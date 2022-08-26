@@ -34,6 +34,7 @@
 	Testes de integração: Cypress
 	Deployment: Cloudflare Pages ou Vercel ou Netlify
 	CI: GitHub Actions
+	Linters: ESLint + Prettier
 	
 **Back-end**:
 
@@ -45,3 +46,4 @@
 	Testes unitários: Jest
 	Deployment: Heroku
 	CI: GitHub Actions
+	Linters: ESLint + Prettier
