@@ -13,7 +13,7 @@
 
 - Alan Augusto [Front-end Developer | UI/UX]
 - Carlos Henrique Brito Malta Leão [Back-end Developer]
-- Pedro Oliveira Guedes [Back-end Developer | DB Engenieer]
+- Pedro Oliveira Guedes [Back-end Developer | DB Engineer]
 - Vinícius Alves de Faria Resende [Full Stack Developer]
 
 #### Funcional 
