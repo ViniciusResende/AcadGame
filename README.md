@@ -69,7 +69,7 @@ Entre as principais features da plataforma estão:
 	Linguagem de Programação: TypeScript
 	Engine: NodeJs
 	Framework: Express
-	ORM: undefined
+	ORM: Sequelize
 	Banco de Dados: MySQL
 	Testes unitários: Jest
 	Deployment: Heroku
