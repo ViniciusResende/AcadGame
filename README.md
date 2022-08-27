@@ -38,6 +38,14 @@ Entre as principais features da plataforma estão:
 
 #### Front-end
 
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.typescriptlang.org/" title="Typescript"><img src="https://github.com/get-icon/geticon/raw/master/icons/typescript-icon.svg" alt="Typescript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://reactjs.org/" title="React"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://sass-lang.com/" title="Sass"><img src="https://github.com/get-icon/geticon/raw/master/icons/sass.svg" alt="Sass" width="75px" height="75px" right-margin="15px"></a>
+
 	Linguagem de Programação: TypeScript
 	Framework de UI: ReactJs
 	Bundler: Parcel ou Webpack + Babel
@@ -49,6 +57,14 @@ Entre as principais features da plataforma estão:
 	Linters: ESLint + Prettier
 	
 #### Back-end
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.typescriptlang.org/" title="Typescript"><img src="https://github.com/get-icon/geticon/raw/master/icons/typescript-icon.svg" alt="Typescript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://nodejs.org/" title="Node.js"><img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs-icon.svg" alt="Node.js" width="75px" height="75px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://expressjs.com/" title="Express"><img src="https://github.com/get-icon/geticon/raw/master/icons/express.svg" alt="Express" width="75px" height="75px"></a>
 
 	Linguagem de Programação: TypeScript
 	Engine: NodeJs
