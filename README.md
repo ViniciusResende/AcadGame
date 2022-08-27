@@ -9,22 +9,28 @@
 
 ---
 
-#### Membros e Papeis 
+### Membros e Papeis 
 
 - Alan Augusto [Front-end Developer | UI/UX]
 - Carlos Henrique Brito Malta Leão [Back-end Developer]
 - Pedro Oliveira Guedes [Back-end Developer | DB Engineer]
 - Vinícius Alves de Faria Resende [Full Stack Developer]
 
-#### Funcional 
+---
 
-**Objetivo**: Acad Game é uma plataforma gameficada focada no público que frequenta academias diariamente e que têm o intuito de competir com outras pessoas e amigos, compartilhar o progresso e persistir na evolução na academia por meio do incentivo de conquistas.
+### Funcional 
 
-**Principais Features**: Entre as principais features da plataforma estão: Criação de Conta, Login, Exibição de detalhes do perfil, Ranking de pontuação de usuários, Área de conquistas, Sessão para registro de exercícios praticados.
+#### Objetivo
+Acad Game é uma plataforma gameficada focada no público que frequenta academias diariamente e que têm o intuito de competir com outras pessoas e amigos, compartilhar o progresso e persistir na evolução na academia por meio do incentivo de conquistas.
 
-#### Tecnologias
+#### Principais Features
+Entre as principais features da plataforma estão: Criação de Conta, Login, Exibição de detalhes do perfil, Ranking de pontuação de usuários, Área de conquistas, Sessão para registro de exercícios praticados.
 
-**Front-end**:
+---
+
+### Tecnologias
+
+#### Front-end
 
 	Linguagem de Programação: TypeScript
 	Framework de UI: ReactJs
@@ -36,7 +42,7 @@
 	CI: GitHub Actions
 	Linters: ESLint + Prettier
 	
-**Back-end**:
+#### Back-end
 
 	Linguagem de Programação: TypeScript
 	Engine: NodeJs
