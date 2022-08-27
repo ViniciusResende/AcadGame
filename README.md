@@ -24,7 +24,13 @@
 Acad Game é uma plataforma gameficada focada no público que frequenta academias diariamente e que têm o intuito de competir com outras pessoas e amigos, compartilhar o progresso e persistir na evolução na academia por meio do incentivo de conquistas.
 
 #### Principais Features
-Entre as principais features da plataforma estão: Criação de Conta, Login, Exibição de detalhes do perfil, Ranking de pontuação de usuários, Área de conquistas, Sessão para registro de exercícios praticados.
+Entre as principais features da plataforma estão: 
+- Criação de conta na plataforma
+- Criação de ficha de exercícios
+- Conexão com outros usuários da plataforma
+- Ranking semanal das conexões
+- Ranking semanal geral da plataforma
+- Área de conquistas
 
 ---
 
