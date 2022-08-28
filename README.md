@@ -9,22 +9,42 @@
 
 ---
 
-#### Membros e Papeis 
+### Membros e Papeis 
 
 - Alan Augusto [Front-end Developer | UI/UX]
 - Carlos Henrique Brito Malta Leão [Back-end Developer]
-- Pedro Oliveira Guedes [Back-end Developer | DB Engenieer]
+- Pedro Oliveira Guedes [Back-end Developer | DB Engineer]
 - Vinícius Alves de Faria Resende [Full Stack Developer]
 
-#### Funcional 
+---
 
-**Objetivo**: Acad Game é uma plataforma gameficada focada no público que frequenta academias diariamente e que têm o intuito de competir com outras pessoas e amigos, compartilhar o progresso e persistir na evolução na academia por meio do incentivo de conquistas.
+### Funcional 
 
-**Principais Features**: Entre as principais features da plataforma estão: Criação de Conta, Login, Exibição de detalhes do perfil, Ranking de pontuação de usuários, Área de conquistas, Sessão para registro de exercícios praticados.
+#### Objetivo
+Acad Game é uma plataforma gameficada focada no público que frequenta academias diariamente e que têm o intuito de competir com outras pessoas e amigos, compartilhar o progresso e persistir na evolução na academia por meio do incentivo de conquistas.
 
-#### Tecnologias
+#### Principais Features
+Entre as principais features da plataforma estão: 
+- Criação de conta na plataforma
+- Criação de ficha de exercícios
+- Conexão com outros usuários da plataforma
+- Ranking semanal das conexões
+- Ranking semanal geral da plataforma
+- Área de conquistas
 
-**Front-end**:
+---
+
+### Tecnologias
+
+#### Front-end
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.typescriptlang.org/" title="Typescript"><img src="https://github.com/get-icon/geticon/raw/master/icons/typescript-icon.svg" alt="Typescript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://reactjs.org/" title="React"><img src="https://github.com/get-icon/geticon/raw/master/icons/react.svg" alt="React" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://sass-lang.com/" title="Sass"><img src="https://github.com/get-icon/geticon/raw/master/icons/sass.svg" alt="Sass" width="75px" height="75px" right-margin="15px"></a>
 
 	Linguagem de Programação: TypeScript
 	Framework de UI: ReactJs
@@ -36,12 +56,20 @@
 	CI: GitHub Actions
 	Linters: ESLint + Prettier
 	
-**Back-end**:
+#### Back-end
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" title="JavaScript"><img src="https://github.com/get-icon/geticon/raw/master/icons/javascript.svg" alt="JavaScript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://www.typescriptlang.org/" title="Typescript"><img src="https://github.com/get-icon/geticon/raw/master/icons/typescript-icon.svg" alt="Typescript" width="75px" height="75px" right-margin="15px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://nodejs.org/" title="Node.js"><img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs-icon.svg" alt="Node.js" width="75px" height="75px"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="https://expressjs.com/" title="Express"><img src="https://github.com/get-icon/geticon/raw/master/icons/express.svg" alt="Express" width="75px" height="75px"></a>
 
 	Linguagem de Programação: TypeScript
 	Engine: NodeJs
 	Framework: Express
-	ORM: undefined
+	ORM: Sequelize
 	Banco de Dados: MySQL
 	Testes unitários: Jest
 	Deployment: Heroku
