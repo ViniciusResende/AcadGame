@@ -13,7 +13,7 @@
 
 - Alan Augusto [Front-end Developer | UI/UX]
 - Carlos Henrique Brito Malta Leão [Back-end Developer]
-- Gabriel Bifano Freddi [Back-end Developer]
+- Gabriel Bifano Freddi [Full Stack Developer]
 - Pedro Oliveira Guedes [Back-end Developer | DB Engineer]
 - Vinícius Alves de Faria Resende [Full Stack Developer]
 
