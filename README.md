@@ -76,3 +76,71 @@ Entre as principais features da plataforma estão:
 	Deployment: Heroku
 	CI: GitHub Actions
 	Linters: ESLint + Prettier
+
+---
+
+### Backlog - Produto
+
+- História: Eu, como frequentador de academia, quero criar uma conta no Acad Game para melhorar minha experiência de exercícios físicos.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de fazer login na minha conta para usufruir dos benefícios do aplicativo.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de acessar meu perfil, para verificar minhas conquistas e algumas configurações da minha conta.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de visualizar minha ficha de exercícios atual, para que possa manter controle da minha rotina na academia.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de editar qualquer um dos exercícios da minha ficha, para que a carga e as repetições sejam compatíveis com minha aptidão física.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de visualizar o ranking semanal de todos os usuários do aplicativo e de meus amigos, para saber como me situo em relação aos outros quanto a dedicação e esforço.
+
+- História: Eu, como usuário de Acad Game, quero receber diferentes “títulos” divertidos com base nas minhas conquistas no aplicativo, o que seria mais uma fonte de motivação para a realização dos meus exercícios diários e minha evolução na academia.
+
+---
+
+### Backlog - Sprint 1
+
+#### Tarefas técnicas:
+- Criação do repositório no GitHub [Vinícius Alves]
+- Modelar o banco de dados [Pedro Guedes, Vinícius Alves, Carlos Henrique]
+- Preparar ambiente no Heroku
+
+#### História: Eu, como frequentador de academia, quero criar uma conta no Acad Game para melhorar minha experiência de exercícios físicos.
+- Desenvolver wireframe da tela de criação de conta [Alan Augusto]
+- Desenvolver o frontend da tela de criação de conta [Vinícius Alves]
+- Desenvolver o frontend da tela de criação de conta [Gabriel Bifano]
+- Criar a tabela de usuários do sistema [Pedro Guedes]
+- Desenvolver rota de criação de usuário [Carlos Henrique]
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de fazer login na minha conta para usufruir dos benefícios do aplicativo.
+- Desenvolver wireframe da tela de login [Gabriel Bifano]
+- Desenvolver o frontend da tela de login [Vinícius Alves]
+- Desenvolver o frontend da tela de login [Alan Augusto]
+- Desenvolver sistema de autenticação por JWT (Json Web Token) [Pedro Guedes]
+- Desenvolver rota de login do usuário [Carlos Henrique]
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de acessar meu perfil, para verificar minhas conquistas e algumas configurações da minha conta.
+- Desenvolver wireframe da tela de perfil [Vinícius Alves]
+- Desenvolver o frontend da tela de perfil [Alan Augusto]
+- Desenvolver o frontend da tela de perfil [Gabriel Bifano]
+- Desenvolver rota para retorno dos dados do perfil [Pedro Guedes]
+- Desenvolver rota para retorno dos dados do perfil [Carlos Henrique]
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de visualizar minha ficha de exercícios atual, para que possa manter controle da minha rotina na academia.
+- Desenvolver wireframe da ficha de exercícios [Alan Augusto]
+- Desenvolver o frontend da ficha de exercícios [Vinícius Alves]
+- Desenvolver o frontend da ficha de exercícios [Gabriel Bifano]
+- Criar uma tabela armazenando os exercícios da ficha do usuário [Pedro Guedes]
+- Desenvolver rota para retorno dos exercícios da lista [Carlos Henrique]
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de editar qualquer um dos exercícios da minha ficha, para que a carga e as repetições sejam compatíveis com minha aptidão física.
+- Desenvolver wireframe da tela de edição da ficha de exercícios [Alan Augusto]
+- Desenvolver o frontend da tela de edição da ficha de exercícios [Vinícius Alves]
+- Desenvolver o frontend da tela de edição da ficha de exercícios [Gabriel Bifano]
+- Desenvolver rota para retorno dos exercícios da lista [Carlos Henrique]
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de visualizar o ranking semanal de todos os usuários do aplicativo e de meus amigos, para saber como me situo em relação aos outros quanto a dedicação e esforço.
+- Desenvolver wireframe da tela ranking [Alan Augusto]
+- Desenvolver o frontend da tela de ranking [Vinícius Alves]
+- Desenvolver o frontend da tela de ranking[Gabriel Bifano]
+- Criar tabela com as posições semanais de cada usuário [Pedro Guedes]
+- Desenvolver rota de consulta dos usuários com maior pontuação na semana [Carlos Henrique]
