@@ -82,11 +82,17 @@ Entre as principais features da plataforma estão:
 ### Backlog - Produto
 
 - História: Eu, como frequentador de academia, quero criar uma conta no Acad Game para melhorar minha experiência de exercícios físicos.
+
 - História: Eu, como usuário do Acad Game, quero ser capaz de fazer login na minha conta para usufruir dos benefícios do aplicativo.
+
 - História: Eu, como usuário do Acad Game, quero ser capaz de acessar meu perfil, para verificar minhas conquistas e algumas configurações da minha conta.
+
 - História: Eu, como usuário do Acad Game, quero ser capaz de visualizar minha ficha de exercícios atual, para que possa manter controle da minha rotina na academia.
+
 - História: Eu, como usuário do Acad Game, quero ser capaz de editar qualquer um dos exercícios da minha ficha, para que a carga e as repetições sejam compatíveis com minha aptidão física.
+
 - História: Eu, como usuário do Acad Game, quero ser capaz de visualizar o ranking semanal de todos os usuários do aplicativo e de meus amigos, para saber como me situo em relação aos outros quanto a dedicação e esforço.
+
 - História: Eu, como usuário de Acad Game, quero receber diferentes “títulos” divertidos com base nas minhas conquistas no aplicativo, o que seria mais uma fonte de motivação para a realização dos meus exercícios diários e minha evolução na academia.
 
 ---
