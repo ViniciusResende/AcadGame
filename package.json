@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "devDependencies": {
+    "@parcel/packager-ts": "2.6.0",
+    "@parcel/transformer-typescript-types": "2.6.0",
+    "@types/jest": "28.1.1",
+    "chokidar": "3.5.3",
+    "cspell": "6.1.1",
+    "husky": "8.0.1",
+    "typescript": ">=3.0.0"
+  },
+  "scripts": {
+    "cspell": "cspell \"**/src/**\" --gitignore --no-progress --no-summary",
+    "sast": "semgrep --disable-version-check --error --config \"p/react\"",
+    "build": "(yarn); (cd ui/web && yarn build)",
+    "verify": "yarn -v",
+    "verify_old": "(yarn cspell) && (cd shared/lib && yarn verify) && (cd server/transaction-monitor && yarn) && (yarn sast ./)",
+    "postinstall": "(husky install); (cd shared/lib && yarn); (cd ui/web && yarn); (cd server/transaction-monitor && yarn)"
+  }
+}
