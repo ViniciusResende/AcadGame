@@ -93,7 +93,21 @@ Entre as principais features da plataforma estão:
 
 - História: Eu, como usuário do Acad Game, quero ser capaz de visualizar o ranking semanal de todos os usuários do aplicativo e de meus amigos, para saber como me situo em relação aos outros quanto a dedicação e esforço.
 
-- História: Eu, como usuário de Acad Game, quero receber diferentes “títulos” divertidos com base nas minhas conquistas no aplicativo, o que seria mais uma fonte de motivação para a realização dos meus exercícios diários e minha evolução na academia.
+- História: Eu, como usuário de Acad Game, quero receber diferentes conquistas divertidas, o que seria mais uma fonte de motivação para a realização dos meus exercícios diários e minha evolução pessoal na academia.
+
+- História: Eu, como usuário do Acad Game, quero poder adicionar amigos de academia à minha rede para me manter melhor motivado em meus treinos.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de compartilhar minhas novas conquistas de treino em minhas redes sociais.
+
+- História: Eu, como usuário do Acad Game, quero enviar fotos de perfil personalizadas ao aplicativo para não ficar limitado somente aos ícones pré-definidos.
+
+- História: Eu, como usuário dedicado ao Acad Game, quero poder cadastrar novos exercícios em minha ficha que não estão presentes no banco de dados.
+
+- História: Eu, como usuário assíduo do Acad Game, quero ver minhas estatísticas de constância nos treinos, bem como evolução de carga e repetições.
+
+- História: Eu, como usuário do Acad Game, quero ser capaz de registrar como estou me sentindo física e mentalmente após completar uma ficha de exercícios.
+
+- Hitória: Eu, como fã do time Acad Game, quero poder enviar críticas, sugestões e elogios aos desenvolvedores através de um formulário simples e de fácil acesso.
 
 ---
 
@@ -117,6 +131,13 @@ Entre as principais features da plataforma estão:
 - Desenvolver o frontend da tela de login [Alan Augusto]
 - Desenvolver sistema de autenticação por JWT (Json Web Token) [Pedro Guedes]
 - Desenvolver rota de login do usuário [Carlos Henrique]
+
+#### História: Eu, como usuário de Acad Game, quero receber diferentes conquistas divertidas, o que seria mais uma fonte de motivação para a realização dos meus exercícios diários e minha evolução pessoal na academia.
+- Desenvolvimento das ideias de cada conquistas [Vinícius Alves]
+- Desenvolver o front end do quadro de conquistas [Alan Augusto]
+- Desenvolver o front end do quadro de conquistas [Gabriel Bifano]
+- Desenvolver rota de retorno para dados das conquistas [Pedro Guedes]
+- Desenvolver rota de retorno para dados das conquistas [Carlos Henrique] 
 
 #### História: Eu, como usuário do Acad Game, quero ser capaz de acessar meu perfil, para verificar minhas conquistas e algumas configurações da minha conta.
 - Desenvolver wireframe da tela de perfil [Vinícius Alves]
