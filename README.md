@@ -109,6 +109,8 @@ Entre as principais features da plataforma estão:
 
 - Hitória: Eu, como fã do time Acad Game, quero poder enviar críticas, sugestões e elogios aos desenvolvedores através de um formulário simples e de fácil acesso.
 
+- História: Eu, como usuário do Acad Game, quero criar desafios semanais e mensais personalizados com os meus amigos. 
+
 ---
 
 ### Backlog - Sprint 1
@@ -165,3 +167,10 @@ Entre as principais features da plataforma estão:
 - Desenvolver o frontend da tela de ranking[Gabriel Bifano]
 - Criar tabela com as posições semanais de cada usuário [Pedro Guedes]
 - Desenvolver rota de consulta dos usuários com maior pontuação na semana [Carlos Henrique]
+
+#### História: Eu, como usuário do Acad Game, quero poder adicionar amigos de academia à minha rede para me manter melhor motivado em meus treinos.
+- Desenvolver wireframe da tela de amigos [Gabriel Bifano]
+- Desenvolver frontend da tela de amigos [Vinícius Alves]
+- Desenvolver frontend da tela de amigos [Alan Augusto]
+- Criar tabela com os amigos de cada usuário [Pedro Guedes]
+- Criar rota de consulta e adição dos amigos do usuário [Carlos Henrique]
