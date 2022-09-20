@@ -1,0 +1,38 @@
+@import 'variables';
+
+/* Default Breakpoints */
+
+@mixin forXLarge() {
+  @media #{$mq-xlarge} {
+    // min 1441px
+    @content;
+  }
+}
+
+@mixin forLarge() {
+  @media #{$mq-large} {
+    // min 1280px
+    @content;
+  }
+}
+
+@mixin forMedium() {
+  @media #{$mq-medium} {
+    // max 1278px
+    @content;
+  }
+}
+
+@mixin forSmall() {
+  @media #{$mq-small} {
+    // max 1024px
+    @content;
+  }
+}
+
+@mixin forXSmall() {
+  @media #{$mq-xsmall} {
+    // max 480px
+    @content;
+  }
+}
