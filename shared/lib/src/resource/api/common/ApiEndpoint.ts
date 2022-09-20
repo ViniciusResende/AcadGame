@@ -45,7 +45,7 @@ export abstract class ApiEndpoint<R> extends ApiClientEndpoint<R> {
     );
 
     const request: Request = new Request(this.apiClient.baseUrl, {
-      body: null,
+      body: JSON.stringify(requestParams.body) || null,
       cache: HttpRequestCacheEnum.DEFAULT,
       credentials: HttpCredentialsEnum.SAME_ORIGIN,
       headers,

@@ -31,6 +31,7 @@ export interface IApiClientEndpoint {
  * parameter values, query string, timeout and general request options.
  */
 export interface IApiClientRequestParams {
+  body?: unknown;
   method?: HttpMethodEnum;
   headers?: Headers;
   urlParams?: UrlParams;
