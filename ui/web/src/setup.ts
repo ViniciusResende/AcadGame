@@ -1,5 +1,5 @@
 /** Library */
-import Lib, { ContinentNumber, ILibConfiguration } from 'evolution-labs-lib';
+import Lib, { ContinentNumber, ILibConfiguration } from 'acad-game-lib';
 
 const continentNumber: ContinentNumber = 4;
 
