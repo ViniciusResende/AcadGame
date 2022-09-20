@@ -1,0 +1,31 @@
+@import '../../../styles';
+
+.button-component {
+  align-items: center;
+  background-color: $primaryColor;
+  border: none;
+  border-radius: 8px;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  justify-content: center;
+  padding: 1em;
+  transition: background, 0.3s ease;
+  width: 100%;
+
+  > svg {
+    width: 20px;
+    margin-right: 0.5em;
+  }
+
+  &:hover {
+    background-color: darken($primaryColor, 5%);
+  }
+
+  &:active {
+    background-color: darken($primaryColor, 10%);
+  }
+}
