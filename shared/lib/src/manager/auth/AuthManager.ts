@@ -7,18 +7,18 @@
 import { Utilities } from '../../utils/Utilities';
 
 /** Engines */
-import { LoginEngine } from '../../engine/login/LoginEngine';
+import { AuthEngine } from '../../engine/auth/AuthEngine';
 
 /**
  * Class to handle business logic related to the authentication at any level
  * at the application
  */
 export class AuthManager extends Utilities.pubSub {
-  #loginEngine: LoginEngine;
+  #authEngine: AuthEngine;
 
   constructor() {
     super();
 
-    this.#loginEngine = new LoginEngine();
+    this.#authEngine = new AuthEngine();
   }
 }
