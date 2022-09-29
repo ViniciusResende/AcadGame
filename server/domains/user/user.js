@@ -39,4 +39,28 @@ class User {
     setScore(score) {
         this.id = score;
     }
+
+    incrementScore(value) {
+        this.score += value;
+    }
+
+    addExercise(exercise) {
+        this.exercises.push(exercise);
+    }
+
+    getExercise(id) {
+        let found = null;
+        this.exercises.forEach(exercise => {
+            if(exercise.id === id) {
+                found = exercise
+                return;
+            }
+        })
+
+        return found;
+    }
+
+    getAllExercises() {
+        return this.exercises;
+    }
 }
