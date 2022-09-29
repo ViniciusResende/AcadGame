@@ -1,4 +1,4 @@
-# **API**
+# **server**
 Essa pasta armazenará todos os arquivos e diretórios relativos ao desenvolvimento do backend da aplicação.  
 A arquitetura escolhida para o desenvolvimento dessa aplicação é a **Arquitetura Hexagonal**.  
   
