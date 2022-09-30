@@ -1,0 +1,29 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "The backend files for the AcadGame project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pe-Guedss/AcadGame.git"
+  },
+  "keywords": [
+    "AcadGame",
+    "Gameficação",
+    "Academia"
+  ],
+  "author": "Pedro de Oliveira Guedes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pe-Guedss/AcadGame/issues"
+  },
+  "homepage": "https://github.com/Pe-Guedss/AcadGame#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "sequelize": "^6.21.6"
+  }
+}
