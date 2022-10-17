@@ -10,7 +10,7 @@ server.use(cookieParser());
 
 // IIF (Immediately Invoked Function) to test the database and "Contracts" table creation.
 (async() => {
-    const BADGE = require('./infrastructure/db_models/badge');
+    const BADGE = require('./infrastructure/models/badge');
 })();
 
 server.listen(process.env.EXPRESS_PORT, () => {
