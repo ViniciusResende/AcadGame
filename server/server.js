@@ -1,7 +1,7 @@
 const Express = require('express');
 const server = Express();
 
-const BadgeRouter = require('./routes/badge/badgeRoute');
+const BadgeRouter = require('./adapters/badge/badgeRoute');
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
