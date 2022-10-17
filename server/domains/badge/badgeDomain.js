@@ -1,4 +1,4 @@
-const queryBadges = require('../../gates/badge/queryBadgeExitGate');
+const queryBadges = require('../../gates/badge/badgeExitGate');
 
 class QueryBadgeDomain {
     

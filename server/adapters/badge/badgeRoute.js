@@ -1,6 +1,6 @@
 const Router = require('express').Router();
 
-const QueryBadge = require('../../gates/badge/queryBadgeEntryGate');
+const QueryBadge = require('../../gates/badge/badgeEntryGate');
 
 Router.get('/', async (req, res) => {
     try {
