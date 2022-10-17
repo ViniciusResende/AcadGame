@@ -1,4 +1,4 @@
-const queryBadgeDomain = require('../../domains/badge/queryBadgeDomain');
+const queryBadgeDomain = require('../../domains/badge/badgeDomain');
 
 class QueryBadge {
     async searchAllBadges() {
