@@ -1,4 +1,4 @@
-const BadgeDBAdapter = require('../../routes/badge/badgeDBAdapter');
+const BadgeDBAdapter = require('../../adapters/badge/badgeDBAdapter');
 
 class QueryBadgeDB {
     async getAllBadges() {
