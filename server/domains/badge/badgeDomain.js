@@ -1,18 +1,12 @@
 class Badge {
     id;
     name;
-    url;
+    icon;
 
-    Badge() {
-        this.id = -1;
-        this.name = "";
-        this.url = "";
-    }
-
-    Badge(id, name, url) {
+    Badge(id, name, icon) {
         this.id = id;
         this.name = name;
-        this.url = url;
+        this.icon = icon;
     }
 
     getId() {
