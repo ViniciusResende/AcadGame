@@ -28,3 +28,5 @@ class Badge {
     }
 
 }
+
+module.exports = new Badge;
