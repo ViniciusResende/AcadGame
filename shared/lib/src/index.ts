@@ -14,4 +14,4 @@ const Lib = new AcadGameLib();
 export default Lib;
 
 /** Types */
-// export * from './types';
+export * from './types';
