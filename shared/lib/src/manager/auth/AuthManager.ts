@@ -3,6 +3,12 @@
  * @module AuthManager
  */
 
+/** Enums */
+import { AuthTypeEnum } from '../../data/enums/AuthEnums';
+
+/** Interfaces */
+import { IApiAcadAuthResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+
 /** Utilities */
 import { Utilities } from '../../utils/Utilities';
 
@@ -18,7 +24,18 @@ export class AuthManager extends Utilities.pubSub {
 
   constructor() {
     super();
-
     this.#authEngine = new AuthEngine();
+  }
+
+  async login(
+    username: string,
+    password: string
+  ): Promise<IApiAcadAuthResponse | null> {
+    const authResponse = await this.#authEngine.authenticateUser(
+      AuthTypeEnum.LOGIN,
+      { username, password }
+    );
+
+    return authResponse;
   }
 }
