@@ -6,14 +6,14 @@ class UserExercise {
     weight;
 
     UserExercise() {
-        this.id = id;
+        this.id = -1;
         this.exercise = Exercise();
         this.numSeries = -1;
         this.numRepetitions = -1;
         this.weight = -1; 
     }
 
-    UserExercise(exercise, numSeries, numRepetitions, weight) {
+    UserExercise(id, exercise, numSeries, numRepetitions, weight) {
         this.id = id;
         this.exercise = exercise;
         this.numSeries = numSeries;
