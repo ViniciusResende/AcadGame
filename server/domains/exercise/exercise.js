@@ -1,26 +1,17 @@
 class Exercise {
     id;
     name;
-    numSeries;
-    numRepetitions;
-    weight;
     type;
 
     Exercise() {
         this.id = -1;
         this.name = "";
-        this.numSeries = -1;
-        this.numRepetitions = -1;
-        this.weight = -1;
         this.type = "";
     }
 
-    Exercise(id, name, numSeries, numRepetitions, weight, type) {
+    Exercise(id, name, type) {
         this.id = id;
         this.name = name;
-        this.numSeries = numSeries;
-        this.numRepetitions = numRepetitions;
-        this.weight = weight;
         this.type = type;
     }
 
@@ -30,18 +21,6 @@ class Exercise {
 
     getName() {
         return this.name;
-    }
-
-    getNumSeries() {
-        return this.numSeries;
-    }
-
-    getNumRepetitions() {
-        return this.numRepetitions;
-    }
-
-    getWeight() {
-        return this.weight;
     }
 
     getType() {
@@ -56,20 +35,8 @@ class Exercise {
         this.name = name;
     }
 
-    setNumSeries(numSeries) {
-        this.numSeries = numSeries;
-    }
-
-    setNumRepetitions(numRepetitions) {
-        this.numRepetitions = numRepetitions;
-    }
-
-    setWeight(weight) {
-        this.weight = weight;
-    }
-
     setType(type) {
         this.type = type;
     }
-    
+
 }
