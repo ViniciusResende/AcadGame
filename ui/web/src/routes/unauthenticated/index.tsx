@@ -4,12 +4,12 @@ import { Route } from 'react-router-dom';
 /** Layouts */
 import UnauthenticatedLayout from '../../components/Layout/Unauthenticated';
 
-/** React components */
-import Login from '../../components/Unauthenticated/Login';
+/** Route elements */
+import RouteLogin from './RouteLogin';
 
 /** Exports */
 export default (
   <Route path="/" element={<UnauthenticatedLayout />}>
-    <Route path="/login" element={<Login />} />
+    <Route path="/login" element={<RouteLogin />} />
   </Route>
 );
