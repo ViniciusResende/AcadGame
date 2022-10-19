@@ -49,6 +49,10 @@
     justify-content: center;
     margin: 8.2em auto;
     max-width: 350px;
+
+    > form {
+      width: 100%;
+    }
   }
 
   &__logo {
