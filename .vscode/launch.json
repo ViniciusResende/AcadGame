@@ -1,0 +1,32 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "command": "(cd shared/lib && yarn watch)",
+      "name": "LibraryWatch",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "node ./tools/parcel-watch.js",
+      "name": "ChokidarWatch",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "(cd ui/web && yarn start)",
+      "name": "WebUiServe",
+      "request": "launch",
+      "type": "node-terminal"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "DevEnvironment",
+      "configurations": ["LibraryWatch", "ChokidarWatch", "WebUiServe"]
+    }
+  ]
+}
