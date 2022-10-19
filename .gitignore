@@ -1,0 +1,19 @@
+# Packages
+node_modules
+
+# Output
+coverage
+dist
+docs
+
+# Parcel
+.parcel-cache
+
+# Misc
+.npm
+npm-debug.log
+package-lock.json
+yarn-error.log
+.DS_Store
+.env
+.cache

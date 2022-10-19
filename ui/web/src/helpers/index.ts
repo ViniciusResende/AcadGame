@@ -1,0 +1,1 @@
+export { doesExists } from './doesExists';

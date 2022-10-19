@@ -1,0 +1,67 @@
+{
+  "folders": [
+    {
+      "name": "AcadGame",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "editor.rulers": [80],
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "editor.formatOnSave": true,
+    "eslint.format.enable": true,
+    "eslint.packageManager": "yarn",
+    "eslint.run": "onSave",
+    "eslint.validate": ["typescript", "typescriptreact"],
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.formatOnSave": true
+    }
+  },
+  "extensions": {
+    "recommendations": [
+      "dbaeumer.vscode-eslint",
+      "streetsidesoftware.code-spell-checker",
+      "kisstkondoros.vscode-codemetrics",
+      "esbenp.prettier-vscode"
+    ]
+  },
+  "launch": {
+    "configurations": [
+      {
+        "command": "(cd shared/lib && yarn watch)",
+        "name": "LibraryWatch",
+        "request": "launch",
+        "type": "node-terminal"
+      },
+      {
+        "command": "node ./tools/parcel-watch.js",
+        "name": "ChokidarWatch",
+        "request": "launch",
+        "type": "node-terminal"
+      },
+      {
+        "command": "(cd ui/web && yarn start)",
+        "name": "WebUiServe",
+        "request": "launch",
+        "type": "node-terminal"
+      },
+      {
+        "command": "(cd server/transaction-monitor && yarn start)",
+        "name": "TransactionMonitor",
+        "request": "launch",
+        "type": "node-terminal"
+      }
+    ],
+    "compounds": [
+      {
+        "name": "DevEnvironment",
+        "configurations": ["LibraryWatch", "ChokidarWatch", "WebUiServe"]
+      }
+    ]
+  }
+}
