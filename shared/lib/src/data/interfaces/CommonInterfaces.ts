@@ -15,7 +15,4 @@ export interface IClass<T> {
  */
 export interface ILibConfiguration {
   baseApiUrl?: string;
-  basePictureUrlApostle?: string;
-  basePictureUrlEquipment?: string;
-  allowedImageDomains?: string[];
 }
