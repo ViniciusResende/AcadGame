@@ -3,6 +3,7 @@ class User {
     name;
     score;
     exercises = [];
+    badgesScore = [];
 
     User() {
         this.id = -1;
@@ -52,7 +53,22 @@ class User {
         let found = null;
         this.exercises.forEach(exercise => {
             if(exercise.id === id) {
-                found = exercise
+                found = exercise;
+                return;
+            }
+        })
+
+        return found;
+    }
+
+    removeExercise(id) {
+        let found = null;
+        let index = 0;
+        this.exercises.forEach(exercise => {
+            index++;
+            if(exercise.id === id) {
+                found = exercise;
+                this.exercises.splice(index, index);
                 return;
             }
         })
