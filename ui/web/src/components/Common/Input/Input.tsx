@@ -60,10 +60,17 @@ function InputComponent(props: InputComponentProps) {
     typeof onBlur === 'function' && onBlur(event);
   };
 
-  const onHoverInput = (
+  const onMouseEnterInput = (
     event: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
-    setIsInputBeingHovered((prev) => !prev);
+    setIsInputBeingHovered(true);
+    typeof onHover === 'function' && onHover(event);
+  };
+
+  const onMouseLeaveInput = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    setIsInputBeingHovered(false);
     typeof onHover === 'function' && onHover(event);
   };
 
@@ -91,8 +98,8 @@ function InputComponent(props: InputComponentProps) {
         onAnimationStart={onAnimationStartInput}
         onBlur={onBlurInput}
         onFocus={onFocusInput}
-        onMouseEnter={onHoverInput}
-        onMouseLeave={onHoverInput}
+        onMouseEnter={onMouseEnterInput}
+        onMouseLeave={onMouseLeaveInput}
         type={!shouldShowPassword ? type : 'text'}
       />
       {type === 'password' && (
