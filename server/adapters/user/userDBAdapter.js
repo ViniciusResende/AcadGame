@@ -36,6 +36,27 @@ class UserDatabaseAdapter {
             throw err;
         }
     }
+
+    async getUserByEmail(email) {
+        try {
+            const QUERIED_USER = await USER.findOne({
+                where: {
+                    email: email
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            if (!QUERIED_USER) {
+                throw new Error('Não encontramos este usuário no sistema.');
+            }
+
+            return QUERIED_USER;
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = UserDatabaseAdapter;
