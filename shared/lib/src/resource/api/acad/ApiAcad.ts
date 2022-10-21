@@ -11,7 +11,10 @@ import {
 } from '../../../utils/classes/api-client/ApiClientEnums';
 
 /** Interfaces */
-import { IApiAcadAuthResponse } from './ApiAcadInterfaces';
+import {
+  IApiAcadAuthResponse,
+  IApiUserGetDataInfoResponse,
+} from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
 
 /** Classes */
@@ -101,5 +104,25 @@ export class ApiAcad extends ApiClient {
     const signUpResponse = responseData.data as IApiAcadAuthResponse;
 
     return signUpResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting user info.
+   *
+   * @param token - The nickname of the user being created
+   * @returns - The User info from provided token
+   */
+  async userInfo(token: string): Promise<IApiUserGetDataInfoResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: new Headers({
+        Authorization: `Bearer ${token}`,
+      }),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request('/user/info', requestParams);
+    const responseData = await response.promise;
+    const userInfoResponse = responseData.data as IApiUserGetDataInfoResponse;
+
+    return userInfoResponse;
   }
 }
