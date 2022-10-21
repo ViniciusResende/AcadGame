@@ -1,11 +1,13 @@
 const USER = require('../../infrastructure/models/user');
 
 class UserDatabaseAdapter {
+    unnecessaryAttributes = ['createdAt', 'updatedAt', 'password'];
+
     async getEveryUser() {
         try {
             const ALL_USERS = await USER.findAll({
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt', 'password']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
@@ -20,7 +22,7 @@ class UserDatabaseAdapter {
         try {
             const QUERIED_USER = await USER.findByPk(id, {
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt', 'password']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
