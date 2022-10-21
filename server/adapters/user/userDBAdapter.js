@@ -15,6 +15,25 @@ class UserDatabaseAdapter {
             throw err;
         }
     }
+
+    async getUserByPK(id) {
+        try {
+            const QUERIED_USER = await USER.findByPk(id, {
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt', 'password']
+                }
+            });
+
+            if (!QUERIED_USER) {
+                throw new Error(`Não encontramos um usuário com id "${id}"`);
+            }
+
+            return QUERIED_USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = UserDatabaseAdapter;
