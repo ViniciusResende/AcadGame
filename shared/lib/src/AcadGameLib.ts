@@ -8,6 +8,7 @@
 
 /** Managers */
 import { AuthManager } from './manager/auth/AuthManager';
+import { UserManager } from './manager/user/UserManager';
 
 /** Utilities */
 import { Utilities, UtilitiesClass } from './utils/Utilities';
@@ -18,10 +19,12 @@ import { Utilities, UtilitiesClass } from './utils/Utilities';
  */
 export class AcadGameLib {
   auth: AuthManager;
+  user: UserManager;
   utils: UtilitiesClass;
 
   constructor() {
     this.auth = new AuthManager();
+    this.user = new UserManager();
     this.utils = Utilities;
   }
 }
