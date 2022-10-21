@@ -20,6 +20,25 @@ export interface IApiAcadAuthResponse {
 }
 
 /**
+ * API data representation for general User Get Data responses'.
+ */
+export interface IApiUserGetDataResponse {
+  id: string;
+  data: unknown;
+}
+
+/**
+ * API data representation for User Get Data Info responses'.
+ */
+export interface IApiUserGetDataInfoResponse extends IApiUserGetDataResponse {
+  data: {
+    nickname: string;
+    totalPoints: number;
+    profileIcon: string; //TODO change to available pictures enum
+  };
+}
+
+/**
  * API login Auth body.
  */
 export interface IApiAcadLoginBody {
