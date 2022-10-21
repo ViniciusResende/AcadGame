@@ -26,3 +26,12 @@ export interface IApiAcadLoginBody {
   username: string;
   password: string;
 }
+
+/**
+ * API signUp Auth body.
+ */
+export interface IApiAcadSignUpBody {
+  nickname: string;
+  email: string;
+  password: string;
+}

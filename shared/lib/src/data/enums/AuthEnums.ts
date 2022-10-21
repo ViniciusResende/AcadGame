@@ -8,6 +8,7 @@
  */
 export enum AuthTypeEnum {
   LOGIN = 'login',
+  SIGNUP = 'signup',
   SSO = 'sso',
   GOOGLE = 'google',
   FACEBOOK = 'facebook',
