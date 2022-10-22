@@ -29,7 +29,7 @@ class UserDatabaseAdapter {
             });
 
             if (!QUERIED_USER) {
-                throw new Error(`Não encontramos um usuário com id "${id}"`);
+                throw new Error(`Não encontramos um usuário com a ID informada.`);
             }
 
             return QUERIED_USER;
