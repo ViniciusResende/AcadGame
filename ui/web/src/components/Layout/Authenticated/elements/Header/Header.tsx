@@ -26,7 +26,9 @@ function HeaderComponent() {
       </Link>
       <nav className="main-header__nav-bar">
         {menuNavigationAnchors.map((menuItem) => (
-          <Link to={menuItem.path}>{menuItem.name}</Link>
+          <Link key={menuItem.path} to={menuItem.path}>
+            {menuItem.name}
+          </Link>
         ))}
       </nav>
     </header>
