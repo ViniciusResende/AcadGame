@@ -1,0 +1,131 @@
+@import '../../../styles';
+
+.profile-page {
+  &__container {
+    padding: 2em;
+    width: 100%;
+  }
+
+  &__upper-cards {
+    align-items: center;
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__user-info {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+  }
+
+  &__user-picture {
+    margin-right: 3.75em;
+    position: relative;
+
+    > img {
+      border: 1px solid $secondaryColor;
+      border-radius: 50%;
+      display: block;
+    }
+
+    > button {
+      background: $secondaryColor;
+      border: none;
+      border-radius: 50%;
+      bottom: 1em;
+      cursor: pointer;
+      padding: 1em;
+      position: absolute;
+      right: 1em;
+      transition: filter 0.3s ease;
+
+      svg {
+        margin: 2px 0 0 2px;
+      }
+
+      svg,
+      path {
+        fill: $primaryColor;
+      }
+
+      &:hover {
+        filter: brightness(1.2);
+      }
+
+      &:active {
+        filter: brightness(1.5);
+      }
+    }
+  }
+
+  &__user-name-points {
+    margin-top: 2em;
+  }
+
+  &__user-name {
+    align-items: center;
+    border-bottom: 1px solid $fontColor;
+    display: flex;
+    justify-content: space-between;
+    min-width: 17.5em;
+    padding-bottom: 0.25em;
+
+    > span {
+      color: $fontColor;
+      font-size: 1.25em;
+      line-height: 1.5em;
+    }
+
+    > button {
+      background: $white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 4px;
+      transition: background 0.3s ease;
+
+      svg,
+      path {
+        transition: fill 0.3s ease;
+      }
+
+      &:hover {
+        background: lighten($backgroundColor, 4);
+
+        path {
+          fill: $supportDark;
+        }
+      }
+
+      &:active {
+        background: $backgroundColor;
+      }
+    }
+  }
+
+  &__user-points {
+    align-items: flex-end;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 4.5em;
+
+    > span {
+      color: $secondaryColor;
+      font-size: 0.875em;
+      font-weight: bold;
+      line-height: 1em;
+      margin-right: 0.5em;
+    }
+
+    > strong {
+      color: $primaryColor;
+      font-size: 1.5em;
+      font-weight: bold;
+      line-height: 0.75em;
+      margin-right: 0.25em;
+    }
+  }
+}
