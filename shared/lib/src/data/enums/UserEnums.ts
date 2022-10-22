@@ -11,3 +11,10 @@ export enum UserGetDataTypeEnum {
   HISTOGRAM = 'histogram',
   BADGES = 'badges',
 }
+
+/**
+ * Enumerated values for User profile pictures.
+ */
+export enum UserProfilePictureEnum {
+  DEFAULT = 'default',
+}

@@ -3,6 +3,9 @@
  * @module ApiAcad
  */
 
+/** Enums */
+import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
+
 /**
  * API data representation for general HTTP responses' structure.
  */
@@ -34,7 +37,7 @@ export interface IApiUserGetDataInfoResponse extends IApiUserGetDataResponse {
   data: {
     nickname: string;
     totalPoints: number;
-    profileIcon: string; //TODO change to available pictures enum
+    profileIcon: UserProfilePictureEnum;
   };
 }
 
