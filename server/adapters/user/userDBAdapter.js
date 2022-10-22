@@ -7,6 +7,8 @@ const { Op } = require('sequelize');
 class UserDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt', 'password'];
 
+    EVERY_USER_INFO = ['nickName', 'email', 'password', 'score'];
+
     USER_REQUIRED_INFO = ['nickName', 'email', 'password'];
 
     async newUser(userInfo) {
@@ -119,6 +121,45 @@ class UserDatabaseAdapter {
             
             return QUERIED_USERS;
         } catch (err) {
+            throw err;
+        }
+    }
+
+    async Update(reqUserId, updateUserId, userInfo){
+        try {
+            if (reqUserId != updateUserId) {
+                throw new Error('Você não pode alterar as informações de outro usuário.');
+            }
+
+            let updateUser =  await USER.findByPk(updateUserId);
+    
+            if(updateUser == null){
+                throw new Error('O usuário a ser atualizado não existe.');
+            }
+
+            if (Object.keys(userInfo).length === 0) {
+                throw new Error('É necessário fornecer as alterações desejadas.') ;
+            }
+
+            Object.keys(userInfo).forEach((info) => {
+                if(!this.EVERY_USER_INFO.includes(info)) {
+                    throw new Error(`Uma das propriedades fornecidas não é válida.`);
+                }
+            });    
+
+            Object.keys(userInfo).forEach(async (info) => {
+                if(info == 'password'){
+                    const SALT_ROUNDS = 10;
+                    updateUser[info] = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
+                }
+                else {
+                    updateUser[info] = userInfo[info];
+                }
+            });
+
+            await updateUser.save();
+        }
+        catch(err) {
             throw err;
         }
     }
