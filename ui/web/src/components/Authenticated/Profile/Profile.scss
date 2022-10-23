@@ -2,6 +2,11 @@
 
 .profile-page {
   &__container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    justify-content: center;
     padding: 2em;
     width: 100%;
   }
@@ -12,12 +17,20 @@
     gap: 1em;
     justify-content: space-between;
     width: 100%;
+
+    .default-card-box__container {
+      width: 100%;
+      max-width: 45vw;
+      height: 23.75em;
+    }
   }
 
   &__user-info {
     align-items: flex-start;
     display: flex;
     justify-content: space-between;
+    margin: auto;
+    max-width: 43.75em;
     padding: 1em;
   }
 
@@ -127,5 +140,16 @@
       line-height: 0.75em;
       margin-right: 0.25em;
     }
+  }
+
+  &__bottom-card {
+    width: 100%;
+  }
+
+  &__user-metrics {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
   }
 }
