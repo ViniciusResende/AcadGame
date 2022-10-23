@@ -15,7 +15,7 @@ Router.get('/', async (req, res) => {
 
 Router.get('/:id', async (req, res) => {
     try {
-        const EXERCISE = await QueryExercise.getOneExercise();
+        const EXERCISE = await QueryExercise.getOneExercise(req.params.id);
 
         res.status(200).json(EXERCISE);
     }
