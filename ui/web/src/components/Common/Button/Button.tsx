@@ -21,6 +21,7 @@ function ButtonComponent(props: ButtonComponentProps) {
     <button
       className={cx('button-component', className, {
         [modifier]: modifier,
+        disabled: elementProps.disabled,
       })}
       {...elementProps}
     >

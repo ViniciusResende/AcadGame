@@ -74,4 +74,32 @@ export class ApiAcad extends ApiClient {
 
     return loginResponse;
   }
+
+  /**
+   * Fetches the API providing a nickname, email and password payload.
+   *
+   * @param nickname - The nickname of the user being created
+   * @param email - The nickname of the user being created
+   * @param password - The password of the user being created
+   * @returns - The JWT token when user is created successfully
+   */
+  async signUp(
+    nickname: string,
+    email: string,
+    password: string
+  ): Promise<IApiAcadAuthResponse> {
+    const requestParams: IApiClientRequestParams = {
+      body: {
+        nickname,
+        email,
+        password,
+      },
+      method: HttpMethodEnum.POST,
+    };
+    const response = this.#api.request('/signUp', requestParams);
+    const responseData = await response.promise;
+    const signUpResponse = responseData.data as IApiAcadAuthResponse;
+
+    return signUpResponse;
+  }
 }

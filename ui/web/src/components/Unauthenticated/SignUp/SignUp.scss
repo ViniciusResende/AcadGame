@@ -1,6 +1,6 @@
 @import '../../../styles/';
 
-.login-page {
+.sign-up-page {
   &__illustration-container {
     align-items: flex-start;
     display: flex;
@@ -56,14 +56,31 @@
   }
 
   &__logo {
-    margin-bottom: 3.75em;
+    margin-bottom: 2.5em;
   }
 
-  &__sign-up {
+  &__login {
     color: $fontColor;
     margin-top: 0.5em;
     > a {
       text-decoration: underline;
+    }
+  }
+
+  &__accept-terms {
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 14px;
+
+    > span {
+      color: $fontColor;
+      font-size: 14px;
+      line-height: 18px;
+
+      > a {
+        text-decoration: underline;
+      }
     }
   }
 
