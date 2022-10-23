@@ -12,6 +12,17 @@ class QueryUser {
 
         return allUsers;
     }
+
+    async getOneUser(id) {
+        try {
+            const QUERIED_USER = await USER_DB_ADAPTER.getUserByPk(id);
+
+            return QUERIED_USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = QueryUser;
