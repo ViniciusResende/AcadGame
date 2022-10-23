@@ -42,6 +42,17 @@ export interface IApiUserGetDataInfoResponse extends IApiUserGetDataResponse {
 }
 
 /**
+ * API data representation for User Get Data Weekly Histogram responses'.
+ */
+export interface IApiUserGetDataWeeklyHistogramResponse
+  extends IApiUserGetDataResponse {
+  data: {
+    date: string;
+    dailyPoints: number;
+  }[];
+}
+
+/**
  * API login Auth body.
  */
 export interface IApiAcadLoginBody {
