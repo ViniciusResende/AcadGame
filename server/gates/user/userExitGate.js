@@ -1,6 +1,36 @@
 const USER_DB_ADAPTER = require('../../adapters/user/userDBAdapter');
 
 class QueryUser {
+    EVERY_USER_INFO = ['nickName', 'email', 'password', 'score'];
+
+    USER_REQUIRED_INFO = ['nickName', 'email', 'password'];
+
+
+    async createNewUser(userInfo) {
+        let newUser = new Object;
+
+        try {
+            // Assuring the userInfo object only contains valid properties
+            Object.keys(userInfo).forEach(info => {
+                if (this.USER_REQUIRED_INFO.includes(info)) {
+                    newUser[info] = userInfo[info];
+                }
+            });
+    
+            // Assuring there are no necessary information being left behind
+            for (const INFO of this.USER_REQUIRED_INFO) {
+                if (!newUser[INFO]) {
+                    throw new Error(`A informação ${INFO} é necessária para concluir o cadastro.`);
+                }
+            }
+
+            USER_DB_ADAPTER.newUser(newUser);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     async getAllUsers() {
         try {
             let allUsers = [];
@@ -64,10 +94,10 @@ class QueryUser {
                 count++;
             });
 
-            return topRankUsers
+            return topRankUsers;
         }
         catch (err) {
-            
+            throw err;
         }
     }
 }
