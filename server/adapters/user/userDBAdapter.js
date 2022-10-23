@@ -125,7 +125,26 @@ class UserDatabaseAdapter {
         }
     }
 
-    async Update(reqUserId, updateUserId, userInfo){
+    async getTopUsers() {
+        try {
+            const ALL_USERS = await USER.findAll({
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                },
+                order: [
+                    ['score', 'DESC'],
+                    ['nickName', 'DESC']
+                ]
+            });
+
+            return ALL_USERS;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async updateUser(reqUserId, updateUserId, userInfo){
         try {
             if (reqUserId != updateUserId) {
                 throw new Error('Você não pode alterar as informações de outro usuário.');
