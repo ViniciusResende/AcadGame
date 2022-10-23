@@ -12,25 +12,9 @@ class UserDatabaseAdapter {
     USER_REQUIRED_INFO = ['nickName', 'email', 'password'];
 
     async newUser(userInfo) {
-        let user = new Object;
-
         try {
-            // Assuring the userInfo object only contains valid properties
-            Object.keys(userInfo).forEach(info => {
-                if (this.USER_REQUIRED_INFO.includes(info)) {
-                    user[info] = userInfo[info];
-                }
-            });
-
-            // Assuring there are no necessary information being left behind
-            for (const INFO of this.USER_REQUIRED_INFO) {
-                if (!user[INFO]) {
-                    throw new Error(`A informação ${INFO} é necessária para concluir o cadastro.`);
-                }
-            }
-            
             const saltRounds = 10;
-            user.password = await bcrypt.hash(user.password, saltRounds);
+            userInfo.password = await bcrypt.hash(userInfo.password, saltRounds);
 
             if(await USER.findOne({
                 where: {
