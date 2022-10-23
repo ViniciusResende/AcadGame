@@ -2,15 +2,20 @@ const USER_DB_ADAPTER = require('../../adapters/user/userDBAdapter');
 
 class QueryUser {
     async getAllUsers() {
-        let allUsers = [];
+        try {
+            let allUsers = [];
 
-        const QUERIED_USERS = await USER_DB_ADAPTER.getEveryUser();
+            const QUERIED_USERS = await USER_DB_ADAPTER.getEveryUser();
 
-        QUERIED_USERS.forEach(queriedUser => {
-            allUsers.push(queriedUser.dataValues);
-        });
+            QUERIED_USERS.forEach(queriedUser => {
+                allUsers.push(queriedUser.dataValues);
+            });
 
-        return allUsers;
+            return allUsers;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
     async getOneUser(id) {
