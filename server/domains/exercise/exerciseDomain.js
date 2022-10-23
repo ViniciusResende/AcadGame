@@ -33,3 +33,5 @@ class QueryExerciseDomain {
         }
     }
 }
+
+module.exports = new QueryExerciseDomain;
