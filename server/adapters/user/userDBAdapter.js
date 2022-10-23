@@ -173,12 +173,8 @@ class UserDatabaseAdapter {
         }
     }
 
-    async eraseAccount(reqUserId, deletionUserId) {
+    async eraseAccount(deletionId) {
         try {
-            if (reqUserId != deletionUserId) {
-                throw new Error('Você não pode deletar a conta de outra pessoa.');
-            }
-
             await USER.destroy({
                 where: {
                     id: deletionId
