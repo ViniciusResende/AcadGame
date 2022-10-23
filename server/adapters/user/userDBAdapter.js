@@ -37,7 +37,15 @@ class UserDatabaseAdapter {
                     email: userInfo.email
                 } 
             }) != null) {
-                throw new Error("Usuário já cadastrado.");
+                throw new Error("Email já cadastrado.");
+            }
+
+            if(await USER.findOne({
+                where: {
+                    nickName: userInfo.nickName
+                } 
+            }) != null) {
+                throw new Error("Apelido já escolhido por outro usuário.");
             }
 
             await USER.create(user);
@@ -149,22 +157,38 @@ class UserDatabaseAdapter {
             if (reqUserId != updateUserId) {
                 throw new Error('Você não pode alterar as informações de outro usuário.');
             }
+            
+            if (Object.keys(userInfo).length === 0) {
+                throw new Error('É necessário fornecer as alterações desejadas.') ;
+            }
+            
+            Object.keys(userInfo).forEach((info) => {
+                if(!this.EVERY_USER_INFO.includes(info)) {
+                    throw new Error(`Uma das propriedades fornecidas não é válida.`);
+                }
+            });
+
+            if(await USER.findOne({
+                where: {
+                    email: userInfo.email
+                } 
+            }) != null) {
+                throw new Error("Este e-mail já é utilizado por outra conta.");
+            }
+
+            if(await USER.findOne({
+                where: {
+                    nickName: userInfo.nickName
+                } 
+            }) != null) {
+                throw new Error("Este apelido já está em uso por outro usuário.");
+            }
 
             let updateUser =  await USER.findByPk(updateUserId);
     
             if(updateUser == null){
                 throw new Error('O usuário a ser atualizado não existe.');
             }
-
-            if (Object.keys(userInfo).length === 0) {
-                throw new Error('É necessário fornecer as alterações desejadas.') ;
-            }
-
-            Object.keys(userInfo).forEach((info) => {
-                if(!this.EVERY_USER_INFO.includes(info)) {
-                    throw new Error(`Uma das propriedades fornecidas não é válida.`);
-                }
-            });    
 
             Object.keys(userInfo).forEach(async (info) => {
                 if(info == 'password'){
