@@ -14,6 +14,7 @@ import {
 import {
   IApiAcadAuthResponse,
   IApiUserGetDataInfoResponse,
+  IApiUserGetDataWeeklyHistogramResponse,
 } from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
 
@@ -30,6 +31,12 @@ export class ApiAcad extends ApiClient {
   constructor(baseUrl: string) {
     super(baseUrl);
     this.#api = new ApiAcadEndpoint(this, { uri: '/api' });
+  }
+
+  #getAuthHeader(token: string) {
+    return new Headers({
+      Authorization: `Bearer ${token}`,
+    });
   }
 
   /**
@@ -114,14 +121,33 @@ export class ApiAcad extends ApiClient {
    */
   async userInfo(token: string): Promise<IApiUserGetDataInfoResponse> {
     const requestParams: IApiClientRequestParams = {
-      headers: new Headers({
-        Authorization: `Bearer ${token}`,
-      }),
+      headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
     const response = this.#api.request('/user/info', requestParams);
     const responseData = await response.promise;
     const userInfoResponse = responseData.data as IApiUserGetDataInfoResponse;
+
+    return userInfoResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting user weekly histogram.
+   *
+   * @param token - The nickname of the user being created
+   * @returns - The User weekly histogram from provided token
+   */
+  async userWeeklyHistogram(
+    token: string
+  ): Promise<IApiUserGetDataWeeklyHistogramResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request('/user/weeklyHistogram', requestParams);
+    const responseData = await response.promise;
+    const userInfoResponse =
+      responseData.data as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
   }
