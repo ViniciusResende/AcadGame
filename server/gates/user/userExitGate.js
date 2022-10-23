@@ -118,8 +118,22 @@ class QueryUser {
             });
 
             USER_DB_ADAPTER.updateUser(updateUserId, userInfo);
-        } catch (err) {
-            
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async deleteAccount(reqUserId, deletionUserId) {
+        try {
+            if (reqUserId != deletionUserId) {
+                throw new Error('Você não pode deletar a conta de outra pessoa.');
+            }
+
+            USER_DB_ADAPTER.eraseAccount(deletionUserId);
+        }
+        catch (err) {
+            throw err;
         }
     }
 }
