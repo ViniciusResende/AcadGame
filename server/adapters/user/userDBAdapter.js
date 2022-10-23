@@ -7,10 +7,6 @@ const { Op } = require('sequelize');
 class UserDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt', 'password'];
 
-    EVERY_USER_INFO = ['nickName', 'email', 'password', 'score'];
-
-    USER_REQUIRED_INFO = ['nickName', 'email', 'password'];
-
     async newUser(userInfo) {
         try {
             const saltRounds = 10;
@@ -136,23 +132,9 @@ class UserDatabaseAdapter {
         }
     }
 
-    async updateUser(reqUserId, updateUserId, userInfo){
-        try {
-            if (reqUserId != updateUserId) {
-                throw new Error('Você não pode alterar as informações de outro usuário.');
-            }
-            
-            if (Object.keys(userInfo).length === 0) {
-                throw new Error('É necessário fornecer as alterações desejadas.') ;
-            }
-            
-            Object.keys(userInfo).forEach((info) => {
-                if(!this.EVERY_USER_INFO.includes(info)) {
-                    throw new Error(`Uma das propriedades fornecidas não é válida.`);
-                }
-            });
-
-            if(await USER.findOne({
+    async updateUser(updateUserId, userInfo){
+        try {            
+            if (await USER.findOne({
                 where: {
                     email: userInfo.email
                 } 
