@@ -7,7 +7,10 @@
 import { UserGetDataTypeEnum } from '../../data/enums/UserEnums';
 
 /** Interfaces */
-import { IApiUserGetDataInfoResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IApiUserGetDataInfoResponse,
+  IApiUserGetDataWeeklyHistogramResponse,
+} from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Utilities */
 import { Utilities } from '../../utils/Utilities';
@@ -34,5 +37,15 @@ export class UserManager extends Utilities.pubSub {
     )) as IApiUserGetDataInfoResponse;
 
     return userGetInfoResponse;
+  }
+
+  async getWeeklyHistogram(): Promise<IApiUserGetDataWeeklyHistogramResponse | null> {
+    const userGetWeeklyHistogramResponse =
+      (await this.#userEngine.getDataFromUser(
+        UserGetDataTypeEnum.HISTOGRAM,
+        null
+      )) as IApiUserGetDataWeeklyHistogramResponse;
+
+    return userGetWeeklyHistogramResponse;
   }
 }
