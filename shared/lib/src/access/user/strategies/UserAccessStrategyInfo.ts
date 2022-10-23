@@ -10,7 +10,7 @@ import { IApiUserGetDataInfoResponse } from '../../../resource/api/acad/ApiAcadI
 import { UserAccessStrategy } from './UserAccessStrategy';
 
 /**
- * Class that specifies Login Auth access strategy
+ * Class that specifies User Get Data access strategy
  */
 export class UserAccessStrategyInfo extends UserAccessStrategy {
   async getData(token: string): Promise<IApiUserGetDataInfoResponse> {
