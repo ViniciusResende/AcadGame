@@ -24,7 +24,7 @@ class QueryUser {
                 }
             }
 
-            USER_DB_ADAPTER.newUser(newUser);
+            await USER_DB_ADAPTER.newUser(newUser);
         }
         catch (err) {
             throw err;
@@ -101,12 +101,8 @@ class QueryUser {
         }
     }
 
-    async updateUserInfo(reqUserId, updateUserId, userInfo) {
+    async updateUserInfo(updateUserId, userInfo) {
         try {
-            if (reqUserId != updateUserId) {
-                throw new Error('Você não pode alterar as informações de outro usuário.');
-            }
-
             if (Object.keys(userInfo).length === 0) {
                 throw new Error('É necessário fornecer as alterações desejadas.') ;
             }
@@ -117,20 +113,16 @@ class QueryUser {
                 }
             });
 
-            USER_DB_ADAPTER.updateUser(updateUserId, userInfo);
+            await USER_DB_ADAPTER.updateUser(updateUserId, userInfo);
         }
         catch (err) {
             throw err;
         }
     }
 
-    async deleteAccount(reqUserId, deletionUserId) {
+    async deleteAccount(deletionUserId) {
         try {
-            if (reqUserId != deletionUserId) {
-                throw new Error('Você não pode deletar a conta de outra pessoa.');
-            }
-
-            USER_DB_ADAPTER.eraseAccount(deletionUserId);
+            await USER_DB_ADAPTER.eraseAccount(deletionUserId);
         }
         catch (err) {
             throw err;
