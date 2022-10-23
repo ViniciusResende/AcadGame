@@ -100,6 +100,28 @@ class QueryUser {
             throw err;
         }
     }
+
+    async updateUserInfo(reqUserId, updateUserId, userInfo) {
+        try {
+            if (reqUserId != updateUserId) {
+                throw new Error('Você não pode alterar as informações de outro usuário.');
+            }
+
+            if (Object.keys(userInfo).length === 0) {
+                throw new Error('É necessário fornecer as alterações desejadas.') ;
+            }
+            
+            Object.keys(userInfo).forEach((info) => {
+                if(!this.EVERY_USER_INFO.includes(info)) {
+                    throw new Error(`Uma das propriedades fornecidas não é válida.`);
+                }
+            });
+
+            USER_DB_ADAPTER.updateUser(updateUserId, userInfo);
+        } catch (err) {
+            
+        }
+    }
 }
 
 module.exports = QueryUser;
