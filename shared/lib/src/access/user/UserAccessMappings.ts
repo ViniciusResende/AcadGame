@@ -9,6 +9,7 @@ import { UserGetDataTypeEnum } from '../../data/enums/UserEnums';
 /** Classes */
 import { UserAccessStrategy } from './strategies/UserAccessStrategy';
 import { UserAccessStrategyInfo } from './strategies/UserAccessStrategyInfo';
+import { UserAccessStrategyWeeklyHistogram } from './strategies/UserAccessStrategyWeeklyHistogram';
 
 /**
  * Mapping between User Get Data type and access strategy class.
@@ -16,4 +17,7 @@ import { UserAccessStrategyInfo } from './strategies/UserAccessStrategyInfo';
 export const userGetDataTypeStrategyMap = new Map<
   UserGetDataTypeEnum,
   UserAccessStrategy
->([[UserGetDataTypeEnum.USERINFO, new UserAccessStrategyInfo()]]);
+>([
+  [UserGetDataTypeEnum.USERINFO, new UserAccessStrategyInfo()],
+  [UserGetDataTypeEnum.HISTOGRAM, new UserAccessStrategyWeeklyHistogram()],
+]);
