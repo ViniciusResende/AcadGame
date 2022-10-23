@@ -13,7 +13,7 @@ server.use(bodyParser.json());
 server.use(cookieParser());
 
 server.use('/badges', BadgeRouter);
-server.use('/exercises', BadgeRouter);
+server.use('/exercises', ExerciseRouter);
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
