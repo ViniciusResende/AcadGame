@@ -133,39 +133,47 @@ class UserDatabaseAdapter {
     }
 
     async updateUser(updateUserId, userInfo){
-        try {            
-            if (await USER.findOne({
-                where: {
-                    email: userInfo.email
-                } 
-            }) != null) {
-                throw new Error("Este e-mail já é utilizado por outra conta.");
-            }
+        try {
+            if (userInfo.email) {
+                const EMAIL_CONFLICT = await USER.findOne({
+                    where: {
+                        email: userInfo.email
+                    } 
+                });
 
-            if(await USER.findOne({
-                where: {
-                    nickName: userInfo.nickName
-                } 
-            }) != null) {
-                throw new Error("Este apelido já está em uso por outro usuário.");
+                if (EMAIL_CONFLICT != null) {
+                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                }
+            }       
+
+            if (userInfo.nickName) {
+                const NICKNAME_CONFLICT = await USER.findOne({
+                    where: {
+                        nickName: userInfo.nickName
+                    } 
+                });
+
+                if(NICKNAME_CONFLICT != null) {
+                    throw new Error("Este apelido já está em uso por outro usuário.");
+                }
             }
 
             let updateUser =  await USER.findByPk(updateUserId);
-    
+            
             if(updateUser == null){
                 throw new Error('O usuário a ser atualizado não existe.');
             }
-
+            
             Object.keys(userInfo).forEach(async (info) => {
                 if(info == 'password'){
                     const SALT_ROUNDS = 10;
-                    updateUser[info] = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
+                    updateUser.dataValues[info] = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
                 }
                 else {
-                    updateUser[info] = userInfo[info];
+                    updateUser.dataValues[info] = userInfo[info];
                 }
             });
-
+            
             await updateUser.save();
         }
         catch(err) {
@@ -187,4 +195,4 @@ class UserDatabaseAdapter {
     }
 }
 
-module.exports = UserDatabaseAdapter;
+module.exports = new UserDatabaseAdapter;
