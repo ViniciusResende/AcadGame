@@ -50,7 +50,7 @@ class QueryUser {
 
     async getOneUser(id) {
         try {
-            const QUERIED_USER = await USER_DB_ADAPTER.getUserByPk(id);
+            const QUERIED_USER = await USER_DB_ADAPTER.getUserByPK(id);
 
             return QUERIED_USER;
         }
@@ -130,4 +130,4 @@ class QueryUser {
     }
 }
 
-module.exports = QueryUser;
+module.exports = new QueryUser;
