@@ -1,8 +1,8 @@
 const Express = require('express');
 const server = Express();
 
-const BadgeRouter = require('./adapters/badge/badgeRoute');
-const ExerciseRouter = require('./adapters/exercise/exerciseRoute');
+const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
+const EXERCISE_ROUTER = require('./adapters/exercise/exerciseRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
 
 const bodyParser = require("body-parser");
@@ -13,8 +13,8 @@ server.use(bodyParser.urlencoded({extended:true}));
 server.use(bodyParser.json());
 server.use(cookieParser());
 
-server.use('/badges', BadgeRouter);
-server.use('/exercises', ExerciseRouter);
+server.use('/badges', BADGE_ROUTER);
+server.use('/exercises', EXERCISE_ROUTER);
 server.use('/users', USER_ROUTER);
 
 server.listen(process.env.EXPRESS_PORT, () => {
