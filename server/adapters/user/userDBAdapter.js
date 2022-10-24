@@ -28,7 +28,8 @@ class UserDatabaseAdapter {
                 throw new Error("Apelido já escolhido por outro usuário.");
             }
 
-            await USER.create(user);
+            userInfo.score = 0;
+            await USER.create(userInfo);
         } 
         catch (err) {
             throw err;
@@ -158,7 +159,11 @@ class UserDatabaseAdapter {
                 }
             }
 
-            let updateUser =  await USER.findByPk(updateUserId);
+            let updateUser =  await USER.findOne({
+                where: {
+                    id: updateUserId
+                }
+            });
             
             if(updateUser == null){
                 throw new Error('O usuário a ser atualizado não existe.');
@@ -167,14 +172,17 @@ class UserDatabaseAdapter {
             Object.keys(userInfo).forEach(async (info) => {
                 if(info == 'password'){
                     const SALT_ROUNDS = 10;
-                    updateUser.dataValues[info] = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
+                    const ENCRYPTED_PASS = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
+                    updateUser[info] = ENCRYPTED_PASS;
                 }
                 else {
-                    updateUser.dataValues[info] = userInfo[info];
+                    updateUser[info] = userInfo[info];
                 }
             });
-            
-            await updateUser.save();
+
+            updateUser.save({
+                fields: Object.keys(userInfo)
+            });
         }
         catch(err) {
             throw err;
