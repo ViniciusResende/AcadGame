@@ -24,7 +24,7 @@ const User = database.define('Users', {
     },
     score: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: true
     }
 });
 
