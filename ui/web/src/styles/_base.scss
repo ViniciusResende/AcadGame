@@ -54,7 +54,7 @@ ol {
   background-clip: content-box;
   border: 4px solid transparent;
   border-radius: 1ex;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(16, 26, 49, 0.3);
 }
 
 *::-webkit-scrollbar-corner {
@@ -62,5 +62,5 @@ ol {
 }
 
 * {
-  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
