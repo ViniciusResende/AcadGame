@@ -1,11 +1,15 @@
 const EXERCISE = require('../../infrastructure/models/exercise');
 
+const { Op } = require('sequelize');
+
 class ExerciseDatabaseAdapter {
+    unnecessaryAttributes = ['createdAt', 'updatedAt'];
+    
     async findAllExercises() {
         try {
             const ALL_EXERCISES = await EXERCISE.findAll({
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
@@ -20,7 +24,7 @@ class ExerciseDatabaseAdapter {
         try {
             const QUERIED_EXERCISE = await EXERCISE.findByPk(id, {
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
@@ -32,6 +36,28 @@ class ExerciseDatabaseAdapter {
         }
         catch (err) {
             return err;
+        }
+    }
+
+    async findExerciseByType(type) {
+        try {
+            const QUERIED_EXERCISES = await EXERCISE.findAll({
+                where: {
+                    type: type
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            if(!QUERIED_EXERCISES) {
+                throw new Error(`Não encontramos um exercício com o tipo ${type}.`)
+            }
+
+            return QUERIED_EXERCISES;
+        }
+        catch(err) {
+            throw err;
         }
     }
 };
