@@ -32,6 +32,23 @@ class QueryExerciseDomain {
             return err;
         }
     }
+
+    async queryExerciseByType(type) {
+        let queriedExercises = [];
+
+        try {
+            const EXERCISES = await queryExercises.getExerciseByType(type);
+
+            for(const EXERCISE of EXERCISES) {
+                queriedExercises.push(EXERCISE);
+            }
+
+            return queriedExercises;
+        }
+        catch(err) {
+            return err;
+        }
+    }
 }
 
 module.exports = new QueryExerciseDomain;
