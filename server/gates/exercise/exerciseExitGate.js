@@ -24,7 +24,18 @@ class QueryExerciseDB {
 
             return QUERIED_EXERCISE.dataValues;
         } 
-        catch (err) {
+        catch(err) {
+            return err;
+        }
+    }
+
+    async getExerciseByType(type) {
+        try {
+            const QUERIED_EXERCISE = await ExerciseDBAdapter.findExerciseByType(type);
+
+            return QUERIED_EXERCISE.dataValues;
+        }
+        catch(err) {
             return err;
         }
     }
