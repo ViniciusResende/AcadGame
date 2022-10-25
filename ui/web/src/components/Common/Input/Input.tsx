@@ -17,6 +17,7 @@ interface InputComponentProps
   className?: string;
   controlId: string;
   inputLabel: string;
+  modifier?: 'default' | 'clear';
   onHover?: React.MouseEventHandler<HTMLInputElement>;
 }
 
@@ -25,6 +26,7 @@ function InputComponent(props: InputComponentProps) {
     className,
     controlId,
     inputLabel,
+    modifier = 'default',
     onAnimationStart,
     onBlur,
     onHover,
@@ -93,7 +95,7 @@ function InputComponent(props: InputComponentProps) {
         {inputLabel}
       </label>
       <input
-        className={cx('input-component', className)}
+        className={cx('input-component', className, modifier)}
         {...elementProps}
         onAnimationStart={onAnimationStartInput}
         onBlur={onBlurInput}
