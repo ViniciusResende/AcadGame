@@ -12,7 +12,9 @@ function AuthenticatedLayout() {
     <Suspense fallback="loading">
       <div className="authenticated-page">
         <Header />
-        <Outlet />
+        <div className="page-content">
+          <Outlet />
+        </div>
       </div>
     </Suspense>
   );
