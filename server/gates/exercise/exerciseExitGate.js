@@ -31,9 +31,14 @@ class QueryExerciseDB {
 
     async getExerciseByType(type) {
         try {
-            const QUERIED_EXERCISE = await ExerciseDBAdapter.findExerciseByType(type);
+            const QUERIED_EXERCISES = await ExerciseDBAdapter.findExerciseByType(type);
 
-            return QUERIED_EXERCISE.dataValues;
+            let returnValues = [];
+            QUERIED_EXERCISES.forEach(queriedExercise => {
+                returnValues.push(queriedExercise).dataValues;
+            });
+
+            return returnValues;
         }
         catch(err) {
             return err;
