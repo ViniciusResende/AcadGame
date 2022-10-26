@@ -10,6 +10,7 @@ import Lib, { UserProfilePictureEnum } from 'acad-game-lib';
 /** Interfaces */
 import {
   IUserInfoData,
+  IUserUpdateInfoBody,
   IUserWeeklyHistogramElementData,
 } from '../../data/interfaces/ProfileInterfaces';
 
@@ -54,8 +55,18 @@ function RouteProfile() {
     );
   }, []);
 
+  async function updateUserInfo(userUpdateInfoBody: IUserUpdateInfoBody) {
+    const response = await Lib.user.updateInfo(userUpdateInfoBody);
+
+    if (response) setUserInfo(response.data);
+  }
+
   return (
-    <Profile userInfo={userInfo} userWeeklyHistogram={userWeeklyHistogram} />
+    <Profile
+      userInfo={userInfo}
+      userWeeklyHistogram={userWeeklyHistogram}
+      updateUserInfo={updateUserInfo}
+    />
   );
 }
 
