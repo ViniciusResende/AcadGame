@@ -60,4 +60,29 @@ export class UserAccess {
 
     return userGetDataResponseBody;
   }
+
+  /**
+   * Updates an User Data according to an giver Payload after updating user data
+   * retrieves it with the updated data
+   *
+   * @param userUpdateDataType - Type of the User Update Data type to get strategy for (e.g user info)
+   * @param authToken - An JWT like token that will be used to authenticate while
+   * fetching user data
+   * @param userUpdateDataBody - An body object containing the info to be updated
+   * of a given type
+   * @returns The payload containing the User Update Data Response
+   */
+  async updateData(
+    userUpdateDataType: UserGetDataTypeEnum,
+    authToken: string,
+    userUpdateDataBody: unknown
+  ): Promise<IApiUserGetDataResponse> {
+    const strategy = this.#getStrategy(userUpdateDataType);
+    const userGetDataResponseBody = await strategy.updateData(
+      authToken,
+      userUpdateDataBody
+    );
+
+    return userGetDataResponseBody;
+  }
 }
