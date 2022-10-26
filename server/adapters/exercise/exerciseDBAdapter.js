@@ -53,6 +53,30 @@ class ExerciseDatabaseAdapter {
             if(!QUERIED_EXERCISES) {
                 throw new Error(`Não encontramos um exercício com o tipo ${type}.`)
             }
+            
+            return QUERIED_EXERCISES;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
+    async findExercisesByName(name) {
+        try {
+            const QUERIED_EXERCISES = await EXERCISE.findAll({
+                where: {
+                    name: {
+                        [Op.like]: `%${name}%`
+                    }
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            if(!QUERIED_EXERCISES) {
+                throw new Error(`Não encontramos nenhum exercício com nome semelhante a ${name}.`);
+            }
 
             return QUERIED_EXERCISES;
         }
