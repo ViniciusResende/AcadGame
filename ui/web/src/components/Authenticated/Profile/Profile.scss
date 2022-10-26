@@ -42,6 +42,8 @@
       border: 1px solid $secondaryColor;
       border-radius: 50%;
       display: block;
+      height: 250px;
+      width: 250px;
     }
 
     > button {
@@ -76,6 +78,7 @@
 
   &__user-name-points {
     margin-top: 2em;
+    width: 17.5em;
   }
 
   &__user-name {
@@ -83,13 +86,20 @@
     border-bottom: 1px solid $fontColor;
     display: flex;
     justify-content: space-between;
+    margin-top: 11px;
     min-width: 17.5em;
     padding-bottom: 0.25em;
 
+    &.inEditionMode {
+      border-bottom: none;
+      margin-top: 0;
+    }
+
     > span {
       color: $fontColor;
-      font-size: 1.25em;
-      line-height: 1.5em;
+      font-size: 1.1em;
+      line-height: 1.25em;
+      margin-left: 1em;
     }
 
     > button {
@@ -97,6 +107,7 @@
       border: none;
       border-radius: 4px;
       cursor: pointer;
+      margin-left: 0.5em;
       padding: 4px;
       transition: background 0.3s ease;
 
