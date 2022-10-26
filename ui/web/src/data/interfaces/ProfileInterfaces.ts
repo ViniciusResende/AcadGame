@@ -16,6 +16,14 @@ export interface IUserInfoData {
 }
 
 /**
+ * User info update payload body
+ */
+export interface IUserUpdateInfoBody {
+  nickname?: string;
+  picture?: UserProfilePictureEnum;
+}
+
+/**
  * User weekly histogram data
  */
 export interface IUserWeeklyHistogramElementData {
