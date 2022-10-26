@@ -2,7 +2,11 @@
 import { UserProfilePictureEnum } from 'acad-game-lib';
 
 /** Assets */
-import { DefaultProfilePic } from '../../../../assets/images/profilePics';
+import {
+  DefaultProfilePic,
+  GenericManOne,
+  SpecialBuzz,
+} from '../../../../assets/images/profilePics';
 
 /**
  * Mapping between User Get profile picture enum and profile picture file.
@@ -10,4 +14,8 @@ import { DefaultProfilePic } from '../../../../assets/images/profilePics';
 export const userGetProfilePictureImageMap = new Map<
   UserProfilePictureEnum,
   string
->([[UserProfilePictureEnum.DEFAULT, DefaultProfilePic]]);
+>([
+  [UserProfilePictureEnum.DEFAULT, DefaultProfilePic],
+  [UserProfilePictureEnum.GENERIC_MAN_ONE, GenericManOne],
+  [UserProfilePictureEnum.SPECIAL_BUZZ, SpecialBuzz],
+]);
