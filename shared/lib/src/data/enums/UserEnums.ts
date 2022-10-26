@@ -17,4 +17,6 @@ export enum UserGetDataTypeEnum {
  */
 export enum UserProfilePictureEnum {
   DEFAULT = 'default',
+  GENERIC_MAN_ONE = 'generic_man_one',
+  SPECIAL_BUZZ = 'special_buzz',
 }

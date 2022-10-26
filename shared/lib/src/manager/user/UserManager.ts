@@ -7,6 +7,7 @@
 import { UserGetDataTypeEnum } from '../../data/enums/UserEnums';
 
 /** Interfaces */
+import { IUserInfoUpdateBody } from '../../data/interfaces/UserInterfaces';
 import {
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
@@ -37,6 +38,17 @@ export class UserManager extends Utilities.pubSub {
     )) as IApiUserGetDataInfoResponse;
 
     return userGetInfoResponse;
+  }
+
+  async updateInfo(
+    userUpdateInfoBody: IUserInfoUpdateBody
+  ): Promise<IApiUserGetDataInfoResponse | null> {
+    const userUpdatedInfoResponse = (await this.#userEngine.updateDataFromUser(
+      UserGetDataTypeEnum.USERINFO,
+      userUpdateInfoBody
+    )) as IApiUserGetDataInfoResponse;
+
+    return userUpdatedInfoResponse;
   }
 
   async getWeeklyHistogram(): Promise<IApiUserGetDataWeeklyHistogramResponse | null> {
