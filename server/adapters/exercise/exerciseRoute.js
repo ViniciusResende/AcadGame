@@ -1,10 +1,10 @@
 const Router = require('express').Router();
 
-const QueryExercise = require('../../gates/exercise/exerciseEntryGate');
+const QueryExercise = require('../../domains/exercise/exerciseDomain');
 
 Router.get('/', async (req, res) => {
     try {
-        const EXERCISES = await QueryExercise.searchAllExercises();
+        const EXERCISES = await QueryExercise.queryAllExercises();
 
         res.status(200).json(EXERCISES);
     }
@@ -13,11 +13,23 @@ Router.get('/', async (req, res) => {
     }
 });
 
-Router.get('/:id', async (req, res) => {
+Router.get('/id/:id', async (req, res) => {
     try {
-        const EXERCISE = await QueryExercise.getOneExercise(req.params.id);
+        const EXERCISE = await QueryExercise.queryOneExercise(req.params.id);
 
         res.status(200).json(EXERCISE);
+    }
+    catch(err) {
+        res.status(500).send(err);
+    }
+});
+
+Router.get('/type/:type', async (req, res) => {
+    try {
+        const TYPE = req.params.type;
+        const EXERCISES = await QueryExercise.queryExercisesByType(TYPE);
+
+        res.status(200).json(EXERCISES);
     }
     catch(err) {
         res.status(500).send(err);
