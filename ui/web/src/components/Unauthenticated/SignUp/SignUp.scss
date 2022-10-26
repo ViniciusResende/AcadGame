@@ -28,6 +28,8 @@
 
     > svg {
       margin-top: 6em;
+      width: auto;
+      height: auto;
     }
 
     @include forXLarge() {
@@ -38,6 +40,8 @@
 
       > svg {
         margin-top: 10em;
+        width: 653px; 
+        height: 467px;
       }
     }
   }
