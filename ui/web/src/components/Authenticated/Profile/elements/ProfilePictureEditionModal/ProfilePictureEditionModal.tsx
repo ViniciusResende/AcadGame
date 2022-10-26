@@ -73,6 +73,7 @@ function ProfilePictureEditionModalComponent({
             saveNewPicture(currentSelectedPicture);
             handleOnClose();
           }}
+          disabled={currentSelectedPicture === userCurrentPicture}
         >
           Confirmar
         </Button>

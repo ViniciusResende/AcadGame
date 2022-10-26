@@ -5,6 +5,8 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(6.25em, 1fr));
     grid-gap: 0.5em;
+    max-height: 600px;
+    overflow: auto;
     width: 100%;
   }
 
