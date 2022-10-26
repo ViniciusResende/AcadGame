@@ -36,4 +36,16 @@ Router.get('/type/:type', async (req, res) => {
     }
 });
 
+Router.get('/name/:name', async (req, res) => {
+    try {
+        const NAME = req.params.name;
+        const EXERCISES = await QueryExercise.queryExercisesByName(NAME);
+
+        res.status(200).json(EXERCISES);
+    }
+    catch(err) {
+        res.status(500).send(err);
+    }
+})
+
 module.exports = Router;
