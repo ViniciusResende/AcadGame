@@ -14,7 +14,7 @@ class QueryExerciseDomain {
             return queriedExercises;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
@@ -29,11 +29,11 @@ class QueryExerciseDomain {
             return queriedExercises;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
 
-    async queryExerciseByType(type) {
+    async queryExercisesByType(type) {
         let queriedExercises = [];
 
         try {
@@ -41,12 +41,14 @@ class QueryExerciseDomain {
 
             for(const EXERCISE of EXERCISES) {
                 queriedExercises.push(EXERCISE);
+                console.log(`exercicios: ${queriedExercises}`);
             }
+
 
             return queriedExercises;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 }
