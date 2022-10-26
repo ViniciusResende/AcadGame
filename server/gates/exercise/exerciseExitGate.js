@@ -44,6 +44,22 @@ class QueryExerciseDB {
             return err;
         }
     }
+
+    async getExercisesByName(name) {
+        try {
+            const QUERIED_EXERCISES = await ExerciseDBAdapter.findExercisesByName(name);
+
+            let returnValues = [];
+            QUERIED_EXERCISES.forEach(queriedExercise => {
+                returnValues.push(queriedExercise).dataValues;
+            });
+            
+            return returnValues;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryExerciseDB;
