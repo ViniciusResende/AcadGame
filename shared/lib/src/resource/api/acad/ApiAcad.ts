@@ -151,7 +151,7 @@ export class ApiAcad extends ApiClient {
         nickname,
         picture,
       },
-      method: HttpMethodEnum.POST,
+      method: HttpMethodEnum.PUT,
     };
     const response = this.#api.request('/user/info', requestParams);
     const responseData = await response.promise;
