@@ -41,11 +41,27 @@ class QueryExerciseDomain {
 
             for(const EXERCISE of EXERCISES) {
                 queriedExercises.push(EXERCISE);
-                console.log(`exercicios: ${queriedExercises}`);
             }
 
 
             return queriedExercises;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
+    async queryExercisesByName(name) {
+        let queriedExercises = [];
+
+        try {
+            const EXERCISES = await queryExercises.getExercisesByName(name);
+
+            EXERCISES.forEach(EXERCISE => {
+                queriedExercises.push(EXERCISE);
+            });
+
+            return EXERCISES;
         }
         catch(err) {
             throw err;
