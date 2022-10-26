@@ -62,7 +62,7 @@ export abstract class UserAccessStrategy {
    * fetching user data
    * @param getDataBody - An body object containing the necessary complementary info
    * for fetching user data
-   * @returns The response payload containing message and token
+   * @returns The response payload containing the fetched data
    */
   abstract getData(
     token: string,
@@ -70,7 +70,20 @@ export abstract class UserAccessStrategy {
   ): Promise<IApiUserGetDataResponse>;
 
   /**
-   * Getter for the API to be used for doing the authentication.
+   * Updates the data from an parameter body via API and retrieves updated data
+   *
+   * @param token - An JWT like token that will be used to authenticate while
+   * fetching user data
+   * @param updateDataBody - An body object containing the data to be update
+   * @returns The response payload containing the updated data
+   */
+  abstract updateData(
+    token: string,
+    updateDataBody: unknown
+  ): Promise<IApiUserGetDataResponse>;
+
+  /**
+   * Getter for the API to be used for getting and saving user data.
    *
    * @returns The API class instance
    */
