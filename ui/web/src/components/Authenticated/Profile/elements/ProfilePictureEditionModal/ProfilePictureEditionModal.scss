@@ -1,0 +1,47 @@
+@import '../../../../../styles/';
+
+.picture-modal {
+  &__container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(6.25em, 1fr));
+    grid-gap: 0.5em;
+    width: 100%;
+  }
+
+  &__picture {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+
+    > img {
+      border: 1px solid $secondaryColor;
+      border-radius: 50%;
+      display: block;
+      height: 100px;
+      width: 100px;
+    }
+
+    &.isSelected > img {
+      border: 3px solid $systemGreen;
+    }
+
+    &:hover > img {
+      border: 3px solid $systemGreen;
+    }
+  }
+
+  &__submit-area {
+    align-items: center;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+    margin-top: 2em;
+    width: 100%;
+
+    > button {
+      max-width: 8em;
+      padding: 0.75em;
+    }
+  }
+}
