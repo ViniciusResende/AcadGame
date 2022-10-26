@@ -54,4 +54,25 @@ export class UserEngine {
     }
     return userGetDataPayload;
   }
+
+  async updateDataFromUser(
+    userUpdateDataType: UserGetDataTypeEnum,
+    userUpdateDataBody: unknown
+  ): Promise<IApiUserGetDataResponse | null> {
+    let userUpdatedDataPayload: IApiUserGetDataResponse | null = null;
+    try {
+      const storedAuthToken = this.#getAuthToken();
+      if (!storedAuthToken)
+        throw new Error(`No token stored, unable to authenticate.`);
+
+      userUpdatedDataPayload = await this.#userAccess.updateData(
+        userUpdateDataType,
+        storedAuthToken,
+        userUpdateDataBody
+      );
+    } catch (error) {
+      console.error(error);
+    }
+    return userUpdatedDataPayload;
+  }
 }
