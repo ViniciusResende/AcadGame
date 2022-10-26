@@ -68,3 +68,11 @@ export interface IApiAcadSignUpBody {
   email: string;
   password: string;
 }
+
+/**
+ * API Update User Info  body.
+ */
+export interface IApiAcadUpdateUserInfoBody {
+  nickname: string;
+  picture: UserProfilePictureEnum;
+}
