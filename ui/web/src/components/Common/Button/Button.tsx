@@ -11,7 +11,7 @@ interface ButtonComponentProps
   children: React.ReactNode;
   className?: string;
   icon?: React.ReactNode;
-  modifier: 'default' | 'outlined';
+  modifier: 'default' | 'outlined' | 'secondary';
 }
 
 function ButtonComponent(props: ButtonComponentProps) {

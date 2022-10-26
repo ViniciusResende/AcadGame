@@ -29,6 +29,32 @@
     background-color: darken($primaryColor, 10%);
   }
 
+  &.outlined {
+    background-color: $white;
+    border: 1px solid $primaryColor;
+    color: $primaryColor;
+
+    &:hover {
+      background-color: darken($white, 2%);
+    }
+
+    &:active {
+      background-color: darken($white, 5%);
+    }
+  }
+
+  &.secondary {
+    background-color: $secondaryColor;
+
+    &:hover {
+      background-color: lighten($secondaryColor, 2%);
+    }
+
+    &:active {
+      background-color: lighten($secondaryColor, 5%);
+    }
+  }
+
   &.disabled {
     background-color: lighten($fontColor, 15%);
     cursor: default;
