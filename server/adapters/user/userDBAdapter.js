@@ -65,10 +65,6 @@ class UserDatabaseAdapter {
                 }
             });
 
-            if (!QUERIED_USER) {
-                throw new Error('Não encontramos este usuário no sistema.');
-            }
-
             return QUERIED_USER;
         } catch (err) {
             throw err;
