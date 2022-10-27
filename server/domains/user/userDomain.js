@@ -1,66 +1,111 @@
+const QUERY_USER = require('../../gates/user/userExitGate');
+
 class User {
-    id;
-    name;
-    score;
-    exercises = [];
+    async createUser(userInfo) {
+        try {
+            if (userInfo.email) {
+                const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
 
-    User() {
-        this.id = -1;
-        this.name = "";
-        this.score = -1;
-    }
-
-    User(id, name, score) {
-        this.id = id;
-        this.name = name;
-        this.score = score;
-    }
-
-    getId() {
-        return this.id;
-    }
-
-    getName() {
-        return this.name;
-    }
-
-    getScore() {
-        return this.score;
-    }
-
-    setId(id) {
-        this.id = id;
-    }
-
-    setName(name) {
-        this.id = name;
-    }
-
-    setScore(score) {
-        this.id = score;
-    }
-
-    incrementScore(value) {
-        this.score += value;
-    }
-
-    addExercise(exercise) {
-        this.exercises.push(exercise);
-    }
-
-    getExercise(id) {
-        let found = null;
-        this.exercises.forEach(exercise => {
-            if(exercise.id === id) {
-                found = exercise
-                return;
+                if (EMAIL_CONFLICT) {
+                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                }
             }
-        })
 
-        return found;
+            await QUERY_USER.createNewUser(userInfo);
+        } 
+        catch (err) {
+            throw err;
+        }
     }
 
-    getAllExercises() {
-        return this.exercises;
+    async getEveryUser() {
+        try {
+            const EVERY_USER = await QUERY_USER.getAllUsers();
+
+            return EVERY_USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async getSingleUser(userID) {
+        try {
+            const USER = await QUERY_USER.getOneUser(userID);
+
+            return USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async getUserByEmail(email) {
+        try {
+            const USER = await QUERY_USER.getUserByEmail(email);
+
+            return USER;
+        } 
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async getUserByNickname(nickname) {
+        try {
+            const USER = await QUERY_USER.getUserByNickname(nickname);
+
+            return USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async getTopRankUsers(rank) {
+        try {
+            const TOP_RANK_USERS = await QUERY_USER.getTopRankUsers(rank);
+
+            return TOP_RANK_USERS;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async updateUserInfo(reqUserId, updateUserId, userInfo) {
+        try {
+            if (reqUserId != updateUserId) {
+                throw new Error('Você não pode alterar as informações de outro usuário.');
+            }
+
+            if (userInfo.email) {
+                const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
+
+                if (EMAIL_CONFLICT && EMAIL_CONFLICT.id != updateUserId) {
+                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                }
+            }
+
+            await QUERY_USER.updateUserInfo(updateUserId, userInfo);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async deleteUserAccount(reqUserId, deletionUserId) {
+        try {
+            if (reqUserId != deletionUserId) {
+                throw new Error('Você não pode deletar a conta de outra pessoa.');
+            }
+
+            await QUERY_USER.deleteAccount(deletionUserId);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 }
+
+module.exports = new User;
