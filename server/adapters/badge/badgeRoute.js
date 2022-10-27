@@ -1,10 +1,10 @@
-const Router = require('express').Router();
+const ROUTER = require('express').Router();
 
-const QueryBadge = require('../../gates/badge/badgeEntryGate');
+const BADGE_DOMAIN = require('../../domains/badge/badgeDomain');
 
-Router.get('/', async (req, res) => {
+ROUTER.get('/', async (req, res) => {
     try {
-        const BADGES = await QueryBadge.searchAllBadges();
+        const BADGES = await BADGE_DOMAIN.queryAllBadges();
 
         res.status(200).json(BADGES);
     }
@@ -13,9 +13,9 @@ Router.get('/', async (req, res) => {
     }
 });
 
-Router.get('/id/:id', async (req, res) => {
+ROUTER.get('/id/:id', async (req, res) => {
     try {
-        const BADGE = await QueryBadge.getOneBadge(req.params.id);
+        const BADGE = await BADGE_DOMAIN.queryOneBadge(req.params.id);
 
         res.status(200).json(BADGE);
     }
@@ -24,4 +24,4 @@ Router.get('/id/:id', async (req, res) => {
     }
 });
 
-module.exports = Router;
+module.exports = ROUTER;
