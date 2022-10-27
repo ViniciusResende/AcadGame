@@ -5,11 +5,11 @@ class QueryExerciseDB {
         try {
             let returnExercises = [];
             
-            let queriedExercises = await ExerciseDBAdapter.findAllExercises();
+            const QUERIED_EXERCISES = await ExerciseDBAdapter.findAllExercises();
 
-            for (const queriedExercise of queriedExercises) {
-                returnExercises.push(queriedExercise.dataValues);
-            }
+            QUERIED_EXERCISES.forEach( exercise =>  {
+                returnExercises.push(exercise.dataValues);
+            });
 
             return returnExercises;
         }
