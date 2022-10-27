@@ -13,7 +13,7 @@ Router.get('/', async (req, res) => {
     }
 });
 
-Router.get('/:id', async (req, res) => {
+Router.get('/id/:id', async (req, res) => {
     try {
         const BADGE = await QueryBadge.getOneBadge(req.params.id);
 
