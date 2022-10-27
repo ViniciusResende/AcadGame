@@ -23,8 +23,8 @@ const Badge = database.define('Badges', {
 });
 
 Badge.sync({
-    alter: true,
-    force: true
+    alter: false,
+    force: false
 }).then(() => {
     console.log('Badge table was (re)created');
 }).catch((err) => {
