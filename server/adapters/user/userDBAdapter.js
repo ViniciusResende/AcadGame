@@ -9,16 +9,8 @@ class UserDatabaseAdapter {
 
     async newUser(userInfo) {
         try {
-            const saltRounds = 10;
-            userInfo.password = await bcrypt.hash(userInfo.password, saltRounds);
-
-            if(await USER.findOne({
-                where: {
-                    email: userInfo.email
-                } 
-            }) != null) {
-                throw new Error("Email já cadastrado.");
-            }
+            const SALT_ROUNDS = 10;
+            userInfo.password = await bcrypt.hash(userInfo.password, SALT_ROUNDS);
 
             userInfo.score = 0;
             await USER.create(userInfo);

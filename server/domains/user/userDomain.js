@@ -3,6 +3,14 @@ const QUERY_USER = require('../../gates/user/userExitGate');
 class User {
     async createUser(userInfo) {
         try {
+            if (userInfo.email) {
+                const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
+
+                if (EMAIL_CONFLICT) {
+                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                }
+            }
+
             await QUERY_USER.createNewUser(userInfo);
         } 
         catch (err) {
