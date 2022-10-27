@@ -1,0 +1,19 @@
+$backgroundColor: #e5e5e5;
+$white: #fff;
+$black: #000;
+$activeColor: #ffb703;
+$primaryColor: #fca311;
+$secondaryColor: #14213d;
+$fontColor: #a8a8b3;
+$supportDark: #60605f;
+$textDisabled: #808080;
+$medalNames: lockedMedal, bronzeMedal, silverMedal, goldMedal;
+$rarityColors: #ededed, #d47d4b, #d4d3d2, #ffbc11;
+$systemGreen: #00b060;
+
+/* Media queries sizes */
+$mq-xlarge: 'screen and (min-width: 1441px)';
+$mq-large: 'screen and (min-width: 1280px)';
+$mq-medium: 'screen and (max-width: 1278px)';
+$mq-small: 'screen and (max-width: 1024px)';
+$mq-xsmall: 'screen and (max-width: 480px)';
