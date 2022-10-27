@@ -14,7 +14,7 @@ class BadgeDatabaseAdapter {
             return ALL_BADGES;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
@@ -33,7 +33,7 @@ class BadgeDatabaseAdapter {
             return QUERIED_BADGE;
         } 
         catch (err) {
-            return err;
+            throw err;
         }
     }
 };

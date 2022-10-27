@@ -14,7 +14,7 @@ class QueryBadgeDB {
             return returnBadges;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
     
@@ -23,8 +23,9 @@ class QueryBadgeDB {
             const QUERIED_BADGE = await BADGE_DB_ADAPTER.findOneBadge(id);
             
             return QUERIED_BADGE.dataValues;
-        } catch (err) {
-            return err;
+        } 
+        catch (err) {
+            throw err;
         }
     }
 }

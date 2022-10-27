@@ -9,7 +9,7 @@ ROUTER.get('/', async (req, res) => {
         res.status(200).json(BADGES);
     }
     catch(err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 });
 
@@ -20,7 +20,7 @@ ROUTER.get('/id/:id', async (req, res) => {
         res.status(200).json(BADGE);
     }
     catch(err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 });
 

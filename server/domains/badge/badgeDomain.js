@@ -9,7 +9,7 @@ class BadgeDomain {
             return BADGES;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
     
@@ -20,7 +20,7 @@ class BadgeDomain {
             return BADGE;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
 }
