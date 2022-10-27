@@ -7,6 +7,9 @@ import Button from '../../Common/Button';
 import Input from '../../Common/Input';
 import UnauthenticatedPage from '../Page';
 
+/** Utils */
+import {emailValidation} from "../utils"
+
 /** Styles */
 import './Login.scss';
 
@@ -47,9 +50,11 @@ function LoginComponent({ loginAuth }: LoginComponentProps) {
         <form onSubmit={onSubmitForm}>
           <Input
             className="login-page__input"
-            controlId="login"
-            inputLabel="Login"
+            controlId="email"
+            inputLabel="E-mail"
+            type="email"
             name="username"
+            validatorFunction={emailValidation}
           />
           <Input
             className="login-page__input"

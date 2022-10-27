@@ -18,6 +18,7 @@ interface InputComponentProps
   controlId: string;
   inputLabel: string;
   onHover?: React.MouseEventHandler<HTMLInputElement>;
+  validatorFunction?:(value: string) => string | undefined;
 }
 
 function InputComponent(props: InputComponentProps) {
@@ -25,21 +26,21 @@ function InputComponent(props: InputComponentProps) {
     className,
     controlId,
     inputLabel,
+    onInput,
     onAnimationStart,
     onBlur,
     onHover,
     onFocus,
     type,
+    validatorFunction,
     ...elementProps
   } = props;
   const [isInputActive, setIsInputActive] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputBeingHovered, setIsInputBeingHovered] = useState(false);
   const [isInputAutoFilled, setIsInputAutoFilled] = useState(false);
-
-  const [shouldShowPassword, setShouldShowPassword] = useState(
-    type !== 'password'
-  );
+  const [shouldShowPassword, setShouldShowPassword] = useState(type !== 'password');
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
 
   const onAnimationStartInput = (
     event: React.AnimationEvent<HTMLInputElement>
@@ -59,6 +60,11 @@ function InputComponent(props: InputComponentProps) {
 
     typeof onBlur === 'function' && onBlur(event);
   };
+
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) =>{
+    const value = event && event.target.value;
+    handleInputValidation(value);
+  }
 
   const onHoverInput = (
     event: React.MouseEvent<HTMLInputElement, MouseEvent>
@@ -80,21 +86,34 @@ function InputComponent(props: InputComponentProps) {
     isHovered: isInputBeingHovered,
   });
 
+  const handleInputValidation = (value: string) => {
+    if(validatorFunction){
+
+      const err: string | undefined = validatorFunction(value);
+      if(err) setErrorMessage(err);
+      else setErrorMessage(undefined);
+    }
+  }
+  //.input-container.hasError ~ _label
   return (
     <div className="input-component__container">
       <label className={labelClasses} htmlFor={controlId}>
         {inputLabel}
       </label>
       <input
-        className={cx('input-component', className)}
+        className={cx('input-component', className, {
+          hasError: errorMessage
+        })}
         {...elementProps}
         onAnimationStart={onAnimationStartInput}
         onBlur={onBlurInput}
+        onChange={onChangeInput}
         onFocus={onFocusInput}
         onMouseEnter={onHoverInput}
         onMouseLeave={onHoverInput}
         type={!shouldShowPassword ? type : 'text'}
       />
+      {errorMessage && (<span className='spanzao'>{errorMessage}</span>)}
       {type === 'password' && (
         <div
           className="input-component__visibility-toggle"
