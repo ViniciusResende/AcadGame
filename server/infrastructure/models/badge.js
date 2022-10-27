@@ -19,6 +19,10 @@ const Badge = database.define('Badges', {
     unlockScore: {
         type: Sequelize.INTEGER,
         allowNull: false
+    },
+    type: {
+        type: Sequelize.STRING,
+        allowNull: false
     }
 });
 
