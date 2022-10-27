@@ -1,11 +1,13 @@
 const BADGE = require('../../infrastructure/models/badge');
 
 class BadgeDatabaseAdapter {
+    unnecessaryAttributes = ['createdAt', 'updatedAt'];
+
     async findAllBadges() {
         try {
             const ALL_BADGES = await BADGE.findAll({
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
@@ -20,7 +22,7 @@ class BadgeDatabaseAdapter {
         try {
             const QUERIED_BADGE = await BADGE.findByPk(id, {
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
@@ -29,7 +31,8 @@ class BadgeDatabaseAdapter {
             }
 
             return QUERIED_BADGE;
-        } catch (err) {
+        } 
+        catch (err) {
             return err;
         }
     }
