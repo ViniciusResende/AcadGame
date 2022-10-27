@@ -165,22 +165,22 @@ class UserDatabaseAdapter {
                 }
             });
             
-            if(updateUser == null){
+            if(!updateUser){
                 throw new Error('O usuário a ser atualizado não existe.');
             }
             
+            if( Object.keys(userInfo).includes('password') ){
+                const SALT_ROUNDS = 10;
+                const ENCRYPTED_PASS = await bcrypt.hash(userInfo['password'], SALT_ROUNDS);
+                updateUser['password'] = ENCRYPTED_PASS;
+            }
+
             Object.keys(userInfo).forEach(async (info) => {
-                if(info == 'password'){
-                    const SALT_ROUNDS = 10;
-                    const ENCRYPTED_PASS = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
-                    updateUser[info] = ENCRYPTED_PASS;
-                }
-                else {
+                if (info != 'password')
                     updateUser[info] = userInfo[info];
-                }
             });
 
-            updateUser.save({
+            await updateUser.save({
                 fields: Object.keys(userInfo)
             });
         }
