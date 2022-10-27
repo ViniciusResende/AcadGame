@@ -17,8 +17,8 @@ interface InputComponentProps
   className?: string;
   controlId: string;
   inputLabel: string;
+  validatorFunctions?: {(value: string) : string | undefined} [];
   onHover?: React.MouseEventHandler<HTMLInputElement>;
-  validatorFunction?:(value: string) => string | undefined;
 }
 
 function InputComponent(props: InputComponentProps) {
@@ -32,7 +32,7 @@ function InputComponent(props: InputComponentProps) {
     onHover,
     onFocus,
     type,
-    validatorFunction,
+    validatorFunctions,
     ...elementProps
   } = props;
   const [isInputActive, setIsInputActive] = useState(false);
@@ -87,11 +87,16 @@ function InputComponent(props: InputComponentProps) {
   });
 
   const handleInputValidation = (value: string) => {
-    if(validatorFunction){
-
-      const err: string | undefined = validatorFunction(value);
-      if(err) setErrorMessage(err);
-      else setErrorMessage(undefined);
+    
+    if(validatorFunctions){
+      validatorFunctions.forEach(element => {
+        if(element){
+          
+          const err: string | undefined = element(value);
+          if(err) setErrorMessage(err);
+          else setErrorMessage(undefined);
+        }
+      });
     }
   }
   //.input-container.hasError ~ _label
@@ -113,7 +118,7 @@ function InputComponent(props: InputComponentProps) {
         onMouseLeave={onHoverInput}
         type={!shouldShowPassword ? type : 'text'}
       />
-      {errorMessage && (<span className='spanzao'>{errorMessage}</span>)}
+      {errorMessage && (<span className='errorSpan'>{errorMessage}</span>)}
       {type === 'password' && (
         <div
           className="input-component__visibility-toggle"

@@ -100,3 +100,11 @@
     width: 20px;
   }
 }
+
+.errorSpan {
+  color: $systemRed;
+  padding-left: 8px;
+  position: absolute;
+  font-size: 10px;
+  margin-top: -14px; 
+}
