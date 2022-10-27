@@ -83,10 +83,6 @@ class UserDatabaseAdapter {
                     exclude: this.unnecessaryAttributes
                 }
             });
-
-            if (!QUERIED_USERS) {
-                throw new Error('Não encontramos um usuário com nome semelhante a esse.');
-            }
             
             return QUERIED_USERS;
         } catch (err) {
