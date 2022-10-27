@@ -22,7 +22,7 @@ class UserDatabaseAdapter {
 
             if(await USER.findOne({
                 where: {
-                    nickName: userInfo.nickName
+                    nickName: userInfo.nickname
                 } 
             }) != null) {
                 throw new Error("Apelido já escolhido por outro usuário.");
@@ -95,7 +95,7 @@ class UserDatabaseAdapter {
         try {
             const QUERIED_USERS = USER.findAll({
                 where: {
-                    nickName: {
+                    nickname: {
                         [Op.like]: `%${nickname}%`
                     }
                 },
@@ -122,7 +122,7 @@ class UserDatabaseAdapter {
                 },
                 order: [
                     ['score', 'DESC'],
-                    ['nickName', 'DESC']
+                    ['nickname', 'DESC']
                 ]
             });
 

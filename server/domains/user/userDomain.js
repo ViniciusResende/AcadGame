@@ -45,7 +45,7 @@ class User {
 
     async getUserByNickname(nickname) {
         try {
-            const USER = await QUERY_USER.getUserByNickName(nickname);
+            const USER = await QUERY_USER.getUserByNickname(nickname);
 
             return USER;
         }
