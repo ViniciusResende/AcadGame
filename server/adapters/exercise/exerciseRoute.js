@@ -9,7 +9,7 @@ Router.get('/', async (req, res) => {
         res.status(200).json(EXERCISES);
     }
     catch(err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 });
 
@@ -20,7 +20,7 @@ Router.get('/id/:id', async (req, res) => {
         res.status(200).json(EXERCISE);
     }
     catch(err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 });
 
@@ -32,7 +32,7 @@ Router.get('/type', async (req, res) => {
         res.status(200).json(EXERCISES);
     }
     catch(err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 });
 
@@ -44,7 +44,7 @@ Router.get('/name', async (req, res) => {
         res.status(200).json(EXERCISES);
     }
     catch(err) {
-        res.status(500).send(err);
+        res.status(500).send(err.message);
     }
 })
 

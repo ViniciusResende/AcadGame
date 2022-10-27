@@ -14,7 +14,7 @@ class QueryExerciseDB {
             return returnExercises;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
 
@@ -25,7 +25,7 @@ class QueryExerciseDB {
             return QUERIED_EXERCISE.dataValues;
         } 
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
@@ -41,7 +41,7 @@ class QueryExerciseDB {
             return returnValues;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 

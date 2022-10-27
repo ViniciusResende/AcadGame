@@ -16,7 +16,7 @@ class ExerciseDatabaseAdapter {
             return ALL_EXERCISES;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
@@ -35,7 +35,7 @@ class ExerciseDatabaseAdapter {
             return QUERIED_EXERCISE;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
 
