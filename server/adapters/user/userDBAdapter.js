@@ -111,18 +111,6 @@ class UserDatabaseAdapter {
 
     async updateUser(updateUserId, userInfo){
         try {
-            if (userInfo.email) {
-                const EMAIL_CONFLICT = await USER.findOne({
-                    where: {
-                        email: userInfo.email
-                    } 
-                });
-
-                if (EMAIL_CONFLICT != null) {
-                    throw new Error("Este e-mail já é utilizado por outra conta.");
-                }
-            }
-
             let updateUser =  await USER.findOne({
                 where: {
                     id: updateUserId
