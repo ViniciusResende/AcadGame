@@ -1,15 +1,15 @@
-const BadgeDBAdapter = require('../../adapters/badge/badgeDBAdapter');
+const BADGE_DB_ADAPTER = require('../../adapters/badge/badgeDBAdapter');
 
 class QueryBadgeDB {
     async getAllBadges() {
+        let returnBadges = [];
+
         try {
-            let returnBadges = [];
+            const QUERIED_BADGES = await BADGE_DB_ADAPTER.findAllBadges();
             
-            let queriedBadges = await BadgeDBAdapter.findAllBadges();
-            
-            for (const queriedBadge of queriedBadges) {
+            QUERIED_BADGES.forEach( queriedBadge => {
                 returnBadges.push(queriedBadge.dataValues);
-            }
+            });
             
             return returnBadges;
         }
@@ -20,7 +20,7 @@ class QueryBadgeDB {
     
     async getOneBadge(id) {
         try {
-            const QUERIED_BADGE = await BadgeDBAdapter.findOneBadge(id);
+            const QUERIED_BADGE = await BADGE_DB_ADAPTER.findOneBadge(id);
             
             return QUERIED_BADGE.dataValues;
         } catch (err) {
