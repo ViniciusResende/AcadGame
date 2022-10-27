@@ -74,10 +74,6 @@ class ExerciseDatabaseAdapter {
                 }
             });
 
-            if(!QUERIED_EXERCISES) {
-                throw new Error(`Não encontramos nenhum exercício com nome semelhante a ${name}.`);
-            }
-
             return QUERIED_EXERCISES;
         }
         catch(err) {
