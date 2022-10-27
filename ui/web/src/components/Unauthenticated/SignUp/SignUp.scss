@@ -27,9 +27,9 @@
     }
 
     > svg {
-      margin-top: 6em;
-      width: auto;
-      height: auto;
+      height: 100%;
+      margin-top: 4em;
+      width: 100%;
     }
 
     @include forXLarge() {
@@ -40,8 +40,6 @@
 
       > svg {
         margin-top: 10em;
-        width: 653px; 
-        height: 467px;
       }
     }
   }
@@ -51,11 +49,19 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 8.2em auto;
+    margin: 4em auto;
     max-width: 350px;
 
     > form {
       width: 100%;
+    }
+
+    @include forXLarge() {
+      margin: 8.2em auto;
+    }
+
+    @include forXSmall() {
+      margin: 0.5em auto;
     }
   }
 
