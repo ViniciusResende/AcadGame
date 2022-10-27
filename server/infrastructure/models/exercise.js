@@ -30,10 +30,13 @@ const Exercise = database.define('Exercises', {
     }
 });
 
-Exercise.sync({alter: false, force: false})
-    .then(() => {
-        console.log('Exercise table was (re)created');
-    })
-    .catch((err) => console.log(err));
+Exercise.sync({
+    alter: false,
+    force: false
+}).then(() => {
+    console.log('Exercise table was (re)created');
+}).catch((err) => {
+    console.log(err)
+});
 
 module.exports = Exercise;
