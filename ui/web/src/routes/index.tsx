@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 /** Routes */
 import RouteUnauthenticated from './unauthenticated';
+import RouteAuthenticated from './authenticated';
 
 /** Exports */
 export default (
@@ -10,7 +11,7 @@ export default (
     <Routes>
       <Route path="/">
         {RouteUnauthenticated}
-        {/* {RouteApostle} */}
+        {RouteAuthenticated}
         {/* <Route path="*" element={<NotFoundPageComponent />} /> */}
       </Route>
     </Routes>

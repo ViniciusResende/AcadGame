@@ -3,6 +3,9 @@
  * @module ApiAcad
  */
 
+/** Enums */
+import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
+
 /**
  * API data representation for general HTTP responses' structure.
  */
@@ -20,6 +23,36 @@ export interface IApiAcadAuthResponse {
 }
 
 /**
+ * API data representation for general User Get Data responses'.
+ */
+export interface IApiUserGetDataResponse {
+  id: string;
+  data: unknown;
+}
+
+/**
+ * API data representation for User Get Data Info responses'.
+ */
+export interface IApiUserGetDataInfoResponse extends IApiUserGetDataResponse {
+  data: {
+    nickname: string;
+    totalPoints: number;
+    profileIcon: UserProfilePictureEnum;
+  };
+}
+
+/**
+ * API data representation for User Get Data Weekly Histogram responses'.
+ */
+export interface IApiUserGetDataWeeklyHistogramResponse
+  extends IApiUserGetDataResponse {
+  data: {
+    date: string;
+    dailyPoints: number;
+  }[];
+}
+
+/**
  * API login Auth body.
  */
 export interface IApiAcadLoginBody {
@@ -34,4 +67,12 @@ export interface IApiAcadSignUpBody {
   nickname: string;
   email: string;
   password: string;
+}
+
+/**
+ * API Update User Info  body.
+ */
+export interface IApiAcadUpdateUserInfoBody {
+  nickname: string;
+  picture: UserProfilePictureEnum;
 }

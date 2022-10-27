@@ -9,9 +9,14 @@ import {
   HttpMethodEnum,
   HttpRequestHeaderEnum,
 } from '../../../utils/classes/api-client/ApiClientEnums';
+import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 
 /** Interfaces */
-import { IApiAcadAuthResponse } from './ApiAcadInterfaces';
+import {
+  IApiAcadAuthResponse,
+  IApiUserGetDataInfoResponse,
+  IApiUserGetDataWeeklyHistogramResponse,
+} from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
 
 /** Classes */
@@ -27,6 +32,12 @@ export class ApiAcad extends ApiClient {
   constructor(baseUrl: string) {
     super(baseUrl);
     this.#api = new ApiAcadEndpoint(this, { uri: '/api' });
+  }
+
+  #getAuthHeader(token: string) {
+    return new Headers({
+      Authorization: `Bearer ${token}`,
+    });
   }
 
   /**
@@ -101,5 +112,73 @@ export class ApiAcad extends ApiClient {
     const signUpResponse = responseData.data as IApiAcadAuthResponse;
 
     return signUpResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting user info.
+   *
+   * @param token - The token to be used to authenticate user
+   * @returns - The User info from provided token
+   */
+  async userInfo(token: string): Promise<IApiUserGetDataInfoResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request('/user/info', requestParams);
+    const responseData = await response.promise;
+    const userInfoResponse = responseData.data as IApiUserGetDataInfoResponse;
+
+    return userInfoResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting user info.
+   *
+   * @param token - The token to be used to authenticate user
+   * @param nickname - The new nickname to be saved
+   * @param picture - The new picture to be save
+   * @returns - The User info from provided token
+   */
+  async updateUserInfo(
+    token: string,
+    nickname: string,
+    picture: UserProfilePictureEnum
+  ): Promise<IApiUserGetDataInfoResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      body: {
+        nickname,
+        picture,
+      },
+      method: HttpMethodEnum.PUT,
+    };
+    const response = this.#api.request('/user/info', requestParams);
+    const responseData = await response.promise;
+    const userInfoSavedResponse =
+      responseData.data as IApiUserGetDataInfoResponse;
+
+    return userInfoSavedResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting user weekly histogram.
+   *
+   * @param token - The token to be used to authenticate user
+   * @returns - The User weekly histogram from provided token
+   */
+  async userWeeklyHistogram(
+    token: string
+  ): Promise<IApiUserGetDataWeeklyHistogramResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request('/user/weeklyHistogram', requestParams);
+    const responseData = await response.promise;
+    const userInfoResponse =
+      responseData.data as IApiUserGetDataWeeklyHistogramResponse;
+
+    return userInfoResponse;
   }
 }
