@@ -66,7 +66,8 @@ class UserDatabaseAdapter {
             });
 
             return QUERIED_USER;
-        } catch (err) {
+        }
+        catch (err) {
             throw err;
         }
     }
@@ -85,7 +86,8 @@ class UserDatabaseAdapter {
             });
             
             return QUERIED_USERS;
-        } catch (err) {
+        }
+        catch (err) {
             throw err;
         }
     }
