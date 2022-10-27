@@ -1,18 +1,12 @@
-const queryBadges = require('../../gates/badge/badgeExitGate');
+const QUERY_BADGES = require('../../gates/badge/badgeExitGate');
 
 class BadgeDomain {
     
     async queryAllBadges() {
-        let queriedBadges = [];
-        
         try {
-            const badges = await queryBadges.getAllBadges();
+            const BADGES = await QUERY_BADGES.getAllBadges();
             
-            for (const badge of badges) {
-                queriedBadges.push(badge);
-            }
-            
-            return queriedBadges;
+            return BADGES;
         }
         catch (err) {
             return err;
@@ -20,15 +14,12 @@ class BadgeDomain {
     }
     
     async queryOneBadge(id) {
-        let queriedBadges = [];
-
         try {
-            const BADGE = await queryBadges.getOneBadge(id);
-
-            queriedBadges.push(BADGE);
+            const BADGE = await QUERY_BADGES.getOneBadge(id);
             
-            return queriedBadges;
-        } catch (err) {
+            return BADGE;
+        }
+        catch (err) {
             return err;
         }
     }
