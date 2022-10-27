@@ -1,82 +1,95 @@
+const QUERY_USER = require('../../gates/user/userExitGate');
+
 class User {
-    id;
-    name;
-    score;
-    exercises = [];
-    badgesScore = [];
-
-    User() {
-        this.id = -1;
-        this.name = "";
-        this.score = -1;
+    async createUser(userInfo) {
+        try {
+            await QUERY_USER.createNewUser(userInfo);
+        } 
+        catch (err) {
+            throw err;
+        }
     }
 
-    User(id, name, score) {
-        this.id = id;
-        this.name = name;
-        this.score = score;
+    async getEveryUser() {
+        try {
+            const EVERY_USER = await QUERY_USER.getAllUsers();
+
+            return EVERY_USER;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
-    getId() {
-        return this.id;
+    async getSingleUser(userID) {
+        try {
+            const USER = await QUERY_USER.getOneUser(userID);
+
+            return USER;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
-    getName() {
-        return this.name;
+    async getUserByEmail(email) {
+        try {
+            const USER = await QUERY_USER.getUserByEmail(email);
+
+            return USER;
+        } 
+        catch (err) {
+            throw err;
+        }
     }
 
-    getScore() {
-        return this.score;
+    async getUserByNickname(nickname) {
+        try {
+            const USER = await QUERY_USER.getUserByNickName(nickname);
+
+            return USER;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
-    setId(id) {
-        this.id = id;
+    async getTopRankUsers(rank) {
+        try {
+            const TOP_RANK_USERS = await QUERY_USER.getTopRankUsers(rank);
+
+            return TOP_RANK_USERS;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
-    setName(name) {
-        this.id = name;
-    }
-
-    setScore(score) {
-        this.id = score;
-    }
-
-    incrementScore(value) {
-        this.score += value;
-    }
-
-    addExercise(exercise) {
-        this.exercises.push(exercise);
-    }
-
-    getExercise(id) {
-        let found = null;
-        this.exercises.forEach(exercise => {
-            if(exercise.id === id) {
-                found = exercise;
-                return;
+    async updateUserInfo(reqUserId, updateUserId, userInfo) {
+        try {
+            if (reqUserId != updateUserId) {
+                throw new Error('Você não pode alterar as informações de outro usuário.');
             }
-        })
 
-        return found;
+            await QUERY_USER.updateUserInfo(updateUserId, userInfo);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
-    removeExercise(id) {
-        let found = null;
-        let index = 0;
-        this.exercises.forEach(exercise => {
-            index++;
-            if(exercise.id === id) {
-                found = exercise;
-                this.exercises.splice(index, index);
-                return;
+    async deleteUserAccount(reqUserId, deletionUserId) {
+        try {
+            if (reqUserId != deletionUserId) {
+                throw new Error('Você não pode deletar a conta de outra pessoa.');
             }
-        })
 
-        return found;
-    }
-
-    getAllExercises() {
-        return this.exercises;
+            await QUERY_USER.deleteAccount(deletionUserId);
+        }
+        catch (err) {
+            throw err;
+        }
     }
 }
+
+module.exports = new User;
