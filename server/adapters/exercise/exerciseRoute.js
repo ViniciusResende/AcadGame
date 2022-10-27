@@ -24,9 +24,9 @@ Router.get('/id/:id', async (req, res) => {
     }
 });
 
-Router.get('/type/:type', async (req, res) => {
+Router.get('/type', async (req, res) => {
     try {
-        const TYPE = req.params.type;
+        const TYPE = req.body.type;
         const EXERCISES = await QueryExercise.queryExercisesByType(TYPE);
 
         res.status(200).json(EXERCISES);
@@ -36,9 +36,9 @@ Router.get('/type/:type', async (req, res) => {
     }
 });
 
-Router.get('/name/:name', async (req, res) => {
+Router.get('/name', async (req, res) => {
     try {
-        const NAME = req.params.name;
+        const NAME = req.body.name;
         const EXERCISES = await QueryExercise.queryExercisesByName(NAME);
 
         res.status(200).json(EXERCISES);
