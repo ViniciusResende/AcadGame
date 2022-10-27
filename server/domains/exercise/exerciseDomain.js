@@ -19,14 +19,10 @@ class QueryExerciseDomain {
     }
 
     async queryOneExercise(id) {
-        let queriedExercises = [];
-
         try {
             const EXERCISE = await queryExercises.getOneExercise(id);
 
-            queriedExercises.push(EXERCISE);
-
-            return queriedExercises;
+            return EXERCISE;
         }
         catch (err) {
             throw err;
