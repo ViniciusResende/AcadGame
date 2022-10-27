@@ -20,14 +20,6 @@ class UserDatabaseAdapter {
                 throw new Error("Email já cadastrado.");
             }
 
-            if(await USER.findOne({
-                where: {
-                    nickName: userInfo.nickname
-                } 
-            }) != null) {
-                throw new Error("Apelido já escolhido por outro usuário.");
-            }
-
             userInfo.score = 0;
             await USER.create(userInfo);
         } 
@@ -144,18 +136,6 @@ class UserDatabaseAdapter {
 
                 if (EMAIL_CONFLICT != null) {
                     throw new Error("Este e-mail já é utilizado por outra conta.");
-                }
-            }       
-
-            if (userInfo.nickName) {
-                const NICKNAME_CONFLICT = await USER.findOne({
-                    where: {
-                        nickName: userInfo.nickName
-                    } 
-                });
-
-                if(NICKNAME_CONFLICT != null) {
-                    throw new Error("Este apelido já está em uso por outro usuário.");
                 }
             }
 
