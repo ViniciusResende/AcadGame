@@ -1,6 +1,6 @@
 const queryBadges = require('../../gates/badge/badgeExitGate');
 
-class QueryBadgeDomain {
+class BadgeDomain {
     
     async queryAllBadges() {
         let queriedBadges = [];
@@ -34,4 +34,4 @@ class QueryBadgeDomain {
     }
 }
 
-module.exports = new QueryBadgeDomain;
+module.exports = new BadgeDomain;
