@@ -28,6 +28,38 @@ class QueryBadgeDB {
             throw err;
         }
     }
+
+    async getBadgesByType(type) {
+        let returnBadges = [];
+        try {
+            const QUERIED_BADGES = await BADGE_DB_ADAPTER.findByType(type);
+    
+            QUERIED_BADGES.forEach( badge => {
+                returnBadges.push(badge.dataValues);
+            });
+            
+            return returnBadges;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async getBadgesByName(name) {
+        let returnBadges = [];
+        try {
+            const QUERIED_BADGES = await BADGE_DB_ADAPTER.findByName(name);
+    
+            QUERIED_BADGES.forEach( badge => {
+                returnBadges.push(badge.dataValues);
+            });
+            
+            return returnBadges;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryBadgeDB;

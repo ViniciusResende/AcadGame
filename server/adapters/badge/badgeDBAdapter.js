@@ -1,5 +1,8 @@
 const BADGE = require('../../infrastructure/models/badge');
 
+
+const { Op } = require('sequelize');
+
 class BadgeDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
@@ -32,6 +35,44 @@ class BadgeDatabaseAdapter {
 
             return QUERIED_BADGE;
         } 
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async findByType(type) {
+        try {
+            const QUERIED_BADGES = await BADGE.findAll({
+                where: {
+                    type: type
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            return QUERIED_BADGES;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async findByName(name) {
+        try {
+            const QUERIED_BADGES = await BADGE.findAll({
+                where: {
+                    name: {
+                        [Op.like]: `%${name}%`
+                    }
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            return QUERIED_BADGES;
+        }
         catch (err) {
             throw err;
         }

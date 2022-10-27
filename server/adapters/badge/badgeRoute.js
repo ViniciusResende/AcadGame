@@ -24,4 +24,28 @@ ROUTER.get('/id/:id', async (req, res) => {
     }
 });
 
+ROUTER.get('/type', async (req, res) => {
+    try {
+        const TYPE = req.body.type;
+        const BADGES = await BADGE_DOMAIN.queryBadgesByType(TYPE);
+        
+        res.status(200).send(BADGES);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
+ROUTER.get('/name', async (req, res) => {
+    try {
+        const NAME = req.body.name;
+        const BADGES = await BADGE_DOMAIN.queryBadgesByName(NAME);
+
+        res.status(200).send(BADGES);
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+});
+
 module.exports = ROUTER;
