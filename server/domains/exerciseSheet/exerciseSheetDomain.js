@@ -2,7 +2,6 @@ const queryExerciseSheet = require('../../gates/exerciseSheet/exerciseSheetExitG
 
 class QueryExerciseSheetDomain {
     async queryUserExerciseSheets(userId) {
-
         try {
             const USER_EXERCISES = await queryExerciseSheet.getUserExerciseSheets(userId);
         
@@ -19,6 +18,15 @@ class QueryExerciseSheetDomain {
 
             // return Object.values(userSheets);
             return userSheets;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
+    async createUserExercise(userExerciseInfo) { 
+        try {
+            await queryExerciseSheet.postUserExercise(userExerciseInfo);
         }
         catch(err) {
             throw err;
