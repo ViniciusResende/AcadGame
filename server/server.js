@@ -1,22 +1,22 @@
-const Express = require('express');
-const server = Express();
+const EXPRESS = require('express');
+const SERVER = EXPRESS();
 
 const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
 const EXERCISE_ROUTER = require('./adapters/exercise/exerciseRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
 
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const BODY_PARSER = require("body-parser");
+const COOKIE_PARSER = require("cookie-parser");
 
-server.use(Express.json());
-server.use(bodyParser.urlencoded({extended:true}));
-server.use(bodyParser.json());
-server.use(cookieParser());
+SERVER.use(EXPRESS.json());
+SERVER.use(BODY_PARSER.urlencoded({extended:true}));
+SERVER.use(BODY_PARSER.json());
+SERVER.use(COOKIE_PARSER());
 
-server.use('/badges', BADGE_ROUTER);
-server.use('/exercises', EXERCISE_ROUTER);
-server.use('/users', USER_ROUTER);
+SERVER.use('/badges', BADGE_ROUTER);
+SERVER.use('/exercises', EXERCISE_ROUTER);
+SERVER.use('/users', USER_ROUTER);
 
-server.listen(process.env.EXPRESS_PORT, () => {
+SERVER.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
 });
