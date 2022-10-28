@@ -26,6 +26,21 @@ Router.post('/', async (req, res) => {
     catch(err) {
         res.status(500).send(err.message);
     }
-})
+});
+
+Router.put('/', async (req, res) => {
+    try {
+        let userExerciseInfo = req.body;
+        const USER_EXERCISE_ID = req.body.id;
+        delete userExerciseInfo.id;
+        
+        await QueryExerciseSheet.updateUserExerciseInfo(USER_EXERCISE_ID, userExerciseInfo);
+
+        res.status(200).send('Exercício de usuário atualizado com sucesso!');
+    }
+    catch(err) {
+        res.status(500).send(err.message);
+    }
+});
 
 module.exports = Router;
