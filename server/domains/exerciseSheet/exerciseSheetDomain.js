@@ -32,6 +32,15 @@ class QueryExerciseSheetDomain {
             throw err;
         }
     }
+
+    async updateUserExerciseInfo(userExerciseId, userExerciseInfo) {
+        try {
+            await queryExerciseSheet.putUserExercise(userExerciseId, userExerciseInfo);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryExerciseSheetDomain;
