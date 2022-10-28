@@ -1,5 +1,6 @@
 /** React imports */
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /** React components */
 import Login from '../../components/Unauthenticated/Login';
@@ -8,11 +9,13 @@ import Login from '../../components/Unauthenticated/Login';
 import Lib from 'acad-game-lib';
 
 function RouteLogin() {
+  const navigator = useNavigate();
+
   async function loginAuth(username: string, password: string) {
     const loginAuthResponse = await Lib.auth.login(username, password);
 
     if (loginAuthResponse?.token) {
-      // TODO
+      navigator('/profile');
     } else {
       // TODO
     }
