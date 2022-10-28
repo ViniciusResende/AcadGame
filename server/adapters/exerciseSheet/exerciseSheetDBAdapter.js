@@ -24,6 +24,15 @@ class ExerciseSheetDatabaseAdapter {
             throw err;
         }
     }
+
+    async newUserExercise(userExerciseInfo) {
+        try {
+            await EXERCISE_SHEET.create(userExerciseInfo);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new ExerciseSheetDatabaseAdapter;
