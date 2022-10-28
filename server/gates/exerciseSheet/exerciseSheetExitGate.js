@@ -65,6 +65,15 @@ class QueryExerciseSheetDB {
             throw err;
         }
     }
+
+    async deleteUserExercise(userExerciseId) {
+        try {
+            await ExerciseSheetDBAdapter.eraseUserExercise(userExerciseId);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryExerciseSheetDB;
