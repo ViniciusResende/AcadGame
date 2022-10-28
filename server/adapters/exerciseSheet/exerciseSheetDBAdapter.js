@@ -1,4 +1,5 @@
 const EXERCISE_SHEET = require('../../infrastructure/models/exerciseSheet');
+const { updateUser } = require('../user/userDBAdapter');
 
 class ExerciseSheetDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
@@ -33,6 +34,31 @@ class ExerciseSheetDatabaseAdapter {
             throw err;
         }
     }
+
+    async updateUserExercise(userExerciseId, userExerciseInfo) {
+        try {
+            let updateUserExercise = await EXERCISE_SHEET.findOne({
+                where: {
+                    id: userExerciseId
+                }
+            });
+
+            if(updateUserExercise == null) {
+                throw new Error(`O exercício de usuário com id ${userExerciseId} não existe.`);
+            }
+
+            Object.keys(userExerciseInfo).forEach(async (info) => {
+                updateUserExercise[info] = userExerciseInfo[info];
+            });
+
+            updateUserExercise.save({
+                fields: Object.keys(userExerciseInfo)
+            });
+        }
+        catch(err) {
+            throw err;
+        }
+    } 
 }
 
 module.exports = new ExerciseSheetDatabaseAdapter;
