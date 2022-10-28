@@ -17,7 +17,7 @@ server.use(cookieParser());
 server.use('/badges', BADGE_ROUTER);
 server.use('/exercises', EXERCISE_ROUTER);
 server.use('/users', USER_ROUTER);
-server.use('/exercise-sheets', EXERCISE_SHEET_ROUTER);
+server.use('/exercises/sheets', EXERCISE_SHEET_ROUTER);
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
