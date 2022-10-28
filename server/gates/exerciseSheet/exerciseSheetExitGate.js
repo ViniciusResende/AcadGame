@@ -46,6 +46,25 @@ class QueryExerciseSheetDB {
             throw err;
         }
     }
+
+    async putUserExercise(userExerciseId, userExerciseInfo) {
+        try {
+            if(Object.keys(userExerciseInfo).length === 0) {
+                throw new Error('É necessário fornecer as alterações desejadas.');
+            }
+
+            Object.keys(userExerciseInfo).forEach((info) => {
+                if(!this.EVERY_USER_EXERCISE_INFO.includes(info)) {
+                    throw new Error(`A propriedade ${info} não é válida.`);
+                }
+            });
+
+            await ExerciseSheetDBAdapter.updateUserExercise(userExerciseId, userExerciseInfo);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryExerciseSheetDB;
