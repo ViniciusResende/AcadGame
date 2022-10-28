@@ -10,7 +10,7 @@ SERVER.use(SESSION({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: process.env.COOKIE_DURATION
+        maxAge: parseInt(process.env.COOKIE_DURATION)
     }
 }));
 
