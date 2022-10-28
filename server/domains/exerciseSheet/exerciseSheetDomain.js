@@ -2,22 +2,23 @@ const queryExerciseSheet = require('../../gates/exerciseSheet/exerciseSheetExitG
 
 class QueryExerciseSheetDomain {
     async queryUserExerciseSheets(userId) {
-        let queriedUserExercises = [];
-        let exerciseSheet1 = [];
-        let exerciseSheet2 = [];
-        let exerciseSheet3 = [];
-        let exerciseSheet4 = [];
-        let exerciseSheet5 = [];
-
 
         try {
             const USER_EXERCISES = await queryExerciseSheet.getUserExerciseSheets(userId);
+        
+            const userSheets = USER_EXERCISES.reduce((acc, item) => {
+                const currentSheet = item.dataValues.numSheet;
 
-            USER_EXERCISES.forEach(USER_EXERCISE => {
-                queriedUserExercises.push(USER_EXERCISE);
-            });
+                if(acc[currentSheet])
+                    acc[currentSheet].push(item)
+                else
+                    Object.assign(acc, {...acc, [currentSheet]: [item]})
 
-            return queriedUserExercises;
+                return acc;
+            }, {})
+
+            // return Object.values(userSheets);
+            return userSheets;
         }
         catch(err) {
             throw err;
