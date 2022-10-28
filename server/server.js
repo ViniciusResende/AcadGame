@@ -6,11 +6,11 @@ require('./infrastructure/authConf')(PASSPORT);
 
 const SESSION = require('express-session');
 SERVER.use(SESSION({
-    secret: '',
+    secret: process.env.PASSPORT_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 0
+        maxAge: process.env.COOKIE_DURATION
     }
 }));
 
