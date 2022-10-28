@@ -1,3 +1,4 @@
+const { deleteUserExercise } = require('../../gates/exerciseSheet/exerciseSheetExitGate');
 const queryExerciseSheet = require('../../gates/exerciseSheet/exerciseSheetExitGate');
 
 class QueryExerciseSheetDomain {
@@ -36,6 +37,15 @@ class QueryExerciseSheetDomain {
     async updateUserExerciseInfo(userExerciseId, userExerciseInfo) {
         try {
             await queryExerciseSheet.putUserExercise(userExerciseId, userExerciseInfo);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
+    async deleteUserExercise(userExerciseId) {
+        try {
+            await queryExerciseSheet.deleteUserExercise(userExerciseId);
         }
         catch(err) {
             throw err;
