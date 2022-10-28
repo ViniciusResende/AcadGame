@@ -5,13 +5,15 @@
 
 /** Enums */
 import { UserGetDataTypeEnum } from '../../data/enums/UserEnums';
-import { LocalStorageKeysEnum } from '../../utils/classes/local-storage/LocalStorageEnums';
+import { HttpResponseCodesEnum } from '../../utils/classes/api-client/ApiClientEnums';
 
 /** Interfaces */
+import { ILibGeneralErrorPayload } from '../../data/interfaces/CommonInterfaces';
 import { IApiUserGetDataResponse } from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Classes */
-import { LocalStorage } from '../../utils/classes/local-storage/LocalStorage';
+import { ApiClientHttpError } from '../../utils/classes/api-client/ApiClientErrors';
+import { Security } from '../../utils/classes/security/Security';
 
 /** Access */
 import { UserAccess } from '../../access/user/UserAccess';
@@ -21,17 +23,22 @@ import { UserAccess } from '../../access/user/UserAccess';
  */
 export class UserEngine {
   #userAccess: UserAccess;
-  #localStorage: LocalStorage;
 
   constructor() {
     this.#userAccess = new UserAccess();
-    this.#localStorage = new LocalStorage();
   }
 
-  #getAuthToken(): string | null {
-    return this.#localStorage.getLocalStorageItem(
-      LocalStorageKeysEnum.AUTH_TOKEN
-    );
+  #handleUserErrors(error: unknown) {
+    if (error) {
+      const HttpError = error as ApiClientHttpError;
+      if (HttpError.statusCode === HttpResponseCodesEnum.UNAUTHORIZED) {
+        const generalErrorPayload: ILibGeneralErrorPayload = {
+          errorCode: HttpError.statusCode,
+          errorMessage: HttpError.message,
+        };
+        Security.publishApiRequestUnauthorized(generalErrorPayload);
+      }
+    }
   }
 
   async getDataFromUser(
@@ -40,7 +47,7 @@ export class UserEngine {
   ): Promise<IApiUserGetDataResponse | null> {
     let userGetDataPayload: IApiUserGetDataResponse | null = null;
     try {
-      const storedAuthToken = this.#getAuthToken();
+      const storedAuthToken = Security.getTokenStored() || 'banana';
       if (!storedAuthToken)
         throw new Error(`No token stored, unable to authenticate.`);
 
@@ -50,6 +57,7 @@ export class UserEngine {
         userGetDataBody
       );
     } catch (error) {
+      this.#handleUserErrors(error);
       console.error(error);
     }
     return userGetDataPayload;
@@ -61,7 +69,7 @@ export class UserEngine {
   ): Promise<IApiUserGetDataResponse | null> {
     let userUpdatedDataPayload: IApiUserGetDataResponse | null = null;
     try {
-      const storedAuthToken = this.#getAuthToken();
+      const storedAuthToken = Security.getTokenStored();
       if (!storedAuthToken)
         throw new Error(`No token stored, unable to authenticate.`);
 
@@ -71,6 +79,7 @@ export class UserEngine {
         userUpdateDataBody
       );
     } catch (error) {
+      this.#handleUserErrors(error);
       console.error(error);
     }
     return userUpdatedDataPayload;
