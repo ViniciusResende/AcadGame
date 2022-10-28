@@ -43,4 +43,17 @@ Router.put('/', async (req, res) => {
     }
 });
 
+Router.delete('/', async (req, res) => {
+    try {
+        let userExerciseId = req.query.id;
+
+        await QueryExerciseSheet.deleteUserExercise(userExerciseId);
+
+        res.status(200).send('Exercício de usuário excluído com sucesso.');
+    }
+    catch(err) {
+        res.status(500).send(err.message);
+    }
+});
+
 module.exports = Router;
