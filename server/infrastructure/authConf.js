@@ -19,4 +19,29 @@ module.exports = async (passport) => {
             done(err, null);
         }
     });
+
+    passport.use(new LOCAL_STRATEGY({
+        usernameField: 'email',
+        passwordField: 'password'
+    }, async (email, password, done) => {
+        try {
+            const CURRENT_USER = await USER.getUserByEmail(email);
+
+            if (!CURRENT_USER) {
+                return done(null, false);
+            }
+
+            const MATCHING_PASSWORD = BCRYPT.compareSync(password, CURRENT_USER.password);
+
+            if (!MATCHING_PASSWORD) {
+                return done(null, false);
+            }
+
+            return done(null, CURRENT_USER);
+        }
+        catch (err) {
+            done(err, false);
+        }
+    }
+    ));
 };
