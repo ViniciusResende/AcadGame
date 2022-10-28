@@ -1,5 +1,4 @@
 const EXERCISE_SHEET = require('../../infrastructure/models/exerciseSheet');
-const { updateUser } = require('../user/userDBAdapter');
 
 class ExerciseSheetDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
@@ -59,6 +58,19 @@ class ExerciseSheetDatabaseAdapter {
             throw err;
         }
     } 
+
+    async eraseUserExercise(userExerciseId) {
+        try {
+            await EXERCISE_SHEET.destroy({
+                where: {
+                    id: userExerciseId
+                }
+            });
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new ExerciseSheetDatabaseAdapter;
