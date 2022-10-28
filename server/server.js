@@ -1,6 +1,22 @@
 const EXPRESS = require('express');
 const SERVER = EXPRESS();
 
+const PASSPORT = require('passport');
+require('./infrastructure/authConf')(PASSPORT);
+
+const SESSION = require('express-session');
+SERVER.use(SESSION({
+    secret: '',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 0
+    }
+}));
+
+SERVER.use(PASSPORT.initialize());
+SERVER.use(PASSPORT.session());
+
 const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
 const EXERCISE_ROUTER = require('./adapters/exercise/exerciseRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
