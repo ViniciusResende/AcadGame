@@ -61,4 +61,24 @@ export class ExercisesSheetEngine {
     }
     return exercisesSheetAvailableToAddPayload;
   }
+
+  async addExercisesToSheet(
+    sheetId: string,
+    exercisesIds: number[]
+  ): Promise<void> {
+    try {
+      const storedAuthToken = Security.getTokenStored();
+      if (!storedAuthToken)
+        throw new Error(`No token stored, unable to authenticate.`);
+
+      await this.#exercisesSheetAccess.addExercisesToSheet(
+        storedAuthToken,
+        sheetId,
+        exercisesIds
+      );
+    } catch (error) {
+      this.#handleExercisesSheetErrors(error);
+      console.error(error);
+    }
+  }
 }
