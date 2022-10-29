@@ -6,6 +6,9 @@
 /** Enums */
 import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 
+/** Interfaces */
+import { IExerciseToAddInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
+
 /**
  * API data representation for general HTTP responses' structure.
  */
@@ -75,4 +78,12 @@ export interface IApiAcadSignUpBody {
 export interface IApiAcadUpdateUserInfoBody {
   nickname: string;
   picture: UserProfilePictureEnum;
+}
+
+/**
+ * API data representation for Exercises Sheet Get Available To Add response.
+ */
+export interface IApiAcadExercisesSheetGetAvailableToAddResponse {
+  sheetId: string;
+  availableExercises: IExerciseToAddInfo[];
 }
