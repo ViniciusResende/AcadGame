@@ -48,6 +48,9 @@
 
   input:checked ~ &__checkmark {
     background-color: $primaryColor;
+    &.system {
+      background-color: $systemGreen;
+    }
   }
 
   input:checked ~ &__checkmark:after {
