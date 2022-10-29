@@ -3,9 +3,11 @@ const { updateUserExercise } = require('../../adapters/exerciseSheet/exerciseShe
 const ExerciseSheetDBAdapter = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 
 class QueryExerciseSheetDB {
-    EVERY_USER_EXERCISE_INFO = ['sheetId', 'userId', 'exerciseId', 'load', 'time', 'numRepetitions', 'numSets'];
+    EVERY_USER_EXERCISE_INFO = ['sheetId', 'userId', 'exerciseId', 'load', 'time', 'numRepetitions', 'numSets', 'isLoad'];
+    LOAD_USER_EXERCISE_INFO = ['load', 'numSets', 'numRepetitions'];
+    TIME_USER_EXERCISE_INFO = ['time', 'numSets'];
 
-    USER_EXERCISE_REQUIRED_INFO = ['sheetId', 'userId', 'exerciseId'];
+    USER_EXERCISE_REQUIRED_INFO = ['sheetId', 'userId', 'exerciseId', 'isLoad'];
 
     async getUserExerciseSheets(userId) {
         try {
@@ -52,23 +54,43 @@ class QueryExerciseSheetDB {
 
     async postUserExercises(userId, sheetId, exerciseIds) {
         try {
+            const QUERIED_EXERCISES = []
+            for(const exerciseId of exerciseIds) {
+                const QUERIED_EXERCISE = await ExerciseSheetDBAdapter.findOneExercise(exerciseId);
+                QUERIED_EXERCISES.push(QUERIED_EXERCISE);
+            }
+            
+            let count = 0;
             let userExercises = [];
             
             exerciseIds.forEach(exerciseId => {
                 let newUserExercise = new Object;
+                const EXERCISE_IS_LOAD = QUERIED_EXERCISES[count].dataValues.isLoad;
                 
                 this.EVERY_USER_EXERCISE_INFO.forEach(info => {
                     newUserExercise[info] = null;
                 });
+
+                if(EXERCISE_IS_LOAD) {
+                    this.LOAD_USER_EXERCISE_INFO.forEach(info => {
+                        newUserExercise[info] = 0;
+                    });
+                } 
+                else {
+                    this.TIME_USER_EXERCISE_INFO.forEach(info => {
+                        newUserExercise[info] = 0;
+                    });
+                }
+
                 newUserExercise['userId'] = userId;
                 newUserExercise['sheetId'] = sheetId;
                 newUserExercise['exerciseId'] = exerciseId;
+                newUserExercise['isLoad'] = EXERCISE_IS_LOAD;
 
                 userExercises.push(newUserExercise);
+                count += 1;
             });
 
-            console.log(userExercises)
-    
             await ExerciseSheetDBAdapter.newUserExercises(userExercises);
         }
         catch(err) {
