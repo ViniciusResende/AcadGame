@@ -36,9 +36,16 @@ export class ApiAcad extends ApiClient {
   }
 
   #getAuthHeader(token: string) {
-    return new Headers({
-      Authorization: `Bearer ${token}`,
-    });
+    const authHeaderExtension = {
+      [HttpRequestHeaderEnum.AUTHORIZATION]: `Bearer ${token}`,
+    };
+
+    return new Headers(
+      Object.assign(
+        Object.fromEntries(this.headers.entries()),
+        authHeaderExtension
+      )
+    );
   }
 
   /**
@@ -216,5 +223,25 @@ export class ApiAcad extends ApiClient {
     } as IApiAcadExercisesSheetGetAvailableToAddResponse;
 
     return availableExercisesToAdd;
+  }
+
+  async exercisesSheetAddExercises(
+    token: string,
+    sheetId: string,
+    exercisesIds: number[]
+  ): Promise<void> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      body: {
+        exercisesIds,
+      },
+      method: HttpMethodEnum.POST,
+    };
+    const response = this.#api.request(
+      `/exercisesSheet/add/${sheetId}`,
+      requestParams
+    );
+
+    await response.promise;
   }
 }
