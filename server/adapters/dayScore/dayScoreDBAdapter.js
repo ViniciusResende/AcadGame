@@ -4,7 +4,7 @@ const DAY_SCORE = require('../../infrastructure/models/dayScore');
 class DayScoreDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
-    async findUserWeeklyScores(userId) {
+    async findUserDayScores(userId) {
         try {
             const QUERIED_DAY_SCORES = await DAY_SCORE.findAll({
                 where: {
@@ -20,7 +20,7 @@ class DayScoreDatabaseAdapter {
             });
 
             if(!QUERIED_DAY_SCORES) {
-                throw new Error (`Não encontramos fichas de exercícios para o usuário com id ${userId}`);
+                throw new Error (`Não encontramos pontuações diárias para o usuário com id ${userId}`);
             }
 
             return QUERIED_DAY_SCORES;
