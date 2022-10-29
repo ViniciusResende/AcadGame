@@ -73,6 +73,14 @@ export class ExercisesSheetAccessStrategy {
     return getAvailableExercisesToAddResponse;
   }
 
+  async addExercisesToSheet(
+    token: string,
+    sheetId: string,
+    exercisesIds: number[]
+  ): Promise<void> {
+    await this.api.exercisesSheetAddExercises(token, sheetId, exercisesIds);
+  }
+
   /**
    * Getter for the API to be used for getting and saving user data.
    *
