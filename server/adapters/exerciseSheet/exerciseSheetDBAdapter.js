@@ -4,6 +4,28 @@ const EXERCISE = require('../../infrastructure/models/exercise');
 class ExerciseSheetDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
+    async findOneExercise(id) {
+        try {
+            const QUERIED_EXERCISE = await EXERCISE.findOne({
+                where: {
+                    id: id
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            if(!QUERIED_EXERCISE) {
+                throw new Error(`Não encontramos o exercício id ${id}`);
+            }
+
+            return QUERIED_EXERCISE;
+        }
+        catch(err) {
+            return err;
+        }
+    }
+
     async findUserExerciseSheets(userId) {
         try {
             const QUERIED_USER_EXERCISES = await EXERCISE_SHEET.findAll({
