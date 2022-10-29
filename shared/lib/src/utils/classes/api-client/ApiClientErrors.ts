@@ -36,3 +36,13 @@ export class RequestAbortedError extends ApiClientError {
     this.name = 'RequestAbortedError';
   }
 }
+
+export class ApiClientHttpError extends Error {
+  statusCode: number;
+
+  constructor(message: string, statusCode: number) {
+    super(message);
+    this.name = 'ApiClientHttpError';
+    this.statusCode = statusCode;
+  }
+}

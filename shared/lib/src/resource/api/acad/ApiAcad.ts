@@ -52,6 +52,11 @@ export class ApiAcad extends ApiClient {
         HttpContentTypeEnum.TEXT,
         HttpContentTypeEnum.ALL,
       ].join(', '),
+      [HttpRequestHeaderEnum.CONTENT_TYPE]: [
+        HttpContentTypeEnum.JSON,
+        HttpContentTypeEnum.TEXT,
+        HttpContentTypeEnum.ALL,
+      ].join(', '),
     };
     return new Headers(
       Object.assign(
@@ -73,6 +78,7 @@ export class ApiAcad extends ApiClient {
     password: string
   ): Promise<IApiAcadAuthResponse> {
     const requestParams: IApiClientRequestParams = {
+      headers: this.headers,
       body: {
         username,
         password,

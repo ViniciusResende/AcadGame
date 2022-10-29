@@ -43,7 +43,9 @@ export abstract class ApiClientEndpoint<ResponseType> {
    * @param requestParams - Parameters to be applied to the transformation
    * @returns - Transformed Request object
    */
-  abstract requestBuilder(requestParams: IApiClientRequestParams): Request;
+  abstract requestBuilder(
+    requestParams: IApiClientRequestParams
+  ): [string, RequestInit];
 
   /**
    * Transforms the provided abortable response object with a custom
@@ -132,16 +134,22 @@ export abstract class ApiClientEndpoint<ResponseType> {
     path: string,
     requestParams: IApiClientRequestParams = {}
   ): IAbortableResponse<ResponseType> {
-    const baseRequest = this.requestBuilder(requestParams);
+    const [baseRequestUrl, baseRequestInit] =
+      this.requestBuilder(requestParams);
     const uri = this.endpoint.uri + path;
-    const request = new Request(
-      this.#buildUrlWithParams(baseRequest.url + uri, requestParams.urlParams),
-      baseRequest
+    const requestUrl = this.#buildUrlWithParams(
+      baseRequestUrl + uri,
+      requestParams.urlParams
     );
     const response = this.apiClient.fetch(
-      request,
+      requestUrl,
+      baseRequestInit,
       requestParams.query,
       requestParams.timeout
+    );
+    const request = new Request(
+      this.#buildUrlWithParams(baseRequestUrl + uri, requestParams.urlParams),
+      { ...baseRequestInit, body: null }
     );
     const customResponse: IAbortableResponse<ResponseType> = {
       abort: response.abort,
