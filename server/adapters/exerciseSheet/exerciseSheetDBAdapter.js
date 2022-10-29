@@ -25,6 +25,29 @@ class ExerciseSheetDatabaseAdapter {
         }
     }
 
+    async findOneExerciseSheet(userId, numSheet) {
+        try {
+            const QUERIED_USER_EXERCISES = EXERCISE_SHEET.findAll({
+                where: {
+                    userId: userId,
+                    numSheet: numSheet
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            if(!QUERIED_USER_EXERCISES) {
+                throw new Error(`Não encontramos nenhum exercício cadastrado para o usuário com id ${userId} na ficha ${numSheet}.`);
+            }
+
+            return QUERIED_USER_EXERCISES;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
     async newUserExercises(userExercisesInfo) {
         try {
             for(const userExercise of userExercisesInfo) {

@@ -15,6 +15,20 @@ Router.get('/', async (req, res) => {
     }
 });
 
+Router.get('/:numSheet', async (req, res) => {
+    let userId = req.query.userID;
+    let numSheet = req.params.numSheet;
+
+    try {
+        const EXERCISE_SHEET = await QueryExerciseSheet.queryOneExerciseSheet(userId, numSheet);
+
+        res.status(200).json(EXERCISE_SHEET);
+    }
+    catch(err) {
+        res.status(500).send(err.message);
+    } 
+});
+
 Router.post('/', async (req, res) => {
     try {
         const USER_EXERCISES_INFO = req.body;

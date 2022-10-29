@@ -22,6 +22,23 @@ class QueryExerciseSheetDB {
         }
     }
 
+    async getOneExerciseSheet(userId, numSheet) {
+        try {
+            const QUERIED_USER_EXERCISES = await ExerciseSheetDBAdapter.findOneExerciseSheet(userId, numSheet);
+
+            let returnValues = [];
+
+            QUERIED_USER_EXERCISES.forEach(queriedUserExercise => {
+                returnValues.push(queriedUserExercise).dataValues;
+            });
+
+            return returnValues;
+        }
+        catch(err) {
+            return err;
+        }
+    }
+
     async postUserExercises(userExercisesInfo) {
         let userExercises = [];
 

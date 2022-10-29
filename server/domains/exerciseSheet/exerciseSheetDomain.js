@@ -25,6 +25,23 @@ class QueryExerciseSheetDomain {
         }
     }
 
+    async queryOneExerciseSheet(userId, numSheet) {
+        try {
+            const USER_EXERCISES = await queryExerciseSheet.getOneExerciseSheet(userId, numSheet);
+
+            const USER_SHEET = [];
+
+            USER_EXERCISES.forEach(userExercise => {
+                USER_SHEET.push(userExercise);
+            });
+
+            return USER_SHEET;
+        }
+        catch(err) {
+
+        }
+    }
+
     async createUserExercises(userExercisesInfo) { 
         try {
             await queryExerciseSheet.postUserExercises(userExercisesInfo);
