@@ -19,6 +19,11 @@ const Exercise = database.define('Exercises', {
     icon: {
         type: Sequelize.STRING,
         allowNull: false
+    },
+    isLoad: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true 
     }
 });
 
