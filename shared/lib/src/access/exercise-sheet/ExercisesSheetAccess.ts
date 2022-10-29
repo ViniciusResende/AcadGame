@@ -37,4 +37,16 @@ export class ExercisesSheetAccess {
 
     return exerciseSheetGetAvailableExercisesToAddResponseBody;
   }
+
+  async addExercisesToSheet(
+    token: string,
+    sheetId: string,
+    exercisesIds: number[]
+  ): Promise<void> {
+    await this.#accessStrategy.addExercisesToSheet(
+      token,
+      sheetId,
+      exercisesIds
+    );
+  }
 }
