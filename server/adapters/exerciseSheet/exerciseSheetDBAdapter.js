@@ -62,16 +62,18 @@ class ExerciseSheetDatabaseAdapter {
         }
     }
 
-    async updateUserExercise(userExerciseId, userExerciseInfo) {
+    async updateUserExercise(userExerciseIds, userExerciseInfo) {
         try {
             let updateUserExercise = await EXERCISE_SHEET.findOne({
                 where: {
-                    id: userExerciseId
+                    sheetId: userExerciseIds['sheetId'],
+                    userId: userExerciseIds['userId'],
+                    exerciseId: userExerciseIds['exerciseId']
                 }
             });
 
             if(updateUserExercise == null) {
-                throw new Error(`O exercício de usuário com id ${userExerciseId} não existe.`);
+                throw new Error(`O exercício de usuário com sheetId: ${userExerciseIds['sheetId']}, userId: ${userExerciseIds['userId']}, e exerciseId: ${userExerciseIds['exerciseId']} não existe.`);
             }
 
             Object.keys(userExerciseInfo).forEach(async (info) => {
@@ -81,6 +83,8 @@ class ExerciseSheetDatabaseAdapter {
             updateUserExercise.save({
                 fields: Object.keys(userExerciseInfo)
             });
+
+            return updateUserExercise;
         }
         catch(err) {
             throw err;

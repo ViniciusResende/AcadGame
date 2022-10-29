@@ -44,15 +44,28 @@ Router.post('/add/:sheetId', async (req, res) => {
     }
 });
 
-Router.put('/', async (req, res) => {
+Router.put('/:sheetId/update/:exerciseId', async (req, res) => {
     try {
-        let userExerciseInfo = req.body;
-        const USER_EXERCISE_ID = req.body.id;
-        delete userExerciseInfo.id;
-        
-        await QueryExerciseSheet.updateUserExerciseInfo(USER_EXERCISE_ID, userExerciseInfo);
+        // expected json request body:
+        // {
+        //     "time": number | undefined,
+        //     "numSets": number | undefined,
+        //     "load": undefined | number,
+        //     "numRepetitions": undefined | number
+        // }
+        const USER_EXERCISE_INFO = req.body;
+        const SHEET_ID = req.params.sheetId;
+        const USER_ID = req.query.userId;
+        const EXERCISE_ID = req.params.exerciseId;
 
-        res.status(200).send('Exercício de usuário atualizado com sucesso!');
+        let userExerciseIds = [];
+        userExerciseIds['sheetId'] = SHEET_ID;
+        userExerciseIds['userId'] = USER_ID;
+        userExerciseIds['exerciseId'] = EXERCISE_ID; 
+        
+        const UPDATE_USER_EXERCISE = await QueryExerciseSheet.updateUserExerciseInfo(userExerciseIds, USER_EXERCISE_INFO);
+
+        res.status(200).json(UPDATE_USER_EXERCISE);
     }
     catch(err) {
         res.status(500).send(err.message);

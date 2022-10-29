@@ -61,9 +61,10 @@ class QueryExerciseSheetDomain {
         }
     }
 
-    async updateUserExerciseInfo(userExerciseId, userExerciseInfo) {
+    async updateUserExerciseInfo(userExerciseIds, userExerciseInfo) {
         try {
-            await queryExerciseSheet.putUserExercise(userExerciseId, userExerciseInfo);
+            const UPDATE_USER_EXERCISE = await queryExerciseSheet.putUserExercise(userExerciseIds, userExerciseInfo);
+            return UPDATE_USER_EXERCISE;
         }
         catch(err) {
             throw err;

@@ -1,4 +1,5 @@
 const { all } = require('../../adapters/badge/badgeRoute');
+const { updateUserExercise } = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 const ExerciseSheetDBAdapter = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 
 class QueryExerciseSheetDB {
@@ -75,7 +76,7 @@ class QueryExerciseSheetDB {
         }
     }
 
-    async putUserExercise(userExerciseId, userExerciseInfo) {
+    async putUserExercise(userExerciseIds, userExerciseInfo) {
         try {
             if(Object.keys(userExerciseInfo).length === 0) {
                 throw new Error('É necessário fornecer as alterações desejadas.');
@@ -87,7 +88,9 @@ class QueryExerciseSheetDB {
                 }
             });
 
-            await ExerciseSheetDBAdapter.updateUserExercise(userExerciseId, userExerciseInfo);
+            const UPDATE_USER_EXERCISE = await ExerciseSheetDBAdapter.updateUserExercise(userExerciseIds, userExerciseInfo);
+
+            return UPDATE_USER_EXERCISE;
         }
         catch(err) {
             throw err;
