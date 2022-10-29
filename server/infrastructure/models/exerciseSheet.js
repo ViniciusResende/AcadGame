@@ -31,6 +31,11 @@ const ExerciseSheet = database.define('ExerciseSheets', {
     numSets: {
         type: Sequelize.INTEGER,
         allowNull: true
+    },
+    isLoad: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true 
     }
 }); 
 
