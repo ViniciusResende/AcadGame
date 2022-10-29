@@ -20,25 +20,29 @@ import { AddSquareIcon, DumbbellIcon } from '../../../assets/svg/icons';
 
 type ExercisesAddComponentProps = {
   availableExercisesList: IExerciseToAddInfoData[];
+  addExercisesToSheet: (exercisesIds: number[]) => Promise<void>;
 };
 
 function ExercisesAddComponent({
   availableExercisesList,
+  addExercisesToSheet,
 }: ExercisesAddComponentProps) {
   function onSubmitForm(event: React.FormEvent) {
     event.preventDefault();
     //@ts-ignore
     const checkboxesNodeList = event.target.exercise as RadioNodeList;
 
-    let addedExercisesIds: string[] = [];
-    checkboxesNodeList.forEach((value) => {
-      //@ts-ignore
-      const { checked: checkboxIsChecked, id: exerciseId } = value;
+    let addedExercisesIds: number[] = [];
+    if (checkboxesNodeList) {
+      checkboxesNodeList.forEach((value) => {
+        //@ts-ignore
+        const { checked: checkboxIsChecked, id: exerciseId } = value;
 
-      if (checkboxIsChecked) addedExercisesIds.push(exerciseId);
-    });
+        if (checkboxIsChecked) addedExercisesIds.push(Number(exerciseId));
+      });
+    }
 
-    console.log(addedExercisesIds);
+    addExercisesToSheet(addedExercisesIds);
   }
 
   return (
