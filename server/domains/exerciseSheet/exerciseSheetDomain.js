@@ -1,4 +1,3 @@
-const { deleteUserExercise } = require('../../gates/exerciseSheet/exerciseSheetExitGate');
 const queryExerciseSheet = require('../../gates/exerciseSheet/exerciseSheetExitGate');
 
 class QueryExerciseSheetDomain {

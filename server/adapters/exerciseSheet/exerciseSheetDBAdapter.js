@@ -1,4 +1,5 @@
 const EXERCISE_SHEET = require('../../infrastructure/models/exerciseSheet');
+const EXERCISE = require('../../infrastructure/models/exercise');
 
 class ExerciseSheetDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];

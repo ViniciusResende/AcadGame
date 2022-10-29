@@ -2,7 +2,6 @@ const Express = require('express');
 const server = Express();
 
 const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
-const EXERCISE_ROUTER = require('./adapters/exercise/exerciseRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
 const EXERCISE_SHEET_ROUTER = require('./adapters/exerciseSheet/exerciseSheetRouter');
 
@@ -14,10 +13,9 @@ server.use(bodyParser.urlencoded({extended:true}));
 server.use(bodyParser.json());
 server.use(cookieParser());
 
-server.use('/badges', BADGE_ROUTER);
-server.use('/exercises', EXERCISE_ROUTER);
-server.use('/users', USER_ROUTER);
-server.use('/exercises/sheets', EXERCISE_SHEET_ROUTER);
+server.use('/api/badges', BADGE_ROUTER);
+server.use('/api/users', USER_ROUTER);
+server.use('/api/exercisesSheet', EXERCISE_SHEET_ROUTER);
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
