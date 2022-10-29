@@ -1,0 +1,44 @@
+@import '../../../../../styles';
+
+.exercises-add-card {
+  &__container {
+    align-items: center;
+    background-color: $white;
+    border-radius: 8px;
+    box-shadow: 0px 2px 3px rgba(20, 33, 61, 0.201);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 400px;
+    padding: 0.5em 1em 0.5em 1.5em;
+    position: relative;
+    width: 100%;
+
+    .checkbox-container__checkmark {
+      top: -2px;
+    }
+
+    &::after {
+      background-color: $primaryColor;
+      border-radius: 8px 0 0 8px;
+      content: '';
+      height: 100%;
+      left: 0px;
+      position: absolute;
+      width: 12px;
+    }
+
+    &.active {
+      &::after {
+        background-color: $systemGreen;
+      }
+    }
+  }
+
+  &__title {
+    color: $supportDark;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  }
+}
