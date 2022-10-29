@@ -1,9 +1,12 @@
 /** React imports */
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 /** React components */
 import ExercisesAdd from '../../components/Authenticated/ExercisesAdd';
+
+/** React Hooks */
+import useSecurity from '../middlewares/useSecurity';
 
 /** Library */
 import Lib from 'acad-game-lib';
@@ -12,7 +15,9 @@ import Lib from 'acad-game-lib';
 import { IExerciseToAddInfoData } from '../../data/interfaces/ExercisesSheetInterfaces';
 
 function RouteExercisesAdd() {
+  useSecurity();
   const { sheetId } = useParams();
+  const navigate = useNavigate();
 
   const [availableExercises, setAvailableExercises] = useState<
     IExerciseToAddInfoData[]
@@ -32,7 +37,19 @@ function RouteExercisesAdd() {
     );
   }, []);
 
-  return <ExercisesAdd availableExercisesList={availableExercises} />;
+  async function addExercisesToSheet(exercisesIds: number[]) {
+    if (sheetId) {
+      await Lib.exercisesSheet.addExercisesToSheet(sheetId, exercisesIds);
+      navigate('/exercisesSheets');
+    }
+  }
+
+  return (
+    <ExercisesAdd
+      availableExercisesList={availableExercises}
+      addExercisesToSheet={addExercisesToSheet}
+    />
+  );
 }
 
 /** Exports */
