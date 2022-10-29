@@ -17,11 +17,10 @@ Router.get('/', async (req, res) => {
 
 Router.post('/', async (req, res) => {
     try {
-        const USER_EXERCISE_INFO = req.body;
-        console.log(req);
-        await QueryExerciseSheet.createUserExercise(USER_EXERCISE_INFO);
+        const USER_EXERCISES_INFO = req.body;
+        await QueryExerciseSheet.createUserExercises(USER_EXERCISES_INFO);
 
-        res.status(200).send('Exercício cadastrado em sua ficha com sucesso!');
+        res.status(200).send('Exercícios cadastrados em sua ficha com sucesso!');
     }
     catch(err) {
         res.status(500).send(err.message);

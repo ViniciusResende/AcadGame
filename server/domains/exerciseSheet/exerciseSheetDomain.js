@@ -25,9 +25,9 @@ class QueryExerciseSheetDomain {
         }
     }
 
-    async createUserExercise(userExerciseInfo) { 
+    async createUserExercises(userExercisesInfo) { 
         try {
-            await queryExerciseSheet.postUserExercise(userExerciseInfo);
+            await queryExerciseSheet.postUserExercises(userExercisesInfo);
         }
         catch(err) {
             throw err;
