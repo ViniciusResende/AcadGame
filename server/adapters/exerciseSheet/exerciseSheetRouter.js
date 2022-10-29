@@ -3,7 +3,7 @@ const Router = require('express').Router();
 const QueryExerciseSheet = require('../../domains/exerciseSheet/exerciseSheetDomain');
 
 Router.get('/', async (req, res) => {
-    let userId = req.query.userID; // TODO: pegar do JWT
+    let userId = req.query.userId; // TODO: pegar do JWT
 
     try {
         const EXERCISE_SHEETS = await QueryExerciseSheet.queryUserExerciseSheets(userId);
@@ -15,14 +15,15 @@ Router.get('/', async (req, res) => {
     }
 });
 
-Router.get('/:numSheet', async (req, res) => {
-    let userId = req.query.userID;
-    let numSheet = req.params.numSheet;
+Router.get('/available/:sheetId', async (req, res) => {
+    let userId = req.query.userId;
+    let type = req.query.type;
+    let sheetId = req.params.sheetId;
 
     try {
-        const EXERCISE_SHEET = await QueryExerciseSheet.queryOneExerciseSheet(userId, numSheet);
+        const EXERCISE_SHEETS = await QueryExerciseSheet.queryAvailableExercisesSheet(userId, sheetId, type);
 
-        res.status(200).json(EXERCISE_SHEET);
+        res.status(200).json(EXERCISE_SHEETS);
     }
     catch(err) {
         res.status(500).send(err.message);

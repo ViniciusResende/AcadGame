@@ -6,8 +6,8 @@ class QueryExerciseSheetDomain {
             const USER_EXERCISES = await queryExerciseSheet.getUserExerciseSheets(userId);
         
             const userSheets = USER_EXERCISES.reduce((acc, item) => {
-                const currentSheet = item.dataValues.numSheet;
-
+                const currentSheet = item.dataValues.sheetId;
+                
                 if(acc[currentSheet])
                     acc[currentSheet].push(item)
                 else
@@ -24,20 +24,28 @@ class QueryExerciseSheetDomain {
         }
     }
 
-    async queryOneExerciseSheet(userId, numSheet) {
+    async queryAvailableExercisesSheet(userId, sheetId, type) {
         try {
-            const USER_EXERCISES = await queryExerciseSheet.getOneExerciseSheet(userId, numSheet);
+            const RETURNED_VALUES = await queryExerciseSheet.getAvailableExercisesSheet(userId, sheetId);
+            const UNAVAILABLE_EXERCISES_SHEET_IDS = RETURNED_VALUES[0];
+            const ALL_EXERCISES = RETURNED_VALUES[1];
+            
+            let availableExercises = [];
 
-            const USER_SHEET = [];
-
-            USER_EXERCISES.forEach(userExercise => {
-                USER_SHEET.push(userExercise);
+            ALL_EXERCISES.forEach(exercise => {
+                const EXERCISE_ID = exercise.dataValues.id;
+                const EXERCISE_TYPE = exercise.dataValues.type;
+                
+                if(!UNAVAILABLE_EXERCISES_SHEET_IDS.includes(EXERCISE_ID)) {
+                    if(type === undefined || EXERCISE_TYPE == type) 
+                        availableExercises.push(exercise);
+                }
             });
 
-            return USER_SHEET;
+            return availableExercises;
         }
         catch(err) {
-
+            throw err;
         }
     }
 

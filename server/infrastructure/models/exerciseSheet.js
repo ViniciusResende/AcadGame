@@ -4,7 +4,7 @@ const User = require('./user');
 const Exercise = require('./exercise');
 
 const ExerciseSheet = database.define('ExerciseSheets', {
-    numSheet: {
+    sheetId: {
         type:Sequelize.INTEGER,
         allowNull: false
     },

@@ -1,9 +1,10 @@
+const { all } = require('../../adapters/badge/badgeRoute');
 const ExerciseSheetDBAdapter = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 
 class QueryExerciseSheetDB {
-    EVERY_USER_EXERCISE_INFO = ['numSheet', 'userId', 'exerciseId', 'load', 'time', 'numRepetitions', 'numSets'];
+    EVERY_USER_EXERCISE_INFO = ['sheetId', 'userId', 'exerciseId', 'load', 'time', 'numRepetitions', 'numSets'];
 
-    USER_EXERCISE_REQUIRED_INFO = ['numSheet', 'userId', 'exerciseId'];
+    USER_EXERCISE_REQUIRED_INFO = ['sheetId', 'userId', 'exerciseId'];
 
     async getUserExerciseSheets(userId) {
         try {
@@ -22,15 +23,24 @@ class QueryExerciseSheetDB {
         }
     }
 
-    async getOneExerciseSheet(userId, numSheet) {
+    async getAvailableExercisesSheet(userId, sheetId) {
         try {
-            const QUERIED_USER_EXERCISES = await ExerciseSheetDBAdapter.findOneExerciseSheet(userId, numSheet);
+            const RETURNED_VALUES = await ExerciseSheetDBAdapter.findAvailableExercisesSheet(userId, sheetId);
 
+            let unavailableExercisesSheetIds = [];
+            let allExercises = [];
             let returnValues = [];
 
-            QUERIED_USER_EXERCISES.forEach(queriedUserExercise => {
-                returnValues.push(queriedUserExercise).dataValues;
+            RETURNED_VALUES[0].forEach(exerciseSheet => {
+                unavailableExercisesSheetIds.push(exerciseSheet.dataValues.exerciseId);
             });
+            
+            RETURNED_VALUES[1].forEach(exercise => {
+                allExercises.push(exercise).dataValues;
+            })
+
+            returnValues.push(unavailableExercisesSheetIds);
+            returnValues.push(allExercises);
 
             return returnValues;
         }
