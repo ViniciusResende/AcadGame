@@ -38,6 +38,14 @@ export class ExercisesSheetAccess {
     return exerciseSheetGetAvailableExercisesToAddResponseBody;
   }
 
+  /**
+   * Add to the given exercises sheet all the exercises that have the ids in the
+   * exercisesIds array
+   *
+   * @param token - The token to be used to authenticate user
+   * @param sheetId - The id of the exercise sheet to add the exercises
+   * @param exercisesIds - A Array containing the ids of the exercises to be added
+   */
   async addExercisesToSheet(
     token: string,
     sheetId: string,
