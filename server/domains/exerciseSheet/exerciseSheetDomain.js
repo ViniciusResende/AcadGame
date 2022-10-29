@@ -7,7 +7,10 @@ class QueryExerciseSheetDomain {
         
             const userSheets = USER_EXERCISES.reduce((acc, item) => {
                 const currentSheet = item.dataValues.sheetId;
-                
+                delete item.dataValues.id;
+                delete item.dataValues.sheetId;
+                delete item.dataValues.userId;
+
                 if(acc[currentSheet])
                     acc[currentSheet].push(item)
                 else
