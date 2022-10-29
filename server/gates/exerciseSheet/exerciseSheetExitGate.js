@@ -97,9 +97,9 @@ class QueryExerciseSheetDB {
         }
     }
 
-    async deleteUserExercise(userExerciseId) {
+    async deleteUserExercise(userExerciseIds) {
         try {
-            await ExerciseSheetDBAdapter.eraseUserExercise(userExerciseId);
+            await ExerciseSheetDBAdapter.eraseUserExercise(userExerciseIds);
         }
         catch(err) {
             throw err;

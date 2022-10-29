@@ -91,11 +91,13 @@ class ExerciseSheetDatabaseAdapter {
         }
     } 
 
-    async eraseUserExercise(userExerciseId) {
+    async eraseUserExercise(userExerciseIds) {
         try {
             await EXERCISE_SHEET.destroy({
                 where: {
-                    id: userExerciseId
+                    sheetId: userExerciseIds['sheetId'],
+                    userId: userExerciseIds['userId'],
+                    exerciseId: userExerciseIds['exerciseId']
                 }
             });
         }

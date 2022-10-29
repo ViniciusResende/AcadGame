@@ -71,9 +71,9 @@ class QueryExerciseSheetDomain {
         }
     }
 
-    async deleteUserExercise(userExerciseId) {
+    async deleteUserExercise(userExerciseIds) {
         try {
-            await queryExerciseSheet.deleteUserExercise(userExerciseId);
+            await queryExerciseSheet.deleteUserExercise(userExerciseIds);
         }
         catch(err) {
             throw err;

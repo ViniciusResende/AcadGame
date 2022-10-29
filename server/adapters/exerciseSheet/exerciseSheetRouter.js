@@ -72,11 +72,18 @@ Router.put('/:sheetId/update/:exerciseId', async (req, res) => {
     }
 });
 
-Router.delete('/', async (req, res) => {
+Router.delete('/:sheetId/delete/:exerciseId', async (req, res) => {
     try {
-        let userExerciseId = req.query.id;
+        const SHEET_ID = req.params.sheetId;
+        const USER_ID = req.query.userId;
+        const EXERCISE_ID = req.params.exerciseId;
 
-        await QueryExerciseSheet.deleteUserExercise(userExerciseId);
+        let userExerciseIds = [];
+        userExerciseIds['sheetId'] = SHEET_ID;
+        userExerciseIds['userId'] = USER_ID;
+        userExerciseIds['exerciseId'] = EXERCISE_ID; 
+
+        await QueryExerciseSheet.deleteUserExercise(userExerciseIds);
 
         res.status(200).send('Exercício de usuário excluído com sucesso.');
     }
