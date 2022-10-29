@@ -12,12 +12,24 @@ class QueryExerciseSheetDB {
     async getUserExerciseSheets(userId) {
         try {
             const QUERIED_USER_EXERCISES = await ExerciseSheetDBAdapter.findUserExerciseSheets(userId);
+            let exerciseIds = [];
+            for(const QUERIED_USER_EXERCISE of QUERIED_USER_EXERCISES) {
+                exerciseIds.push(QUERIED_USER_EXERCISE.dataValues.exerciseId);
+            }
+
+            let queriedExerciseNames = new Object;
+            for(const EXERCISE_ID of exerciseIds) {
+                const QUERIED_EXERCISE = await ExerciseSheetDBAdapter.findOneExercise(EXERCISE_ID);
+                queriedExerciseNames[EXERCISE_ID] = QUERIED_EXERCISE.dataValues.name;
+            }
 
             let returnValues = [];
 
-            QUERIED_USER_EXERCISES.forEach(queriedUserExercise => {
-                returnValues.push(queriedUserExercise).dataValues;
-            });
+            for(const QUERIED_USER_EXERCISE of QUERIED_USER_EXERCISES) {
+                const QUERIED_EXERCISE_ID = QUERIED_USER_EXERCISE.dataValues.exerciseId;
+                QUERIED_USER_EXERCISE.dataValues['name'] = queriedExerciseNames[QUERIED_EXERCISE_ID];
+                returnValues.push(QUERIED_USER_EXERCISE).dataValues;
+            }
 
             return returnValues;
         }
