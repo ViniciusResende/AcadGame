@@ -33,8 +33,11 @@ export class ExercisesSheetManager extends Utilities.pubSub {
         sheetId
       )) as IApiAcadExercisesSheetGetAvailableToAddResponse;
 
-    const { availableExercises } = exercisesSheetGetAvailableForSheetResponse;
-
-    return availableExercises || null;
+    return exercisesSheetGetAvailableForSheetResponse
+      ? exercisesSheetGetAvailableForSheetResponse.availableExercises
+      : null;
+  }
+  async addExercisesToSheet(sheetId: string, exercisesIds: number[]) {
+    await this.#exercisesSheetEngine.addExercisesToSheet(sheetId, exercisesIds);
   }
 }
