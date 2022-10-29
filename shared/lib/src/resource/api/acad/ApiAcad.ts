@@ -189,6 +189,14 @@ export class ApiAcad extends ApiClient {
     return userInfoResponse;
   }
 
+  /**
+   * Fetches the API providing a header token and getting the available exercises
+   * for a given sheet.
+   *
+   * @param token - The token to be used to authenticate user
+   * @param sheetId - The id of the exercise sheet to fetch the available exercises
+   * @returns - The Available exercises for a giver exercises sheet
+   */
   async exercisesSheetGetAvailableToAdd(
     token: string,
     sheetId: string
@@ -198,7 +206,7 @@ export class ApiAcad extends ApiClient {
       method: HttpMethodEnum.GET,
     };
     const response = this.#api.request(
-      `/exercises/all?sheetId=${sheetId}`,
+      `/exercisesSheet/available/${sheetId}`,
       requestParams
     );
     const responseData = await response.promise;
