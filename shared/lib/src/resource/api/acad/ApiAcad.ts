@@ -14,6 +14,7 @@ import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 /** Interfaces */
 import {
   IApiAcadAuthResponse,
+  IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
 } from './ApiAcadInterfaces';
@@ -186,5 +187,26 @@ export class ApiAcad extends ApiClient {
       responseData.data as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
+  }
+
+  async exercisesSheetGetAvailableToAdd(
+    token: string,
+    sheetId: string
+  ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/exercises/all?sheetId=${sheetId}`,
+      requestParams
+    );
+    const responseData = await response.promise;
+    const availableExercisesToAdd = {
+      sheetId,
+      availableExercises: responseData.data,
+    } as IApiAcadExercisesSheetGetAvailableToAddResponse;
+
+    return availableExercisesToAdd;
   }
 }
