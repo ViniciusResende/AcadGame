@@ -51,9 +51,9 @@ class ExerciseSheetDatabaseAdapter {
         }
     }
 
-    async newUserExercises(userExercisesInfo) {
+    async newUserExercises(userExercises) {
         try {
-            for(const userExercise of userExercisesInfo) {
+            for(const userExercise of userExercises) {
                 await EXERCISE_SHEET.create(userExercise);
             }
         }

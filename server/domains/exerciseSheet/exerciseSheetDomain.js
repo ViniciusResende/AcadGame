@@ -52,9 +52,9 @@ class QueryExerciseSheetDomain {
         }
     }
 
-    async createUserExercises(userExercisesInfo) { 
+    async createUserExercises(userId, sheetId, exercisesIds) { 
         try {
-            await queryExerciseSheet.postUserExercises(userExercisesInfo);
+            await queryExerciseSheet.postUserExercises(userId, sheetId, exercisesIds);
         }
         catch(err) {
             throw err;

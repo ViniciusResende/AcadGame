@@ -30,12 +30,14 @@ Router.get('/available/:sheetId', async (req, res) => {
     } 
 });
 
-Router.post('/', async (req, res) => {
+Router.post('/add/:sheetId', async (req, res) => {
     try {
-        const USER_EXERCISES_INFO = req.body;
-        await QueryExerciseSheet.createUserExercises(USER_EXERCISES_INFO);
+        const EXERCISE_IDS = req.body.exerciseIds;
+        const USER_ID = req.query.userId;
+        const SHEET_ID = req.params.sheetId;
+        await QueryExerciseSheet.createUserExercises(USER_ID, SHEET_ID, EXERCISE_IDS);
 
-        res.status(200).send('Exercícios cadastrados em sua ficha com sucesso!');
+        res.status(201).send('Exercícios cadastrados em sua ficha com sucesso!');
     }
     catch(err) {
         res.status(500).send(err.message);

@@ -49,28 +49,24 @@ class QueryExerciseSheetDB {
         }
     }
 
-    async postUserExercises(userExercisesInfo) {
-        let userExercises = [];
-
+    async postUserExercises(userId, sheetId, exerciseIds) {
         try {
-            // userInfo object must contains only valid properties
-            userExercisesInfo.forEach(userExerciseInfo => {
+            let userExercises = [];
+            
+            exerciseIds.forEach(exerciseId => {
                 let newUserExercise = new Object;
-                Object.keys(userExerciseInfo).forEach(info => {
-                    if (this.EVERY_USER_EXERCISE_INFO.includes(info)) {
-                        newUserExercise[info] = userExerciseInfo[info];
-                    }
+                
+                this.EVERY_USER_EXERCISE_INFO.forEach(info => {
+                    newUserExercise[info] = null;
                 });
-
-                // verify if no necessary information being left behind
-                for(const INFO of this.USER_EXERCISE_REQUIRED_INFO) {
-                    if(!newUserExercise[INFO]) {
-                        throw new Error(`A informação ${INFO} é necessária para concluir o cadastro do exercício de usuário.`)
-                    }
-                }
+                newUserExercise['userId'] = userId;
+                newUserExercise['sheetId'] = sheetId;
+                newUserExercise['exerciseId'] = exerciseId;
 
                 userExercises.push(newUserExercise);
             });
+
+            console.log(userExercises)
     
             await ExerciseSheetDBAdapter.newUserExercises(userExercises);
         }
