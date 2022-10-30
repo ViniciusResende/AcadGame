@@ -1,4 +1,5 @@
 const DayScoreDBAdapter = require('../../adapters/dayScore/dayScoreDBAdapter');
+const { addDays } = require('date-fns');
 
 class QueryDayScore {
     async getUserDayScores(userId) {
@@ -22,9 +23,17 @@ class QueryDayScore {
         try {
             const DAY_SCORES = await DayScoreDBAdapter.findUserDayScoresInInterval(userId, startDate, endDate);
 
+            let currentDate = startDate;
+
             let dayScores = [];
             for (let index = 0; index < 8; index++) {
-                dayScores[index] = 0;
+                let currentDateString = currentDate.toLocaleDateString("sv", {timezone: "America/Sao_Paulo"});
+                dayScores[index] = {
+                    'date': currentDateString,
+                    'score': 0
+                };
+
+                currentDate = addDays(currentDate, 1);
             }
 
             DAY_SCORES.forEach(dayScore => {
@@ -32,7 +41,7 @@ class QueryDayScore {
                 const dayScoreIndex = dayScoreDate - startDate.getDate();
 
                 
-                dayScores[dayScoreIndex] = dayScore.dataValues.score;
+                dayScores[dayScoreIndex].score = dayScore.dataValues.score;
             });
 
             return dayScores;
