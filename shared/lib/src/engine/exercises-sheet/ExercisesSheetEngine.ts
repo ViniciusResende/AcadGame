@@ -8,7 +8,10 @@ import { HttpResponseCodesEnum } from '../../utils/classes/api-client/ApiClientE
 
 /** Interfaces */
 import { ILibGeneralErrorPayload } from '../../data/interfaces/CommonInterfaces';
-import { IApiAcadExercisesSheetGetAvailableToAddResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IApiAcadExercisesSheetGetAvailableToAddResponse,
+  IApiAcadExercisesSheetGetUserSheetResponse,
+} from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Classes */
 import { ApiClientHttpError } from '../../utils/classes/api-client/ApiClientErrors';
@@ -38,6 +41,26 @@ export class ExercisesSheetEngine {
         Security.publishApiRequestUnauthorized(generalErrorPayload);
       }
     }
+  }
+
+  async getUserSheets(): Promise<
+    IApiAcadExercisesSheetGetUserSheetResponse[] | null
+  > {
+    let exercisesSheetUserSheetsPayload:
+      | IApiAcadExercisesSheetGetUserSheetResponse[]
+      | null = null;
+    try {
+      const storedAuthToken = Security.getTokenStored();
+      if (!storedAuthToken)
+        throw new Error(`No token stored, unable to authenticate.`);
+
+      exercisesSheetUserSheetsPayload =
+        await this.#exercisesSheetAccess.getUserSheets(storedAuthToken);
+    } catch (error) {
+      this.#handleExercisesSheetErrors(error);
+      console.error(error);
+    }
+    return exercisesSheetUserSheetsPayload;
   }
 
   async getAvailableExercisesToAdd(
