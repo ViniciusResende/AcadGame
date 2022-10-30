@@ -15,10 +15,12 @@ import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 import {
   IApiAcadAuthResponse,
   IApiAcadExercisesSheetGetAvailableToAddResponse,
+  IApiAcadExercisesSheetGetUserSheetResponse,
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
 } from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
+import { ISheetExerciseInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
 
 /** Classes */
 import { ApiClient } from '../../../utils/classes/api-client/ApiClient';
@@ -194,6 +196,29 @@ export class ApiAcad extends ApiClient {
       responseData.data as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
+  }
+
+  async exercisesSheetGetUserSheets(
+    token: string
+  ): Promise<IApiAcadExercisesSheetGetUserSheetResponse[]> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(`/exercisesSheet`, requestParams);
+    const responseData = await response.promise;
+
+    const exercisesSheetArray = (() => {
+      const resData = responseData.data as Record<string, ISheetExerciseInfo[]>;
+      const sheetsIds = Object.keys(resData);
+
+      return sheetsIds.map((sheetId) => ({
+        sheetId,
+        exercises: resData[sheetId],
+      }));
+    })();
+
+    return exercisesSheetArray;
   }
 
   /**
