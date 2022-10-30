@@ -1,13 +1,9 @@
-const USER_DB_ADAPTER = require('../user/userDBAdapter');
-
-const bcrypt = require('bcrypt');
-
-const LocalStrategy = require('passport-local').Strategy;
+const PASSPORT = require('passport');
 
 class AuthAdapter {
-    async login(user, password) {
+    async login(req, res, next) {
         try {
-            
+            await PASSPORT.authenticate('local')(req, res, next);
         }
         catch (err) {
             throw err;
