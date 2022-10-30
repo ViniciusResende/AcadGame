@@ -5,7 +5,7 @@
 
 /** Interfaces */
 import { IExerciseToAddInfo } from '../../data/interfaces/ExercisesSheetInterfaces';
-import { IApiAcadExercisesSheetGetAvailableToAddResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import { IApiAcadExercisesSheetGetUserSheetResponse } from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Utilities */
 import { Utilities } from '../../utils/Utilities';
@@ -25,13 +25,20 @@ export class ExercisesSheetManager extends Utilities.pubSub {
     this.#exercisesSheetEngine = new ExercisesSheetEngine();
   }
 
+  async getUserExercisesSheets(): Promise<
+    IApiAcadExercisesSheetGetUserSheetResponse[] | null
+  > {
+    const exercisesSheetUserSheetsPayload =
+      await this.#exercisesSheetEngine.getUserSheets();
+
+    return exercisesSheetUserSheetsPayload;
+  }
+
   async getAllExercisesAvailableForSheet(
     sheetId: string
   ): Promise<IExerciseToAddInfo[] | null> {
     const exercisesSheetGetAvailableForSheetResponse =
-      (await this.#exercisesSheetEngine.getAvailableExercisesToAdd(
-        sheetId
-      )) as IApiAcadExercisesSheetGetAvailableToAddResponse;
+      await this.#exercisesSheetEngine.getAvailableExercisesToAdd(sheetId);
 
     return exercisesSheetGetAvailableForSheetResponse
       ? exercisesSheetGetAvailableForSheetResponse.availableExercises
@@ -40,4 +47,6 @@ export class ExercisesSheetManager extends Utilities.pubSub {
   async addExercisesToSheet(sheetId: string, exercisesIds: number[]) {
     await this.#exercisesSheetEngine.addExercisesToSheet(sheetId, exercisesIds);
   }
+
+  // async updateExerciseOnSheet() {}
 }
