@@ -1,9 +1,9 @@
 const AUTH_ADAPTER = require('../../adapters/authentication/authAdapter');
 
 class authGate {
-   async makeLogin(user, password) {
+   async makeLogin(req, res, next) {
       try {
-         await AUTH_ADAPTER.login(user, password);
+         await AUTH_ADAPTER.login(req, res, next);
       }
       catch (err) {
          throw err;
