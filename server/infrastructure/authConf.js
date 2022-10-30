@@ -10,9 +10,9 @@ module.exports = async (passport) => {
         done(null, user.id);
     });
 
-    passport.deserializeUser( (id, done) => {
+    passport.deserializeUser( async (id, done) => {
         try {
-            const CURRENT_USER = USER.getSingleUser(id);
+            const CURRENT_USER = await USER.getSingleUser(id);
             done(null, CURRENT_USER);
         }
         catch (err) {
@@ -25,7 +25,7 @@ module.exports = async (passport) => {
         passwordField: 'password'
     }, async (email, password, done) => {
         try {
-            const CURRENT_USER = await USER.getUserByEmail(email);
+            const CURRENT_USER = await USER.getUserByEmailWithPassword(email);
 
             if (!CURRENT_USER) {
                 return done(null, false);
@@ -33,14 +33,15 @@ module.exports = async (passport) => {
 
             const MATCHING_PASSWORD = BCRYPT.compareSync(password, CURRENT_USER.password);
 
+            
             if (!MATCHING_PASSWORD) {
                 return done(null, false);
             }
-
+            
             return done(null, CURRENT_USER);
         }
         catch (err) {
-            done(err, false);
+            return done(err, false);
         }
     }
     ));
