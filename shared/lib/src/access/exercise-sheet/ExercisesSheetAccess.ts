@@ -7,7 +7,10 @@
 import { ExercisesSheetAccessStrategy } from './strategies/ExercisesSheetAccessStrategy';
 
 /** Interfaces */
-import { IApiAcadExercisesSheetGetAvailableToAddResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IApiAcadExercisesSheetGetAvailableToAddResponse,
+  IApiAcadExercisesSheetGetUserSheetResponse,
+} from '../../resource/api/acad/ApiAcadInterfaces';
 
 /**
  * Class to provide access to exchanges' data.
@@ -17,6 +20,16 @@ export class ExercisesSheetAccess {
 
   constructor() {
     this.#accessStrategy = new ExercisesSheetAccessStrategy();
+  }
+
+  async getUserSheets(
+    token: string
+  ): Promise<IApiAcadExercisesSheetGetUserSheetResponse[]> {
+    const getUserSheetsResponse = await this.#accessStrategy.getUserSheets(
+      token
+    );
+
+    return getUserSheetsResponse;
   }
 
   /**
