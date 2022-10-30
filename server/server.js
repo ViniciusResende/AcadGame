@@ -17,7 +17,7 @@ server.use(cookieParser());
 server.use('/api/badges', BADGE_ROUTER);
 server.use('/api/users', USER_ROUTER);
 server.use('/api/exercisesSheet', EXERCISE_SHEET_ROUTER);
-server.use('/api/dayScores', DAY_SCORE_ROUTER);
+server.use('/api/dailyScores', DAY_SCORE_ROUTER);
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
