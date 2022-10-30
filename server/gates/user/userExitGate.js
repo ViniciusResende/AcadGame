@@ -70,6 +70,17 @@ class QueryUser {
         }
     }
 
+    async getUserByEmailWithPassword(email) {
+        try {
+            const QUERIED_USER = await USER_DB_ADAPTER.getUserByEmailWithPassword(email);
+
+            return QUERIED_USER;
+        } 
+        catch (err) {
+            throw err;
+        }
+    }
+
     async getUserByNickname(nickname) {
         try {
             const QUERIED_USER = await USER_DB_ADAPTER.getUsersByNick(nickname);

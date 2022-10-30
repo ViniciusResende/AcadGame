@@ -50,6 +50,17 @@ class User {
             throw err;
         }
     }
+    
+    async getUserByEmailWithPassword(email) {
+        try {
+            const USER = await QUERY_USER.getUserByEmailWithPassword(email);
+
+            return USER;
+        } 
+        catch (err) {
+            throw err;
+        }
+    }
 
     async getUserByNickname(nickname) {
         try {

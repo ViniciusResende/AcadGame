@@ -72,6 +72,24 @@ class UserDatabaseAdapter {
         }
     }
 
+    async getUserByEmailWithPassword(email) {
+        try {
+            const QUERIED_USER = await USER.findOne({
+                where: {
+                    email: email
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            });
+
+            return QUERIED_USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     async getUsersByNick(nickname) {
         try {
             const QUERIED_USERS = USER.findAll({
