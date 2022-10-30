@@ -1,17 +1,14 @@
 const ROUTER = require('express').Router();
 
-const AUTH = require('../../domains/authentication/authDomain');
+const AUTH_DOMAIN = require('../../domains/authentication/authDomain');
 
-ROUTER.post('/', async (req, res) => {
+// const AUTH = require('../../domains/authentication/authDomain');
+
+ROUTER.post('/', async (req, res, next) => await AUTH_DOMAIN.login(req, res, next), async (req, res) => {
     try {
-        const EMAIL = req.body.email;
-        const PASSWORD = req.body.password;
-
-        const TOKEN = await AUTH.login(EMAIL, PASSWORD);
-
-        res.status(200).json({
-            message: "enjoy your token :)",
-            token: TOKEN
+        res.status(200).send({
+            token: req.cookies['connect.sid'],
+            message: 'Enjoy your token! :)'
         });
     }
     catch (err) {
