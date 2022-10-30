@@ -7,7 +7,10 @@
 import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 
 /** Interfaces */
-import { IExerciseToAddInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
+import {
+  IExerciseToAddInfo,
+  ISheetExerciseInfo,
+} from '../../../data/interfaces/ExercisesSheetInterfaces';
 
 /**
  * API data representation for general HTTP responses' structure.
@@ -78,6 +81,11 @@ export interface IApiAcadSignUpBody {
 export interface IApiAcadUpdateUserInfoBody {
   nickname: string;
   picture: UserProfilePictureEnum;
+}
+
+export interface IApiAcadExercisesSheetGetUserSheetResponse {
+  sheetId: string;
+  exercises: ISheetExerciseInfo[];
 }
 
 /**
