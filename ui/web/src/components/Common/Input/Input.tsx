@@ -18,6 +18,7 @@ interface InputComponentProps
   controlId: string;
   inputLabel: string;
   modifier?: 'default' | 'clear';
+  unitOfMeasurementTag?: string;
   onHover?: React.MouseEventHandler<HTMLInputElement>;
 }
 
@@ -27,6 +28,7 @@ function InputComponent(props: InputComponentProps) {
     controlId,
     inputLabel,
     modifier = 'default',
+    unitOfMeasurementTag,
     onAnimationStart,
     onBlur,
     onHover,
@@ -111,6 +113,11 @@ function InputComponent(props: InputComponentProps) {
         >
           {shouldShowPassword ? <EyeIcon /> : <EyeSlashIcon />}
         </div>
+      )}
+      {unitOfMeasurementTag && (
+        <span className="input-component__unity-measurement-tag">
+          {unitOfMeasurementTag}
+        </span>
       )}
     </div>
   );
