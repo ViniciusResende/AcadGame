@@ -15,7 +15,10 @@ ROUTER.post('/signUp', async (req, res) => {
     }
 });
 
-ROUTER.get('/', async (req, res) => {
+ROUTER.get('/', (req, res, next) => {
+    if ( req.isAuthenticated() ) return next();
+    else res.status(401).send('É necessário se logar para realizar essa operação.');
+}, async (req, res) => {
     try {
         const USERS = await userDomain.getEveryUser();
 
