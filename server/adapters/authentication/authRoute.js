@@ -3,9 +3,9 @@ const ROUTER = require('express').Router();
 const AUTH_DOMAIN = require('../../domains/authentication/authDomain');
 
 ROUTER.post('/login', 
-    async (req, res, next) => {
+    (req, res, next) => {
         if (!req.isAuthenticated())
-            await AUTH_DOMAIN.login(req, res, next);
+            AUTH_DOMAIN.login(req, res, next);
         else
             res.status(400).send('Você já está logado!');
     },

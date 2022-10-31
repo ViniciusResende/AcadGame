@@ -1,9 +1,9 @@
 const PASSPORT = require('passport');
 
 class AuthAdapter {
-    async login(req, res, next) {
+    login(req, res, next) {
         try {
-            await PASSPORT.authenticate('local')(req, res, next);
+            PASSPORT.authenticate('local')(req, res, next);
         }
         catch (err) {
             throw err;
