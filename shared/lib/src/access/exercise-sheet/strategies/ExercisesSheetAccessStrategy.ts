@@ -10,7 +10,9 @@ import { Utilities } from '../../../utils/Utilities';
 import {
   IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadExercisesSheetUpdateExerciseBody,
 } from '../../../resource/api/acad/ApiAcadInterfaces';
+import { ISheetExerciseInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
 
 /** Classes */
 import { ApiAcad } from '../../../resource/api/acad/ApiAcad';
@@ -65,6 +67,22 @@ export class ExercisesSheetAccessStrategy {
     );
 
     return getUserSheetsResponse;
+  }
+
+  async updateUserSheetExercise(
+    token: string,
+    updateExerciseBody: IApiAcadExercisesSheetUpdateExerciseBody
+  ): Promise<ISheetExerciseInfo> {
+    const { sheetId, updatedExercise } = updateExerciseBody;
+
+    const updatedUserSheetExerciseResponse =
+      await this.api.exercisesSheetUpdateExercise(
+        token,
+        sheetId,
+        updatedExercise
+      );
+
+    return updatedUserSheetExerciseResponse;
   }
 
   /**

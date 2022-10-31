@@ -10,7 +10,9 @@ import { ExercisesSheetAccessStrategy } from './strategies/ExercisesSheetAccessS
 import {
   IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadExercisesSheetUpdateExerciseBody,
 } from '../../resource/api/acad/ApiAcadInterfaces';
+import { ISheetExerciseInfo } from '../../data/interfaces/ExercisesSheetInterfaces';
 
 /**
  * Class to provide access to exchanges' data.
@@ -30,6 +32,19 @@ export class ExercisesSheetAccess {
     );
 
     return getUserSheetsResponse;
+  }
+
+  async updateUserSheetExercise(
+    token: string,
+    updateExerciseBody: IApiAcadExercisesSheetUpdateExerciseBody
+  ): Promise<ISheetExerciseInfo> {
+    const updateUserSheetExerciseResponse =
+      await this.#accessStrategy.updateUserSheetExercise(
+        token,
+        updateExerciseBody
+      );
+
+    return updateUserSheetExerciseResponse;
   }
 
   /**
