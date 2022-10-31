@@ -22,6 +22,8 @@ const EXERCISE_ROUTER = require('./adapters/exercise/exerciseRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
 const AUTH_ROUTER = require('./adapters/authentication/authRoute');
 
+const IS_AUTHENTICATED = require('./domains/authentication/authDomain').isLoggedIn;
+
 const BODY_PARSER = require("body-parser");
 const COOKIE_PARSER = require("cookie-parser");
 
@@ -36,8 +38,8 @@ SERVER.use(BODY_PARSER.urlencoded({extended:true}));
 SERVER.use(BODY_PARSER.json());
 SERVER.use(COOKIE_PARSER());
 
-SERVER.use('/badges', BADGE_ROUTER, errorHandler);
-SERVER.use('/exercises', EXERCISE_ROUTER, errorHandler);
+SERVER.use('/badges', IS_AUTHENTICATED, BADGE_ROUTER, errorHandler);
+SERVER.use('/exercises', IS_AUTHENTICATED, EXERCISE_ROUTER, errorHandler);
 SERVER.use('/users', USER_ROUTER, errorHandler);
 SERVER.use('/auth', AUTH_ROUTER, errorHandler);
 
