@@ -68,7 +68,14 @@ export class ExercisesSheetManager extends Utilities.pubSub {
       ? exercisesSheetGetAvailableForSheetResponse.availableExercises
       : null;
   }
+
   async addExercisesToSheet(sheetId: string, exercisesIds: number[]) {
     await this.#exercisesSheetEngine.addExercisesToSheet(sheetId, exercisesIds);
+  }
+
+  async submitSelectedExercisesFromUserSheets(
+    exercisesToSubmit: ISheetExerciseInfo[]
+  ) {
+    await this.#exercisesSheetEngine.submitSelectedExercises(exercisesToSubmit);
   }
 }
