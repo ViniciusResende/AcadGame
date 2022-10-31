@@ -16,6 +16,18 @@ class Auth {
             throw err;
         }
     }
+
+    logout(req) {
+        try {
+            if(!req.isAuthenticated())
+                throw new Error('Você ainda não efetuou login.');
+
+            AUTH_GATE.makeLogout(req);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new Auth;

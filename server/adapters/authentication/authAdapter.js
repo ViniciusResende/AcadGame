@@ -9,6 +9,18 @@ class AuthAdapter {
             throw err;
         }
     }
+
+    logout(req) {
+        try {
+            req.logOut(err => {            
+                if(err)
+                    throw new Error('Ocorreu um erro ao efetuar logout.');
+            });
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new AuthAdapter;

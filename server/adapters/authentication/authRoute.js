@@ -2,8 +2,6 @@ const ROUTER = require('express').Router();
 
 const AUTH_DOMAIN = require('../../domains/authentication/authDomain');
 
-// const AUTH = require('../../domains/authentication/authDomain');
-
 ROUTER.post('/login', 
     async (req, res, next) => {
         if (!req.isAuthenticated())
@@ -21,6 +19,17 @@ ROUTER.post('/login',
         catch (err) {
             res.status(500).send(err.message);
         }
-    });
+});
+
+ROUTER.delete('/logout', (req, res) => {
+    try {
+        AUTH_DOMAIN.logout(req);
+
+        res.status(200).send('Logout efetuado com sucesso.');
+    }
+    catch (err) {
+        res.status(500).send(err.message);
+    }
+});
 
 module.exports = ROUTER;

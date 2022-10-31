@@ -9,6 +9,15 @@ class authGate {
          throw err;
       }
    }
+
+   makeLogout(req) {
+      try {
+         AUTH_ADAPTER.logout(req);
+      }
+      catch (err) {
+         throw err;
+      }
+   }
 }
 
 module.exports = new authGate;
