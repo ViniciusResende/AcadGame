@@ -301,4 +301,18 @@ export class ApiAcad extends ApiClient {
 
     await response.promise;
   }
+
+  async exercisesSheetSubmitSelectedExercises(
+    token: string,
+    exercisesToSubmit: ISheetExerciseInfo[]
+  ): Promise<void> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      body: exercisesToSubmit,
+      method: HttpMethodEnum.POST,
+    };
+    const response = this.#api.request(`/dailyScores/user/add/`, requestParams);
+
+    await response.promise;
+  }
 }
