@@ -4,7 +4,7 @@ const USER_DOMAIN = require('../../domains/user/userDomain');
 
 const AUTH_DOMAIN = require('../../domains/authentication/authDomain');
 
-ROUTER.post('/signUp', async (req, res) => {
+ROUTER.post('/signUp', async (req, res, next) => {
     try {
         const USER_INFO = req.body;
 
@@ -18,7 +18,7 @@ ROUTER.post('/signUp', async (req, res) => {
 });
 
 ROUTER.get('/', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const USERS = await USER_DOMAIN.getEveryUser();
 
@@ -31,7 +31,7 @@ ROUTER.get('/', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
 );
 
 ROUTER.get('/id/:id', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const USER_ID = req.params.id;
 
@@ -46,7 +46,7 @@ ROUTER.get('/id/:id', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next)
 );
 
 ROUTER.get('/email', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const USER_EMAIL = req.body.email;
 
@@ -61,7 +61,7 @@ ROUTER.get('/email', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
 );
 
 ROUTER.get('/nickname', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const USER_NICKNAME = req.body.nickname;
 
@@ -76,7 +76,7 @@ ROUTER.get('/nickname', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, nex
 );
 
 ROUTER.get('/top/:rank', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const RANK = req.params.rank;
 
@@ -91,7 +91,7 @@ ROUTER.get('/top/:rank', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, ne
 );
 
 ROUTER.put('/:id', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const USER_INFO = req.body.userInfo;
             const REQ_USER_ID = req.body.userId;
@@ -108,7 +108,7 @@ ROUTER.put('/:id', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
 );
 
 ROUTER.delete('/:id', (req, res, next) => AUTH_DOMAIN.isLoggedIn(req, res, next),
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             const DELETION_USER_ID = req.body.userId;
             const REQ_USER_ID = req.params.id;
