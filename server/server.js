@@ -27,7 +27,6 @@ const COOKIE_PARSER = require("cookie-parser");
 
 
 const errorHandler = (err, req, res, next) => {
-    console.log('fbadsjkfbadsfbadskb');
     res.status(500).send(err.message);
 }
 
