@@ -25,7 +25,8 @@ type ExercisesSheetComponentProps = {
   userExercisesSheet: IExercisesSheetInfoData;
   openExerciseEdition: (
     event: React.MouseEvent<HTMLElement>,
-    exerciseToBeEdited: ISheetExerciseInfoData
+    exerciseToBeEdited: ISheetExerciseInfoData,
+    sheetBeingEditedId: string
   ) => void;
 };
 
@@ -50,7 +51,16 @@ function ExercisesSheetComponent({
           <ExerciseCard
             key={exercise.exerciseId}
             userExercise={exercise}
-            openExerciseEdition={openExerciseEdition}
+            openExerciseEdition={(
+              event: React.MouseEvent<HTMLElement>,
+              exerciseToBeEdited: ISheetExerciseInfoData
+            ) =>
+              openExerciseEdition(
+                event,
+                exerciseToBeEdited,
+                userExercisesSheet.sheetId
+              )
+            }
           />
         ))}
         <Link
