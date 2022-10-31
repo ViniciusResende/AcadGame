@@ -129,6 +129,16 @@ export class ExercisesSheetAccessStrategy {
     await this.api.exercisesSheetAddExercises(token, sheetId, exercisesIds);
   }
 
+  async submitSelectedExercises(
+    token: string,
+    exercisesToSubmit: ISheetExerciseInfo[]
+  ): Promise<void> {
+    await this.api.exercisesSheetSubmitSelectedExercises(
+      token,
+      exercisesToSubmit
+    );
+  }
+
   /**
    * Getter for the API to be used for getting and saving user data.
    *

@@ -94,4 +94,14 @@ export class ExercisesSheetAccess {
       exercisesIds
     );
   }
+
+  async submitSelectedExercises(
+    token: string,
+    exercisesToSubmit: ISheetExerciseInfo[]
+  ): Promise<void> {
+    await this.#accessStrategy.submitSelectedExercises(
+      token,
+      exercisesToSubmit
+    );
+  }
 }
