@@ -20,7 +20,7 @@ SERVER.use(PASSPORT.session());
 const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
 const EXERCISE_ROUTER = require('./adapters/exercise/exerciseRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
-const LOGIN_ROUTER = require('./adapters/authentication/loginRoute');
+const AUTH_ROUTER = require('./adapters/authentication/authRoute');
 
 const BODY_PARSER = require("body-parser");
 const COOKIE_PARSER = require("cookie-parser");
@@ -33,7 +33,7 @@ SERVER.use(COOKIE_PARSER());
 SERVER.use('/badges', BADGE_ROUTER);
 SERVER.use('/exercises', EXERCISE_ROUTER);
 SERVER.use('/users', USER_ROUTER);
-SERVER.use('/login', LOGIN_ROUTER);
+SERVER.use('/auth', AUTH_ROUTER);
 
 SERVER.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
