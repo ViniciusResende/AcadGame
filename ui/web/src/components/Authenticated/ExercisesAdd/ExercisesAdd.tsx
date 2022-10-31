@@ -24,6 +24,10 @@ import { AddSquareIcon, DumbbellIcon } from '../../../assets/svg/icons';
 /** Constants */
 const availableExercisesFilters = [
   {
+    name: 'Cardio',
+    value: ExercisesSheetExerciseToAddTypeEnum.CARDIO,
+  },
+  {
     name: 'Dorsais',
     value: ExercisesSheetExerciseToAddTypeEnum.LATS,
   },

@@ -9,6 +9,7 @@
 export enum ExercisesSheetExerciseToAddTypeEnum {
   BICEPS = 'biceps',
   CALF = 'calf',
+  CARDIO = 'cardio',
   CHEST = 'chest',
   GLUTEAL = 'gluteal',
   LATS = 'lats',
