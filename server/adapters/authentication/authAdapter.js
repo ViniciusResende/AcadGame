@@ -10,6 +10,14 @@ class AuthAdapter {
         }
     }
 
+    isLoggedIn(req, res, next) {
+        if (!req.isAuthenticated()){
+            return next(new Error('Você não está autenticado.'));
+        }
+        
+        return next();
+    }
+
     logout(req) {
         try {
             req.logOut(err => {            

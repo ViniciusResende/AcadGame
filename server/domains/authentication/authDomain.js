@@ -17,6 +17,10 @@ class Auth {
         }
     }
 
+    isLoggedIn(req, res, next) {
+        AUTH_GATE.checkAuthentication(req, res, next);
+    }
+
     logout(req) {
         try {
             if(!req.isAuthenticated())

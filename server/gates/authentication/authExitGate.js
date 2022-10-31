@@ -10,6 +10,10 @@ class authGate {
       }
    }
 
+   checkAuthentication(req, res, next) {
+      AUTH_ADAPTER.isLoggedIn(req, res, next);
+   }
+
    makeLogout(req) {
       try {
          AUTH_ADAPTER.logout(req);
