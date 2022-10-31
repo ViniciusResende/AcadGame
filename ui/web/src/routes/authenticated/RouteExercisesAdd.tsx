@@ -9,7 +9,7 @@ import ExercisesAdd from '../../components/Authenticated/ExercisesAdd';
 import useSecurity from '../middlewares/useSecurity';
 
 /** Library */
-import Lib from 'acad-game-lib';
+import Lib, { ExercisesSheetExerciseToAddTypeEnum } from 'acad-game-lib';
 
 /** Interfaces */
 import { IExerciseToAddInfoData } from '../../data/interfaces/ExercisesSheetInterfaces';
@@ -23,19 +23,32 @@ function RouteExercisesAdd() {
     IExerciseToAddInfoData[]
   >([]);
 
+  async function getAvailableExercises(
+    filterType: ExercisesSheetExerciseToAddTypeEnum | undefined = undefined
+  ) {
+    if (!sheetId) return null;
+    const getAvailableExercisesResponse =
+      await Lib.exercisesSheet.getAllExercisesAvailableForSheet(
+        sheetId,
+        filterType
+      );
+
+    return getAvailableExercisesResponse;
+  }
+
   useEffect(() => {
-    async function getAvailableExercises() {
-      if (!sheetId) return null;
-      const getAvailableExercisesResponse =
-        await Lib.exercisesSheet.getAllExercisesAvailableForSheet(sheetId);
-
-      return getAvailableExercisesResponse;
-    }
-
     getAvailableExercises().then(
       (response) => response && setAvailableExercises(response)
     );
   }, []);
+
+  async function filterExercisesBy(
+    filterType: ExercisesSheetExerciseToAddTypeEnum
+  ) {
+    getAvailableExercises(filterType).then(
+      (response) => response && setAvailableExercises(response)
+    );
+  }
 
   async function addExercisesToSheet(exercisesIds: number[]) {
     if (sheetId) {
@@ -47,6 +60,7 @@ function RouteExercisesAdd() {
   return (
     <ExercisesAdd
       availableExercisesList={availableExercises}
+      filterExercisesBy={filterExercisesBy}
       addExercisesToSheet={addExercisesToSheet}
     />
   );
