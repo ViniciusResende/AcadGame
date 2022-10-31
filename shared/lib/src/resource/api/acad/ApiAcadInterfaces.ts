@@ -59,6 +59,22 @@ export interface IApiUserGetDataWeeklyHistogramResponse
 }
 
 /**
+ * API data representation for Get User Exercises Sheets response.
+ */
+export interface IApiAcadExercisesSheetGetUserSheetResponse {
+  sheetId: string;
+  exercises: ISheetExerciseInfo[];
+}
+
+/**
+ * API data representation for Exercises Sheet Get Available To Add response.
+ */
+export interface IApiAcadExercisesSheetGetAvailableToAddResponse {
+  sheetId: string;
+  availableExercises: IExerciseToAddInfo[];
+}
+
+/**
  * API login Auth body.
  */
 export interface IApiAcadLoginBody {
@@ -83,15 +99,10 @@ export interface IApiAcadUpdateUserInfoBody {
   picture: UserProfilePictureEnum;
 }
 
-export interface IApiAcadExercisesSheetGetUserSheetResponse {
-  sheetId: string;
-  exercises: ISheetExerciseInfo[];
-}
-
 /**
- * API data representation for Exercises Sheet Get Available To Add response.
+ * API Update Sheet Exercise  body.
  */
-export interface IApiAcadExercisesSheetGetAvailableToAddResponse {
+export interface IApiAcadExercisesSheetUpdateExerciseBody {
   sheetId: string;
-  availableExercises: IExerciseToAddInfo[];
+  updatedExercise: ISheetExerciseInfo;
 }
