@@ -221,6 +221,25 @@ export class ApiAcad extends ApiClient {
     return exercisesSheetArray;
   }
 
+  async exercisesSheetUpdateExercise(
+    token: string,
+    sheetId: string,
+    updatedExercise: ISheetExerciseInfo
+  ): Promise<ISheetExerciseInfo> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.PUT,
+    };
+    const response = this.#api.request(
+      `/exercisesSheet/${sheetId}/update/${updatedExercise.exerciseId}`,
+      requestParams
+    );
+    const responseData = await response.promise;
+    const exerciseUpdateResponse = responseData.data as ISheetExerciseInfo;
+
+    return exerciseUpdateResponse;
+  }
+
   /**
    * Fetches the API providing a header token and getting the available exercises
    * for a given sheet.
