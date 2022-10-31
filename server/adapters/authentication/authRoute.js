@@ -9,7 +9,7 @@ ROUTER.post('/login',
         else
             res.status(400).send('Você já está logado!');
     },
-    async (req, res) => {
+    async (req, res, next) => {
         try {
             res.status(200).send({
                 token: req.cookies['connect.sid'],
@@ -17,18 +17,18 @@ ROUTER.post('/login',
             });
         }
         catch (err) {
-            res.status(500).send(err.message);
+            next(err);
         }
 });
 
-ROUTER.delete('/logout', (req, res) => {
+ROUTER.delete('/logout', (req, res, next) => {
     try {
         AUTH_DOMAIN.logout(req);
 
         res.status(200).send('Logout efetuado com sucesso.');
     }
     catch (err) {
-        res.status(500).send(err.message);
+        next(err);
     }
 });
 
