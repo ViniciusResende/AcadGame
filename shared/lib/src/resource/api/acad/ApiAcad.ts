@@ -9,6 +9,7 @@ import {
   HttpMethodEnum,
   HttpRequestHeaderEnum,
 } from '../../../utils/classes/api-client/ApiClientEnums';
+import { ExercisesSheetExerciseToAddTypeEnum } from '../../../data/enums/ExercisesSheetEnums';
 import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 
 /** Interfaces */
@@ -252,7 +253,7 @@ export class ApiAcad extends ApiClient {
   async exercisesSheetGetAvailableToAdd(
     token: string,
     sheetId: string,
-    filterType: string | undefined
+    filterType: ExercisesSheetExerciseToAddTypeEnum | undefined
   ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse> {
     const requestParams: IApiClientRequestParams = {
       headers: this.#getAuthHeader(token),

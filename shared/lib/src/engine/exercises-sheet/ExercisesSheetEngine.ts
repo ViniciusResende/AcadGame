@@ -4,6 +4,7 @@
  */
 
 /** Enums */
+import { ExercisesSheetExerciseToAddTypeEnum } from '../../data/enums/ExercisesSheetEnums';
 import { HttpResponseCodesEnum } from '../../utils/classes/api-client/ApiClientEnums';
 
 /** Interfaces */
@@ -88,7 +89,7 @@ export class ExercisesSheetEngine {
 
   async getAvailableExercisesToAdd(
     sheetId: string,
-    filterType: string | undefined
+    filterType: ExercisesSheetExerciseToAddTypeEnum | undefined
   ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse | null> {
     let exercisesSheetAvailableToAddPayload: IApiAcadExercisesSheetGetAvailableToAddResponse | null =
       null;

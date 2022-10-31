@@ -6,6 +6,9 @@
 /** Utilities */
 import { Utilities } from '../../../utils/Utilities';
 
+/** Enums */
+import { ExercisesSheetExerciseToAddTypeEnum } from '../../../data/enums/ExercisesSheetEnums';
+
 /** Interfaces */
 import {
   IApiAcadExercisesSheetGetAvailableToAddResponse,
@@ -98,7 +101,7 @@ export class ExercisesSheetAccessStrategy {
   async getAvailableExercisesToAdd(
     token: string,
     sheetId: string,
-    filterType: string | undefined
+    filterType: ExercisesSheetExerciseToAddTypeEnum | undefined
   ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse> {
     const getAvailableExercisesToAddResponse =
       await this.api.exercisesSheetGetAvailableToAdd(

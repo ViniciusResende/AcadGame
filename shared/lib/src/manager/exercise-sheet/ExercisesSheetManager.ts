@@ -3,6 +3,9 @@
  * @module ExercisesSheetManager
  */
 
+/** Enums */
+import { ExercisesSheetExerciseToAddTypeEnum } from '../../data/enums/ExercisesSheetEnums';
+
 /** Interfaces */
 import {
   IExerciseToAddInfo,
@@ -53,7 +56,7 @@ export class ExercisesSheetManager extends Utilities.pubSub {
 
   async getAllExercisesAvailableForSheet(
     sheetId: string,
-    filterType: string | undefined = undefined
+    filterType: ExercisesSheetExerciseToAddTypeEnum | undefined = undefined
   ): Promise<IExerciseToAddInfo[] | null> {
     const exercisesSheetGetAvailableForSheetResponse =
       await this.#exercisesSheetEngine.getAvailableExercisesToAdd(
