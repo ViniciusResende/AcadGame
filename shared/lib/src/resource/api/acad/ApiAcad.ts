@@ -246,18 +246,22 @@ export class ApiAcad extends ApiClient {
    *
    * @param token - The token to be used to authenticate user
    * @param sheetId - The id of the exercise sheet to fetch the available exercises
+   * @param filterType - The type of exercises to filter results (not obligatory)
    * @returns - The Available exercises for a giver exercises sheet
    */
   async exercisesSheetGetAvailableToAdd(
     token: string,
-    sheetId: string
+    sheetId: string,
+    filterType: string | undefined
   ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse> {
     const requestParams: IApiClientRequestParams = {
       headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
     const response = this.#api.request(
-      `/exercisesSheet/available/${sheetId}`,
+      `/exercisesSheet/available/${sheetId}${
+        filterType ? `?type=${filterType}` : ''
+      }`,
       requestParams
     );
     const responseData = await response.promise;

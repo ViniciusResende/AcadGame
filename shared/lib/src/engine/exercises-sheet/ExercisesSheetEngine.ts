@@ -87,7 +87,8 @@ export class ExercisesSheetEngine {
   }
 
   async getAvailableExercisesToAdd(
-    sheetId: string
+    sheetId: string,
+    filterType: string | undefined
   ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse | null> {
     let exercisesSheetAvailableToAddPayload: IApiAcadExercisesSheetGetAvailableToAddResponse | null =
       null;
@@ -99,7 +100,8 @@ export class ExercisesSheetEngine {
       exercisesSheetAvailableToAddPayload =
         await this.#exercisesSheetAccess.getAvailableExercisesToAdd(
           storedAuthToken,
-          sheetId
+          sheetId,
+          filterType
         );
     } catch (error) {
       this.#handleExercisesSheetErrors(error);

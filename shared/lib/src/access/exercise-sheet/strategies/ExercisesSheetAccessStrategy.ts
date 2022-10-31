@@ -92,14 +92,20 @@ export class ExercisesSheetAccessStrategy {
    * @param token - An JWT like token that will be used to authenticate while
    * fetching user data
    * @param sheetId - The sheet id that intends to fetch available exercises to add
+   * @param filterType - The type of exercises to filter results (not obligatory)
    * @returns The response payload containing the fetched data
    */
   async getAvailableExercisesToAdd(
     token: string,
-    sheetId: string
+    sheetId: string,
+    filterType: string | undefined
   ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse> {
     const getAvailableExercisesToAddResponse =
-      await this.api.exercisesSheetGetAvailableToAdd(token, sheetId);
+      await this.api.exercisesSheetGetAvailableToAdd(
+        token,
+        sheetId,
+        filterType
+      );
 
     return getAvailableExercisesToAddResponse;
   }

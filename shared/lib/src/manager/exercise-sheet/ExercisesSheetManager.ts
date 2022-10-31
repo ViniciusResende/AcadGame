@@ -52,10 +52,14 @@ export class ExercisesSheetManager extends Utilities.pubSub {
   }
 
   async getAllExercisesAvailableForSheet(
-    sheetId: string
+    sheetId: string,
+    filterType: string | undefined = undefined
   ): Promise<IExerciseToAddInfo[] | null> {
     const exercisesSheetGetAvailableForSheetResponse =
-      await this.#exercisesSheetEngine.getAvailableExercisesToAdd(sheetId);
+      await this.#exercisesSheetEngine.getAvailableExercisesToAdd(
+        sheetId,
+        filterType
+      );
 
     return exercisesSheetGetAvailableForSheetResponse
       ? exercisesSheetGetAvailableForSheetResponse.availableExercises
