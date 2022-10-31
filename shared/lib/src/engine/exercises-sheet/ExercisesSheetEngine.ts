@@ -130,4 +130,22 @@ export class ExercisesSheetEngine {
       console.error(error);
     }
   }
+
+  async submitSelectedExercises(
+    exercisesToSubmit: ISheetExerciseInfo[]
+  ): Promise<void> {
+    try {
+      const storedAuthToken = Security.getTokenStored();
+      if (!storedAuthToken)
+        throw new Error(`No token stored, unable to authenticate.`);
+
+      await this.#exercisesSheetAccess.submitSelectedExercises(
+        storedAuthToken,
+        exercisesToSubmit
+      );
+    } catch (error) {
+      this.#handleExercisesSheetErrors(error);
+      console.error(error);
+    }
+  }
 }
