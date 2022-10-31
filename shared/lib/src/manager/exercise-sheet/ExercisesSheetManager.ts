@@ -4,8 +4,14 @@
  */
 
 /** Interfaces */
-import { IExerciseToAddInfo } from '../../data/interfaces/ExercisesSheetInterfaces';
-import { IApiAcadExercisesSheetGetUserSheetResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IExerciseToAddInfo,
+  ISheetExerciseInfo,
+} from '../../data/interfaces/ExercisesSheetInterfaces';
+import {
+  IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadExercisesSheetUpdateExerciseBody,
+} from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Utilities */
 import { Utilities } from '../../utils/Utilities';
@@ -34,6 +40,17 @@ export class ExercisesSheetManager extends Utilities.pubSub {
     return exercisesSheetUserSheetsPayload;
   }
 
+  async updateExerciseOnSheet(
+    ISheetExerciseInfo: IApiAcadExercisesSheetUpdateExerciseBody
+  ): Promise<ISheetExerciseInfo | null> {
+    const updatedUserSheetExercisePayload =
+      await this.#exercisesSheetEngine.updateUserSheetExercise(
+        ISheetExerciseInfo
+      );
+
+    return updatedUserSheetExercisePayload;
+  }
+
   async getAllExercisesAvailableForSheet(
     sheetId: string
   ): Promise<IExerciseToAddInfo[] | null> {
@@ -47,6 +64,4 @@ export class ExercisesSheetManager extends Utilities.pubSub {
   async addExercisesToSheet(sheetId: string, exercisesIds: number[]) {
     await this.#exercisesSheetEngine.addExercisesToSheet(sheetId, exercisesIds);
   }
-
-  // async updateExerciseOnSheet() {}
 }
