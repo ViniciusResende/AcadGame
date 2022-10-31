@@ -8,9 +8,11 @@ import { HttpResponseCodesEnum } from '../../utils/classes/api-client/ApiClientE
 
 /** Interfaces */
 import { ILibGeneralErrorPayload } from '../../data/interfaces/CommonInterfaces';
+import { ISheetExerciseInfo } from '../../data/interfaces/ExercisesSheetInterfaces';
 import {
   IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadExercisesSheetUpdateExerciseBody,
 } from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Classes */
@@ -61,6 +63,27 @@ export class ExercisesSheetEngine {
       console.error(error);
     }
     return exercisesSheetUserSheetsPayload;
+  }
+
+  async updateUserSheetExercise(
+    updateExerciseBody: IApiAcadExercisesSheetUpdateExerciseBody
+  ): Promise<ISheetExerciseInfo | null> {
+    let updatedUserSheetExercisePayload: ISheetExerciseInfo | null = null;
+    try {
+      const storedAuthToken = Security.getTokenStored();
+      if (!storedAuthToken)
+        throw new Error(`No token stored, unable to authenticate.`);
+
+      updatedUserSheetExercisePayload =
+        await this.#exercisesSheetAccess.updateUserSheetExercise(
+          storedAuthToken,
+          updateExerciseBody
+        );
+    } catch (error) {
+      this.#handleExercisesSheetErrors(error);
+      console.error(error);
+    }
+    return updatedUserSheetExercisePayload;
   }
 
   async getAvailableExercisesToAdd(
