@@ -28,12 +28,23 @@ type ExercisesSheetComponentProps = {
     exerciseToBeEdited: ISheetExerciseInfoData,
     sheetBeingEditedId: string
   ) => void;
+  addExerciseToSubmit: (exercise: ISheetExerciseInfoData) => void;
+  removeExerciseToSubmit: (exerciseId: number) => void;
 };
 
 function ExercisesSheetComponent({
   userExercisesSheet,
   openExerciseEdition,
+  addExerciseToSubmit,
+  removeExerciseToSubmit,
 }: ExercisesSheetComponentProps) {
+  function exerciseCardOpenEdition(
+    event: React.MouseEvent<HTMLElement>,
+    exerciseToBeEdited: ISheetExerciseInfoData
+  ) {
+    openExerciseEdition(event, exerciseToBeEdited, userExercisesSheet.sheetId);
+  }
+
   return (
     <div className="exercises-sheet__container">
       <header className="exercises-sheet__header">
@@ -51,16 +62,9 @@ function ExercisesSheetComponent({
           <ExerciseCard
             key={exercise.exerciseId}
             userExercise={exercise}
-            openExerciseEdition={(
-              event: React.MouseEvent<HTMLElement>,
-              exerciseToBeEdited: ISheetExerciseInfoData
-            ) =>
-              openExerciseEdition(
-                event,
-                exerciseToBeEdited,
-                userExercisesSheet.sheetId
-              )
-            }
+            openExerciseEdition={exerciseCardOpenEdition}
+            onCardCheck={() => addExerciseToSubmit(exercise)}
+            onCardUncheck={() => removeExerciseToSubmit(exercise.exerciseId)}
           />
         ))}
         <Link

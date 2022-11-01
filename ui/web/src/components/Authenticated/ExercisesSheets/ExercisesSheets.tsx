@@ -29,11 +29,16 @@ type ExercisesSheetsComponentProps = {
     sheetId: string,
     updatedExerciseData: ISheetExerciseInfoData
   ) => void;
+  addExerciseToSubmit: (exercise: ISheetExerciseInfoData) => void;
+  removeExerciseToSubmit: (exerciseId: number) => void;
+  submitSelectedExercises: () => void;
 };
-
 function ExercisesSheetsComponent({
   userExercisesSheets,
   saveExerciseEdition,
+  addExerciseToSubmit,
+  removeExerciseToSubmit,
+  submitSelectedExercises,
 }: ExercisesSheetsComponentProps) {
   const [isEditionModalOpen, setIsEditionModalOpen] = useState(false);
   const [sheetBeingEditedId, setSheetBeingEditedId] = useState('');
@@ -72,12 +77,18 @@ function ExercisesSheetsComponent({
               key={exercisesSheet.sheetId}
               userExercisesSheet={exercisesSheet}
               openExerciseEdition={openExerciseEdition}
+              addExerciseToSubmit={addExerciseToSubmit}
+              removeExerciseToSubmit={removeExerciseToSubmit}
             />
           ))}
         </Slider>
       </main>
       <footer className="exercises-sheets-page__submit-sheet">
-        <Button modifier="default" icon={<FlagIcon />}>
+        <Button
+          modifier="default"
+          icon={<FlagIcon />}
+          onClick={submitSelectedExercises}
+        >
           Finalizar Treino
         </Button>
       </footer>
