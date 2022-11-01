@@ -50,6 +50,21 @@ class QueryDayScore {
             throw err;
         }
     }
+
+    async postDailyScore(userId, date, score) {
+        try {
+            let newDailyScore = new Object;
+
+            newDailyScore['userId'] = userId;
+            newDailyScore['date'] = date;
+            newDailyScore['score'] = score;
+
+            await DayScoreDBAdapter.newDailyScore(newDailyScore);
+        }  
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryDayScore;
