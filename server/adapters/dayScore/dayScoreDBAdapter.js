@@ -54,6 +54,15 @@ class DayScoreDatabaseAdapter {
             throw err;
         }
     }
+
+    async newDailyScore(dailyScore) {
+        try {
+            await DAY_SCORE.create(dailyScore);
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new DayScoreDatabaseAdapter;
