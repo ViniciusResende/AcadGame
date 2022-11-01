@@ -199,6 +199,13 @@ export class ApiAcad extends ApiClient {
     return userInfoResponse;
   }
 
+  /**
+   * Fetches the API providing a header token and getting all the user exercises
+   * sheets with its respective exercises
+   *
+   * @param token - The token to be used to authenticate user
+   * @returns - Array containing all user exercises sheets
+   */
   async exercisesSheetGetUserSheets(
     token: string
   ): Promise<IApiAcadExercisesSheetGetUserSheetResponse[]> {
@@ -222,6 +229,15 @@ export class ApiAcad extends ApiClient {
     return exercisesSheetArray;
   }
 
+  /**
+   * Fetches the API providing a header token and updating a exercise from a certain
+   * user sheet to match the new exercise payload
+   *
+   * @param token - The token to be used to authenticate user
+   * @param sheetId - The id of the exercise sheet to fetch the available exercises
+   * @param updatedExercise - The exercise being updated object with updated values
+   * @returns - The payload of the exercise that has been updated with new values
+   */
   async exercisesSheetUpdateExercise(
     token: string,
     sheetId: string,
@@ -302,6 +318,14 @@ export class ApiAcad extends ApiClient {
     await response.promise;
   }
 
+  /**
+   * Fetches the API providing a header token and a list of exercises that the user
+   * has marked as concluded at that submit.
+   *
+   * @param token - The token to be used to authenticate user
+   * @param exercisesToSubmit - A exercise array containing all exercises that the
+   * user has marked as done
+   */
   async exercisesSheetSubmitSelectedExercises(
     token: string,
     exercisesToSubmit: ISheetExerciseInfo[]
