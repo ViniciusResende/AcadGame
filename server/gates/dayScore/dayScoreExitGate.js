@@ -65,6 +65,36 @@ class QueryDayScore {
             throw err;
         }
     }
+
+    async getWeekPodium(year, weekNumber) {
+        try {
+            const ALL_DAILY_SCORES = await DayScoreDBAdapter.findAllDailyScores();      
+
+            let usersWeeklyScores = ALL_DAILY_SCORES.reduce((acc, item) => {
+                const CURRENT_USER_ID = item.dataValues.userId;
+                const CURRENT_YEAR = item.dataValues.year;
+                const CURRENT_WEEK = item.dataValues.week;
+                const CURRENT_SCORE = item.dataValues.score;
+                delete item.dataValues.date;
+
+                if(CURRENT_YEAR === year && CURRENT_WEEK === weekNumber) {
+                    if(acc[CURRENT_USER_ID])
+                        acc[CURRENT_USER_ID].score += CURRENT_SCORE;
+                    else
+                        Object.assign(acc, {...acc, [CURRENT_USER_ID]:item.dataValues});
+                }
+
+                return acc;
+            }, {}); 
+
+            const RETURN_VALUES = Object.values(usersWeeklyScores);
+
+            return RETURN_VALUES;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryDayScore;
