@@ -51,6 +51,13 @@
     /* Microsoft Edge */
     color: $textDisabled;
   }
+
+  &.hasError {
+    border-color: $systemRed;
+    &:hover {
+      border-color: $systemLightRed;
+    }
+  }
 }
 
 .input-component__container {
@@ -99,6 +106,14 @@
   > svg {
     width: 20px;
   }
+}
+
+.errorSpan {
+  color: $systemRed;
+  padding-left: 8px;
+  position: absolute;
+  font-size: 10px;
+  margin-top: -14px; 
 }
 
 .input-component__unity-measurement-tag {
