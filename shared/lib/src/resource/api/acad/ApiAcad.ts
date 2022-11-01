@@ -9,15 +9,19 @@ import {
   HttpMethodEnum,
   HttpRequestHeaderEnum,
 } from '../../../utils/classes/api-client/ApiClientEnums';
+import { ExercisesSheetExerciseToAddTypeEnum } from '../../../data/enums/ExercisesSheetEnums';
 import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 
 /** Interfaces */
 import {
   IApiAcadAuthResponse,
+  IApiAcadExercisesSheetGetAvailableToAddResponse,
+  IApiAcadExercisesSheetGetUserSheetResponse,
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
 } from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
+import { ISheetExerciseInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
 
 /** Classes */
 import { ApiClient } from '../../../utils/classes/api-client/ApiClient';
@@ -35,9 +39,16 @@ export class ApiAcad extends ApiClient {
   }
 
   #getAuthHeader(token: string) {
-    return new Headers({
-      Authorization: `Bearer ${token}`,
-    });
+    const authHeaderExtension = {
+      [HttpRequestHeaderEnum.AUTHORIZATION]: `Bearer ${token}`,
+    };
+
+    return new Headers(
+      Object.assign(
+        Object.fromEntries(this.headers.entries()),
+        authHeaderExtension
+      )
+    );
   }
 
   /**
@@ -186,5 +197,146 @@ export class ApiAcad extends ApiClient {
       responseData.data as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting all the user exercises
+   * sheets with its respective exercises
+   *
+   * @param token - The token to be used to authenticate user
+   * @returns - Array containing all user exercises sheets
+   */
+  async exercisesSheetGetUserSheets(
+    token: string
+  ): Promise<IApiAcadExercisesSheetGetUserSheetResponse[]> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(`/exercisesSheet`, requestParams);
+    const responseData = await response.promise;
+
+    const exercisesSheetArray = (() => {
+      const resData = responseData.data as Record<string, ISheetExerciseInfo[]>;
+      const sheetsIds = Object.keys(resData);
+
+      return sheetsIds.map((sheetId) => ({
+        sheetId,
+        exercises: resData[sheetId],
+      }));
+    })();
+
+    return exercisesSheetArray;
+  }
+
+  /**
+   * Fetches the API providing a header token and updating a exercise from a certain
+   * user sheet to match the new exercise payload
+   *
+   * @param token - The token to be used to authenticate user
+   * @param sheetId - The id of the exercise sheet to update the exercise
+   * @param updatedExercise - The exercise being updated object with updated values
+   * @returns - The payload of the exercise that has been updated with new values
+   */
+  async exercisesSheetUpdateExercise(
+    token: string,
+    sheetId: string,
+    updatedExercise: ISheetExerciseInfo
+  ): Promise<ISheetExerciseInfo> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.PUT,
+    };
+    const response = this.#api.request(
+      `/exercisesSheet/${sheetId}/update/${updatedExercise.exerciseId}`,
+      requestParams
+    );
+    const responseData = await response.promise;
+    const exerciseUpdateResponse = responseData.data as ISheetExerciseInfo;
+
+    return exerciseUpdateResponse;
+  }
+
+  /**
+   * Fetches the API providing a header token and getting the available exercises
+   * for a given sheet.
+   *
+   * @param token - The token to be used to authenticate user
+   * @param sheetId - The id of the exercise sheet to fetch the available exercises
+   * @param filterType - The type of exercises to filter results (not obligatory)
+   * @returns - The Available exercises for a giver exercises sheet
+   */
+  async exercisesSheetGetAvailableToAdd(
+    token: string,
+    sheetId: string,
+    filterType: ExercisesSheetExerciseToAddTypeEnum | undefined
+  ): Promise<IApiAcadExercisesSheetGetAvailableToAddResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/exercisesSheet/available/${sheetId}${
+        filterType ? `?type=${filterType}` : ''
+      }`,
+      requestParams
+    );
+    const responseData = await response.promise;
+    const availableExercisesToAdd = {
+      sheetId,
+      availableExercises: responseData.data,
+    } as IApiAcadExercisesSheetGetAvailableToAddResponse;
+
+    return availableExercisesToAdd;
+  }
+
+  /**
+   * Fetches the API providing a header token and adding exercises to a given
+   * exercises sheet
+   *
+   * @param token - The token to be used to authenticate user
+   * @param sheetId - The id of the exercise sheet to add the exercises
+   * @param exercisesIds - A Array containing the ids of the exercises to be added
+   */
+  async exercisesSheetAddExercises(
+    token: string,
+    sheetId: string,
+    exercisesIds: number[]
+  ): Promise<void> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      body: {
+        exercisesIds,
+      },
+      method: HttpMethodEnum.POST,
+    };
+    const response = this.#api.request(
+      `/exercisesSheet/add/${sheetId}`,
+      requestParams
+    );
+
+    await response.promise;
+  }
+
+  /**
+   * Fetches the API providing a header token and a list of exercises that the user
+   * has marked as concluded at that submit.
+   *
+   * @param token - The token to be used to authenticate user
+   * @param exercisesToSubmit - A exercise array containing all exercises that the
+   * user has marked as done
+   */
+  async exercisesSheetSubmitSelectedExercises(
+    token: string,
+    exercisesToSubmit: ISheetExerciseInfo[]
+  ): Promise<void> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      body: exercisesToSubmit,
+      method: HttpMethodEnum.POST,
+    };
+    const response = this.#api.request(`/dailyScores/user/add/`, requestParams);
+
+    await response.promise;
   }
 }

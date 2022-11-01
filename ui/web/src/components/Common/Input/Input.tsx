@@ -1,5 +1,5 @@
 /** React imports */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 
 /** Helpers */
@@ -18,6 +18,7 @@ interface InputComponentProps
   controlId: string;
   inputLabel: string;
   modifier?: 'default' | 'clear';
+  unitOfMeasurementTag?: string;
   onHover?: React.MouseEventHandler<HTMLInputElement>;
 }
 
@@ -27,6 +28,7 @@ function InputComponent(props: InputComponentProps) {
     controlId,
     inputLabel,
     modifier = 'default',
+    unitOfMeasurementTag,
     onAnimationStart,
     onBlur,
     onHover,
@@ -34,7 +36,9 @@ function InputComponent(props: InputComponentProps) {
     type,
     ...elementProps
   } = props;
-  const [isInputActive, setIsInputActive] = useState(false);
+  const [isInputActive, setIsInputActive] = useState(
+    !!elementProps.defaultValue
+  );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputBeingHovered, setIsInputBeingHovered] = useState(false);
   const [isInputAutoFilled, setIsInputAutoFilled] = useState(false);
@@ -42,6 +46,10 @@ function InputComponent(props: InputComponentProps) {
   const [shouldShowPassword, setShouldShowPassword] = useState(
     type !== 'password'
   );
+
+  useEffect(() => {
+    setIsInputActive(!!elementProps.defaultValue);
+  }, [elementProps.defaultValue]);
 
   const onAnimationStartInput = (
     event: React.AnimationEvent<HTMLInputElement>
@@ -111,6 +119,11 @@ function InputComponent(props: InputComponentProps) {
         >
           {shouldShowPassword ? <EyeIcon /> : <EyeSlashIcon />}
         </div>
+      )}
+      {unitOfMeasurementTag && (
+        <span className="input-component__unity-measurement-tag">
+          {unitOfMeasurementTag}
+        </span>
       )}
     </div>
   );

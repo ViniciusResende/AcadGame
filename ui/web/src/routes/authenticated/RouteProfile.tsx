@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 /** React components */
 import Profile from '../../components/Authenticated/Profile';
 
+/** React Hooks */
+import useSecurity from '../middlewares/useSecurity';
+
 /** Library */
 import Lib, { UserProfilePictureEnum } from 'acad-game-lib';
 
@@ -28,6 +31,8 @@ const DEFAULT_USER_WEEKLY_HISTOGRAM_PAYLOAD = [
 ];
 
 function RouteProfile() {
+  useSecurity();
+
   const [userInfo, setUserInfo] = useState<IUserInfoData>(
     DEFAULT_USER_INFO_PAYLOAD
   );

@@ -47,7 +47,7 @@ export class UserEngine {
   ): Promise<IApiUserGetDataResponse | null> {
     let userGetDataPayload: IApiUserGetDataResponse | null = null;
     try {
-      const storedAuthToken = Security.getTokenStored() || 'banana';
+      const storedAuthToken = Security.getTokenStored();
       if (!storedAuthToken)
         throw new Error(`No token stored, unable to authenticate.`);
 
