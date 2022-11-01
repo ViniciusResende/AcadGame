@@ -234,7 +234,7 @@ export class ApiAcad extends ApiClient {
    * user sheet to match the new exercise payload
    *
    * @param token - The token to be used to authenticate user
-   * @param sheetId - The id of the exercise sheet to fetch the available exercises
+   * @param sheetId - The id of the exercise sheet to update the exercise
    * @param updatedExercise - The exercise being updated object with updated values
    * @returns - The payload of the exercise that has been updated with new values
    */
