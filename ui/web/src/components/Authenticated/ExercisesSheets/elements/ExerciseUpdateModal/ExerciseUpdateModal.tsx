@@ -1,6 +1,5 @@
 /** React imports */
-import React, { useState, useMemo } from 'react';
-import cx from 'classnames';
+import React from 'react';
 
 /** React Components */
 import Button from '../../../../Common/Button';
