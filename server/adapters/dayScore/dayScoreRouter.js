@@ -35,11 +35,22 @@ Router.post('/user/add', async (req, res) => {
 
         await DayScore.createDailyScore(USER_ID, SENT_EXERCISES_INFO);
 
-        res.status(201).json('Pontuações diárias cadastradas com sucesso!');
+        res.status(201).send('Pontuações diárias cadastradas com sucesso!');
     }
     catch(err) {
         res.status(500).send(err.message);
     }
 });
+
+Router.get('/weekPodium', async (req, res) => {
+    try {
+        const WEEK_PODIUM = await DayScore.getWeekPodium();
+
+        res.status(200).json(WEEK_PODIUM);
+    }
+    catch(err) {
+        res.status(500).send(err.message);
+    }
+})
 
 module.exports = Router;
