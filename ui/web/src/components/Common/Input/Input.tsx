@@ -1,5 +1,5 @@
 /** React imports */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 
 /** Helpers */
@@ -36,7 +36,9 @@ function InputComponent(props: InputComponentProps) {
     type,
     ...elementProps
   } = props;
-  const [isInputActive, setIsInputActive] = useState(false);
+  const [isInputActive, setIsInputActive] = useState(
+    !!elementProps.defaultValue
+  );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputBeingHovered, setIsInputBeingHovered] = useState(false);
   const [isInputAutoFilled, setIsInputAutoFilled] = useState(false);
@@ -44,6 +46,10 @@ function InputComponent(props: InputComponentProps) {
   const [shouldShowPassword, setShouldShowPassword] = useState(
     type !== 'password'
   );
+
+  useEffect(() => {
+    setIsInputActive(!!elementProps.defaultValue);
+  }, [elementProps.defaultValue]);
 
   const onAnimationStartInput = (
     event: React.AnimationEvent<HTMLInputElement>
