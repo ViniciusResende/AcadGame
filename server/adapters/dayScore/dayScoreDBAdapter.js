@@ -5,6 +5,32 @@ const { Op } = require('sequelize');
 class DayScoreDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
+    async findAllDailyScores() {
+        try {
+            const QUERIED_DAILY_SCORES = await DAY_SCORE.findAll({
+                attributes: [
+                    'userId',
+                    'date',
+                    [sequelize.fn('WEEK', sequelize.col('date')), 'week'],
+                    [sequelize.fn('YEAR', sequelize.col('date')), 'year'],
+                    'score',
+                ], 
+                order: [
+                    ['score', 'DESC']
+                ]
+            });
+
+            if(!QUERIED_DAILY_SCORES) {
+                throw new Error (`Não encontramos pontuações diárias.`);
+            }
+
+            return QUERIED_DAILY_SCORES;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
     async findUserDayScores(userId) {
         try {
             const QUERIED_DAY_SCORES = await DAY_SCORE.findAll({
@@ -17,6 +43,9 @@ class DayScoreDatabaseAdapter {
                     [sequelize.fn('WEEK', sequelize.col('date')), 'week'],
                     [sequelize.fn('YEAR', sequelize.col('date')), 'year'],
                     'score',
+                ],
+                order: [
+                    ['date', 'DESC']
                 ]
             });
 
