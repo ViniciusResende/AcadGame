@@ -21,9 +21,33 @@ class DayScore {
             today.setSeconds(59);
             const ONE_WEEK_AGO = addDays(today, -7);
 
-            const LAST_7_DAY_SCORES = QueryDayScore.getDaysScoresInInterval(userId, ONE_WEEK_AGO, today);
+            const LAST_7_DAY_SCORES = await QueryDayScore.getDaysScoresInInterval(userId, ONE_WEEK_AGO, today);
 
             return LAST_7_DAY_SCORES;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
+
+    async createDailyScore(userId, sentExercisesInfo) {
+        try {
+            const TODAY = new Date();
+            let score = 0;
+
+            // TODO: improve the score increase business rule 
+            sentExercisesInfo.forEach(sentExerciseInfo => {
+                let numRepetitions = sentExerciseInfo.numRepetitions;
+                let numSets = sentExerciseInfo.numSets;
+                let time = sentExerciseInfo.time;
+
+                if(sentExerciseInfo.isLoad)
+                    score += numRepetitions * numSets;
+                else
+                    score += 30;
+            });
+
+            await QueryDayScore.postDailyScore(userId, TODAY, score);
         }
         catch(err) {
             throw err;
