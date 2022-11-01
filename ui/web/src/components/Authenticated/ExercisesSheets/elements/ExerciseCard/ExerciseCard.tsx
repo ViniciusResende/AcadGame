@@ -1,9 +1,15 @@
 /** React imports */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 
 /** React Component */
 import Checkbox from '../../../../Common/Checkbox';
+
+/** Library */
+import Lib from 'acad-game-lib';
+
+/** Enums */
+import { ExercisesSheetEventTypesEnum } from '../../../../../data/enums/ExercisesSheetEnums';
 
 /** Interfaces */
 import { ISheetExerciseInfoData } from '../../../../../data/interfaces/ExercisesSheetInterfaces';
@@ -20,17 +26,31 @@ type ExerciseCardComponentProps = {
     event: React.MouseEvent<HTMLElement>,
     exerciseToBeEdited: ISheetExerciseInfoData
   ) => void;
+  onCardCheck: () => void;
+  onCardUncheck: () => void;
 };
 
 function ExerciseCardComponent({
   userExercise,
   openExerciseEdition,
+  onCardCheck,
+  onCardUncheck,
 }: ExerciseCardComponentProps) {
   const [isCardActive, setIsCardActive] = useState(false);
 
-  function toggleCardActiveness(_event: React.MouseEvent<HTMLElement>) {
-    // event.stopPropagation(); //TODO Prevent multiple calls on checkbox click
-    setIsCardActive((prev) => !prev);
+  function activateCard() {
+    setIsCardActive(true);
+    onCardCheck();
+  }
+
+  function deactivateCard() {
+    setIsCardActive(false);
+    onCardUncheck();
+  }
+
+  function toggleCardActiveness(event: React.MouseEvent<HTMLElement>) {
+    event.preventDefault();
+    isCardActive ? deactivateCard() : activateCard();
   }
 
   function renderLoadExerciseContent() {
@@ -83,6 +103,21 @@ function ExerciseCardComponent({
     );
   }
 
+  useEffect(() => {
+    const cleanCardState = () => setIsCardActive(false);
+
+    Lib.utils.subscribe(
+      ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED,
+      cleanCardState
+    );
+
+    return () =>
+      Lib.utils.unsubscribe(
+        ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED,
+        cleanCardState
+      );
+  }, []);
+
   return (
     <div
       className={cx('exercise-card__container', { active: isCardActive })}
@@ -101,12 +136,7 @@ function ExerciseCardComponent({
             : renderTimeExerciseContent()}
         </aside>
         <aside className="exercise-card__checkbox-container">
-          <Checkbox
-            color="system"
-            checked={isCardActive}
-            onClick={toggleCardActiveness}
-            readOnly
-          />
+          <Checkbox color="system" checked={isCardActive} readOnly />
         </aside>
       </main>
     </div>
