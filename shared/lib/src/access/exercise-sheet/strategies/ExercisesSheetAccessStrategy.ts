@@ -62,6 +62,13 @@ export class ExercisesSheetAccessStrategy {
     this.#apiAcad = this.#getApiAcadInstance();
   }
 
+  /**
+   * Retrieves a payload containing all the user exercises sheets with its
+   * respective exercises
+   *
+   * @param token - The token to be used to authenticate user
+   * @returns - Array containing all user exercises sheets
+   */
   async getUserSheets(
     token: string
   ): Promise<IApiAcadExercisesSheetGetUserSheetResponse[]> {
@@ -72,6 +79,15 @@ export class ExercisesSheetAccessStrategy {
     return getUserSheetsResponse;
   }
 
+  /**
+   * Responsible for updating a exercise from a certain user sheet to match the
+   * provided exercise payload
+   *
+   * @param token - The token to be used to authenticate user
+   * @param updateExerciseBody - A body containing the sheetId of the exercise
+   * being updated and a object containing the new values fo the exercise
+   * @returns - The payload of the exercise that has been updated with new values
+   */
   async updateUserSheetExercise(
     token: string,
     updateExerciseBody: IApiAcadExercisesSheetUpdateExerciseBody
@@ -129,6 +145,14 @@ export class ExercisesSheetAccessStrategy {
     await this.api.exercisesSheetAddExercises(token, sheetId, exercisesIds);
   }
 
+  /**
+   * Responsible for submitting a list of exercises that the user has marked as
+   * concluded at that submit.
+   *
+   * @param token - The token to be used to authenticate user
+   * @param exercisesToSubmit - A exercise array containing all exercises that the
+   * user has marked as done
+   */
   async submitSelectedExercises(
     token: string,
     exercisesToSubmit: ISheetExerciseInfo[]
