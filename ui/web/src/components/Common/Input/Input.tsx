@@ -1,5 +1,5 @@
 /** React imports */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import cx from 'classnames';
 
 /** Helpers */
@@ -17,6 +17,8 @@ interface InputComponentProps
   className?: string;
   controlId: string;
   inputLabel: string;
+  modifier?: 'default' | 'clear';
+  unitOfMeasurementTag?: string;
   validatorFunctions?: {(value: string) : string | undefined} [];
   onHover?: React.MouseEventHandler<HTMLInputElement>;
 }
@@ -26,21 +28,29 @@ function InputComponent(props: InputComponentProps) {
     className,
     controlId,
     inputLabel,
-    onInput,
+    modifier = 'default',
+    unitOfMeasurementTag,
     onAnimationStart,
     onBlur,
     onHover,
+    onInput,
     onFocus,
     type,
     validatorFunctions,
     ...elementProps
   } = props;
-  const [isInputActive, setIsInputActive] = useState(false);
+  const [isInputActive, setIsInputActive] = useState(
+    !!elementProps.defaultValue
+  );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputBeingHovered, setIsInputBeingHovered] = useState(false);
   const [isInputAutoFilled, setIsInputAutoFilled] = useState(false);
   const [shouldShowPassword, setShouldShowPassword] = useState(type !== 'password');
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    setIsInputActive(!!elementProps.defaultValue);
+  }, [elementProps.defaultValue]);
 
   const onAnimationStartInput = (
     event: React.AnimationEvent<HTMLInputElement>
@@ -61,15 +71,23 @@ function InputComponent(props: InputComponentProps) {
     typeof onBlur === 'function' && onBlur(event);
   };
 
+
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) =>{
     const value = event && event.target.value;
     handleInputValidation(value);
   }
 
-  const onHoverInput = (
+  const onMouseEnterInput = (
     event: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
-    setIsInputBeingHovered((prev) => !prev);
+    setIsInputBeingHovered(true);
+    typeof onHover === 'function' && onHover(event);
+  };
+
+  const onMouseLeaveInput = (
+    event: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    setIsInputBeingHovered(false);
     typeof onHover === 'function' && onHover(event);
   };
 
@@ -106,7 +124,7 @@ function InputComponent(props: InputComponentProps) {
         {inputLabel}
       </label>
       <input
-        className={cx('input-component', className, {
+        className={cx('input-component', className, modifier, {
           hasError: errorMessage
         })}
         {...elementProps}
@@ -114,8 +132,8 @@ function InputComponent(props: InputComponentProps) {
         onBlur={onBlurInput}
         onChange={onChangeInput}
         onFocus={onFocusInput}
-        onMouseEnter={onHoverInput}
-        onMouseLeave={onHoverInput}
+        onMouseEnter={onMouseEnterInput}
+        onMouseLeave={onMouseLeaveInput}
         type={!shouldShowPassword ? type : 'text'}
       />
       {errorMessage && (<span className='errorSpan'>{errorMessage}</span>)}
@@ -126,6 +144,11 @@ function InputComponent(props: InputComponentProps) {
         >
           {shouldShowPassword ? <EyeIcon /> : <EyeSlashIcon />}
         </div>
+      )}
+      {unitOfMeasurementTag && (
+        <span className="input-component__unity-measurement-tag">
+          {unitOfMeasurementTag}
+        </span>
       )}
     </div>
   );

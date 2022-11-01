@@ -1,0 +1,65 @@
+@import '../../../../../styles/';
+
+.main-header {
+  &__container {
+    align-items: center;
+    background-color: $secondaryColor;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1.125em;
+    height: 5.625em;
+    width: 100%;
+  }
+
+  &__logo {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+
+    > div {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      > h3 {
+        color: $primaryColor;
+        font-size: 1.5em;
+        font-weight: 100;
+        line-height: 2em;
+        text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      }
+
+      > h4 {
+        color: $fontColor;
+        font-size: 0.875em;
+        font-weight: 300;
+        line-height: 1.25em;
+      }
+    }
+  }
+
+  &__nav-bar {
+    margin-right: 92px;
+
+    > a {
+      color: $white;
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 32px;
+      padding: 0 16px;
+      text-align: center;
+      transition: color 0.3s ease;
+
+      &:not(:last-child) {
+        border-right: 1px solid $white;
+      }
+
+      &:hover {
+        color: $primaryColor;
+      }
+    }
+  }
+}

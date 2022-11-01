@@ -79,6 +79,7 @@ export enum HttpRequestReferrerPolicyEnum {
 export enum HttpRequestHeaderEnum {
   ACCEPT = 'accept',
   AUTHORIZATION = 'authorization',
+  CONTENT_TYPE = 'content-type',
 }
 
 /**
@@ -88,4 +89,21 @@ export enum HttpContentTypeEnum {
   ALL = '*/*',
   JSON = 'application/json',
   TEXT = 'text/plain',
+}
+
+/**
+ * Enumerated values for common HTTP response codes.
+ */
+export enum HttpResponseCodesEnum {
+  OK = 200,
+  CREATED = 201,
+  ACCEPTED = 202,
+  NO_CONTENT = 204,
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  REQUEST_TIMEOUT = 408,
+  TOKEN_EXPIRED = 498,
+  INTERNAL_SERVER_ERROR = 500,
 }

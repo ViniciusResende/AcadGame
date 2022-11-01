@@ -45,7 +45,6 @@ export class AuthAccess {
    * in a given method
    * @returns The payload containing the Auth Response
    */
-
   async auth(
     authType: AuthTypeEnum,
     authBody: unknown

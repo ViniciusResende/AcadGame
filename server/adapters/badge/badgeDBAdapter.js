@@ -1,18 +1,23 @@
 const BADGE = require('../../infrastructure/models/badge');
 
+
+const { Op } = require('sequelize');
+
 class BadgeDatabaseAdapter {
+    unnecessaryAttributes = ['createdAt', 'updatedAt'];
+
     async findAllBadges() {
         try {
             const ALL_BADGES = await BADGE.findAll({
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
             return ALL_BADGES;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
@@ -20,7 +25,7 @@ class BadgeDatabaseAdapter {
         try {
             const QUERIED_BADGE = await BADGE.findByPk(id, {
                 attributes: {
-                    exclude: ['createdAt', 'updatedAt']
+                    exclude: this.unnecessaryAttributes
                 }
             });
 
@@ -29,8 +34,47 @@ class BadgeDatabaseAdapter {
             }
 
             return QUERIED_BADGE;
-        } catch (err) {
-            return err;
+        } 
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async findByType(type) {
+        try {
+            const QUERIED_BADGES = await BADGE.findAll({
+                where: {
+                    type: type
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            return QUERIED_BADGES;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async findByName(name) {
+        try {
+            const QUERIED_BADGES = await BADGE.findAll({
+                where: {
+                    name: {
+                        [Op.like]: `%${name}%`
+                    }
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            return QUERIED_BADGES;
+        }
+        catch (err) {
+            throw err;
         }
     }
 };

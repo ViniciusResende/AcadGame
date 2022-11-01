@@ -11,6 +11,13 @@
   transition: all 0.2s ease;
   width: 100%;
 
+  &.clear {
+    border: none;
+    border-bottom: 1px solid $fontColor;
+    border-radius: unset;
+    padding-bottom: 0.5em;
+  }
+
   &:not([value='']) {
     border-color: #878786;
   }
@@ -107,4 +114,11 @@
   position: absolute;
   font-size: 10px;
   margin-top: -14px; 
+}
+
+.input-component__unity-measurement-tag {
+  color: $fontColor;
+  position: absolute;
+  right: 24px;
+  top: 18px;
 }

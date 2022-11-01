@@ -62,6 +62,9 @@
   &__sign-up {
     color: $fontColor;
     margin-top: 0.5em;
+    > a {
+      text-decoration: underline;
+    }
   }
 
   &__input {

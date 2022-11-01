@@ -34,7 +34,9 @@ export abstract class ApiEndpoint<R> extends ApiClientEndpoint<R> {
    * @param requestParams - Parameters to be applied to the transformation
    * @returns - Transformed Request object
    */
-  requestBuilder(requestParams: IApiClientRequestParams = {}): Request {
+  requestBuilder(
+    requestParams: IApiClientRequestParams = {}
+  ): [string, RequestInit] {
     const { defaultParams = {} } = this.endpoint;
     const headers = new Headers(
       Object.assign(
@@ -44,22 +46,22 @@ export abstract class ApiEndpoint<R> extends ApiClientEndpoint<R> {
       )
     );
 
-    const request: Request = new Request(this.apiClient.baseUrl, {
+    const requestInit: RequestInit = {
       body: JSON.stringify(requestParams.body) || null,
       cache: HttpRequestCacheEnum.DEFAULT,
       credentials: HttpCredentialsEnum.SAME_ORIGIN,
       headers,
       integrity: '',
       keepalive: false,
-      method: defaultParams.method || HttpMethodEnum.GET,
+      method: requestParams.method || HttpMethodEnum.GET,
       mode: HttpRequestModeEnum.CORS,
       redirect: HttpRequestRedirectEnum.FOLLOW,
       referrer: '',
       referrerPolicy:
         HttpRequestReferrerPolicyEnum.STRICT_ORIGIN_WHEN_CROSS_ORIGIN,
       signal: undefined,
-    });
+    };
 
-    return request;
+    return [this.apiClient.baseUrl, requestInit];
   }
 }
