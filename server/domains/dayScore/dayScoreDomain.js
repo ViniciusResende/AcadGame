@@ -53,6 +53,40 @@ class DayScore {
             throw err;
         }
     }
+
+    async getWeekPodium() {
+        try {
+            let currentDate = new Date();
+            let startDate = new Date(currentDate.getFullYear(), 0, 1);
+
+            var days = Math.floor((currentDate - startDate) /
+            (24 * 60 * 60 * 1000));
+
+            var currentWeekNumber = Math.ceil(days / 7);
+            var currentYear = currentDate.getFullYear();
+            
+            let weekPodium = await QueryDayScore.getWeekPodium(currentYear, currentWeekNumber);
+
+            function compare(a, b) {
+                if (a.score < b.score)
+                  return 1;
+
+                if (a.score > b.score)
+                  return -1;
+                
+                return 0;
+            }
+
+            weekPodium.sort(compare);
+
+            console.log(weekPodium);
+
+            return weekPodium;
+        }
+        catch(err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new DayScore;
