@@ -7,6 +7,9 @@ import ExercisesSheets from '../../components/Authenticated/ExercisesSheets';
 /** Library */
 import Lib from 'acad-game-lib';
 
+/** Enums */
+import { ExercisesSheetEventTypesEnum } from '../../data/enums/ExercisesSheetEnums';
+
 /** Interfaces */
 import {
   IExercisesSheetInfoData,
@@ -39,6 +42,9 @@ function RouteExercisesSheet() {
   const [userExercisesSheets, setUserExercisesSheets] = useState<
     IExercisesSheetInfoData[]
   >([]);
+  const [exercisesToSubmitHashMap, setExercisesToSubmitHashMap] = useState<
+    Record<string, ISheetExerciseInfoData[]>
+  >({});
 
   async function updateExerciseFromSheet(
     sheetId: string,
@@ -63,6 +69,40 @@ function RouteExercisesSheet() {
     }
   }
 
+  function addExerciseToSubmit(exercise: ISheetExerciseInfoData) {
+    const exerciseHashKey = String(exercise.exerciseId);
+
+    const newExercisesToSubmit = Object.assign({}, exercisesToSubmitHashMap);
+    if (!newExercisesToSubmit[exerciseHashKey])
+      newExercisesToSubmit[exerciseHashKey] = new Array();
+
+    newExercisesToSubmit[exerciseHashKey].push(exercise);
+
+    setExercisesToSubmitHashMap(newExercisesToSubmit);
+  }
+
+  function removeExerciseToSubmit(exerciseId: number) {
+    const exerciseHashKey = String(exerciseId);
+
+    const newExercisesToSubmit = Object.assign({}, exercisesToSubmitHashMap);
+
+    newExercisesToSubmit[exerciseHashKey].pop();
+
+    setExercisesToSubmitHashMap(newExercisesToSubmit);
+  }
+
+  async function submitSelectedExercises() {
+    const selectedExercisesToSubmitSheets = Object.values(
+      exercisesToSubmitHashMap
+    ).flat(1);
+
+    await Lib.exercisesSheet.submitSelectedExercisesFromUserSheets(
+      selectedExercisesToSubmitSheets
+    );
+    setExercisesToSubmitHashMap({});
+    Lib.utils.publish(ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED);
+  }
+
   useEffect(() => {
     async function getAvailableExercises() {
       const getUserExercisesSheetsResponse =
@@ -80,6 +120,9 @@ function RouteExercisesSheet() {
     <ExercisesSheets
       userExercisesSheets={userExercisesSheets}
       saveExerciseEdition={updateExerciseFromSheet}
+      addExerciseToSubmit={addExerciseToSubmit}
+      removeExerciseToSubmit={removeExerciseToSubmit}
+      submitSelectedExercises={submitSelectedExercises}
     />
   );
 }
