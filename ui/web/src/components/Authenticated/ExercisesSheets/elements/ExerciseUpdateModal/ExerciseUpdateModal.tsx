@@ -64,12 +64,14 @@ function ExerciseUpdateModalComponent({
           controlId="numSets"
           inputLabel="Séries"
           name="numSets"
+          defaultValue={exerciseBeingEdited?.numSets}
         />
         <Input
           className="exercise-update__edition-input"
           controlId="numRepetitions"
           inputLabel="Repetições"
           name="numRepetitions"
+          defaultValue={exerciseBeingEdited?.numRepetitions || undefined}
         />
         <Input
           className="exercise-update__edition-input"
@@ -77,6 +79,7 @@ function ExerciseUpdateModalComponent({
           inputLabel="Peso"
           name="load"
           unitOfMeasurementTag="kg"
+          defaultValue={exerciseBeingEdited?.load || undefined}
         />
       </>
     );
@@ -90,6 +93,7 @@ function ExerciseUpdateModalComponent({
           controlId="numSets"
           inputLabel="Séries"
           name="numSets"
+          defaultValue={exerciseBeingEdited?.numSets}
         />
         <Input
           className="exercise-update__edition-input"
@@ -97,6 +101,7 @@ function ExerciseUpdateModalComponent({
           inputLabel="Tempo"
           name="time"
           unitOfMeasurementTag="min"
+          defaultValue={exerciseBeingEdited?.time || undefined}
         />
       </>
     );
