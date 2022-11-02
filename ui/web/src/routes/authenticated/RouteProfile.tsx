@@ -10,6 +10,16 @@ import useSecurity from '../middlewares/useSecurity';
 /** Library */
 import Lib, { UserProfilePictureEnum } from 'acad-game-lib';
 
+/** Helpers */
+import { dispatchFeedbackToast } from '../../helpers';
+
+/** Enums */
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../data/enums/ToastEnums';
+
 /** Interfaces */
 import {
   IUserInfoData,
@@ -63,7 +73,20 @@ function RouteProfile() {
   async function updateUserInfo(userUpdateInfoBody: IUserUpdateInfoBody) {
     const response = await Lib.user.updateInfo(userUpdateInfoBody);
 
-    if (response) setUserInfo(response.data);
+    if (response) {
+      setUserInfo(response.data);
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.SUCCESS,
+        message: ToastConfigMessagesEnum.PROFILE_SUCCESS_ON_UPDATE_INFO,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    } else {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.PROFILE_FAIL_ON_UPDATE_INFO,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    }
   }
 
   return (
