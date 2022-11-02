@@ -47,7 +47,7 @@ function InputComponent(props: InputComponentProps) {
     ...elementProps
   } = props;
   const [isInputActive, setIsInputActive] = useState(
-    !!elementProps.defaultValue
+    doesExists(elementProps.defaultValue)
   );
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [isInputBeingHovered, setIsInputBeingHovered] = useState(false);
@@ -60,7 +60,7 @@ function InputComponent(props: InputComponentProps) {
   );
 
   useEffect(() => {
-    setIsInputActive(!!elementProps.defaultValue);
+    setIsInputActive(doesExists(elementProps.defaultValue));
   }, [elementProps.defaultValue]);
 
   useEffect(() => {
