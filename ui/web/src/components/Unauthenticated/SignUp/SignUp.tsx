@@ -62,7 +62,7 @@ function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
     password: string,
     passwordCheck: string
   ): boolean {
-    if (!nickname || !email || !password || !password) {
+    if (!nickname || !email || !password || !passwordCheck) {
       dispatchFeedbackToast({
         type: ToastConfigTypesEnum.FAIL,
         message: ToastConfigMessagesEnum.SIGN_UP_FORM_NOT_FULFILLED,
