@@ -95,6 +95,14 @@
   &.labelHighLight {
     color: $primaryColor;
   }
+
+  &.hasError {
+    color: $systemRed;
+
+    &.isHovered {
+      color: $systemLightRed;
+    }
+  }
 }
 
 .input-component__visibility-toggle {
@@ -110,10 +118,10 @@
 
 .errorSpan {
   color: $systemRed;
+  font-size: 10px;
   padding-left: 8px;
   position: absolute;
-  font-size: 10px;
-  margin-top: -14px; 
+  bottom: -12px;
 }
 
 .input-component__unity-measurement-tag {
