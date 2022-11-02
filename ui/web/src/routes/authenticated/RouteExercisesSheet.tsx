@@ -7,8 +7,16 @@ import ExercisesSheets from '../../components/Authenticated/ExercisesSheets';
 /** Library */
 import Lib from 'acad-game-lib';
 
+/** Helpers */
+import { dispatchFeedbackToast } from '../../helpers';
+
 /** Enums */
 import { ExercisesSheetEventTypesEnum } from '../../data/enums/ExercisesSheetEnums';
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../data/enums/ToastEnums';
 
 /** Interfaces */
 import {
@@ -66,6 +74,17 @@ function RouteExercisesSheet() {
           updateExerciseFromSheetResponse
         )
       );
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.SUCCESS,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_SUCCESS_ON_UPDATE,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    } else {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_FAIL_ON_UPDATE,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
     }
   }
 
