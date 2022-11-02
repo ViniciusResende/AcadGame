@@ -111,15 +111,30 @@ function RouteExercisesSheet() {
   }
 
   async function submitSelectedExercises() {
-    const selectedExercisesToSubmitSheets = Object.values(
-      exercisesToSubmitHashMap
-    ).flat(1);
+    try {
+      const selectedExercisesToSubmitSheets = Object.values(
+        exercisesToSubmitHashMap
+      ).flat(1);
 
-    await Lib.exercisesSheet.submitSelectedExercisesFromUserSheets(
-      selectedExercisesToSubmitSheets
-    );
-    setExercisesToSubmitHashMap({});
-    Lib.utils.publish(ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED);
+      await Lib.exercisesSheet.submitSelectedExercisesFromUserSheets(
+        selectedExercisesToSubmitSheets
+      );
+      setExercisesToSubmitHashMap({});
+      Lib.utils.publish(
+        ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED
+      );
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.SUCCESS,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_SUCCESS_ON_SUBMIT,
+        timeToClose: ToastConfigDurationEnum.LONG,
+      });
+    } catch (error) {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_FAIL_ON_SUBMIT,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    }
   }
 
   useEffect(() => {
