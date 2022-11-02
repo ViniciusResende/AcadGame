@@ -23,6 +23,7 @@ export enum ToastConfigDurationEnum {
  * Enumerated values for Toast messages configuration.
  */
 export enum ToastConfigMessagesEnum {
+  EXERCISES_ADD_SUCCESS_MESSAGE = 'Os exercícios selecionados foram adicionados à sua ficha de exercícios.',
   GENERIC_FAIL_MESSAGE = 'Alguma coisa aconteceu, por favor tente novamente mais tarde.',
   LOGIN_FORM_NOT_FULFILLED = 'Todos os campos do formulário de login devem ser preenchidos.',
   LOGIN_GENERIC_FAIL = 'Falha na autenticação, verifique suas credenciais e tente novamente.',
