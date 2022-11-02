@@ -10,14 +10,12 @@ import UnauthenticatedPage from '../Page';
 
 /** Helpers */
 import {
+  dispatchFeedbackToast,
   emailValidation,
   passwordValidation,
   passwordMatchValidation,
   requiredValidation,
 } from '../../../helpers';
-
-/** Helpers */
-import { dispatchFeedbackToast } from '../../../helpers';
 
 /** Enums */
 import {
