@@ -24,6 +24,8 @@ export enum ToastConfigDurationEnum {
  */
 export enum ToastConfigMessagesEnum {
   GENERIC_FAIL_MESSAGE = 'Alguma coisa aconteceu, por favor tente novamente mais tarde.',
+  LOGIN_FORM_NOT_FULFILLED = 'Todos os campos do formulário de login devem ser preenchidos.',
+  LOGIN_GENERIC_FAIL = 'Falha na autenticação, verifique suas credenciais e tente novamente.',
   PASSWORD_DO_NOT_MATCH_FAIL_MESSAGE = 'As senhas não conferem, por favor verifique os valores informados.',
   SIGN_UP_FORM_NOT_FULFILLED = 'Todos os campos do formulário de cadastro devem ser preenchidos.',
   SIGN_UP_GENERIC_FAIL = 'Infelizmente não conseguimos concluir seu cadastro, tente novamente em alguns instantes',

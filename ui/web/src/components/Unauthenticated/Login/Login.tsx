@@ -1,5 +1,5 @@
 /** React imports */
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 /** React Component */
@@ -7,8 +7,19 @@ import Button from '../../Common/Button';
 import Input from '../../Common/Input';
 import UnauthenticatedPage from '../Page';
 
-/** Utils */
-import {emailValidation, passwordValidation} from "../utils"
+/** Helpers */
+import {
+  dispatchFeedbackToast,
+  emailValidation,
+  requiredValidation,
+} from '../../../helpers';
+
+/** Enums */
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../../data/enums/ToastEnums';
 
 /** Styles */
 import './Login.scss';
@@ -22,6 +33,8 @@ type LoginComponentProps = {
   loginAuth: (username: string, password: string) => Promise<void>;
 };
 function LoginComponent({ loginAuth }: LoginComponentProps) {
+  const [thereIsInputErrors, setThereIsInputErrors] = useState(false);
+
   function LoginIllustration() {
     return (
       <div className="login-page__illustration-container">
@@ -35,12 +48,30 @@ function LoginComponent({ loginAuth }: LoginComponentProps) {
     );
   }
 
+  function handleFormValidation(email: string, password: string): boolean {
+    if (!email || !password) {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.LOGIN_FORM_NOT_FULFILLED,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+
+      return true;
+    }
+
+    return false;
+  }
+
   function onSubmitForm(event: React.FormEvent) {
     event.preventDefault();
     //@ts-ignore
-    const { username, password } = event.target;
+    let { username, password } = event.target;
+    username = username.value;
+    password = password.value;
 
-    loginAuth(username.value, password.value);
+    const thereIsFormErrors = handleFormValidation(username, password);
+
+    if (!thereIsFormErrors) loginAuth(username.value, password.value);
   }
 
   function LoginContent() {
@@ -54,7 +85,9 @@ function LoginComponent({ loginAuth }: LoginComponentProps) {
             inputLabel="E-mail"
             type="email"
             name="username"
-            validatorFunctions={[emailValidation]}
+            validatorFunctions={[requiredValidation, emailValidation]}
+            onValidationError={() => setThereIsInputErrors(true)}
+            onValidationSuccess={() => setThereIsInputErrors(false)}
           />
           <Input
             className="login-page__input"
@@ -62,9 +95,16 @@ function LoginComponent({ loginAuth }: LoginComponentProps) {
             inputLabel="Senha"
             type="password"
             name="password"
-            validatorFunctions={[passwordValidation]}
+            validatorFunctions={[requiredValidation]}
+            onValidationError={() => setThereIsInputErrors(true)}
+            onValidationSuccess={() => setThereIsInputErrors(false)}
           />
-          <Button modifier="default" icon={<LogInIcon />} type="submit">
+          <Button
+            modifier="default"
+            icon={<LogInIcon />}
+            type="submit"
+            disabled={thereIsInputErrors}
+          >
             Entrar
           </Button>
         </form>

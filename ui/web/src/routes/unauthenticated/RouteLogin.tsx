@@ -8,6 +8,16 @@ import Login from '../../components/Unauthenticated/Login';
 /** Library */
 import Lib from 'acad-game-lib';
 
+/** Helpers */
+import { dispatchFeedbackToast } from '../../helpers';
+
+/** Enums */
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../data/enums/ToastEnums';
+
 function RouteLogin() {
   const navigator = useNavigate();
 
@@ -17,7 +27,11 @@ function RouteLogin() {
     if (loginAuthResponse?.token) {
       navigator('/profile');
     } else {
-      // TODO
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.LOGIN_GENERIC_FAIL,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
     }
   }
 
