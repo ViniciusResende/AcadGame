@@ -11,6 +11,16 @@ import useSecurity from '../middlewares/useSecurity';
 /** Library */
 import Lib, { ExercisesSheetExerciseToAddTypeEnum } from 'acad-game-lib';
 
+/** Helpers */
+import { dispatchFeedbackToast } from '../../helpers';
+
+/** Enums */
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../data/enums/ToastEnums';
+
 /** Interfaces */
 import { IExerciseToAddInfoData } from '../../data/interfaces/ExercisesSheetInterfaces';
 
@@ -52,8 +62,21 @@ function RouteExercisesAdd() {
 
   async function addExercisesToSheet(exercisesIds: number[]) {
     if (sheetId) {
-      await Lib.exercisesSheet.addExercisesToSheet(sheetId, exercisesIds);
-      navigate('/exercisesSheets');
+      try {
+        await Lib.exercisesSheet.addExercisesToSheet(sheetId, exercisesIds);
+        dispatchFeedbackToast({
+          type: ToastConfigTypesEnum.SUCCESS,
+          message: ToastConfigMessagesEnum.EXERCISES_ADD_SUCCESS_MESSAGE,
+          timeToClose: ToastConfigDurationEnum.MEDIUM,
+        });
+        navigate('/exercisesSheets');
+      } catch (error) {
+        dispatchFeedbackToast({
+          type: ToastConfigTypesEnum.FAIL,
+          message: ToastConfigMessagesEnum.EXERCISES_ADD_FAIL_MESSAGE,
+          timeToClose: ToastConfigDurationEnum.MEDIUM,
+        });
+      }
     }
   }
 

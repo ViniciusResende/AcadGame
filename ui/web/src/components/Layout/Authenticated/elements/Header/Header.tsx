@@ -11,7 +11,7 @@ import { Logo } from '../../../../../assets/svg/logo';
 function HeaderComponent() {
   const menuNavigationAnchors = [
     { path: '/', name: 'Home' },
-    { path: '/gymSheet', name: 'Ficha de Exercícios' },
+    { path: '/exercisesSheets', name: 'Ficha de Exercícios' },
     { path: '/friends', name: 'Meus Amigos' },
     { path: '/profile', name: 'Perfil' },
   ];

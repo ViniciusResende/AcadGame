@@ -128,6 +128,7 @@ export class ExercisesSheetEngine {
     } catch (error) {
       this.#handleExercisesSheetErrors(error);
       console.error(error);
+      throw error;
     }
   }
 
@@ -146,6 +147,7 @@ export class ExercisesSheetEngine {
     } catch (error) {
       this.#handleExercisesSheetErrors(error);
       console.error(error);
+      throw error;
     }
   }
 }

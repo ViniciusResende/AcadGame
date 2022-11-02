@@ -191,4 +191,5 @@ export const SliderComponent = ({
   );
 };
 
+/** Exports */
 export default SliderComponent;

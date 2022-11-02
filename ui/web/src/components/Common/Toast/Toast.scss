@@ -1,0 +1,114 @@
+@import '../../../styles';
+
+.toast-component {
+  &__container {
+    @keyframes slideForwards {
+      0% {
+        right: -35%;
+      }
+      100% {
+        right: 40px;
+      }
+    }
+
+    @keyframes slideUpwards {
+      0% {
+        bottom: -35%;
+      }
+      100% {
+        bottom: 10px;
+      }
+    }
+
+    &.defaultPositioning {
+      animation: slideForwards 0.5s 0.5s forwards;
+      max-width: 450px;
+      position: fixed;
+      right: -35%;
+      top: 200px;
+      width: 30%;
+      z-index: 16;
+
+      &.isAboutToClose {
+        animation: slideForwards, slideForwards 0.5s reverse forwards;
+        right: 40px;
+      }
+    }
+
+    &.isMobilePositioning {
+      animation: slideUpwards 0.5s 0.5s forwards;
+      bottom: -35%;
+      left: 50%;
+      position: fixed;
+      transform: translate(-50%, -50%);
+      width: 317px;
+
+      &.isAboutToClose {
+        animation: slideUpwards, slideUpwards 0.5s reverse forwards;
+        bottom: 10px;
+      }
+    }
+  }
+
+  &__default {
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+    display: flex;
+    max-height: 150px;
+    min-height: 72px;
+    padding: 0 12px;
+
+    &.fail {
+      background-color: $systemRed;
+    }
+
+    &.success {
+      background-color: $systemGreen;
+    }
+  }
+
+  &__toast-icon {
+    fill: $white;
+    max-width: 20px;
+    margin: 0 5px 0 10px;
+    width: 100%;
+
+    > path {
+      fill: $white;
+    }
+  }
+
+  &__message {
+    color: $white;
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    line-height: 16px;
+    margin-left: 15px;
+    padding: 16px 0;
+    width: 100%;
+  }
+
+  &__btn-close {
+    align-self: flex-start;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    flex-grow: 1;
+    margin-top: 0.5em;
+    max-width: 15px;
+    padding: 0;
+    width: 100%;
+
+    > svg,
+    path {
+      cursor: pointer;
+      fill: $white;
+      transition: fill 0.2s ease;
+
+      &:hover {
+        fill: $backgroundColor;
+      }
+    }
+  }
+}

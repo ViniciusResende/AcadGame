@@ -7,8 +7,16 @@ import ExercisesSheets from '../../components/Authenticated/ExercisesSheets';
 /** Library */
 import Lib from 'acad-game-lib';
 
+/** Helpers */
+import { dispatchFeedbackToast } from '../../helpers';
+
 /** Enums */
 import { ExercisesSheetEventTypesEnum } from '../../data/enums/ExercisesSheetEnums';
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../data/enums/ToastEnums';
 
 /** Interfaces */
 import {
@@ -66,6 +74,17 @@ function RouteExercisesSheet() {
           updateExerciseFromSheetResponse
         )
       );
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.SUCCESS,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_SUCCESS_ON_UPDATE,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    } else {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_FAIL_ON_UPDATE,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
     }
   }
 
@@ -92,15 +111,30 @@ function RouteExercisesSheet() {
   }
 
   async function submitSelectedExercises() {
-    const selectedExercisesToSubmitSheets = Object.values(
-      exercisesToSubmitHashMap
-    ).flat(1);
+    try {
+      const selectedExercisesToSubmitSheets = Object.values(
+        exercisesToSubmitHashMap
+      ).flat(1);
 
-    await Lib.exercisesSheet.submitSelectedExercisesFromUserSheets(
-      selectedExercisesToSubmitSheets
-    );
-    setExercisesToSubmitHashMap({});
-    Lib.utils.publish(ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED);
+      await Lib.exercisesSheet.submitSelectedExercisesFromUserSheets(
+        selectedExercisesToSubmitSheets
+      );
+      setExercisesToSubmitHashMap({});
+      Lib.utils.publish(
+        ExercisesSheetEventTypesEnum.EXERCISES_SHEETS_SUBMITTED
+      );
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.SUCCESS,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_SUCCESS_ON_SUBMIT,
+        timeToClose: ToastConfigDurationEnum.LONG,
+      });
+    } catch (error) {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.EXERCISES_SHEET_FAIL_ON_SUBMIT,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    }
   }
 
   useEffect(() => {

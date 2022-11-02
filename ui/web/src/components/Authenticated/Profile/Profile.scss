@@ -116,6 +116,10 @@
         transition: fill 0.3s ease;
       }
 
+      > svg {
+        width: 21px;
+      }
+
       &:hover {
         background: lighten($backgroundColor, 4);
 
