@@ -1,5 +1,5 @@
 /** React imports */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 /** React Components */
 import Button from '../../../../Common/Button';
@@ -24,6 +24,8 @@ function ExerciseUpdateModalComponent({
   saveEdition,
   handleOnClose,
 }: ExerciseUpdateModalComponentProps) {
+  const [shouldUnmountInputs, setShouldUnmountInputs] = useState(false);
+
   function onSubmitForm(event: React.FormEvent) {
     event.preventDefault();
 
@@ -54,7 +56,12 @@ function ExerciseUpdateModalComponent({
     }
 
     newExerciseAfterEdition && saveEdition(newExerciseAfterEdition);
+    setShouldUnmountInputs(true);
   }
+
+  useEffect(() => {
+    if (isOpen) setShouldUnmountInputs(false);
+  }, [isOpen]);
 
   function renderLoadExerciseInputs() {
     return (
@@ -111,23 +118,32 @@ function ExerciseUpdateModalComponent({
     <Modal
       title="Edição Exercício"
       isOpen={isOpen}
-      handleOnClose={handleOnClose}
+      handleOnClose={() => {
+        handleOnClose();
+        setShouldUnmountInputs(true);
+      }}
     >
       <form className="exercise-update__form" onSubmit={onSubmitForm}>
-        <h3 className="exercise-update__title">{exerciseBeingEdited?.name}</h3>
-        {exerciseBeingEdited?.isLoad
-          ? renderLoadExerciseInputs()
-          : renderTimeExerciseInputs()}
-        <Button
-          className="exercise-update__submit-btn"
-          modifier="default"
-          type="submit"
-          onClick={() => {
-            handleOnClose();
-          }}
-        >
-          Confirmar
-        </Button>
+        {!shouldUnmountInputs && (
+          <>
+            <h3 className="exercise-update__title">
+              {exerciseBeingEdited?.name}
+            </h3>
+            {exerciseBeingEdited?.isLoad
+              ? renderLoadExerciseInputs()
+              : renderTimeExerciseInputs()}
+            <Button
+              className="exercise-update__submit-btn"
+              modifier="default"
+              type="submit"
+              onClick={() => {
+                handleOnClose();
+              }}
+            >
+              Confirmar
+            </Button>
+          </>
+        )}
       </form>
     </Modal>
   );
