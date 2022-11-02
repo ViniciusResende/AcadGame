@@ -23,6 +23,7 @@ export enum ToastConfigDurationEnum {
  * Enumerated values for Toast messages configuration.
  */
 export enum ToastConfigMessagesEnum {
+  EXERCISES_ADD_FAIL_MESSAGE = 'Os exercícios selecionados não puderam ser adicionados, por favor tente novamente.',
   EXERCISES_ADD_SUCCESS_MESSAGE = 'Os exercícios selecionados foram adicionados à sua ficha de exercícios.',
   EXERCISES_SHEET_FAIL_ON_UPDATE = 'O exercício não pode ser atualizado, por favor tente novamente.',
   EXERCISES_SHEET_SUCCESS_ON_UPDATE = 'O exercício teve seus valores editados com sucesso.',

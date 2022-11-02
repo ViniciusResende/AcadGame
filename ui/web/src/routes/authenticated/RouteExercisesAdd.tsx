@@ -62,13 +62,21 @@ function RouteExercisesAdd() {
 
   async function addExercisesToSheet(exercisesIds: number[]) {
     if (sheetId) {
-      await Lib.exercisesSheet.addExercisesToSheet(sheetId, exercisesIds);
-      dispatchFeedbackToast({
-        type: ToastConfigTypesEnum.SUCCESS,
-        message: ToastConfigMessagesEnum.EXERCISES_ADD_SUCCESS_MESSAGE,
-        timeToClose: ToastConfigDurationEnum.MEDIUM,
-      });
-      navigate('/exercisesSheets');
+      try {
+        await Lib.exercisesSheet.addExercisesToSheet(sheetId, exercisesIds);
+        dispatchFeedbackToast({
+          type: ToastConfigTypesEnum.SUCCESS,
+          message: ToastConfigMessagesEnum.EXERCISES_ADD_SUCCESS_MESSAGE,
+          timeToClose: ToastConfigDurationEnum.MEDIUM,
+        });
+        navigate('/exercisesSheets');
+      } catch (error) {
+        dispatchFeedbackToast({
+          type: ToastConfigTypesEnum.FAIL,
+          message: ToastConfigMessagesEnum.EXERCISES_ADD_FAIL_MESSAGE,
+          timeToClose: ToastConfigDurationEnum.MEDIUM,
+        });
+      }
     }
   }
 
