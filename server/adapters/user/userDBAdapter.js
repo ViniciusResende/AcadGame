@@ -29,7 +29,9 @@ class UserDatabaseAdapter {
             }
 
             userInfo.score = 0;
-            await USER.create(userInfo);
+            const NEW_USER = await USER.create(userInfo);
+
+            return NEW_USER;
         } 
         catch (err) {
             throw err;
@@ -77,7 +79,7 @@ class UserDatabaseAdapter {
                     email: email
                 },
                 attributes: {
-                    exclude: this.unnecessaryAttributes
+                    exclude: ['createdAt', 'updatedAt']
                 }
             });
 

@@ -3,7 +3,8 @@ const QUERY_USER = require('../../gates/user/userExitGate');
 class User {
     async createUser(userInfo) {
         try {
-            await QUERY_USER.createNewUser(userInfo);
+            const NEW_USER = await QUERY_USER.createNewUser(userInfo);
+            return NEW_USER;
         } 
         catch (err) {
             throw err;
