@@ -3,6 +3,9 @@
  * @module Utilities
  */
 
+/** Types */
+import { GenericCallbackFunction } from '../data/types/CommonTypes';
+
 /** Enums */
 import { UtilitiesEvents } from './UtilitiesEnums';
 
@@ -11,6 +14,7 @@ import { IClass, ILibConfiguration } from '../data/interfaces/CommonInterfaces';
 
 /** Classes */
 import { PubSub } from './classes/pubsub/PubSub';
+import { Security } from './classes/security/Security';
 
 /**
  * Bus to provide access to all utility services.
@@ -74,6 +78,27 @@ class Utilities extends PubSub {
         (o: unknown, p: string) => (o as ObjectNode)?.[p] ?? defaultValue,
         object
       ) as T;
+  }
+
+  /**
+   * Method responsible for subscribing a callback function to all security class
+   * fail authentication events
+   *
+   * @param callback - The callback function to be executed in case of authentication
+   * fail event dispatch.
+   */
+  subscribeSecurityFailEvents(callback: GenericCallbackFunction) {
+    Security.subscribeSecurityFailEvents(callback);
+  }
+
+  /**
+   * Method responsible for unsubscribing a callback function to all security class
+   * fail authentication events
+   *
+   * @param callback - The subscribe callback function to be unsubscribed.
+   */
+  unsubscribeSecurityFailEvents(callback: GenericCallbackFunction) {
+    Security.unsubscribeSecurityFailEvents(callback);
   }
 }
 

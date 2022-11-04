@@ -16,3 +16,11 @@ export interface IClass<T> {
 export interface ILibConfiguration {
   baseApiUrl?: string;
 }
+
+/**
+ * General Error  Payload body.
+ */
+export interface ILibGeneralErrorPayload {
+  errorCode: number;
+  errorMessage: string;
+}

@@ -1,0 +1,59 @@
+@import '../../../styles/';
+
+.checkbox-container {
+  cursor: pointer;
+  display: block;
+  font-size: 22px;
+  margin-bottom: 12px;
+  padding-left: 24px;
+  position: relative;
+  user-select: none;
+
+  input {
+    cursor: pointer;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    width: 0;
+  }
+
+  &__checkmark {
+    background-color: $white;
+    border: 1px solid $fontColor;
+    border-radius: 4px;
+    position: absolute;
+    height: 16px;
+    left: 0;
+    transition: filter 0.3s ease;
+    top: -4px;
+    width: 16px;
+
+    &::after {
+      border: solid $white;
+      border-width: 0 3px 3px 0;
+      content: '';
+      display: none;
+      position: absolute;
+      height: 7px;
+      left: 5px;
+      transform: rotate(45deg);
+      top: 2px;
+      width: 2px;
+    }
+  }
+
+  &:hover input ~ &__checkmark {
+    filter: brightness(0.95);
+  }
+
+  input:checked ~ &__checkmark {
+    background-color: $primaryColor;
+    &.system {
+      background-color: $systemGreen;
+    }
+  }
+
+  input:checked ~ &__checkmark:after {
+    display: block;
+  }
+}

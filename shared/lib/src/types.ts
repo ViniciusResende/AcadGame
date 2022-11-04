@@ -8,6 +8,8 @@ export * from './data/types/CommonTypes';
 
 /** Enums */
 export * from './data/enums/AuthEnums';
+export * from './data/enums/ExercisesSheetEnums';
+export * from './data/enums/UserEnums';
 export * from './utils/UtilitiesEnums';
 
 /** Interfaces  */

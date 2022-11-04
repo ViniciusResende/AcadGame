@@ -1,37 +1,50 @@
-const queryBadges = require('../../gates/badge/badgeExitGate');
+const QUERY_BADGES = require('../../gates/badge/badgeExitGate');
 
-class QueryBadgeDomain {
+class BadgeDomain {
     
     async queryAllBadges() {
-        let queriedBadges = [];
-        
         try {
-            const badges = await queryBadges.getAllBadges();
+            const BADGES = await QUERY_BADGES.getAllBadges();
             
-            for (const badge of badges) {
-                queriedBadges.push(badge);
-            }
-            
-            return queriedBadges;
+            return BADGES;
         }
         catch (err) {
-            return err;
+            throw err;
         }
     }
     
     async queryOneBadge(id) {
-        let queriedBadges = [];
-
         try {
-            const BADGE = await queryBadges.getOneBadge(id);
-
-            queriedBadges.push(BADGE);
+            const BADGE = await QUERY_BADGES.getOneBadge(id);
             
-            return queriedBadges;
-        } catch (err) {
-            return err;
+            return BADGE;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async queryBadgesByType(type) {
+        try {
+            const BADGES = await QUERY_BADGES.getBadgesByType(type);
+
+            return BADGES;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async queryBadgesByName(name) {
+        try {
+            const BADGES = await QUERY_BADGES.getBadgesByName(name);
+
+            return BADGES;
+        }
+        catch (err) {
+            throw err;
         }
     }
 }
 
-module.exports = new QueryBadgeDomain;
+module.exports = new BadgeDomain;

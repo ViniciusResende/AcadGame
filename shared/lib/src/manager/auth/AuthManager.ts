@@ -38,4 +38,17 @@ export class AuthManager extends Utilities.pubSub {
 
     return authResponse;
   }
+
+  async signUp(
+    nickname: string,
+    email: string,
+    password: string
+  ): Promise<IApiAcadAuthResponse | null> {
+    const authResponse = await this.#authEngine.authenticateUser(
+      AuthTypeEnum.SIGNUP,
+      { nickname, email, password }
+    );
+
+    return authResponse;
+  }
 }

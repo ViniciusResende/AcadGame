@@ -1,0 +1,170 @@
+@import '../../../styles';
+
+.profile-page {
+  &__container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
+    justify-content: center;
+    padding: 2em;
+    width: 100%;
+  }
+
+  &__upper-cards {
+    align-items: center;
+    display: flex;
+    gap: 1em;
+    justify-content: space-between;
+    width: 100%;
+
+    .default-card-box__container {
+      width: 100%;
+      max-width: 45vw;
+      height: 23.75em;
+    }
+  }
+
+  &__user-info {
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 43.75em;
+    padding: 1em;
+  }
+
+  &__user-picture {
+    margin-right: 3.75em;
+    position: relative;
+
+    > img {
+      border: 1px solid $secondaryColor;
+      border-radius: 50%;
+      display: block;
+      height: 250px;
+      width: 250px;
+    }
+
+    > button {
+      background: $secondaryColor;
+      border: none;
+      border-radius: 50%;
+      bottom: 1em;
+      cursor: pointer;
+      padding: 1em;
+      position: absolute;
+      right: 1em;
+      transition: filter 0.3s ease;
+
+      svg {
+        margin: 2px 0 0 2px;
+      }
+
+      svg,
+      path {
+        fill: $primaryColor;
+      }
+
+      &:hover {
+        filter: brightness(1.2);
+      }
+
+      &:active {
+        filter: brightness(1.5);
+      }
+    }
+  }
+
+  &__user-name-points {
+    margin-top: 2em;
+    width: 17.5em;
+  }
+
+  &__user-name {
+    align-items: center;
+    border-bottom: 1px solid $fontColor;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 11px;
+    min-width: 17.5em;
+    padding-bottom: 0.25em;
+
+    &.inEditionMode {
+      border-bottom: none;
+      margin-top: 0;
+    }
+
+    > span {
+      color: $fontColor;
+      font-size: 1.1em;
+      line-height: 1.25em;
+      margin-left: 1em;
+    }
+
+    > button {
+      background: $white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 0.5em;
+      padding: 4px;
+      transition: background 0.3s ease;
+
+      svg,
+      path {
+        transition: fill 0.3s ease;
+      }
+
+      > svg {
+        width: 21px;
+      }
+
+      &:hover {
+        background: lighten($backgroundColor, 4);
+
+        path {
+          fill: $supportDark;
+        }
+      }
+
+      &:active {
+        background: $backgroundColor;
+      }
+    }
+  }
+
+  &__user-points {
+    align-items: flex-end;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 4.5em;
+
+    > span {
+      color: $secondaryColor;
+      font-size: 0.875em;
+      font-weight: bold;
+      line-height: 1em;
+      margin-right: 0.5em;
+    }
+
+    > strong {
+      color: $primaryColor;
+      font-size: 1.5em;
+      font-weight: bold;
+      line-height: 0.75em;
+      margin-right: 0.25em;
+    }
+  }
+
+  &__bottom-card {
+    width: 100%;
+  }
+
+  &__user-metrics {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+  }
+}
