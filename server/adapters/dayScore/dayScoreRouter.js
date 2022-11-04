@@ -1,12 +1,15 @@
 const Router = require('express').Router();
+const authMiddleware = require('../../middlewares/auth');
 
 const DayScore = require('../../domains/dayScore/dayScoreDomain');
 
+Router.use(authMiddleware);
+
 Router.get('/', async (req, res) => {
     try {
-        let userId = req.query.userId;
+        const USER_ID = req.userId;
 
-        const DAY_SCORES = await DayScore.getUserDayScores(userId);
+        const DAY_SCORES = await DayScore.getUserDayScores(USER_ID);
 
         res.status(200).json(DAY_SCORES);
     }
@@ -17,9 +20,9 @@ Router.get('/', async (req, res) => {
 
 Router.get('/user/last7days', async (req, res) => {
     try {
-        let userId = req.query.userId;
+        const USER_ID = req.userId;
 
-        const LAST_7_DAYS_SCORES = await DayScore.getLast7DaysScores(userId);
+        const LAST_7_DAYS_SCORES = await DayScore.getLast7DaysScores(USER_ID);
 
         res.status(200).json(LAST_7_DAYS_SCORES);
     }
@@ -30,7 +33,7 @@ Router.get('/user/last7days', async (req, res) => {
 
 Router.post('/user/add', async (req, res) => {
     try {
-        const USER_ID = req.query.userId;
+        const USER_ID = req.userId;
         const SENT_EXERCISES_INFO = req.body;
 
         await DayScore.createDailyScore(USER_ID, SENT_EXERCISES_INFO);

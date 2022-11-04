@@ -1,6 +1,9 @@
 const ROUTER = require('express').Router();
+const authMiddleware = require('../../middlewares/auth');
 
 const userDomain = require('../../domains/user/userDomain');
+
+ROUTER.use(authMiddleware);
 
 ROUTER.post('/signUp', async (req, res) => {
     try {
@@ -28,7 +31,7 @@ ROUTER.get('/', async (req, res) => {
 
 ROUTER.get('/id/:id', async (req, res) => {
     try {
-        const USER_ID = req.params.id;
+        const USER_ID = req.userId;
 
         const SINGLE_USER = await userDomain.getSingleUser(USER_ID);
 
