@@ -42,7 +42,11 @@ Router.post('/user/add', async (req, res) => {
 
         await DayScore.createDailyScore(USER_ID, SENT_EXERCISES_INFO);
 
-        res.status(201).send('Pontuações diárias cadastradas com sucesso!');
+        res.status(201).send({
+            data: {
+                message: 'Pontuações diárias cadastradas com sucesso!'
+            }
+        });
     }
     catch(err) {
         res.status(400).send(err.message);

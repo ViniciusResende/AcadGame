@@ -244,6 +244,7 @@ export class ApiAcad extends ApiClient {
   ): Promise<ISheetExerciseInfo> {
     const requestParams: IApiClientRequestParams = {
       headers: this.#getAuthHeader(token),
+      body: updatedExercise,
       method: HttpMethodEnum.PUT,
     };
     const response = this.#api.request(
