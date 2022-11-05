@@ -7,6 +7,12 @@
     &.withArrow {
       padding: 0 25px;
     }
+
+    @include forXSmall() {
+      &.withArrow {
+        padding: 0;
+      }
+    }
   }
 
   &__wrapper {
