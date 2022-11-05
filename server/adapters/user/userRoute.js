@@ -5,19 +5,6 @@ const userDomain = require('../../domains/user/userDomain');
 
 ROUTER.use(authMiddleware);
 
-ROUTER.post('/signUp', async (req, res) => {
-    try {
-        const USER_INFO = req.body;
-
-        await userDomain.createUser(USER_INFO);
-
-        res.status(200).send('Usuário cadastrado com sucesso!');
-    }
-    catch (err) {
-        res.status(500).send(err.message);
-    }
-});
-
 ROUTER.get('/', async (req, res) => {
     try {
         const USERS = await userDomain.getEveryUser();
