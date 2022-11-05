@@ -12,7 +12,7 @@ ROUTER.get('/', async (req, res) => {
         res.status(200).json(USERS);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -25,7 +25,7 @@ ROUTER.get('/id/:id', async (req, res) => {
         res.status(200).json(SINGLE_USER);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -38,7 +38,7 @@ ROUTER.get('/email', async (req, res) => {
         res.status(200).json(USER_BY_EMAIL);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -51,7 +51,7 @@ ROUTER.get('/nickname', async (req, res) => {
         res.status(200).json(USER_BY_NICKNAME);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -64,7 +64,7 @@ ROUTER.get('/top/:rank', async (req, res) => {
         res.status(200).json(TOP_RANK_USERS);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -79,7 +79,7 @@ ROUTER.put('/:id', async (req, res) => {
         res.status(200).send('Usuário atualizado com sucesso!');
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -93,7 +93,7 @@ ROUTER.delete('/:id', async (req, res) => {
         res.status(200).send('Usuário excluído com sucesso!');
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 

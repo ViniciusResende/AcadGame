@@ -11,10 +11,10 @@ Router.get('/', async (req, res) => {
     try {
         const EXERCISE_SHEETS = await QueryExerciseSheet.queryUserExerciseSheets(USER_ID);
 
-        res.status(200).json(EXERCISE_SHEETS);
+        res.status(200).json({ data: EXERCISE_SHEETS });
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -26,10 +26,10 @@ Router.get('/available/:sheetId', async (req, res) => {
     try {
         const EXERCISE_SHEETS = await QueryExerciseSheet.queryAvailableExercisesSheet(USER_ID, sheetId, type);
 
-        res.status(200).json(EXERCISE_SHEETS);
+        res.status(200).json({ data: EXERCISE_SHEETS });
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     } 
 });
 
@@ -43,7 +43,7 @@ Router.post('/add/:sheetId', async (req, res) => {
         res.status(201).send('Exercícios cadastrados em sua ficha com sucesso!');
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -64,7 +64,7 @@ Router.put('/:sheetId/update/:exerciseId', async (req, res) => {
         res.status(200).json(UPDATE_USER_EXERCISE);
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -84,7 +84,7 @@ Router.delete('/:sheetId/delete/:exerciseId', async (req, res) => {
         res.status(200).send('Exercício de usuário excluído com sucesso.');
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 

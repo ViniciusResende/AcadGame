@@ -60,13 +60,9 @@ export class ApiAcad extends ApiClient {
     const headersExtension = {
       [HttpRequestHeaderEnum.ACCEPT]: [
         HttpContentTypeEnum.JSON,
-        HttpContentTypeEnum.TEXT,
-        HttpContentTypeEnum.ALL,
       ].join(', '),
       [HttpRequestHeaderEnum.CONTENT_TYPE]: [
         HttpContentTypeEnum.JSON,
-        HttpContentTypeEnum.TEXT,
-        HttpContentTypeEnum.ALL,
       ].join(', '),
     };
     return new Headers(
@@ -91,12 +87,12 @@ export class ApiAcad extends ApiClient {
     const requestParams: IApiClientRequestParams = {
       headers: this.headers,
       body: {
-        username,
+        email: username,
         password,
       },
       method: HttpMethodEnum.POST,
     };
-    const response = this.#api.request('/auth', requestParams);
+    const response = this.#api.request('/auth/authenticate', requestParams);
     const responseData = await response.promise;
     const loginResponse = responseData.data as IApiAcadAuthResponse;
 
@@ -117,6 +113,7 @@ export class ApiAcad extends ApiClient {
     password: string
   ): Promise<IApiAcadAuthResponse> {
     const requestParams: IApiClientRequestParams = {
+      headers: this.headers,
       body: {
         nickname,
         email,
@@ -124,7 +121,7 @@ export class ApiAcad extends ApiClient {
       },
       method: HttpMethodEnum.POST,
     };
-    const response = this.#api.request('/signUp', requestParams);
+    const response = this.#api.request('/auth/register', requestParams);
     const responseData = await response.promise;
     const signUpResponse = responseData.data as IApiAcadAuthResponse;
 
@@ -191,10 +188,12 @@ export class ApiAcad extends ApiClient {
       headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
-    const response = this.#api.request('/user/weeklyHistogram', requestParams);
+    const response = this.#api.request('/dailyScores/user/last7days', requestParams);
     const responseData = await response.promise;
-    const userInfoResponse =
-      responseData.data as IApiUserGetDataWeeklyHistogramResponse;
+    const userInfoResponse = {
+      id: undefined,
+      data: responseData.data 
+    } as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
   }

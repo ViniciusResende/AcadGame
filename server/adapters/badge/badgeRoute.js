@@ -9,7 +9,7 @@ ROUTER.get('/', async (req, res) => {
         res.status(200).json(BADGES);
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -20,7 +20,7 @@ ROUTER.get('/id/:id', async (req, res) => {
         res.status(200).json(BADGE);
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -32,7 +32,7 @@ ROUTER.get('/type', async (req, res) => {
         res.status(200).send(BADGES);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -44,7 +44,7 @@ ROUTER.get('/name', async (req, res) => {
         res.status(200).send(BADGES);
     }
     catch (err) {
-        res.status(500).send(err.message);
+        res.status(400).send(err.message);
     }
 });
 

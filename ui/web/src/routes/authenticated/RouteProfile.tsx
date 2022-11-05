@@ -36,7 +36,7 @@ const DEFAULT_USER_INFO_PAYLOAD = {
 const DEFAULT_USER_WEEKLY_HISTOGRAM_PAYLOAD = [
   {
     date: '0000-00-00',
-    dailyPoints: 0,
+    score: 0,
   },
 ];
 
