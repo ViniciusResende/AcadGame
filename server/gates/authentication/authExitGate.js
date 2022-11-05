@@ -9,7 +9,7 @@ class AuthenticationEntryGate {
 
          const TOKEN = AUTH_ADAPTER.generateToken({ id: USER.id });
 
-         return { token: TOKEN };
+         return TOKEN;
       }
       catch(err) {
          throw err;
@@ -19,13 +19,15 @@ class AuthenticationEntryGate {
    async authenticateUser(email, password) {
       try {
          const USER = await USER_DOMAIN.getUserByEmail(email);
+         if(!USER) throw new Error('E-mail não cadastrado.');
 
-         if(!await bcrypt.compare(password, USER.password))
-            throw new Error('Senha inválida.');
+         const MATCHING_PASSWORDS = AUTH_ADAPTER.checkPasswords(password, USER.password);
+         if(!MATCHING_PASSWORDS) throw new Error('Senha inválida.');
+         
 
-         const token = generateToken({ id: USER.id });
+         const TOKEN = AUTH_ADAPTER.generateToken({id: USER.id});
 
-         return { token };
+         return TOKEN;
       }
       catch(err) {
          throw err;
