@@ -9,24 +9,8 @@ class UserDatabaseAdapter {
 
     async newUser(userInfo) {
         try {
-            const saltRounds = 10;
-            userInfo.password = await bcrypt.hash(userInfo.password, saltRounds);
-
-            if(await USER.findOne({
-                where: {
-                    email: userInfo.email
-                } 
-            }) != null) {
-                throw new Error("Email já cadastrado.");
-            }
-
-            if(await USER.findOne({
-                where: {
-                    nickName: userInfo.nickName
-                } 
-            }) != null) {
-                throw new Error("Apelido já escolhido por outro usuário.");
-            }
+            const SALT_ROUNDS = 10;
+            userInfo.password = await bcrypt.hash(userInfo.password, SALT_ROUNDS);
 
             userInfo.score = 0;
             const NEW_USER = await USER.create(userInfo);
@@ -83,12 +67,9 @@ class UserDatabaseAdapter {
                 }
             });
 
-            if (!QUERIED_USER) {
-                throw new Error('Não encontramos este usuário no sistema.');
-            }
-
             return QUERIED_USER;
-        } catch (err) {
+        }
+        catch (err) {
             throw err;
         }
     }
@@ -97,7 +78,7 @@ class UserDatabaseAdapter {
         try {
             const QUERIED_USERS = USER.findAll({
                 where: {
-                    nickName: {
+                    nickname: {
                         [Op.like]: `%${nickname}%`
                     }
                 },
@@ -105,13 +86,10 @@ class UserDatabaseAdapter {
                     exclude: this.unnecessaryAttributes
                 }
             });
-
-            if (!QUERIED_USERS) {
-                throw new Error('Não encontramos um usuário com nome semelhante a esse.');
-            }
             
             return QUERIED_USERS;
-        } catch (err) {
+        }
+        catch (err) {
             throw err;
         }
     }
@@ -124,7 +102,7 @@ class UserDatabaseAdapter {
                 },
                 order: [
                     ['score', 'DESC'],
-                    ['nickName', 'DESC']
+                    ['nickname', 'DESC']
                 ]
             });
 
@@ -137,52 +115,28 @@ class UserDatabaseAdapter {
 
     async updateUser(updateUserId, userInfo){
         try {
-            if (userInfo.email) {
-                const EMAIL_CONFLICT = await USER.findOne({
-                    where: {
-                        email: userInfo.email
-                    } 
-                });
-
-                if (EMAIL_CONFLICT != null) {
-                    throw new Error("Este e-mail já é utilizado por outra conta.");
-                }
-            }       
-
-            if (userInfo.nickName) {
-                const NICKNAME_CONFLICT = await USER.findOne({
-                    where: {
-                        nickName: userInfo.nickName
-                    } 
-                });
-
-                if(NICKNAME_CONFLICT != null) {
-                    throw new Error("Este apelido já está em uso por outro usuário.");
-                }
-            }
-
             let updateUser =  await USER.findOne({
                 where: {
                     id: updateUserId
                 }
             });
             
-            if(updateUser == null){
+            if(!updateUser){
                 throw new Error('O usuário a ser atualizado não existe.');
             }
             
+            if( Object.keys(userInfo).includes('password') ){
+                const SALT_ROUNDS = 10;
+                const ENCRYPTED_PASS = await bcrypt.hash(userInfo['password'], SALT_ROUNDS);
+                updateUser['password'] = ENCRYPTED_PASS;
+            }
+
             Object.keys(userInfo).forEach(async (info) => {
-                if(info == 'password'){
-                    const SALT_ROUNDS = 10;
-                    const ENCRYPTED_PASS = await bcrypt.hash(userInfo[info], SALT_ROUNDS);
-                    updateUser[info] = ENCRYPTED_PASS;
-                }
-                else {
+                if (info != 'password')
                     updateUser[info] = userInfo[info];
-                }
             });
 
-            updateUser.save({
+            await updateUser.save({
                 fields: Object.keys(userInfo)
             });
         }

@@ -1,0 +1,49 @@
+{
+  "name": "acad-game-web",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@types/classnames": "^2.3.1",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "chart.js": "^3.9.1",
+    "classnames": "^2.3.1",
+    "moment": "^2.29.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.15.3",
+    "react-router-dom": "^6.3.0",
+    "react-use-pagination": "^2.0.1",
+    "typescript": "^4.4.4"
+  },
+  "devDependencies": {
+    "@parcel/packager-raw-url": "2.6.0",
+    "@parcel/transformer-sass": "2.6.0",
+    "@parcel/transformer-svg-react": "2.6.0",
+    "@parcel/transformer-webmanifest": "2.6.0",
+    "@typescript-eslint/eslint-plugin": "5.27.1",
+    "@typescript-eslint/parser": "5.27.1",
+    "eslint": "8.17.0",
+    "parcel": "2.6.0",
+    "parcel-reporter-multiple-static-file-copier": "1.0.5",
+    "process": "^0.11.10",
+    "sass": "1.52.2"
+  },
+  "multipleStaticFileCopier": [
+    {
+      "origin": "./src/assets/favicon",
+      "destination": "dist"
+    }
+  ],
+  "scripts": {
+    "start": "parcel src/index.html --port 3500 --config ./config/parcel.json --open",
+    "build": "parcel build src/index.html --config ./config/parcel.json --no-source-maps",
+    "postinstall": "yarn link \"acad-game-lib\""
+  },
+  "browserslist": [
+    "defaults",
+    "not IE 11",
+    "maintained node versions"
+  ]
+}

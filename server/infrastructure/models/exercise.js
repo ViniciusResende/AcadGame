@@ -16,6 +16,14 @@ const Exercise = database.define('Exercises', {
         type: Sequelize.STRING,
         allowNull: true
     },
+    isTime: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
+    isLoad: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
     icon: {
         type: Sequelize.STRING,
         allowNull: false
@@ -27,10 +35,13 @@ const Exercise = database.define('Exercises', {
     }
 });
 
-Exercise.sync({alter: false, force: false})
-    .then(() => {
-        console.log('Exercise table was (re)created');
-    })
-    .catch((err) => console.log(err));
+Exercise.sync({
+    alter: false,
+    force: false
+}).then(() => {
+    console.log('Exercise table was (re)created');
+}).catch((err) => {
+    console.log(err)
+});
 
 module.exports = Exercise;

@@ -1,0 +1,11 @@
+# Packages
+node_modules
+
+# Output
+coverage
+dist
+docs
+
+# Files
+jest.config.js
+*.test.ts

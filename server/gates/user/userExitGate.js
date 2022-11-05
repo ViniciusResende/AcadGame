@@ -1,9 +1,9 @@
 const USER_DB_ADAPTER = require('../../adapters/user/userDBAdapter');
 
 class QueryUser {
-    EVERY_USER_INFO = ['nickName', 'email', 'password', 'score'];
+    EVERY_USER_INFO = ['nickname', 'email', 'password', 'score'];
 
-    USER_REQUIRED_INFO = ['nickName', 'email', 'password'];
+    USER_REQUIRED_INFO = ['nickname', 'email', 'password'];
 
 
     async createNewUser(userInfo) {
@@ -72,7 +72,7 @@ class QueryUser {
         }
     }
 
-    async getUserByNickName(nickname) {
+    async getUserByNickname(nickname) {
         try {
             const QUERIED_USER = await USER_DB_ADAPTER.getUsersByNick(nickname);
 

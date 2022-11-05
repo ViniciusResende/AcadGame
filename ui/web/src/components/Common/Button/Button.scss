@@ -1,0 +1,62 @@
+@import '../../../styles';
+
+.button-component {
+  align-items: center;
+  background-color: $primaryColor;
+  border: none;
+  border-radius: 8px;
+  color: $white;
+  cursor: pointer;
+  display: flex;
+  font-family: 'Roboto';
+  font-size: 16px;
+  font-weight: 500;
+  justify-content: center;
+  padding: 1em;
+  transition: background, 0.3s ease;
+  width: 100%;
+
+  > svg {
+    width: 20px;
+    margin-right: 0.5em;
+  }
+
+  &:hover {
+    background-color: darken($primaryColor, 5%);
+  }
+
+  &:active {
+    background-color: darken($primaryColor, 10%);
+  }
+
+  &.outlined {
+    background-color: $white;
+    border: 1px solid $primaryColor;
+    color: $primaryColor;
+
+    &:hover {
+      background-color: darken($white, 2%);
+    }
+
+    &:active {
+      background-color: darken($white, 5%);
+    }
+  }
+
+  &.secondary {
+    background-color: $secondaryColor;
+
+    &:hover {
+      background-color: lighten($secondaryColor, 2%);
+    }
+
+    &:active {
+      background-color: lighten($secondaryColor, 5%);
+    }
+  }
+
+  &.disabled {
+    background-color: lighten($fontColor, 15%);
+    cursor: default;
+  }
+}

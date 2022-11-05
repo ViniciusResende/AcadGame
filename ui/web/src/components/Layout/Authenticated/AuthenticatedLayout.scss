@@ -1,0 +1,23 @@
+@import '../../../styles/';
+
+.authenticated-page {
+  align-items: center;
+  background-color: $backgroundColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+  left: 0;
+  position: relative;
+  top: 0;
+  width: 100%;
+  z-index: 0;
+}
+
+.page-content {
+  flex: 1 0;
+  padding-left: 0.5em;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  width: 100%;
+}

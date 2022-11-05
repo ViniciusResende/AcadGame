@@ -1,0 +1,132 @@
+@import '../../../styles';
+
+.input-component {
+  border: 1px solid $fontColor;
+  border-radius: 8px;
+  color: $supportDark;
+  display: block;
+  font-size: inherit;
+  outline: 0;
+  padding: 1em;
+  transition: all 0.2s ease;
+  width: 100%;
+
+  &.clear {
+    border: none;
+    border-bottom: 1px solid $fontColor;
+    border-radius: unset;
+    padding-bottom: 0.5em;
+  }
+
+  &:not([value='']) {
+    border-color: #878786;
+  }
+
+  &:hover {
+    border-color: $supportDark;
+    color: $supportDark;
+  }
+
+  &:focus {
+    border-color: $primaryColor;
+    color: $supportDark;
+  }
+
+  &:disabled {
+    background: $backgroundColor;
+    color: $textDisabled;
+  }
+
+  &:disabled::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $textDisabled;
+  }
+
+  &:disabled:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $textDisabled;
+  }
+
+  &:disabled::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: $textDisabled;
+  }
+
+  &.hasError {
+    border-color: $systemRed;
+    &:hover {
+      border-color: $systemLightRed;
+    }
+  }
+}
+
+.input-component__container {
+  position: relative;
+  width: 100%;
+}
+
+.input-component__label {
+  color: $fontColor;
+  font-size: 16px;
+  font-weight: 400;
+  left: 0;
+  line-height: 1;
+  padding-left: 16px;
+  pointer-events: none;
+  position: absolute;
+  top: 18px;
+  transition: all 0.25s ease;
+
+  &.isActive {
+    background: $white;
+    color: #878786;
+    font-size: 12px;
+    left: 5px;
+    padding: 0 5px;
+    top: -6px;
+    transition: all 0.125s ease;
+    width: auto;
+  }
+
+  &.isHovered {
+    color: $supportDark;
+  }
+
+  &.labelHighLight {
+    color: $primaryColor;
+  }
+
+  &.hasError {
+    color: $systemRed;
+
+    &.isHovered {
+      color: $systemLightRed;
+    }
+  }
+}
+
+.input-component__visibility-toggle {
+  cursor: pointer;
+  position: absolute;
+  right: 12px;
+  top: 18px;
+
+  > svg {
+    width: 20px;
+  }
+}
+
+.errorSpan {
+  color: $systemRed;
+  font-size: 10px;
+  padding-left: 8px;
+  position: absolute;
+  bottom: -12px;
+}
+
+.input-component__unity-measurement-tag {
+  color: $fontColor;
+  position: absolute;
+  right: 24px;
+  top: 18px;
+}

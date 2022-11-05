@@ -46,7 +46,7 @@ class User {
 
     async getUserByNickname(nickname) {
         try {
-            const USER = await QUERY_USER.getUserByNickName(nickname);
+            const USER = await QUERY_USER.getUserByNickname(nickname);
 
             return USER;
         }
@@ -70,6 +70,14 @@ class User {
         try {
             if (reqUserId != updateUserId) {
                 throw new Error('Você não pode alterar as informações de outro usuário.');
+            }
+
+            if (userInfo.email) {
+                const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
+
+                if (EMAIL_CONFLICT && EMAIL_CONFLICT.id != updateUserId) {
+                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                }
             }
 
             await QUERY_USER.updateUserInfo(updateUserId, userInfo);
