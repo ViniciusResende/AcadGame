@@ -7,7 +7,7 @@
  * Exercise to add info data
  */
 export interface IExerciseToAddInfoData {
-  exerciseId: number;
+  id: number;
   name: string;
   type: string;
 }

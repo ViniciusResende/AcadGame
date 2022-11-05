@@ -32,9 +32,9 @@ function ExerciseAddCardComponent({
     >
       <strong className="exercises-add-card__title">{exercise.name}</strong>
       <Checkbox
-        id={String(exercise.exerciseId)}
+        id={String(exercise.id)}
         name="exercise"
-        value={exercise.exerciseId}
+        value={exercise.id}
         color="system"
         checked={isCardActive}
         onClick={toggleCardActiveness}

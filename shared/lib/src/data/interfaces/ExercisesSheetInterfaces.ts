@@ -10,7 +10,7 @@ import { ExercisesSheetExerciseToAddTypeEnum } from '../enums/ExercisesSheetEnum
  * Update Exercise To Add Info body interface.
  */
 export interface IExerciseToAddInfo {
-  exerciseId: number;
+  id: number;
   name: string;
   type: ExercisesSheetExerciseToAddTypeEnum;
 }
