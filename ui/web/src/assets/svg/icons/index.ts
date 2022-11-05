@@ -1,4 +1,5 @@
 import AddSquareIcon from './add-square.svg';
+import BarsIcon from './bars.svg';
 import BullseyeArrowIcon from './bullseye-arrow.svg';
 import CalendarIcon from './calendar.svg';
 import CheckIcon from './check.svg';
@@ -17,6 +18,7 @@ import XMarkIcon from './xmark.svg';
 
 export {
   AddSquareIcon,
+  BarsIcon,
   BullseyeArrowIcon,
   CalendarIcon,
   CheckIcon,
