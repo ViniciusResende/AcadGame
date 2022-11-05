@@ -188,7 +188,7 @@ function ProfileComponent({
       <div className="profile-page__bottom-card">
         <DefaultCardBox title="Métricas da Semana" icon={<MetricsChartIcon />}>
           <div className="profile-page__user-metrics">
-            <div>
+            <div className="profile-page__user-metrics-illustration">
               <CellphoneMetricsIllustration />
             </div>
             <WeeklyUserChart userWeeklyHistogram={userWeeklyHistogram} />
