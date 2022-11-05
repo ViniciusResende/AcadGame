@@ -3,11 +3,16 @@ const jwt = require('jsonwebtoken');
 
 class authAdapter {
     generateToken(params = {}) {
-        const TOKEN = jwt.sign(params, process.env.JWT_SECRET, {
-            expiresIn: process.env.COOKIE_DURATION,
-        });
-
-        return TOKEN;
+        try {
+            const TOKEN = jwt.sign(params, process.env.JWT_SECRET, {
+                expiresIn: process.env.COOKIE_DURATION,
+            });
+            
+            return TOKEN;
+        }
+        catch (err) {
+            throw err;
+        }
     }
 
     async checkPasswords(inputedPassword, hashedPassword) {
