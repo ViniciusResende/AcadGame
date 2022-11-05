@@ -1,11 +1,10 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const authConfig = require('../../config/auth.json');
 
 const userDomain = require('../../domains/user/userDomain');
 
 function generateToken(params = {}) {
-   return jwt.sign(params, authConfig.secret, {
+   return jwt.sign(params, process.env.JWT_SECRET, {
        expiresIn: 86400, // token expires in one day
    });
 }
