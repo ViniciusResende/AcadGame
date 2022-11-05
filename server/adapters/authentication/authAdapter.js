@@ -16,12 +16,17 @@ class authAdapter {
     }
 
     async checkPasswords(inputedPassword, hashedPassword) {
-        const MATCH = await bcrypt.compare(inputedPassword, hashedPassword);
+        try {
+            const MATCH = await bcrypt.compare(inputedPassword, hashedPassword);
 
-        if(!MATCH)
-            return false;
-        else
-            return true;
+            if(!MATCH)
+                return false;
+            else
+                return true;
+        }
+        catch(err) {
+            throw err;
+        }
     }
 }
 
