@@ -5,7 +5,7 @@ const userDomain = require('../../domains/user/userDomain');
 
 function generateToken(params = {}) {
    return jwt.sign(params, process.env.JWT_SECRET, {
-       expiresIn: 86400, // token expires in one day
+       expiresIn: process.env.COOKIE_DURATION,
    });
 }
 
