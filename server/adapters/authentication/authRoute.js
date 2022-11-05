@@ -1,4 +1,4 @@
-const authEntryGate = require('../../gates/authentication/authEntryGate');
+const authDomain = require('../../domains/authentication/authDomain');
 
 const ROUTER = require('express').Router();
 
@@ -6,7 +6,7 @@ ROUTER.post('/register', async(req, res) => {
     try {
         const USER_INFO = req.body;
 
-        const TOKEN = await authEntryGate.registerUser(USER_INFO);
+        const TOKEN = await authDomain.registerUser(USER_INFO);
 
         res.status(200).send(TOKEN);
     }
@@ -20,7 +20,7 @@ ROUTER.post('/authenticate', async(req, res) => {
         const EMAIL = req.body.email;
         const PASSWORD = req.body.password;
 
-        const TOKEN = await authEntryGate.authenticateUser(EMAIL, PASSWORD);
+        const TOKEN = await authDomain.authenticateUser(EMAIL, PASSWORD);
 
         res.status(200).send(TOKEN);
     }
