@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "name": "Home",
+      "path": "/"
+    },
+    {
+      "name": "Ficha de Exercícios",
+      "path": "/exercisesSheets"
+    },
+    {
+      "name": "Ranking",
+      "path": "/friends"
+    },
+    {
+      "name": "Perfil",
+      "path": "/profile"
+    }
+  ]
+}
