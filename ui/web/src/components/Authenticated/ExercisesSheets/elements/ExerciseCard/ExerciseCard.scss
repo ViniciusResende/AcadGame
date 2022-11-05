@@ -35,6 +35,10 @@
         background-color: $systemGreen;
       }
     }
+
+    @include forMedium() {
+      max-width: 40em;
+    }
   }
 
   &__header {
@@ -92,6 +96,10 @@
     justify-content: flex-start;
     gap: 0.25em;
     width: 50%;
+
+    @include forSmall() {
+      width: 70%;
+    }
   }
 
   &__metric {

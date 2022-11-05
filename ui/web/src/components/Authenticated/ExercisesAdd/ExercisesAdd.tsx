@@ -19,7 +19,11 @@ import { IExerciseToAddInfoData } from '../../../data/interfaces/ExercisesSheetI
 import './ExercisesAdd.scss';
 
 /** Assets */
-import { AddSquareIcon, DumbbellIcon } from '../../../assets/svg/icons';
+import {
+  AddSquareIcon,
+  ChevronLightIcon,
+  DumbbellIcon,
+} from '../../../assets/svg/icons';
 
 /** Constants */
 const availableExercisesFilters = [
@@ -78,6 +82,8 @@ function ExercisesAddComponent({
   filterExercisesBy,
   addExercisesToSheet,
 }: ExercisesAddComponentProps) {
+  const [isFiltersShown, setIsFiltersShown] = useState(false);
+
   function onSubmitForm(event: React.FormEvent) {
     event.preventDefault();
     //@ts-ignore
@@ -100,7 +106,25 @@ function ExercisesAddComponent({
     <div className="exercises-add-page__container">
       <form onSubmit={onSubmitForm}>
         <DefaultCardBox title="Exercícios Disponíveis" icon={<DumbbellIcon />}>
-          <ul className="exercises-add-page__filters">
+          <button
+            className="exercises-add-page__filters-collapse"
+            onClick={() => setIsFiltersShown((prev) => !prev)}
+            type="button"
+          >
+            <span>
+              {isFiltersShown ? 'Esconder Filtros' : 'Mostrar Filtros'}
+            </span>
+            <ChevronLightIcon
+              className={cx('exercises-add-page__chevron', {
+                isOpen: isFiltersShown,
+              })}
+            />
+          </button>
+          <ul
+            className={cx('exercises-add-page__filters', {
+              isCollapsed: !isFiltersShown,
+            })}
+          >
             {availableExercisesFilters.map((filter) => (
               <li
                 className="exercises-add-page__filter-option"
