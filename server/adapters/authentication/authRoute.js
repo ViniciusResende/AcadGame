@@ -8,10 +8,16 @@ ROUTER.post('/register', async(req, res) => {
 
         const TOKEN = await authDomain.registerUser(USER_INFO);
 
-        res.status(200).send(TOKEN);
+        res.status(200).send({
+            token: TOKEN,
+            message: 'Enjoy your token! =D'
+        });
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(500).send({
+            token: null,
+            message: err.message
+        });
     }
 });
 
@@ -22,10 +28,16 @@ ROUTER.post('/authenticate', async(req, res) => {
 
         const TOKEN = await authDomain.authenticateUser(EMAIL, PASSWORD);
 
-        res.status(200).send(TOKEN);
+        res.status(200).send({
+            token: TOKEN,
+            message: 'Enjoy your token! =D'
+        });
     }
     catch(err) {
-        res.status(500).send(err.message);
+        res.status(500).send({
+            token: null,
+            message: err.message
+        });
     }
 });
 
