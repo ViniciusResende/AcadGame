@@ -40,7 +40,11 @@ function HeaderComponent() {
           })}
         >
           {MenuItems.items.map((menuItem) => (
-            <Link key={menuItem.path} to={menuItem.path}>
+            <Link
+              key={menuItem.path}
+              to={menuItem.path}
+              onClick={() => setIsHeaderCollapsed(true)}
+            >
               {menuItem.name}
             </Link>
           ))}
