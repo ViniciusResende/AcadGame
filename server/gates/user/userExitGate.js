@@ -24,7 +24,9 @@ class QueryUser {
                 }
             }
 
-            await USER_DB_ADAPTER.newUser(newUser);
+            const NEW_USER = await USER_DB_ADAPTER.newUser(newUser);
+
+            return NEW_USER;
         }
         catch (err) {
             throw err;
