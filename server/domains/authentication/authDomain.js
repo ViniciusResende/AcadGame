@@ -1,22 +1,11 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-
-const userDomain = require('../../domains/user/userDomain');
-
-function generateToken(params = {}) {
-   return jwt.sign(params, process.env.JWT_SECRET, {
-       expiresIn: process.env.COOKIE_DURATION,
-   });
-}
+const authExitGate = require('../../gates/authentication/authExitGate');
 
 class authDomain {
    async registerUser(userInfo) {
       try {
-         const user = await userDomain.createUser(userInfo);
+         const TOKEN = await authExitGate.registerUser(userInfo);
 
-         const token = generateToken({ id: user.id });
-
-         return { token };
+         return TOKEN;
       }
       catch(err) {
          throw err;
@@ -25,14 +14,9 @@ class authDomain {
 
    async authenticateUser(email, password) {
       try {
-         const USER = await userDomain.getUserByEmail(email);
+         const TOKEN = authExitGate.authenticateUser(email. password);
 
-         if(!await bcrypt.compare(password, USER.password))
-            throw new Error('Senha inválida.');
-
-         const token = generateToken({ id: USER.id });
-
-         return { token };
+         return TOKEN;
       }
       catch(err) {
          throw err;
