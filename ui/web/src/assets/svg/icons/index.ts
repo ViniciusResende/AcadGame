@@ -4,6 +4,7 @@ import BullseyeArrowIcon from './bullseye-arrow.svg';
 import CalendarIcon from './calendar.svg';
 import CheckIcon from './check.svg';
 import ChevronIcon from './chevron.svg';
+import ChevronLightIcon from './chevron-light.svg';
 import DumbbellIcon from './dumbbell.svg';
 import EyeIcon from './eye.svg';
 import EyeSlashIcon from './eye-slash.svg';
@@ -23,6 +24,7 @@ export {
   CalendarIcon,
   CheckIcon,
   ChevronIcon,
+  ChevronLightIcon,
   DumbbellIcon,
   EyeIcon,
   EyeSlashIcon,
