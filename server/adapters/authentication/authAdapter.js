@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 class authAdapter {
-    async generateToken(params = {}) {
+    generateToken(params = {}) {
         const TOKEN = jwt.sign(params, process.env.JWT_SECRET, {
             expiresIn: process.env.COOKIE_DURATION,
         });
