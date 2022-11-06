@@ -79,8 +79,6 @@ class DayScore {
 
             weekPodium.sort(compare);
 
-            console.log(weekPodium);
-
             return weekPodium;
         }
         catch(err) {
