@@ -8,13 +8,17 @@ ROUTER.post('/register', async(req, res) => {
 
         const TOKEN = await authDomain.registerUser(USER_INFO);
 
-        res.status(200).send({
-            token: TOKEN,
-            message: 'Enjoy your token! =D'
-        });
+        const responseObject = {
+            data: {
+                token: TOKEN,
+                message: 'Enjoy your token!'
+            }
+        }
+
+        res.status(200).send(responseObject);
     }
     catch(err) {
-        res.status(500).send({
+        res.status(400).send({
             token: null,
             message: err.message
         });
@@ -28,13 +32,17 @@ ROUTER.post('/authenticate', async(req, res) => {
 
         const TOKEN = await authDomain.authenticateUser(EMAIL, PASSWORD);
 
-        res.status(200).send({
-            token: TOKEN,
-            message: 'Enjoy your token! =D'
-        });
+        const responseObject = {
+            data: {
+                token: TOKEN,
+                message: 'Enjoy your token!'
+            }
+        }
+
+        res.status(200).send(responseObject);
     }
     catch(err) {
-        res.status(500).send({
+        res.status(400).send({
             token: null,
             message: err.message
         });

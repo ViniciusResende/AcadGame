@@ -14,7 +14,7 @@ class authDomain {
 
    async authenticateUser(email, password) {
       try {
-         const TOKEN = authExitGate.authenticateUser(email. password);
+         const TOKEN = authExitGate.authenticateUser(email, password);
 
          return TOKEN;
       }

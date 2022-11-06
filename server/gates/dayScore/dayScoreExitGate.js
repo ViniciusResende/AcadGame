@@ -21,30 +21,27 @@ class QueryDayScore {
 
     async getDaysScoresInInterval(userId, startDate, endDate) {
         try {
-            const DAY_SCORES = await DayScoreDBAdapter.findUserDayScoresInInterval(userId, startDate, endDate);
+            const USER_DAY_SCORES = await DayScoreDBAdapter.findUserDayScoresInInterval(userId, startDate, endDate);
 
             let currentDate = startDate;
 
-            let dayScores = [];
+            let allDayScores = [];
             for (let index = 0; index < 8; index++) {
                 let currentDateString = currentDate.toLocaleDateString("sv", {timezone: "America/Sao_Paulo"});
-                dayScores[index] = {
+                allDayScores[index] = {
                     'date': currentDateString,
                     'score': 0
                 };
 
+                const match = USER_DAY_SCORES.find(element => element.dataValues.date.getDate() === currentDate.getDate());
+                if(match)
+                    allDayScores[index].score = match.dataValues.score;
+
                 currentDate = addDays(currentDate, 1);
             }
+            console.log(allDayScores);
 
-            DAY_SCORES.forEach(dayScore => {
-                const dayScoreDate = dayScore.dataValues.date.getDate();
-                const dayScoreIndex = dayScoreDate - startDate.getDate();
-
-                
-                dayScores[dayScoreIndex].score = dayScore.dataValues.score;
-            });
-
-            return dayScores;
+            return allDayScores;
         }
         catch(err) {
             throw err;

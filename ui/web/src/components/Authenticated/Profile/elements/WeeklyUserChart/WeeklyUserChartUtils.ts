@@ -32,9 +32,9 @@ export function transformToChartData(
   let chartLabels = [];
 
   for (const weeklyHistogramElement of userWeeklyHistogramData) {
-    const { dailyPoints, date } = weeklyHistogramElement;
+    const { score, date } = weeklyHistogramElement;
 
-    chartData.push(dailyPoints);
+    chartData.push(score);
     chartLabels.push(moment(date).format('DD/MM'));
   }
 

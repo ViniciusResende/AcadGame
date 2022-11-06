@@ -32,7 +32,7 @@ export interface IApiAcadAuthResponse {
  * API data representation for general User Get Data responses'.
  */
 export interface IApiUserGetDataResponse {
-  id: string;
+  id: string | undefined;
   data: unknown;
 }
 
@@ -54,7 +54,7 @@ export interface IApiUserGetDataWeeklyHistogramResponse
   extends IApiUserGetDataResponse {
   data: {
     date: string;
-    dailyPoints: number;
+    score: number;
   }[];
 }
 

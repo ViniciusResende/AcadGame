@@ -118,7 +118,7 @@ class QueryExerciseSheetDB {
 
             Object.keys(userExerciseInfo).forEach((info) => {
                 if(!this.EVERY_USER_EXERCISE_INFO.includes(info)) {
-                    throw new Error(`A propriedade ${info} não é válida.`);
+                    delete userExerciseInfo[info];
                 }
             });
 

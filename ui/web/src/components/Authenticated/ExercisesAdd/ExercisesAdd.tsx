@@ -137,7 +137,7 @@ function ExercisesAddComponent({
           </ul>
           <div className="exercises-add-page__cards">
             {availableExercisesList.map((exercise) => (
-              <ExerciseAddCard key={exercise.exerciseId} exercise={exercise} />
+              <ExerciseAddCard key={exercise.id} exercise={exercise} />
             ))}
           </div>
         </DefaultCardBox>

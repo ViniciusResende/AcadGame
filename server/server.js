@@ -1,4 +1,5 @@
 const Express = require('express');
+const cors = require('cors');
 const server = Express();
 
 const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
@@ -10,6 +11,7 @@ const DAY_SCORE_ROUTER = require('./adapters/dayScore/dayScoreRouter');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
+server.use(cors());
 server.use(Express.json());
 server.use(bodyParser.urlencoded({extended:true}));
 server.use(bodyParser.json());
