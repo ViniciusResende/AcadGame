@@ -138,14 +138,14 @@ function RouteExercisesSheet() {
   }
 
   useEffect(() => {
-    async function getAvailableExercises() {
+    async function getUserSheets() {
       const getUserExercisesSheetsResponse =
         await Lib.exercisesSheet.getUserExercisesSheets();
 
       return getUserExercisesSheetsResponse;
     }
 
-    getAvailableExercises().then(
+    getUserSheets().then(
       (response) => response && setUserExercisesSheets(response)
     );
   }, []);
