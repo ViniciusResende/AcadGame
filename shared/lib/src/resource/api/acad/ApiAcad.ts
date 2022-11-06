@@ -58,12 +58,10 @@ export class ApiAcad extends ApiClient {
    */
   get headers(): Headers {
     const headersExtension = {
-      [HttpRequestHeaderEnum.ACCEPT]: [
-        HttpContentTypeEnum.JSON,
-      ].join(', '),
-      [HttpRequestHeaderEnum.CONTENT_TYPE]: [
-        HttpContentTypeEnum.JSON,
-      ].join(', '),
+      [HttpRequestHeaderEnum.ACCEPT]: [HttpContentTypeEnum.JSON].join(', '),
+      [HttpRequestHeaderEnum.CONTENT_TYPE]: [HttpContentTypeEnum.JSON].join(
+        ', '
+      ),
     };
     return new Headers(
       Object.assign(
@@ -188,11 +186,14 @@ export class ApiAcad extends ApiClient {
       headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
-    const response = this.#api.request('/dailyScores/user/last7days', requestParams);
+    const response = this.#api.request(
+      '/dailyScores/user/last7days',
+      requestParams
+    );
     const responseData = await response.promise;
     const userInfoResponse = {
       id: undefined,
-      data: responseData.data 
+      data: responseData.data,
     } as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
