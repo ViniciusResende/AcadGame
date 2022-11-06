@@ -57,7 +57,7 @@ Router.get('/weekPodium', async (req, res) => {
     try {
         const WEEK_PODIUM = await DayScore.getWeekPodium();
 
-        res.status(200).json(WEEK_PODIUM);
+        res.status(200).json({ data: WEEK_PODIUM });
     }
     catch(err) {
         res.status(400).send(err.message);
