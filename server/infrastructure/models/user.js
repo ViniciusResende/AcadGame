@@ -13,6 +13,11 @@ const User = database.define('Users', {
         allowNull: false,
         unique: false
     },
+    profileIcon: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: "default"
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false,
