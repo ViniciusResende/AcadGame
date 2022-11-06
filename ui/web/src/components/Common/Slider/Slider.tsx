@@ -27,7 +27,7 @@ export const SliderComponent = ({
   children,
   className,
   autoplay = true,
-  delay = 2500,
+  delay = 10000,
   slidesToShow = 1,
   slideClassName,
   ...rest
