@@ -33,10 +33,13 @@ class QueryDayScore {
                     'score': 0
                 };
 
-                const match = USER_DAY_SCORES.find(element => element.dataValues.date.getDate() === currentDate.getDate());
-                if(match)
-                    allDayScores[index].score = match.dataValues.score;
-
+                const matches = USER_DAY_SCORES.filter(element => element.dataValues.date.getDate() === currentDate.getDate());
+                if(matches) {
+                    matches.forEach(match => {
+                        allDayScores[index].score += match.dataValues.score;
+                    });
+                }
+                    
                 currentDate = addDays(currentDate, 1);
             }
             console.log(allDayScores);
