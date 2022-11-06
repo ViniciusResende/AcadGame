@@ -91,7 +91,10 @@ function ExercisesAddComponent({
 
     let addedExercisesIds: number[] = [];
     if (checkboxesNodeList) {
-      checkboxesNodeList.forEach((value) => {
+      const iterableCheckBoxesNodeList = Array.isArray(checkboxesNodeList)
+        ? checkboxesNodeList
+        : [checkboxesNodeList];
+      iterableCheckBoxesNodeList.forEach((value) => {
         //@ts-ignore
         const { checked: checkboxIsChecked, id: exerciseId } = value;
 
