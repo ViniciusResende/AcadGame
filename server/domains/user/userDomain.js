@@ -1,3 +1,5 @@
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 const QUERY_USER = require('../../gates/user/userExitGate');
 
 class User {
@@ -72,7 +74,10 @@ class User {
                 const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
 
                 if (EMAIL_CONFLICT && EMAIL_CONFLICT.id != updateUserId) {
-                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                    let error = new SERVER_ERROR;
+                    error.ServerError(400, 'Este e-mail já é utilizado por outra conta.');
+                    
+                    throw error;
                 }
             }
 
