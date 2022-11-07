@@ -1,3 +1,5 @@
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 const QUERY_USER = require('../../gates/user/userExitGate');
 
 class User {
@@ -66,34 +68,29 @@ class User {
         }
     }
 
-    async updateUserInfo(reqUserId, updateUserId, userInfo) {
+    async updateUserInfo(userId, userInfo) {
         try {
-            if (reqUserId != updateUserId) {
-                throw new Error('Você não pode alterar as informações de outro usuário.');
-            }
-
             if (userInfo.email) {
                 const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
 
                 if (EMAIL_CONFLICT && EMAIL_CONFLICT.id != updateUserId) {
-                    throw new Error("Este e-mail já é utilizado por outra conta.");
+                    let error = new SERVER_ERROR;
+                    error.ServerError(400, 'Este e-mail já é utilizado por outra conta.');
+                    
+                    throw error;
                 }
             }
 
-            await QUERY_USER.updateUserInfo(updateUserId, userInfo);
+            await QUERY_USER.updateUserInfo(userId, userInfo);
         }
         catch (err) {
             throw err;
         }
     }
 
-    async deleteUserAccount(reqUserId, deletionUserId) {
+    async deleteUserAccount(userId) {
         try {
-            if (reqUserId != deletionUserId) {
-                throw new Error('Você não pode deletar a conta de outra pessoa.');
-            }
-
-            await QUERY_USER.deleteAccount(deletionUserId);
+            await QUERY_USER.deleteAccount(userId);
         }
         catch (err) {
             throw err;

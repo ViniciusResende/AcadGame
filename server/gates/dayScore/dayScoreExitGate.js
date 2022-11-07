@@ -1,4 +1,5 @@
 const DayScoreDBAdapter = require('../../adapters/dayScore/dayScoreDBAdapter');
+const UserDBAdapter = require('../../adapters/user/userDBAdapter');
 const { addDays } = require('date-fns');
 
 class QueryDayScore {
@@ -68,14 +69,22 @@ class QueryDayScore {
 
     async getWeekPodium(year, weekNumber) {
         try {
-            const ALL_DAILY_SCORES = await DayScoreDBAdapter.findAllDailyScores();      
+            const ALL_DAILY_SCORES = await DayScoreDBAdapter.findAllDailyScores();
+            const ALL_USERS = await UserDBAdapter.getEveryUser();
 
             let usersWeeklyScores = ALL_DAILY_SCORES.reduce((acc, item) => {
                 const CURRENT_USER_ID = item.dataValues.userId;
                 const CURRENT_YEAR = item.dataValues.year;
                 const CURRENT_WEEK = item.dataValues.week;
                 const CURRENT_SCORE = item.dataValues.score;
+                const CURRENT_USER = ALL_USERS.find(element => element.dataValues.id === CURRENT_USER_ID);
+                
                 delete item.dataValues.date;
+                delete item.dataValues.year;
+                delete item.dataValues.week;
+                
+                item.dataValues['nickname'] = CURRENT_USER.nickname;
+                item.dataValues['profileIcon'] = CURRENT_USER.profileIcon;
 
                 if(CURRENT_YEAR === year && CURRENT_WEEK === weekNumber) {
                     if(acc[CURRENT_USER_ID])

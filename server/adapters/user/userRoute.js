@@ -1,22 +1,19 @@
 const ROUTER = require('express').Router();
-const authMiddleware = require('../../middlewares/auth');
 
 const userDomain = require('../../domains/user/userDomain');
 
-ROUTER.use(authMiddleware);
-
-ROUTER.get('/', async (req, res) => {
+ROUTER.get('/', async (req, res, next) => {
     try {
         const USERS = await userDomain.getEveryUser();
 
         res.status(200).json(USERS);
     }
     catch (err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-ROUTER.get('/id/:id', async (req, res) => {
+ROUTER.get('/me', async (req, res, next) => {
     try {
         const USER_ID = req.userId;
 
@@ -25,11 +22,11 @@ ROUTER.get('/id/:id', async (req, res) => {
         res.status(200).json(SINGLE_USER);
     }
     catch (err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-ROUTER.get('/email', async (req, res) => {
+ROUTER.get('/email', async (req, res, next) => {
     try {
         const USER_EMAIL = req.body.email;
 
@@ -38,11 +35,11 @@ ROUTER.get('/email', async (req, res) => {
         res.status(200).json(USER_BY_EMAIL);
     }
     catch (err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-ROUTER.get('/nickname', async (req, res) => {
+ROUTER.get('/nickname', async (req, res, next) => {
     try {
         const USER_NICKNAME = req.body.nickname;
 
@@ -51,11 +48,11 @@ ROUTER.get('/nickname', async (req, res) => {
         res.status(200).json(USER_BY_NICKNAME);
     }
     catch (err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-ROUTER.get('/top/:rank', async (req, res) => {
+ROUTER.get('/top/:rank', async (req, res, next) => {
     try {
         const RANK = req.params.rank;
 
@@ -64,36 +61,35 @@ ROUTER.get('/top/:rank', async (req, res) => {
         res.status(200).json(TOP_RANK_USERS);
     }
     catch (err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-ROUTER.put('/:id', async (req, res) => {
+ROUTER.put('/', async (req, res, next) => {
     try {
         const USER_INFO = req.body.userInfo;
-        const REQ_USER_ID = req.body.userId;
-        const UPDATE_USER_ID = req.params.id;
 
-        await userDomain.updateUserInfo(REQ_USER_ID, UPDATE_USER_ID, USER_INFO);
+        const USER_ID = req.userId;
+
+        await userDomain.updateUserInfo(USER_ID, USER_INFO);
 
         res.status(200).send('Usuário atualizado com sucesso!');
     }
     catch (err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-ROUTER.delete('/:id', async (req, res) => {
+ROUTER.delete('/', async (req, res, next) => {
     try {
-        const DELETION_USER_ID = req.body.userId;
-        const REQ_USER_ID = req.params.id;
+        const USER_ID = req.userId;
 
-        await userDomain.deleteUserAccount(REQ_USER_ID, DELETION_USER_ID);
+        await userDomain.deleteUserAccount(USER_ID);
 
         res.status(200).send('Usuário excluído com sucesso!');
     }
     catch(err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
