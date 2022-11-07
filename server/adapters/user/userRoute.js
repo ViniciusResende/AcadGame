@@ -83,12 +83,11 @@ ROUTER.put('/', async (req, res) => {
     }
 });
 
-ROUTER.delete('/:id', async (req, res) => {
+ROUTER.delete('/', async (req, res) => {
     try {
-        const DELETION_USER_ID = req.body.userId;
-        const REQ_USER_ID = req.params.id;
+        const USER_ID = req.userId;
 
-        await userDomain.deleteUserAccount(REQ_USER_ID, DELETION_USER_ID);
+        await userDomain.deleteUserAccount(USER_ID);
 
         res.status(200).send('Usuário excluído com sucesso!');
     }
