@@ -14,7 +14,7 @@ Router.get('/', async (req, res) => {
         res.status(200).json(DAY_SCORES);
     }
     catch(err) {
-        res.status(400).send(err.message);
+        res.status(err.statusCode || 500).send(err.message);
     }
 });
 
@@ -31,7 +31,7 @@ Router.get('/user/last7days', async (req, res) => {
         res.status(200).json(responseObject);
     }
     catch(err) {
-        res.status(400).send(err.message);
+        res.status(err.statusCode || 500).send(err.message);
     }
 });
 
@@ -49,7 +49,7 @@ Router.post('/user/add', async (req, res) => {
         });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        res.status(err.statusCode || 500).send(err.message);
     }
 });
 
@@ -60,7 +60,7 @@ Router.get('/weekPodium', async (req, res) => {
         res.status(200).json({ data: WEEK_PODIUM });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        res.status(err.statusCode || 500).send(err.message);
     }
 });
 
@@ -73,7 +73,7 @@ Router.get('/user/ranking', async (req, res) => {
         res.status(200).json({ data: userRank });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        res.status(err.statusCode || 500).send(err.message);
     }
 });
 
