@@ -1,5 +1,3 @@
-const { all } = require('../../adapters/badge/badgeRoute');
-const { updateUserExercise } = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 const ExerciseSheetDBAdapter = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 
 class QueryExerciseSheetDB {
