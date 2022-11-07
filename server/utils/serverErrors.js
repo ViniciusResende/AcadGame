@@ -8,4 +8,4 @@ class ServerError {
     }
 }
 
-module.exports = new ServerError;
+module.exports = ServerError;
