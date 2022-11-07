@@ -103,7 +103,7 @@ class QueryUser {
         }
     }
 
-    async updateUserInfo(updateUserId, userInfo) {
+    async updateUserInfo(userId, userInfo) {
         try {
             if (Object.keys(userInfo).length === 0) {
                 throw new Error('É necessário fornecer as alterações desejadas.') ;
@@ -115,7 +115,7 @@ class QueryUser {
                 }
             });
 
-            await USER_DB_ADAPTER.updateUser(updateUserId, userInfo);
+            await USER_DB_ADAPTER.updateUser(userId, userInfo);
         }
         catch (err) {
             throw err;
