@@ -18,7 +18,7 @@ ROUTER.post('/register', async(req, res) => {
         res.status(200).send(responseObject);
     }
     catch(err) {
-        res.status(400).send({
+        res.status(err.statusCode || 500).send({
             token: null,
             message: err.message
         });
@@ -42,7 +42,7 @@ ROUTER.post('/authenticate', async(req, res) => {
         res.status(200).send(responseObject);
     }
     catch(err) {
-        res.status(400).send({
+        res.status(err.statusCode || 500).send({
             token: null,
             message: err.message
         });
