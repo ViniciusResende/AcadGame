@@ -66,12 +66,8 @@ class User {
         }
     }
 
-    async updateUserInfo(reqUserId, updateUserId, userInfo) {
+    async updateUserInfo(userId, userInfo) {
         try {
-            if (reqUserId != updateUserId) {
-                throw new Error('Você não pode alterar as informações de outro usuário.');
-            }
-
             if (userInfo.email) {
                 const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
 
@@ -80,7 +76,7 @@ class User {
                 }
             }
 
-            await QUERY_USER.updateUserInfo(updateUserId, userInfo);
+            await QUERY_USER.updateUserInfo(userId, userInfo);
         }
         catch (err) {
             throw err;
