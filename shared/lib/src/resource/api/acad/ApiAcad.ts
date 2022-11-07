@@ -137,9 +137,12 @@ export class ApiAcad extends ApiClient {
       headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
-    const response = this.#api.request('/user/info', requestParams);
+    const response = this.#api.request('/users/me', requestParams);
     const responseData = await response.promise;
-    const userInfoResponse = responseData.data as IApiUserGetDataInfoResponse;
+    const userInfoResponse = {
+      id: undefined,
+      data: responseData.data,
+    } as IApiUserGetDataInfoResponse;
 
     return userInfoResponse;
   }
