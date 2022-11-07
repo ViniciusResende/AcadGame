@@ -122,9 +122,9 @@ class QueryUser {
         }
     }
 
-    async deleteAccount(deletionUserId) {
+    async deleteAccount(userId) {
         try {
-            await USER_DB_ADAPTER.eraseAccount(deletionUserId);
+            await USER_DB_ADAPTER.eraseAccount(userId);
         }
         catch (err) {
             throw err;

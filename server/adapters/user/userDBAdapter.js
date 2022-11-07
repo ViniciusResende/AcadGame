@@ -145,11 +145,11 @@ class UserDatabaseAdapter {
         }
     }
 
-    async eraseAccount(deletionId) {
+    async eraseAccount(userId) {
         try {
             await USER.destroy({
                 where: {
-                    id: deletionId
+                    id: userId
                 }
             });
         }
