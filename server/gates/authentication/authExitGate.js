@@ -28,9 +28,6 @@ class AuthenticationEntryGate {
             throw error;
          }
 
-         console.log(USER);
-         console.log(email);
-
          const MATCHING_PASSWORDS = AUTH_ADAPTER.checkPasswords(password, USER.password);
          if(!MATCHING_PASSWORDS) {
             let error = new SERVER_ERROR;
