@@ -42,7 +42,7 @@ export interface IApiUserGetDataResponse {
 export interface IApiUserGetDataInfoResponse extends IApiUserGetDataResponse {
   data: {
     nickname: string;
-    totalPoints: number;
+    score: number;
     profileIcon: UserProfilePictureEnum;
   };
 }
