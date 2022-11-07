@@ -16,7 +16,7 @@ ROUTER.get('/', async (req, res) => {
     }
 });
 
-ROUTER.get('/id/:id', async (req, res) => {
+ROUTER.get('/me', async (req, res) => {
     try {
         const USER_ID = req.userId;
 
@@ -68,13 +68,13 @@ ROUTER.get('/top/:rank', async (req, res) => {
     }
 });
 
-ROUTER.put('/:id', async (req, res) => {
+ROUTER.put('/', async (req, res) => {
     try {
         const USER_INFO = req.body.userInfo;
-        const REQ_USER_ID = req.body.userId;
-        const UPDATE_USER_ID = req.params.id;
 
-        await userDomain.updateUserInfo(REQ_USER_ID, UPDATE_USER_ID, USER_INFO);
+        const USER_ID = req.userId;
+
+        await userDomain.updateUserInfo(USER_ID, USER_INFO);
 
         res.status(200).send('Usuário atualizado com sucesso!');
     }
