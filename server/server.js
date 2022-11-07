@@ -9,6 +9,7 @@ const EXERCISE_SHEET_ROUTER = require('./adapters/exerciseSheet/exerciseSheetRou
 const DAY_SCORE_ROUTER = require('./adapters/dayScore/dayScoreRouter');
 
 const AUTHENTICATION = require('./utils/authMiddleware');
+const ERROR_HANDLING = require('./utils/errorMiddleware');
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -19,11 +20,11 @@ server.use(bodyParser.urlencoded({extended:true}));
 server.use(bodyParser.json());
 server.use(cookieParser());
 
-server.use('/api/badges', AUTHENTICATION, BADGE_ROUTER);
-server.use('/api/users', AUTHENTICATION, USER_ROUTER);
-server.use('/api/exercisesSheet', AUTHENTICATION, EXERCISE_SHEET_ROUTER);
-server.use('/api/dailyScores', AUTHENTICATION, DAY_SCORE_ROUTER);
-server.use('/api/auth', AUTH_ROUTER);
+server.use('/api/badges', AUTHENTICATION, BADGE_ROUTER, ERROR_HANDLING);
+server.use('/api/users', AUTHENTICATION, USER_ROUTER, ERROR_HANDLING);
+server.use('/api/exercisesSheet', AUTHENTICATION, EXERCISE_SHEET_ROUTER, ERROR_HANDLING);
+server.use('/api/dailyScores', AUTHENTICATION, DAY_SCORE_ROUTER, ERROR_HANDLING);
+server.use('/api/auth', AUTH_ROUTER, ERROR_HANDLING);
 
 server.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
