@@ -51,6 +51,13 @@
     /* Microsoft Edge */
     color: $textDisabled;
   }
+
+  &.hasError {
+    border-color: $systemRed;
+    &:hover {
+      border-color: $systemLightRed;
+    }
+  }
 }
 
 .input-component__container {
@@ -88,6 +95,14 @@
   &.labelHighLight {
     color: $primaryColor;
   }
+
+  &.hasError {
+    color: $systemRed;
+
+    &.isHovered {
+      color: $systemLightRed;
+    }
+  }
 }
 
 .input-component__visibility-toggle {
@@ -99,4 +114,19 @@
   > svg {
     width: 20px;
   }
+}
+
+.errorSpan {
+  color: $systemRed;
+  font-size: 10px;
+  padding-left: 8px;
+  position: absolute;
+  bottom: -12px;
+}
+
+.input-component__unity-measurement-tag {
+  color: $fontColor;
+  position: absolute;
+  right: 24px;
+  top: 18px;
 }

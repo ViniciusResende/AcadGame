@@ -22,4 +22,12 @@ No geral, espera-se que as rotas escritas nos arquivos dessa pasta sejam curtas,
 O padrão de nomenclatura dos arquivos dessa pasta é: "\<nomeDaEntidade\>Router" (para adaptadores de requisições http por exemplo) e "\<nomeDaEntidade\>DBAdapter" (para adaptadores de conexão com o banco de dados).  
   
 ## **infrastructure**
-Como o próprio nome sugere, cuida da **infraestrutura** do sistema. Nessa pasta estão arquivos de modelo de entidades no banco de dados escolhido, além de outros arquivos de configuração, como um ".env", por exemplo.  
+Como o próprio nome sugere, cuida da infraestrutura do sistema. Nessa pasta estão arquivos de modelo de entidades no banco de dados escolhido, além de outros arquivos de configuração, como um ".env", por exemplo.  
+  
+## **utils**
+Nesse diretório estão presentes arquivos úteis para o desenvolvimento, como middlewares, classes e funções auxiliares. Não é uma pasta que faz, por padrão, parte da arquitetura hexagonal, mas facilita e modulariza o desenvolvimento da aplicação.
+  
+---
+  
+Nas pastas **domains**, **app** e  **interface**, espera-se que haja arquivos nomeados para as entidades, que serão todos importados por um único arquivo "_index.js_" que, por sua vez, será o arquivo que exportará cada um dos métodos e classes definidos nos arquivos importados. O arquivo "_index.js_" é a face de comunicação com os outros níveis do hexágono.  
+  

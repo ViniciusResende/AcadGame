@@ -1,37 +1,27 @@
-const USER_SERVICES = require('../../gates/user/userExitGate');
+const authExitGate = require('../../gates/authentication/authExitGate');
 
-const AUTH_GATE = require('../../gates/authentication/authExitGate');
+class authDomain {
+   async registerUser(userInfo) {
+      try {
+         const TOKEN = await authExitGate.registerUser(userInfo);
 
-class Auth {
-    async login(req, res, next) {
-        try {
-            const USER = await USER_SERVICES.getUserByEmail(req.body.email);
-            if (!USER) {
-                throw new Error('Usuário não cadastrado.');
-            }
+         return TOKEN;
+      }
+      catch(err) {
+         throw err;
+      }
+   }
 
-            AUTH_GATE.makeLogin(req, res, next);
-        }
-        catch (err) {
-            throw err;
-        }
-    }
+   async authenticateUser(email, password) {
+      try {
+         const TOKEN = authExitGate.authenticateUser(email, password);
 
-    isLoggedIn(req, res, next) {
-        AUTH_GATE.checkAuthentication(req, res, next);
-    }
-
-    logout(req) {
-        try {
-            if(!req.isAuthenticated())
-                throw new Error('Você ainda não efetuou login.');
-
-            AUTH_GATE.makeLogout(req);
-        }
-        catch (err) {
-            throw err;
-        }
-    }
+         return TOKEN;
+      }
+      catch(err) {
+         throw err;
+      }
+   }
 }
 
-module.exports = new Auth;
+module.exports = new authDomain;

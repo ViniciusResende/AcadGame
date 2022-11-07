@@ -13,7 +13,9 @@ class UserDatabaseAdapter {
             userInfo.password = await bcrypt.hash(userInfo.password, SALT_ROUNDS);
 
             userInfo.score = 0;
-            await USER.create(userInfo);
+            const NEW_USER = await USER.create(userInfo);
+
+            return NEW_USER;
         } 
         catch (err) {
             throw err;
@@ -43,10 +45,6 @@ class UserDatabaseAdapter {
                 }
             });
 
-            if (!QUERIED_USER) {
-                throw new Error(`Não encontramos um usuário com a ID informada.`);
-            }
-
             return QUERIED_USER;
         }
         catch (err) {
@@ -61,7 +59,7 @@ class UserDatabaseAdapter {
                     email: email
                 },
                 attributes: {
-                    exclude: this.unnecessaryAttributes
+                    exclude: ['createdAt', 'updatedAt']
                 }
             });
 
@@ -129,16 +127,16 @@ class UserDatabaseAdapter {
         }
     }
 
-    async updateUser(updateUserId, userInfo){
+    async updateUser(userId, userInfo){
         try {
             let updateUser =  await USER.findOne({
                 where: {
-                    id: updateUserId
+                    id: userId
                 }
             });
             
             if(!updateUser){
-                throw new Error('O usuário a ser atualizado não existe.');
+                return;
             }
             
             if( Object.keys(userInfo).includes('password') ){
@@ -161,11 +159,11 @@ class UserDatabaseAdapter {
         }
     }
 
-    async eraseAccount(deletionId) {
+    async eraseAccount(userId) {
         try {
             await USER.destroy({
                 where: {
-                    id: deletionId
+                    id: userId
                 }
             });
         }

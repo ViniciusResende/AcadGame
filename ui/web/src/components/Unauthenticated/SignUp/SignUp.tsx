@@ -8,6 +8,22 @@ import Checkbox from '../../Common/Checkbox';
 import Input from '../../Common/Input';
 import UnauthenticatedPage from '../Page';
 
+/** Helpers */
+import {
+  dispatchFeedbackToast,
+  emailValidation,
+  passwordValidation,
+  passwordMatchValidation,
+  requiredValidation,
+} from '../../../helpers';
+
+/** Enums */
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../../data/enums/ToastEnums';
+
 /** Styles */
 import './SignUp.scss';
 
@@ -25,6 +41,10 @@ type SignUpComponentProps = {
 };
 function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
   const [hasAcceptedTerms, setHasAcceptedTerms] = useState(false);
+  const [thereIsInputErrors, setThereIsInputErrors] = useState(false);
+  const [doesPasswordsMatchError, setDoesPasswordsMatch] = useState<
+    string | undefined
+  >(undefined);
 
   function SignUpIllustration() {
     return (
@@ -36,12 +56,52 @@ function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
     );
   }
 
+  function handleFormValidation(
+    nickname: string,
+    email: string,
+    password: string,
+    passwordCheck: string
+  ): boolean {
+    if (!nickname || !email || !password || !passwordCheck) {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.SIGN_UP_FORM_NOT_FULFILLED,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+
+      return true;
+    }
+
+    const errorPasswordMatch = passwordMatchValidation(password, passwordCheck);
+    if (!errorPasswordMatch) return false;
+
+    setDoesPasswordsMatch(errorPasswordMatch);
+    dispatchFeedbackToast({
+      type: ToastConfigTypesEnum.FAIL,
+      message: ToastConfigMessagesEnum.PASSWORD_DO_NOT_MATCH_FAIL_MESSAGE,
+      timeToClose: ToastConfigDurationEnum.MEDIUM,
+    });
+
+    return true;
+  }
+
   function onSubmitForm(event: React.FormEvent) {
     event.preventDefault();
     //@ts-ignore
-    const { nickname, email, password } = event.target;
+    let { nickname, email, password, password_check } = event.target;
+    nickname = nickname.value;
+    email = email.value;
+    password = password.value;
+    password_check = password_check.value;
 
-    signUpAuth(nickname.value, email.value, password.value);
+    const thereIsFormErrors = handleFormValidation(
+      nickname,
+      email,
+      password,
+      password_check
+    );
+
+    if (!thereIsFormErrors) signUpAuth(nickname, email, password);
   }
 
   function LoginContent() {
@@ -54,12 +114,18 @@ function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
             controlId="nickname"
             inputLabel="Apelido"
             name="nickname"
+            validatorFunctions={[requiredValidation, emailValidation]}
+            onValidationError={() => setThereIsInputErrors(true)}
+            onValidationSuccess={() => setThereIsInputErrors(false)}
           />
           <Input
             className="sign-up-page__input"
             controlId="email"
             inputLabel="E-mail"
             name="email"
+            validatorFunctions={[requiredValidation, emailValidation]}
+            onValidationError={() => setThereIsInputErrors(true)}
+            onValidationSuccess={() => setThereIsInputErrors(false)}
           />
           <Input
             className="sign-up-page__input"
@@ -67,6 +133,10 @@ function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
             inputLabel="Senha"
             type="password"
             name="password"
+            validatorFunctions={[requiredValidation, passwordValidation]}
+            customErrorMessage={doesPasswordsMatchError}
+            onValidationError={() => setThereIsInputErrors(true)}
+            onValidationSuccess={() => setThereIsInputErrors(false)}
           />
           <Input
             className="sign-up-page__input"
@@ -74,6 +144,10 @@ function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
             inputLabel="Confirmar Senha"
             type="password"
             name="password_check"
+            validatorFunctions={[requiredValidation]}
+            customErrorMessage={doesPasswordsMatchError}
+            onValidationError={() => setThereIsInputErrors(true)}
+            onValidationSuccess={() => setThereIsInputErrors(false)}
           />
           <div className="sign-up-page__accept-terms">
             <Checkbox onClick={() => setHasAcceptedTerms((prev) => !prev)} />
@@ -86,7 +160,7 @@ function SignUpComponent({ signUpAuth }: SignUpComponentProps) {
             modifier="default"
             icon={<LogInIcon />}
             type="submit"
-            disabled={!hasAcceptedTerms}
+            disabled={!hasAcceptedTerms || thereIsInputErrors}
           >
             Entrar
           </Button>

@@ -6,6 +6,12 @@
 /** Enums */
 import { UserProfilePictureEnum } from '../../../data/enums/UserEnums';
 
+/** Interfaces */
+import {
+  IExerciseToAddInfo,
+  ISheetExerciseInfo,
+} from '../../../data/interfaces/ExercisesSheetInterfaces';
+
 /**
  * API data representation for general HTTP responses' structure.
  */
@@ -26,7 +32,7 @@ export interface IApiAcadAuthResponse {
  * API data representation for general User Get Data responses'.
  */
 export interface IApiUserGetDataResponse {
-  id: string;
+  id: string | undefined;
   data: unknown;
 }
 
@@ -48,8 +54,24 @@ export interface IApiUserGetDataWeeklyHistogramResponse
   extends IApiUserGetDataResponse {
   data: {
     date: string;
-    dailyPoints: number;
+    score: number;
   }[];
+}
+
+/**
+ * API data representation for Get User Exercises Sheets response.
+ */
+export interface IApiAcadExercisesSheetGetUserSheetResponse {
+  sheetId: string;
+  exercises: ISheetExerciseInfo[];
+}
+
+/**
+ * API data representation for Exercises Sheet Get Available To Add response.
+ */
+export interface IApiAcadExercisesSheetGetAvailableToAddResponse {
+  sheetId: string;
+  availableExercises: IExerciseToAddInfo[];
 }
 
 /**
@@ -75,4 +97,12 @@ export interface IApiAcadSignUpBody {
 export interface IApiAcadUpdateUserInfoBody {
   nickname: string;
   picture: UserProfilePictureEnum;
+}
+
+/**
+ * API Update Sheet Exercise  body.
+ */
+export interface IApiAcadExercisesSheetUpdateExerciseBody {
+  sheetId: string;
+  updatedExercise: ISheetExerciseInfo;
 }

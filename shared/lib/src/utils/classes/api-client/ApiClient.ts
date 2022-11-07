@@ -11,6 +11,7 @@ import {
   ApiClientError,
   RequestAbortedError,
   RequestTimeoutError,
+  ApiClientHttpError,
 } from './ApiClientErrors';
 
 /**
@@ -81,6 +82,11 @@ export class ApiClient {
     clearTimeout(timeoutId);
   }
 
+  async #handleHttpError(response: Response): Promise<ApiClientHttpError> {
+    const responseResolved = await response.json();
+    return new ApiClientHttpError(responseResolved.error, response.status);
+  }
+
   /**
    * Fetches data from the API.
    *
@@ -92,30 +98,25 @@ export class ApiClient {
    * @returns Abortable response object
    */
   fetch(
-    request: Request,
+    baseUrl: string,
+    requestInit: RequestInit,
     query?: URLSearchParams,
     timeout: number = this.#timeout
   ): IAbortableResponse<Response> {
     const controller = new AbortController();
     const { signal } = controller;
-    const requestInit: RequestInit = {};
-    requestInit.body = request.body;
-    requestInit.cache = request.cache;
-    requestInit.credentials = request.credentials;
-    requestInit.headers = request.headers;
-    requestInit.integrity = request.integrity;
-    requestInit.keepalive = request.keepalive;
-    requestInit.method = request.method;
-    requestInit.mode = request.mode;
-    requestInit.referrer = request.referrer;
-    requestInit.referrerPolicy = request.referrerPolicy;
     requestInit.signal = signal;
 
-    const url = this.#getEndpointUrl(request.url, query);
+    const url = this.#getEndpointUrl(baseUrl, query);
     let rejectPromise: (error: Error) => void;
     const promise: Promise<Response> = new Promise((resolve, reject) => {
       rejectPromise = reject;
-      fetch(url, requestInit).then(resolve).catch(reject);
+      fetch(url, requestInit)
+        .then(async (response) => {
+          if (response.ok) return resolve(response);
+          throw await this.#handleHttpError(response);
+        })
+        .catch(reject);
     });
     const fetchReturn = {
       abort: (error: ApiClientError = new RequestAbortedError()) => {

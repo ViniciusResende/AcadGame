@@ -4,8 +4,21 @@ import React, { useEffect, useState } from 'react';
 /** React components */
 import Profile from '../../components/Authenticated/Profile';
 
+/** React Hooks */
+import useSecurity from '../middlewares/useSecurity';
+
 /** Library */
 import Lib, { UserProfilePictureEnum } from 'acad-game-lib';
+
+/** Helpers */
+import { dispatchFeedbackToast } from '../../helpers';
+
+/** Enums */
+import {
+  ToastConfigDurationEnum,
+  ToastConfigMessagesEnum,
+  ToastConfigTypesEnum,
+} from '../../data/enums/ToastEnums';
 
 /** Interfaces */
 import {
@@ -23,11 +36,13 @@ const DEFAULT_USER_INFO_PAYLOAD = {
 const DEFAULT_USER_WEEKLY_HISTOGRAM_PAYLOAD = [
   {
     date: '0000-00-00',
-    dailyPoints: 0,
+    score: 0,
   },
 ];
 
 function RouteProfile() {
+  useSecurity();
+
   const [userInfo, setUserInfo] = useState<IUserInfoData>(
     DEFAULT_USER_INFO_PAYLOAD
   );
@@ -58,7 +73,20 @@ function RouteProfile() {
   async function updateUserInfo(userUpdateInfoBody: IUserUpdateInfoBody) {
     const response = await Lib.user.updateInfo(userUpdateInfoBody);
 
-    if (response) setUserInfo(response.data);
+    if (response) {
+      setUserInfo(response.data);
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.SUCCESS,
+        message: ToastConfigMessagesEnum.PROFILE_SUCCESS_ON_UPDATE_INFO,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    } else {
+      dispatchFeedbackToast({
+        type: ToastConfigTypesEnum.FAIL,
+        message: ToastConfigMessagesEnum.PROFILE_FAIL_ON_UPDATE_INFO,
+        timeToClose: ToastConfigDurationEnum.MEDIUM,
+      });
+    }
   }
 
   return (

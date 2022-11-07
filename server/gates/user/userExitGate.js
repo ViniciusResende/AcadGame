@@ -1,3 +1,5 @@
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 const USER_DB_ADAPTER = require('../../adapters/user/userDBAdapter');
 
 class QueryUser {
@@ -20,11 +22,16 @@ class QueryUser {
             // Assuring there are no necessary information being left behind
             for (const INFO of this.USER_REQUIRED_INFO) {
                 if (!newUser[INFO]) {
-                    throw new Error(`A informação ${INFO} é necessária para concluir o cadastro.`);
+                    let error = new SERVER_ERROR;
+                    error.ServerError(400, `A informação ${INFO} é necessária para concluir o cadastro.`);
+                    
+                    throw error;
                 }
             }
 
-            await USER_DB_ADAPTER.newUser(newUser);
+            const NEW_USER = await USER_DB_ADAPTER.newUser(newUser);
+
+            return NEW_USER;
         }
         catch (err) {
             throw err;
@@ -112,28 +119,31 @@ class QueryUser {
         }
     }
 
-    async updateUserInfo(updateUserId, userInfo) {
+    async updateUserInfo(userId, userInfo) {
         try {
             if (Object.keys(userInfo).length === 0) {
-                throw new Error('É necessário fornecer as alterações desejadas.') ;
+                return;
             }
             
             Object.keys(userInfo).forEach((info) => {
                 if(!this.EVERY_USER_INFO.includes(info)) {
-                    throw new Error(`Uma das propriedades fornecidas não é válida.`);
+                    let error = new SERVER_ERROR;
+                    error.ServerError(400, `Uma das propriedades fornecidas não é válida.`);
+
+                    throw error;
                 }
             });
 
-            await USER_DB_ADAPTER.updateUser(updateUserId, userInfo);
+            await USER_DB_ADAPTER.updateUser(userId, userInfo);
         }
         catch (err) {
             throw err;
         }
     }
 
-    async deleteAccount(deletionUserId) {
+    async deleteAccount(userId) {
         try {
-            await USER_DB_ADAPTER.eraseAccount(deletionUserId);
+            await USER_DB_ADAPTER.eraseAccount(userId);
         }
         catch (err) {
             throw err;

@@ -1,0 +1,136 @@
+@import '../../../styles';
+
+.slider-component {
+  &__container {
+    position: relative;
+
+    &.withArrow {
+      padding: 0 25px;
+    }
+
+    @include forXSmall() {
+      &.withArrow {
+        padding: 0;
+      }
+    }
+  }
+
+  &__wrapper {
+    height: 100%;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &__slide {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    height: 0;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &__currentSlide {
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+
+    &.next {
+      animation: slideleft 0.5s forwards;
+    }
+
+    &.prev {
+      animation: slideright 0.5s forwards;
+    }
+  }
+
+  @keyframes slideleft {
+    0% {
+      transform: translateX(50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes slideright {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    padding: 12px 0;
+    width: 100%;
+  }
+
+  &__dotsBtn {
+    background: $supportDark;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0;
+    height: 13px;
+    margin-right: 8px;
+    width: 13px;
+
+    &:last-child {
+      margin: 0;
+    }
+
+    &.isActive {
+      background: $primaryColor;
+    }
+  }
+
+  &__arrows {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    width: 100%;
+
+    @media (max-width: 540px) {
+      display: none;
+    }
+  }
+
+  &__arrow {
+    background: none;
+    border: none;
+    display: flex;
+    width: 40px;
+
+    > svg {
+      fill: $supportDark;
+
+      &:hover {
+        fill: $fontColor;
+      }
+    }
+  }
+
+  &__arrowLeft {
+    cursor: pointer;
+    left: -7px;
+    padding: 0;
+    position: absolute;
+    top: 45%;
+    transform: rotate(180deg);
+    z-index: 1;
+  }
+
+  &__arrowRight {
+    cursor: pointer;
+    padding: 0;
+    position: absolute;
+    right: -7px;
+    top: 45%;
+    z-index: 1;
+  }
+}

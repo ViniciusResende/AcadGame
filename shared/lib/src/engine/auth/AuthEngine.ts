@@ -5,13 +5,12 @@
 
 /** Enums */
 import { AuthTypeEnum } from '../../data/enums/AuthEnums';
-import { LocalStorageKeysEnum } from '../../utils/classes/local-storage/LocalStorageEnums';
 
 /** Interfaces */
 import { IApiAcadAuthResponse } from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Classes */
-import { LocalStorage } from '../../utils/classes/local-storage/LocalStorage';
+import { Security } from '../../utils/classes/security/Security';
 
 /** Access */
 import { AuthAccess } from '../../access/auth/AuthAccess';
@@ -21,18 +20,9 @@ import { AuthAccess } from '../../access/auth/AuthAccess';
  */
 export class AuthEngine {
   #authAccess: AuthAccess;
-  #localStorage: LocalStorage;
 
   constructor() {
     this.#authAccess = new AuthAccess();
-    this.#localStorage = new LocalStorage();
-  }
-
-  #persistAuthToken(token: string) {
-    this.#localStorage.setLocalStorageItem(
-      LocalStorageKeysEnum.AUTH_TOKEN,
-      token
-    );
   }
 
   async authenticateUser(
@@ -42,9 +32,7 @@ export class AuthEngine {
     let authPayload: IApiAcadAuthResponse | null = null;
     try {
       authPayload = await this.#authAccess.auth(authType, authBody);
-      if (authPayload.token) {
-        this.#persistAuthToken(authPayload.token);
-      }
+      if (authPayload.token) Security.setNewAuthToken(authPayload.token);
     } catch (error) {
       console.log(error);
     }

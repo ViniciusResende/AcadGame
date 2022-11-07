@@ -1,34 +1,33 @@
-const PASSPORT = require('passport');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-class AuthAdapter {
-    login(req, res, next) {
+class authAdapter {
+    generateToken(params = {}) {
         try {
-            PASSPORT.authenticate('local')(req, res, next);
+            const TOKEN = jwt.sign(params, process.env.JWT_SECRET, {
+                expiresIn: process.env.COOKIE_DURATION,
+            });
+            
+            return TOKEN;
         }
         catch (err) {
             throw err;
         }
     }
 
-    isLoggedIn(req, res, next) {
-        if (!req.isAuthenticated()){
-            return next(new Error('Você não está autenticado.'));
-        }
-        
-        return next();
-    }
-
-    logout(req) {
+    async checkPasswords(inputedPassword, hashedPassword) {
         try {
-            req.logOut(err => {            
-                if(err)
-                    throw new Error('Ocorreu um erro ao efetuar logout.');
-            });
+            const MATCH = await bcrypt.compare(inputedPassword, hashedPassword);
+
+            if(!MATCH)
+                return false;
+            else
+                return true;
         }
-        catch (err) {
+        catch(err) {
             throw err;
         }
     }
 }
 
-module.exports = new AuthAdapter;
+module.exports = new authAdapter;

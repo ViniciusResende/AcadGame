@@ -28,5 +28,5 @@ export interface IUserUpdateInfoBody {
  */
 export interface IUserWeeklyHistogramElementData {
   date: string;
-  dailyPoints: number;
+  score: number;
 }

@@ -1,33 +1,54 @@
+const authDomain = require('../../domains/authentication/authDomain');
+
 const ROUTER = require('express').Router();
 
-const AUTH_DOMAIN = require('../../domains/authentication/authDomain');
+ROUTER.post('/register', async(req, res, next) => {
+    try {
+        const USER_INFO = req.body;
 
-ROUTER.post('/login', 
-    (req, res, next) => {
-        if (!req.isAuthenticated())
-            AUTH_DOMAIN.login(req, res, next);
-        else
-            res.status(400).send('Você já está logado!');
-    },
-    async (req, res, next) => {
-        try {
-            res.status(200).send({
-                token: req.cookies['connect.sid'],
-                message: 'Enjoy your token! :)'
-            });
+        const TOKEN = await authDomain.registerUser(USER_INFO);
+
+        const responseObject = {
+            data: {
+                token: TOKEN,
+                message: 'Enjoy your token!'
+            }
         }
-        catch (err) {
-            next(err);
+
+        res.status(200).send(responseObject);
+    }
+    catch(err) {
+        err.message = {
+            token: null,
+            message: err.message
         }
+        
+        next(err);
+    }
 });
 
-ROUTER.delete('/logout', (req, res, next) => {
+ROUTER.post('/authenticate', async(req, res, next) => {
     try {
-        AUTH_DOMAIN.logout(req);
+        const EMAIL = req.body.email;
+        const PASSWORD = req.body.password;
 
-        res.status(200).send('Logout efetuado com sucesso.');
+        const TOKEN = await authDomain.authenticateUser(EMAIL, PASSWORD);
+
+        const responseObject = {
+            data: {
+                token: TOKEN,
+                message: 'Enjoy your token!'
+            }
+        }
+
+        res.status(200).send(responseObject);
     }
-    catch (err) {
+    catch(err) {
+        err.message = {
+            token: null,
+            message: err.message
+        }
+        
         next(err);
     }
 });

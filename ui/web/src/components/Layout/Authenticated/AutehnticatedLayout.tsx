@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom';
 
 /** React Component */
 import Header from './elements/Header';
+import Toast from '../../Common/Toast';
+
 /** Styles */
 import './AuthenticatedLayout.scss';
 
@@ -14,6 +16,7 @@ function AuthenticatedLayout() {
         <Header />
         <div className="page-content">
           <Outlet />
+          <Toast />
         </div>
       </div>
     </Suspense>
