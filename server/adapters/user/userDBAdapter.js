@@ -113,11 +113,11 @@ class UserDatabaseAdapter {
         }
     }
 
-    async updateUser(updateUserId, userInfo){
+    async updateUser(userId, userInfo){
         try {
             let updateUser =  await USER.findOne({
                 where: {
-                    id: updateUserId
+                    id: userId
                 }
             });
             
