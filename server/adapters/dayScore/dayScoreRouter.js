@@ -62,6 +62,19 @@ Router.get('/weekPodium', async (req, res) => {
     catch(err) {
         res.status(400).send(err.message);
     }
-})
+});
+
+Router.get('/user/ranking', async (req, res) => {
+    try {
+        const userId = req.userId;
+
+        const userRank = await DayScore.getUserWeeklyRank(userId);
+
+        res.status(200).json({ data: userRank });
+    }
+    catch(err) {
+        res.status(400).send(err.message);
+    }
+});
 
 module.exports = Router;
