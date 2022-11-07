@@ -1,9 +1,6 @@
 const Router = require('express').Router();
-const authMiddleware = require('../../utils/authMiddleware');
 
 const QueryExerciseSheet = require('../../domains/exerciseSheet/exerciseSheetDomain');
-
-Router.use(authMiddleware);
 
 Router.get('/', async (req, res) => {
     const USER_ID = req.userId;

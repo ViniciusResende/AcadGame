@@ -1,9 +1,6 @@
 const Router = require('express').Router();
-const authMiddleware = require('../../utils/authMiddleware');
 
 const DayScore = require('../../domains/dayScore/dayScoreDomain');
-
-Router.use(authMiddleware);
 
 Router.get('/', async (req, res) => {
     try {

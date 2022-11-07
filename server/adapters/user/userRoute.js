@@ -1,9 +1,6 @@
 const ROUTER = require('express').Router();
-const authMiddleware = require('../../utils/authMiddleware');
 
 const userDomain = require('../../domains/user/userDomain');
-
-ROUTER.use(authMiddleware);
 
 ROUTER.get('/', async (req, res) => {
     try {
