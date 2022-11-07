@@ -32,7 +32,7 @@ class QueryExerciseSheetDB {
             return returnValues;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
@@ -58,7 +58,7 @@ class QueryExerciseSheetDB {
             return returnValues;
         }
         catch(err) {
-            return err;
+            throw err;
         }
     }
 
