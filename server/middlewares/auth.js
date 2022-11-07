@@ -16,8 +16,6 @@ module.exports = (req, res, next) => {
     if(!/^Bearer$/i.test(scheme))
         return res.status(401).send({ error: 'Malformatted token' });
 
-    console.log(process.env.JWT_SECRET);
-
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if(err)
             return res.status(401).send({ error: 'Invalid token' });
