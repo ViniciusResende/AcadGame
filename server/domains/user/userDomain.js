@@ -83,13 +83,9 @@ class User {
         }
     }
 
-    async deleteUserAccount(reqUserId, deletionUserId) {
+    async deleteUserAccount(userId) {
         try {
-            if (reqUserId != deletionUserId) {
-                throw new Error('Você não pode deletar a conta de outra pessoa.');
-            }
-
-            await QUERY_USER.deleteAccount(deletionUserId);
+            await QUERY_USER.deleteAccount(userId);
         }
         catch (err) {
             throw err;
