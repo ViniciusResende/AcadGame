@@ -1,5 +1,5 @@
 const ROUTER = require('express').Router();
-const authMiddleware = require('../../middlewares/auth');
+const authMiddleware = require('../../utils/authMiddleware');
 
 const userDomain = require('../../domains/user/userDomain');
 

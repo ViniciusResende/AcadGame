@@ -1,5 +1,5 @@
 const Router = require('express').Router();
-const authMiddleware = require('../../middlewares/auth');
+const authMiddleware = require('../../utils/authMiddleware');
 
 const DayScore = require('../../domains/dayScore/dayScoreDomain');
 
