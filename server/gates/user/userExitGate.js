@@ -3,7 +3,7 @@ const SERVER_ERROR = require('../../utils/serverErrors');
 const USER_DB_ADAPTER = require('../../adapters/user/userDBAdapter');
 
 class QueryUser {
-    EVERY_USER_INFO = ['nickname', 'email', 'password', 'score'];
+    EVERY_USER_INFO = ['nickname', 'profilePicture', 'email', 'password', 'score'];
 
     USER_REQUIRED_INFO = ['nickname', 'email', 'password'];
 
