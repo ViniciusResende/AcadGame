@@ -2,7 +2,7 @@ const authDomain = require('../../domains/authentication/authDomain');
 
 const ROUTER = require('express').Router();
 
-ROUTER.post('/register', async(req, res) => {
+ROUTER.post('/register', async(req, res, next) => {
     try {
         const USER_INFO = req.body;
 
@@ -18,14 +18,16 @@ ROUTER.post('/register', async(req, res) => {
         res.status(200).send(responseObject);
     }
     catch(err) {
-        res.status(err.statusCode || 500).send({
+        err.message = {
             token: null,
             message: err.message
-        });
+        }
+        
+        next(err);
     }
 });
 
-ROUTER.post('/authenticate', async(req, res) => {
+ROUTER.post('/authenticate', async(req, res, next) => {
     try {
         const EMAIL = req.body.email;
         const PASSWORD = req.body.password;
@@ -42,10 +44,12 @@ ROUTER.post('/authenticate', async(req, res) => {
         res.status(200).send(responseObject);
     }
     catch(err) {
-        res.status(err.statusCode || 500).send({
+        err.message = {
             token: null,
             message: err.message
-        });
+        }
+        
+        next(err);
     }
 });
 

@@ -2,7 +2,7 @@ const Router = require('express').Router();
 
 const DayScore = require('../../domains/dayScore/dayScoreDomain');
 
-Router.get('/', async (req, res) => {
+Router.get('/', async (req, res, next) => {
     try {
         const USER_ID = req.userId;
 
@@ -11,11 +11,11 @@ Router.get('/', async (req, res) => {
         res.status(200).json(DAY_SCORES);
     }
     catch(err) {
-        res.status(err.statusCode || 500).send(err.message);
+        next(err);
     }
 });
 
-Router.get('/user/last7days', async (req, res) => {
+Router.get('/user/last7days', async (req, res, next) => {
     try {
         const USER_ID = req.userId;
 
@@ -28,11 +28,11 @@ Router.get('/user/last7days', async (req, res) => {
         res.status(200).json(responseObject);
     }
     catch(err) {
-        res.status(err.statusCode || 500).send(err.message);
+        next(err);
     }
 });
 
-Router.post('/user/add', async (req, res) => {
+Router.post('/user/add', async (req, res, next) => {
     try {
         const USER_ID = req.userId;
         const SENT_EXERCISES_INFO = req.body;
@@ -46,22 +46,22 @@ Router.post('/user/add', async (req, res) => {
         });
     }
     catch(err) {
-        res.status(err.statusCode || 500).send(err.message);
+        next(err);
     }
 });
 
-Router.get('/weekPodium', async (req, res) => {
+Router.get('/weekPodium', async (req, res, next) => {
     try {
         const WEEK_PODIUM = await DayScore.getWeekPodium();
 
         res.status(200).json({ data: WEEK_PODIUM });
     }
     catch(err) {
-        res.status(err.statusCode || 500).send(err.message);
+        next(err);
     }
 });
 
-Router.get('/user/ranking', async (req, res) => {
+Router.get('/user/ranking', async (req, res, next) => {
     try {
         const userId = req.userId;
 
@@ -70,7 +70,7 @@ Router.get('/user/ranking', async (req, res) => {
         res.status(200).json({ data: userRank });
     }
     catch(err) {
-        res.status(err.statusCode || 500).send(err.message);
+        next(err);
     }
 });
 
