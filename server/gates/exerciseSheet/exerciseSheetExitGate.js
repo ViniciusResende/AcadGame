@@ -1,5 +1,7 @@
 const ExerciseSheetDBAdapter = require('../../adapters/exerciseSheet/exerciseSheetDBAdapter');
 
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 class QueryExerciseSheetDB {
     EVERY_USER_EXERCISE_INFO = ['sheetId', 'userId', 'exerciseId', 'load', 'time', 'numRepetitions', 'numSets', 'isLoad'];
     LOAD_USER_EXERCISE_INFO = ['load', 'numSets', 'numRepetitions'];
@@ -111,7 +113,10 @@ class QueryExerciseSheetDB {
     async putUserExercise(userExerciseIds, userExerciseInfo) {
         try {
             if(Object.keys(userExerciseInfo).length === 0) {
-                throw new Error('É necessário fornecer as alterações desejadas.');
+                let error = new SERVER_ERROR;
+                error.ServerError(400, 'É necessário fornecer as alterações desejadas.');
+
+                throw error;
             }
 
             Object.keys(userExerciseInfo).forEach((info) => {
