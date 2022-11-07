@@ -19,7 +19,7 @@ ROUTER.get('/me', async (req, res, next) => {
 
         const SINGLE_USER = await userDomain.getSingleUser(USER_ID);
 
-        res.status(200).json(SINGLE_USER);
+        res.status(200).json({data: SINGLE_USER});
     }
     catch (err) {
         next(err);
@@ -65,7 +65,7 @@ ROUTER.get('/top/:rank', async (req, res, next) => {
     }
 });
 
-ROUTER.put('/', async (req, res, next) => {
+ROUTER.put('/me', async (req, res, next) => {
     try {
         const USER_INFO = req.body.userInfo;
 
@@ -73,7 +73,7 @@ ROUTER.put('/', async (req, res, next) => {
 
         await userDomain.updateUserInfo(USER_ID, USER_INFO);
 
-        res.status(200).send('Usuário atualizado com sucesso!');
+        res.status(200).send({data: 'Usuário atualizado com sucesso!'});
     }
     catch (err) {
         next(err);
