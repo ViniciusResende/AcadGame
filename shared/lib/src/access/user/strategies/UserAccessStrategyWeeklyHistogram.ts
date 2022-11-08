@@ -26,8 +26,6 @@ export class UserAccessStrategyWeeklyHistogram extends UserAccessStrategy {
   async getData(
     token: string
   ): Promise<IApiUserGetDataWeeklyHistogramResponse> {
-    if (this.#userWeeklyHistogramCache) return this.#userWeeklyHistogramCache;
-
     const getUserWeeklyHistogramResponse = await this.api.userWeeklyHistogram(
       token
     );
