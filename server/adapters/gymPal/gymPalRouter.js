@@ -34,4 +34,13 @@ ROUTER.delete('/remove', async (req, res, next) => {
     catch (err) {
         next(err);
     }
-})
+});
+
+ROUTER.put('/accept', async (req, res, next) => {
+    try {
+        console.log('Essa rota tem por objetivo permitir ao usuário aceitar uma das solicitações enviadas');
+    }
+    catch (err) {
+        next(err);
+    }
+});
