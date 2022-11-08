@@ -9,6 +9,8 @@
   }
 
   &__picture {
+    border: 1px solid $secondaryColor;
+    border-radius: 50%;
     width: 2.75em;
   }
 
@@ -17,6 +19,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  &__points {
+    white-space: nowrap;
   }
 
   &__trophy {
