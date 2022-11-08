@@ -17,6 +17,22 @@ export interface IRankingUserInfo {
 }
 
 /**
+ * Ranking Current User Info body interface.
+ */
+export interface IRankingCurrentUserInfo extends IRankingUserInfo {
+  userRank: number;
+}
+
+/**
+ * User Ranking Info body interface.
+ */
+export interface IUserRankingInfo {
+  firstPlaceRankUser: IRankingUserInfo;
+  averageScore: number;
+  userRankInfo: IRankingCurrentUserInfo;
+}
+
+/**
  * Week Ranking Info body interface.
  */
 export interface IWeekRankingInfo {
