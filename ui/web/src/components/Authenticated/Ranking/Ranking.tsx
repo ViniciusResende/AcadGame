@@ -5,13 +5,19 @@ import React from 'react';
 import PodiumUser from './elements/PodiumUser';
 import ProfileUser from './elements/ProfileUser';
 import ProfileUserChart from './elements/ProfileUserChart';
+import Slider from '../../Common/Slider';
 import WeekPodiumChart from './elements/WeekPodiumChart';
+import WeekRankCard from './elements/WeekRankCard';
 
 /** React Template Components */
 import DefaultCardBox from '../../Template/DefaultCardBox';
 
+/** Helpers */
+import { chunkArray } from '../../../helpers';
+
 /** Interfaces */
 import {
+  IRankingUserInfo,
   IUserRankingInfo,
   IWeekRankingInfo,
 } from '../../../data/interfaces/RankingInterfaces';
@@ -20,7 +26,19 @@ import {
 import './Ranking.scss';
 
 /** Assets */
-import { MetricsChartIcon, WifiSignalIcon } from '../../../assets/svg/icons';
+import {
+  CalendarStarIcon,
+  MetricsChartIcon,
+  WifiSignalIcon,
+} from '../../../assets/svg/icons';
+
+/** Constants */
+const NON_PODIUM_PER_RANK_CARD = 5;
+const PODIUM_USERS_AMOUNT = 4;
+
+function retrieveCardBeginPosition(cardChunkIdx: number) {
+  return cardChunkIdx * NON_PODIUM_PER_RANK_CARD + PODIUM_USERS_AMOUNT + 1;
+}
 
 type RankingComponentProps = {
   userRanking: IUserRankingInfo;
@@ -30,6 +48,11 @@ function RankingComponent({
   userRanking,
   weekRankingInfo,
 }: RankingComponentProps) {
+  const chunks = chunkArray<IRankingUserInfo>(
+    weekRankingInfo.nonPodiumUsers,
+    NON_PODIUM_PER_RANK_CARD
+  );
+
   return (
     <div className="ranking-page__container">
       <section className="ranking-page__upper-cards">
@@ -54,6 +77,24 @@ function RankingComponent({
           <div className="ranking-page__rank-profile-card">
             <ProfileUser profileUserInfo={userRanking.userRankInfo} />
             <ProfileUserChart userRankingInfo={userRanking} />
+          </div>
+        </DefaultCardBox>
+      </section>
+      <section className="ranking-page__down-cards">
+        <DefaultCardBox icon={<CalendarStarIcon />} title="Ranking da Semana">
+          <div className="ranking-page__week-rank-card">
+            <Slider slidesToShow={5} autoplay={false}>
+              {chunkArray<IRankingUserInfo>(
+                weekRankingInfo.nonPodiumUsers,
+                NON_PODIUM_PER_RANK_CARD
+              ).map((nonPodiumUsersChunk, chunkIdx) => (
+                <WeekRankCard
+                  key={nonPodiumUsersChunk[0].userId}
+                  beginPosition={retrieveCardBeginPosition(chunkIdx)}
+                  rankCardUsers={nonPodiumUsersChunk}
+                />
+              ))}
+            </Slider>
           </div>
         </DefaultCardBox>
       </section>
