@@ -27,6 +27,7 @@ import QuestionPersonIcon from './question-person.svg';
 import StarPersonIcon from './star-person.svg';
 import ToDoListIcon from './todo-list.svg';
 import TrophyStarIcon from './trophy-star.svg';
+import WifiSignalIcon from './wifi-signal.svg';
 import XMarkIcon from './xmark.svg';
 
 export {
@@ -59,5 +60,6 @@ export {
   StarPersonIcon,
   ToDoListIcon,
   TrophyStarIcon,
+  WifiSignalIcon,
   XMarkIcon,
 };
