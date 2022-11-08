@@ -1,5 +1,5 @@
 /** React imports */
-import React from 'react';
+import React, { useState } from 'react';
 
 /** React Components */
 import PodiumUser from './elements/PodiumUser';
@@ -11,6 +11,9 @@ import WeekRankCard from './elements/WeekRankCard';
 
 /** React Template Components */
 import DefaultCardBox from '../../Template/DefaultCardBox';
+
+/** React Hooks */
+import { useResize } from '../../../hooks';
 
 /** Helpers */
 import { chunkArray } from '../../../helpers';
@@ -48,10 +51,25 @@ function RankingComponent({
   userRanking,
   weekRankingInfo,
 }: RankingComponentProps) {
-  const chunks = chunkArray<IRankingUserInfo>(
-    weekRankingInfo.nonPodiumUsers,
-    NON_PODIUM_PER_RANK_CARD
+  const [rankCardsAmount, setRankCardsAmount] = useState<number>(
+    calcRankCards()
   );
+
+  function calcRankCards(): number {
+    const { innerWidth } = window;
+
+    if (innerWidth > 1500) return 5;
+    else if (innerWidth > 1210) return 4;
+    else if (innerWidth > 950) return 3;
+    else if (innerWidth > 700) return 2;
+
+    return 1;
+  }
+
+  function onResize() {
+    setRankCardsAmount(calcRankCards());
+  }
+  useResize(onResize);
 
   return (
     <div className="ranking-page__container">
@@ -83,7 +101,7 @@ function RankingComponent({
       <section className="ranking-page__down-cards">
         <DefaultCardBox icon={<CalendarStarIcon />} title="Ranking da Semana">
           <div className="ranking-page__week-rank-card">
-            <Slider slidesToShow={5} autoplay={false}>
+            <Slider slidesToShow={rankCardsAmount} autoplay={false}>
               {chunkArray<IRankingUserInfo>(
                 weekRankingInfo.nonPodiumUsers,
                 NON_PODIUM_PER_RANK_CARD
