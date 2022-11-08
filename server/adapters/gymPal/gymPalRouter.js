@@ -53,3 +53,5 @@ ROUTER.delete('/reject', async (req, res, next) => {
         next(err);
     }
 });
+
+module.exports = ROUTER;
