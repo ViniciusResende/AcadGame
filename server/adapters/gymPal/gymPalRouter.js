@@ -38,7 +38,7 @@ ROUTER.delete('/remove', async (req, res, next) => {
 
 ROUTER.put('/accept', async (req, res, next) => {
     try {
-        console.log('Essa rota tem por objetivo permitir ao usuário aceitar uma das solicitações enviadas');
+        res.status(200).send('Essa rota tem por objetivo permitir ao usuário aceitar uma das solicitações enviadas');
     }
     catch (err) {
         next(err);
