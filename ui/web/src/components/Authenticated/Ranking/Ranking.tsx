@@ -41,7 +41,11 @@ function RankingComponent({
             </div>
             <div className="ranking-page__podium-users">
               {weekRankingInfo.podiumUsers.map((podiumUser, idx) => (
-                <PodiumUser podiumUserInfo={podiumUser} position={idx + 1} />
+                <PodiumUser
+                  key={podiumUser.userId}
+                  podiumUserInfo={podiumUser}
+                  position={idx + 1}
+                />
               ))}
             </div>
           </div>
