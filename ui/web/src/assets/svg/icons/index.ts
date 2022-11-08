@@ -2,6 +2,7 @@ import AddSquareIcon from './add-square.svg';
 import BarsIcon from './bars.svg';
 import BullseyeArrowIcon from './bullseye-arrow.svg';
 import CalendarIcon from './calendar.svg';
+import CalendarStarIcon from './calendar-star.svg';
 import CheckIcon from './check.svg';
 import ChevronIcon from './chevron.svg';
 import ChevronLightIcon from './chevron-light.svg';
@@ -35,6 +36,7 @@ export {
   BarsIcon,
   BullseyeArrowIcon,
   CalendarIcon,
+  CalendarStarIcon,
   CheckIcon,
   ChevronIcon,
   ChevronLightIcon,
