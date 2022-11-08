@@ -1,0 +1,32 @@
+@import '../../../../../styles';
+
+.profile-user {
+  &__container {
+    align-items: center;
+    display: flex;
+    gap: 1.25em;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 19em;
+  }
+
+  &__picture {
+    border: 1px solid $secondaryColor;
+    border-radius: 50%;
+    width: 5.5em;
+  }
+
+  &__content {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+    justify-content: space-evenly;
+  }
+
+  &__info {
+    color: $secondaryColor;
+    font-size: 1em;
+    line-height: 1.375em;
+  }
+}
