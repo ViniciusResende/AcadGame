@@ -1,6 +1,6 @@
 export const BAR_CHART_COLOR = '#ffb703';
 
-export const WeeklyUserChartOptions = {
+export const WeekPodiumChartOptions = {
   responsive: true,
   maintainAspectRatio: false,
   indexAxis: 'y' as 'y',

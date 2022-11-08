@@ -11,7 +11,7 @@ import {
 } from './WeekPodiumChartUtils';
 
 /** Constants */
-import { WeeklyUserChartOptions } from './WeekPodiumChartConstants';
+import { WeekPodiumChartOptions } from './WeekPodiumChartConstants';
 
 /** Styles */
 import './WeekPodiumChart.scss';
@@ -34,7 +34,7 @@ function WeekPodiumChartComponent({
     <div className="week-podium-chart__container">
       <BarChartTemplate
         data={chartData}
-        options={WeeklyUserChartOptions}
+        options={WeekPodiumChartOptions}
         height={440}
       />
     </div>
