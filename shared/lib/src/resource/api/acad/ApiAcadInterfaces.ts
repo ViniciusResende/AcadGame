@@ -11,7 +11,10 @@ import {
   IExerciseToAddInfo,
   ISheetExerciseInfo,
 } from '../../../data/interfaces/ExercisesSheetInterfaces';
-import { IRankingUserInfo } from '../../../data/interfaces/RankingInterfaces';
+import {
+  IRankingCurrentUserInfo,
+  IRankingUserInfo,
+} from '../../../data/interfaces/RankingInterfaces';
 
 /**
  * API data representation for general HTTP responses' structure.
@@ -73,6 +76,15 @@ export interface IApiAcadExercisesSheetGetUserSheetResponse {
 export interface IApiAcadExercisesSheetGetAvailableToAddResponse {
   sheetId: string;
   availableExercises: IExerciseToAddInfo[];
+}
+
+/**
+ * API data representation for Get Current User Ranking response.
+ */
+export interface IApiAcadRankingGetUserRankInfoResponse {
+  firstPlaceRankUser: IRankingUserInfo;
+  averageScore: number;
+  userRankInfo: IRankingCurrentUserInfo;
 }
 
 /**
