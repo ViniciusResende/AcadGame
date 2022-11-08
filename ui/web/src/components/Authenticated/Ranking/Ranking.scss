@@ -11,11 +11,17 @@
   }
 
   &__upper-cards {
-    align-items: flex-start;
-    display: flex;
-    gap: 1em;
-    justify-content: space-between;
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas: 'podium podium podium .';
     width: 100%;
+
+    .default-card-box__container {
+      width: 100%;
+      &:first-child {
+        grid-area: podium;
+      }
+    }
   }
 
   &__podium-card {
@@ -27,6 +33,23 @@
     width: 100%;
   }
 
+  &__podium-chart {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3.25em;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__podium-line {
+    background-color: $secondaryColor;
+    height: 1px;
+    margin-bottom: 7px;
+    margin-left: 5%;
+    width: 80%;
+  }
+
   &__podium-users {
     align-items: flex-start;
     display: flex;
@@ -35,7 +58,14 @@
     justify-content: space-evenly;
   }
 
-  &__rank-profile {
+  &__rank-profile-card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: space-between;
+    margin-top: -1.25em;
+    padding: 1em;
     width: 100%;
   }
 }
