@@ -1,3 +1,4 @@
+export { cloneObj } from './cloneObj';
 export { dispatchFeedbackToast } from './dispatchFeedbackToast';
 export { doesExists } from './doesExists';
 export { getCurrentDate } from './getCurrentDate';
