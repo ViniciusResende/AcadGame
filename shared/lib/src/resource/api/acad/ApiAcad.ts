@@ -17,11 +17,14 @@ import {
   IApiAcadAuthResponse,
   IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadRankingGetUserRankInfoResponse,
+  IApiAcadRankingGetWeeklyRankingResponse,
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
 } from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
 import { ISheetExerciseInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
+import { IRankingUserInfo } from '../../../data/interfaces/RankingInterfaces';
 
 /** Classes */
 import { ApiClient } from '../../../utils/classes/api-client/ApiClient';
@@ -346,5 +349,50 @@ export class ApiAcad extends ApiClient {
     const response = this.#api.request(`/dailyScores/user/add/`, requestParams);
 
     await response.promise;
+  }
+
+  async rankingGetUserRanking(
+    token: string
+  ): Promise<IApiAcadRankingGetUserRankInfoResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/dailyScores/user/ranking`,
+      requestParams
+    );
+    const responseData = await response.promise;
+
+    const resData = responseData.data as Record<string, unknown>;
+
+    return {
+      firstPlaceRankUser: resData.first,
+      averageScore: resData.averageScore,
+      userRankInfo: resData.user,
+    } as IApiAcadRankingGetUserRankInfoResponse;
+  }
+
+  async rankingGetWeeklyRanking(
+    token: string
+  ): Promise<IApiAcadRankingGetWeeklyRankingResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/dailyScores/weekPodium`,
+      requestParams
+    );
+    const responseData = await response.promise;
+
+    const resData = responseData.data as IRankingUserInfo[];
+
+    const weeklyRanking = {
+      podiumUsers: resData.slice(0, 4), // first four
+      nonPodiumUsers: resData.slice(5), // from fifth position and on
+    };
+
+    return weeklyRanking;
   }
 }

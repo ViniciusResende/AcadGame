@@ -106,6 +106,15 @@ export const SliderComponent = ({
               )}
             </div>
           );
+        } else if (arrayChildren.length === indexCorrected) {
+          return (
+            <div className={cx('slider-component__slide', slideClassName)}>
+              {arrayChildren.slice(
+                indexCorrected - (indexCorrected % slidesToShow),
+                indexCorrected
+              )}
+            </div>
+          );
         }
       });
     }
