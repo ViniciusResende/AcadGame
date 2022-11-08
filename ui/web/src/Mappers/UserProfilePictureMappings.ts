@@ -36,7 +36,7 @@ import {
   SpecialSpike,
   SpecialTheSims,
   SpecialZelda,
-} from '../../../../assets/images/profilePics';
+} from '../assets/images/profilePics';
 
 /**
  * Mapping between User Get profile picture enum and profile picture file.

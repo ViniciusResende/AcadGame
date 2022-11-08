@@ -7,7 +7,7 @@ import Modal from '../../../../Common/Modal';
 import Button from '../../../../Common/Button';
 
 /** Mappings */
-import { userGetProfilePictureImageMap } from '../../Mappers/UserProfilePictureMappings';
+import { userGetProfilePictureImageMap } from '../../../../../Mappers/UserProfilePictureMappings';
 
 /** Styles */
 import './ProfilePictureEditionModal.scss';

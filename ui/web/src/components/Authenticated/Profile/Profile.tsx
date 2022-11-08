@@ -12,7 +12,7 @@ import WeeklyUserChart from './elements/WeeklyUserChart';
 import DefaultCardBox from '../../Template/DefaultCardBox';
 
 /** Mappings */
-import { userGetProfilePictureImageMap } from './Mappers/UserProfilePictureMappings';
+import { userGetProfilePictureImageMap } from '../../../Mappers/UserProfilePictureMappings';
 
 /** Styles */
 import './Profile.scss';
