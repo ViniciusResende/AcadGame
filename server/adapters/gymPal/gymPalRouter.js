@@ -26,3 +26,12 @@ ROUTER.post('/add', async (req, res, next) => {
         next(err);
     }
 });
+
+ROUTER.delete('/remove', async (req, res, next) => {
+    try {
+        res.status(200).send('O objetivo dessa rota é permitir ao usuário excluir um amigo da rede.');
+    }
+    catch (err) {
+        next(err);
+    }
+})
