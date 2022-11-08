@@ -8,7 +8,10 @@ import { HttpResponseCodesEnum } from '../../utils/classes/api-client/ApiClientE
 
 /** Interfaces */
 import { ILibGeneralErrorPayload } from '../../data/interfaces/CommonInterfaces';
-import { IApiAcadRankingGetWeeklyRankingResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IApiAcadRankingGetUserRankInfoResponse,
+  IApiAcadRankingGetWeeklyRankingResponse,
+} from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Classes */
 import { ApiClientHttpError } from '../../utils/classes/api-client/ApiClientErrors';
@@ -40,21 +43,39 @@ export class RankingEngine {
     }
   }
 
-  async getWeeklyRanking(): Promise<IApiAcadRankingGetWeeklyRankingResponse | null> {
-    let rankingUserSheetsPayload: IApiAcadRankingGetWeeklyRankingResponse | null =
+  async getUserRanking(): Promise<IApiAcadRankingGetUserRankInfoResponse | null> {
+    let userRankingPayload: IApiAcadRankingGetUserRankInfoResponse | null =
       null;
     try {
       const storedAuthToken = Security.getTokenStored();
       if (!storedAuthToken)
         throw new Error(`No token stored, unable to authenticate.`);
 
-      rankingUserSheetsPayload = await this.#rankingAccess.getWeeklyRanking(
+      userRankingPayload = await this.#rankingAccess.getUserRanking(
         storedAuthToken
       );
     } catch (error) {
       this.#handleRankingErrors(error);
       console.error(error);
     }
-    return rankingUserSheetsPayload;
+    return userRankingPayload;
+  }
+
+  async getWeeklyRanking(): Promise<IApiAcadRankingGetWeeklyRankingResponse | null> {
+    let weeklyRankingPayload: IApiAcadRankingGetWeeklyRankingResponse | null =
+      null;
+    try {
+      const storedAuthToken = Security.getTokenStored();
+      if (!storedAuthToken)
+        throw new Error(`No token stored, unable to authenticate.`);
+
+      weeklyRankingPayload = await this.#rankingAccess.getWeeklyRanking(
+        storedAuthToken
+      );
+    } catch (error) {
+      this.#handleRankingErrors(error);
+      console.error(error);
+    }
+    return weeklyRankingPayload;
   }
 }
