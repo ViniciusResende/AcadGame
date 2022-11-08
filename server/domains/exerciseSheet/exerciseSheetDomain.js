@@ -22,7 +22,6 @@ class QueryExerciseSheetDomain {
                 userSheets[currentSheet].push(userExercise);
             });
 
-            // return Object.values(userSheets);
             return userSheets;
         }
         catch(err) {
