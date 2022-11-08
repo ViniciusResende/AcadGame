@@ -30,7 +30,7 @@ function PodiumUserComponent({
         alt={`${podiumUserInfo.nickname}-profile-picture`}
       />
       <div className="podium-user__content">
-        <span className="podium-user__name">{podiumUserInfo.nickname}</span>
+        <strong className="podium-user__name">{podiumUserInfo.nickname}</strong>
         <span className="podium-user__points">
           {podiumUserInfo.score} pontos
         </span>
