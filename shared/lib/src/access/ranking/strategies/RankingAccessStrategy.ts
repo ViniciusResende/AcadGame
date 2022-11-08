@@ -10,7 +10,10 @@ import { Utilities } from '../../../utils/Utilities';
 import { ApiAcad } from '../../../resource/api/acad/ApiAcad';
 
 /** Interfaces */
-import { IApiAcadRankingGetWeeklyRankingResponse } from '../../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IApiAcadRankingGetUserRankInfoResponse,
+  IApiAcadRankingGetWeeklyRankingResponse,
+} from '../../../resource/api/acad/ApiAcadInterfaces';
 
 /**
  * Class that enables the creation of custom Ranking access strategies
@@ -51,6 +54,21 @@ export class RankingAccessStrategy {
    */
   #onConfigurationChanged() {
     this.#apiAcad = this.#getApiAcadInstance();
+  }
+
+  /**
+   * Retrieves a payload containing all the user exercises sheets with its
+   * respective exercises
+   *
+   * @param token - The token to be used to authenticate user
+   * @returns - Array containing all user exercises sheets
+   */
+  async getUserRanking(
+    token: string
+  ): Promise<IApiAcadRankingGetUserRankInfoResponse> {
+    const getUserRankingResponse = await this.api.rankingGetUserRanking(token);
+
+    return getUserRankingResponse;
   }
 
   /**
