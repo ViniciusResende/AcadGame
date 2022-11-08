@@ -81,7 +81,7 @@ export const ProfileUserChartOptions = {
     y: {
       grid: {
         display: true,
-        drawBorder: true,
+        drawBorder: false,
         offset: false,
         color: '#606060',
         borderDash: [3, 5],
