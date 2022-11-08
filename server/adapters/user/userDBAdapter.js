@@ -158,6 +158,16 @@ class UserDatabaseAdapter {
             await updateUser.save({
                 fields: Object.keys(userInfo)
             });
+
+            const UPDATE_USER = Object.entries(updateUser.dataValues);
+
+            const FILTERED_UPDATED_USER = UPDATE_USER.filter(([property, value]) => 
+                !this.unnecessaryAttributes.includes(property)
+            );
+
+            const UPDATED_USER_RESPONSE = Object.fromEntries(FILTERED_UPDATED_USER);
+
+            return UPDATED_USER_RESPONSE;
         }
         catch(err) {
             throw err;

@@ -69,7 +69,7 @@ ROUTER.put('/me', async (req, res, next) => {
     try {
         const USER_INFO = req.body.userInfo;
         
-        const USER_ID = req.userId;
+        const USER_ID = req.body.userId;
 
         if (!USER_INFO) {
             const UPDATED_USER = await USER_DOMAIN.getSingleUser(USER_ID);
@@ -79,9 +79,12 @@ ROUTER.put('/me', async (req, res, next) => {
             });
         }
 
-        await USER_DOMAIN.updateUserInfo(USER_ID, USER_INFO);
+        const UPDATED_USER = await USER_DOMAIN.updateUserInfo(USER_ID, USER_INFO);
 
-        res.status(200).send({data: 'Usuário atualizado com sucesso!'});
+        res.status(200).send({
+            message: 'Usuário atualizado com sucesso!',
+            data: UPDATED_USER
+        });
     }
     catch (err) {
         next(err);

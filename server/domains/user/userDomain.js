@@ -84,7 +84,7 @@ class User {
             if (userInfo.email) {
                 const EMAIL_CONFLICT = await this.getUserByEmail(userInfo.email);
 
-                if (EMAIL_CONFLICT && EMAIL_CONFLICT.id != updateUserId) {
+                if (EMAIL_CONFLICT && EMAIL_CONFLICT.id != userId) {
                     let error = new SERVER_ERROR;
                     error.ServerError(400, 'Este e-mail já é utilizado por outra conta.');
                     
@@ -92,7 +92,9 @@ class User {
                 }
             }
 
-            await QUERY_USER.updateUserInfo(userId, userInfo);
+            const UPDATED_USER = await QUERY_USER.updateUserInfo(userId, userInfo);
+
+            return UPDATED_USER;
         }
         catch (err) {
             throw err;

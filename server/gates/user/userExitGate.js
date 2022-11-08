@@ -134,7 +134,9 @@ class QueryUser {
                 }
             });
 
-            await USER_DB_ADAPTER.updateUser(userId, userInfo);
+            const UPDATED_USER = await USER_DB_ADAPTER.updateUser(userId, userInfo);
+
+            return UPDATED_USER;
         }
         catch (err) {
             throw err;
