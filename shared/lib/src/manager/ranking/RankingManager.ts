@@ -4,7 +4,10 @@
  */
 
 /** Interfaces */
-import { IApiAcadRankingGetWeeklyRankingResponse } from '../../resource/api/acad/ApiAcadInterfaces';
+import {
+  IApiAcadRankingGetUserRankInfoResponse,
+  IApiAcadRankingGetWeeklyRankingResponse,
+} from '../../resource/api/acad/ApiAcadInterfaces';
 
 /** Utilities */
 import { Utilities } from '../../utils/Utilities';
@@ -24,10 +27,15 @@ export class RankingManager extends Utilities.pubSub {
     this.#rankingEngine = new RankingEngine();
   }
 
-  async getWeekRankings(): Promise<IApiAcadRankingGetWeeklyRankingResponse | null> {
-    const rankingUserSheetsPayload =
-      await this.#rankingEngine.getWeeklyRanking();
+  async getUserRanking(): Promise<IApiAcadRankingGetUserRankInfoResponse | null> {
+    const userRankingPayload = await this.#rankingEngine.getUserRanking();
 
-    return rankingUserSheetsPayload;
+    return userRankingPayload;
+  }
+
+  async getWeekRankings(): Promise<IApiAcadRankingGetWeeklyRankingResponse | null> {
+    const weekRankingPayload = await this.#rankingEngine.getWeeklyRanking();
+
+    return weekRankingPayload;
   }
 }
