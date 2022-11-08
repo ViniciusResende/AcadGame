@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 
 const { Op } = require('sequelize');
 
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 class UserDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt', 'password'];
 
@@ -136,7 +138,10 @@ class UserDatabaseAdapter {
             });
             
             if(!updateUser){
-                return;
+                let error = new SERVER_ERROR;
+                error.ServerError(404, 'Usuário inexistente.');
+                
+                throw error;
             }
             
             if( Object.keys(userInfo).includes('password') ){
