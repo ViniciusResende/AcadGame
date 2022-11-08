@@ -1,8 +1,11 @@
 /** React imports */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 /** React Template Components */
 import { BarChartTemplate } from '../../../../Template/ChartJsTemplate';
+
+/** Helpers */
+import { cloneObj } from '../../../../../helpers';
 
 /** Utils */
 import {
@@ -30,12 +33,28 @@ function WeekPodiumChartComponent({
 
   const chartData = chartDatasetFactory(chartLabels, rawChartData);
 
+  const [mutableChartOptions, setMutableChartOptions] = useState(
+    WeekPodiumChartOptions
+  );
+
+  useEffect(() => {
+    if (window.innerWidth < 850) {
+      let newWeekPodiumChartOptions =
+        cloneObj<typeof WeekPodiumChartOptions>(mutableChartOptions);
+
+      newWeekPodiumChartOptions.scales.y.ticks.display = false;
+
+      setMutableChartOptions(newWeekPodiumChartOptions);
+    }
+  }, []);
+
   return (
     <div className="week-podium-chart__container">
       <BarChartTemplate
         data={chartData}
-        options={WeekPodiumChartOptions}
+        options={mutableChartOptions}
         height={440}
+        width={176}
       />
     </div>
   );

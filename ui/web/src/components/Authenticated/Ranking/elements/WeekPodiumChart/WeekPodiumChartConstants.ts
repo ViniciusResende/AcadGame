@@ -78,6 +78,7 @@ export const WeekPodiumChartOptions = {
         drawBorder: true,
       },
       ticks: {
+        display: true,
         color: '#606060',
         font: {
           family: "'Roboto'",
