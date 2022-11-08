@@ -15,7 +15,7 @@ ROUTER.post('/register', async(req, res, next) => {
             }
         }
 
-        res.status(200).send(responseObject);
+        res.status(201).send(responseObject);
     }
     catch(err) {
         err.message = {
