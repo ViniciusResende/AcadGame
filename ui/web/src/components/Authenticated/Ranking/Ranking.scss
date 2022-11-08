@@ -68,4 +68,24 @@
     padding: 1em;
     width: 100%;
   }
+
+  @include forSmall() {
+    &__upper-cards {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      justify-content: flex-start;
+    }
+  }
+
+  @include forXSmall() {
+    &__podium-card {
+      padding: 1em 0.25em;
+    }
+
+    &__podium-line {
+      display: none;
+    }
+  }
 }

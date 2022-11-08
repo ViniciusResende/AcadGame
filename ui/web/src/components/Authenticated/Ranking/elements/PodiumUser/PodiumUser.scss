@@ -44,4 +44,29 @@
       display: none;
     }
   }
+
+  @include forMedium() {
+    &__picture {
+      width: 1.75em;
+    }
+
+    &__content {
+      font-size: 0.75em;
+    }
+
+    &__trophy {
+      width: 18px;
+    }
+  }
+
+  @include forXSmall() {
+    &__container {
+      flex-direction: column;
+      gap: 0.25em;
+    }
+
+    &__content {
+      align-items: center;
+    }
+  }
 }
