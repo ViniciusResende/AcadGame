@@ -29,4 +29,10 @@
     font-size: 1em;
     line-height: 1.375em;
   }
+
+  @include forSmall() {
+    &__container {
+      justify-content: center;
+    }
+  }
 }
