@@ -36,6 +36,7 @@ function ProfileUserChartComponent({
         data={chartData}
         options={ProfileUserChartOptions}
         height={400}
+        width={260}
       />
     </div>
   );
