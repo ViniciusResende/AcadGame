@@ -44,3 +44,12 @@ ROUTER.put('/accept', async (req, res, next) => {
         next(err);
     }
 });
+
+ROUTER.delete('/reject', async (req, res, next) => {
+    try {
+        res.status(200).send('Essa rota é responsável por rejeitar uma solicitação de amizade recebida pelo usuário.');
+    }
+    catch (err) {
+        next(err);
+    }
+});
