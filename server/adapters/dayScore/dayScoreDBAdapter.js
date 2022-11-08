@@ -2,6 +2,8 @@ const sequelize = require('../../infrastructure/db');
 const DAY_SCORE = require('../../infrastructure/models/dayScore');
 const { Op } = require('sequelize');
 
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 class DayScoreDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
@@ -21,7 +23,10 @@ class DayScoreDatabaseAdapter {
             });
 
             if(!QUERIED_DAILY_SCORES) {
-                throw new Error (`Não encontramos pontuações diárias.`);
+                let error = new SERVER_ERROR;
+                error.ServerError(500, `Não encontramos pontuações diárias.`);
+
+                throw error;
             }
 
             return QUERIED_DAILY_SCORES;
@@ -50,7 +55,10 @@ class DayScoreDatabaseAdapter {
             });
 
             if(!QUERIED_DAY_SCORES) {
-                throw new Error (`Não encontramos pontuações diárias para o usuário com id ${userId}`);
+                let error = new SERVER_ERROR;
+                error.ServerError(400, `Não encontramos pontuações diárias para o usuário com id ${userId}`);
+
+                throw error;
             }
 
             return QUERIED_DAY_SCORES;

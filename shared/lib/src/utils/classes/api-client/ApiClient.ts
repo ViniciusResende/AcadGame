@@ -84,10 +84,7 @@ export class ApiClient {
 
   async #handleHttpError(response: Response): Promise<ApiClientHttpError> {
     const responseResolved = await response.json();
-    return new ApiClientHttpError(
-      responseResolved.data.message,
-      response.status
-    );
+    return new ApiClientHttpError(responseResolved.error, response.status);
   }
 
   /**

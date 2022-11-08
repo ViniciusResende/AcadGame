@@ -170,7 +170,7 @@ function ProfileComponent({
               </div>
               <div className="profile-page__user-points">
                 <span>Pontos acumulados:</span>
-                <strong>{userInfo.totalPoints}</strong>
+                <strong>{userInfo.score}</strong>
                 <TrophyStarIcon />
               </div>
             </div>

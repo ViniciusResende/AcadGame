@@ -51,8 +51,8 @@
         "type": "node-terminal"
       },
       {
-        "command": "(cd server/transaction-monitor && yarn start)",
-        "name": "TransactionMonitor",
+        "command": "(cd server && yarn dev)",
+        "name": "NodeServer",
         "request": "launch",
         "type": "node-terminal"
       }
@@ -60,7 +60,12 @@
     "compounds": [
       {
         "name": "DevEnvironment",
-        "configurations": ["LibraryWatch", "ChokidarWatch", "WebUiServe"]
+        "configurations": [
+          "LibraryWatch",
+          "ChokidarWatch",
+          "WebUiServe",
+          "NodeServer"
+        ]
       }
     ]
   }

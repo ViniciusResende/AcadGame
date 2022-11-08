@@ -4,22 +4,24 @@ class QueryExerciseSheetDomain {
     async queryUserExerciseSheets(userId) {
         try {
             const USER_EXERCISES = await queryExerciseSheet.getUserExerciseSheets(userId);
-        
-            const userSheets = USER_EXERCISES.reduce((acc, item) => {
-                const currentSheet = item.dataValues.sheetId;
-                delete item.dataValues.id;
-                delete item.dataValues.sheetId;
-                delete item.dataValues.userId;
 
-                if(acc[currentSheet])
-                    acc[currentSheet].push(item)
-                else
-                    Object.assign(acc, {...acc, [currentSheet]: [item]})
+            const userSheets = {
+                1: [],
+                2: [],
+                3: [],
+                4: [],
+                5: []
+            }
 
-                return acc;
-            }, {})
+            USER_EXERCISES.forEach(userExercise => {
+                const currentSheet = userExercise.dataValues.sheetId;
+                delete userExercise.dataValues.id;
+                delete userExercise.dataValues.sheetId;
+                delete userExercise.dataValues.userId;
 
-            // return Object.values(userSheets);
+                userSheets[currentSheet].push(userExercise);
+            });
+
             return userSheets;
         }
         catch(err) {
