@@ -1,6 +1,8 @@
 const EXERCISE_SHEET = require('../../infrastructure/models/exerciseSheet');
 const EXERCISE = require('../../infrastructure/models/exercise');
 
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 class ExerciseSheetDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
@@ -16,7 +18,10 @@ class ExerciseSheetDatabaseAdapter {
             });
 
             if(!QUERIED_EXERCISE) {
-                throw new Error(`Não encontramos o exercício id ${id}`);
+                let error = new SERVER_ERROR;
+                error.ServerError(400, `Não encontramos o exercício id ${id}`)
+
+                throw error;
             }
 
             return QUERIED_EXERCISE;
@@ -38,7 +43,10 @@ class ExerciseSheetDatabaseAdapter {
             });
 
             if(!QUERIED_USER_EXERCISES) {
-                throw new Error(`Não encontramos fichas de exercícios para o usuário com id ${userId}`);
+                let error = new SERVER_ERROR;
+                error.ServerError(400, `Não encontramos fichas de exercícios para o usuário com id ${userId}`)
+
+                throw error;
             }
 
             return QUERIED_USER_EXERCISES;
@@ -95,7 +103,10 @@ class ExerciseSheetDatabaseAdapter {
             });
 
             if(updateUserExercise == null) {
-                throw new Error(`O exercício de usuário com sheetId: ${userExerciseIds['sheetId']}, userId: ${userExerciseIds['userId']}, e exerciseId: ${userExerciseIds['exerciseId']} não existe.`);
+                let error = new SERVER_ERROR;
+                error.ServerError(400, `O exercício de usuário com sheetId: ${userExerciseIds['sheetId']}, userId: ${userExerciseIds['userId']}, e exerciseId: ${userExerciseIds['exerciseId']} não existe.`)
+
+                throw error;
             }
 
             Object.keys(userExerciseInfo).forEach(async (info) => {

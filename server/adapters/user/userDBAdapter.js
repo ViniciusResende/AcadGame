@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 
 const { Op } = require('sequelize');
 
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 class UserDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt', 'password'];
 
@@ -45,10 +47,6 @@ class UserDatabaseAdapter {
                 }
             });
 
-            if (!QUERIED_USER) {
-                throw new Error(`Não encontramos um usuário com a ID informada.`);
-            }
-
             return QUERIED_USER;
         }
         catch (err) {
@@ -57,6 +55,24 @@ class UserDatabaseAdapter {
     }
 
     async getUserByEmail(email) {
+        try {
+            const QUERIED_USER = await USER.findOne({
+                where: {
+                    email: email
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            });
+
+            return QUERIED_USER;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async getUserByEmailWithPassword(email) {
         try {
             const QUERIED_USER = await USER.findOne({
                 where: {
@@ -113,16 +129,19 @@ class UserDatabaseAdapter {
         }
     }
 
-    async updateUser(updateUserId, userInfo){
+    async updateUser(userId, userInfo){
         try {
             let updateUser =  await USER.findOne({
                 where: {
-                    id: updateUserId
+                    id: userId
                 }
             });
             
             if(!updateUser){
-                throw new Error('O usuário a ser atualizado não existe.');
+                let error = new SERVER_ERROR;
+                error.ServerError(404, 'Usuário inexistente.');
+                
+                throw error;
             }
             
             if( Object.keys(userInfo).includes('password') ){
@@ -139,17 +158,27 @@ class UserDatabaseAdapter {
             await updateUser.save({
                 fields: Object.keys(userInfo)
             });
+
+            const UPDATE_USER = Object.entries(updateUser.dataValues);
+
+            const FILTERED_UPDATED_USER = UPDATE_USER.filter(([property, value]) => 
+                !this.unnecessaryAttributes.includes(property)
+            );
+
+            const UPDATED_USER_RESPONSE = Object.fromEntries(FILTERED_UPDATED_USER);
+
+            return UPDATED_USER_RESPONSE;
         }
         catch(err) {
             throw err;
         }
     }
 
-    async eraseAccount(deletionId) {
+    async eraseAccount(userId) {
         try {
             await USER.destroy({
                 where: {
-                    id: deletionId
+                    id: userId
                 }
             });
         }

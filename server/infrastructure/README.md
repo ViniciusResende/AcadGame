@@ -6,6 +6,6 @@ Este arquivo serve para armazenar variáveis de ambiente necessárias às config
 Como muitas informações de configuração são confidenciais, não é possível disponibilizar o arquivo real "```.env```" para visualização pública. Para que o sistema funcione corretamente, você, localmente, deve renomear este arquivo de ```.env-sample``` para ```.env``` e atribuir os valores para todas as configurações listadas no mesmo.  
 Como dito anteriormente, esses valores são, muitas vezes, confidenciais. Portanto, se você for membro da equipe de desenvolvimento, apenas solicite aos desenvolvedores Back-end quais são os valores necessários. Caso contrário, você pode montar a infraestrutura por conta própria e atribuir seus próprios valores às configurações.
 
-## ```db_models```
+## ```models```
 O mapeamento de objetos relacionais do sistema será feito através do [Sequelize](https://sequelize.org/). Essa pasta é responsável por armazenar os arquivos que definem os modelos de objetos presentes no banco de dados.  
-Cada arquivo de script é responsável por definir um objeto, sendo os que têm nomes compostos, como "```userExercises```", por exemplo, são utilizados para definir objetos de relacionamento entre dois outros modelos. No caso do exemplo acima, para definir o objeto de relacionamento entre o modelo de usuários e o de exercícios.
+Cada arquivo de script é responsável por definir um objeto e os atributos que devem estar presentes na tabela do mesmo, bem como os objetos de relacionamento. O arquivo ```exerciseSheet```, por exemplo, é uma tabela que relaciona a entidade ```user``` à entidade ```exercise```.

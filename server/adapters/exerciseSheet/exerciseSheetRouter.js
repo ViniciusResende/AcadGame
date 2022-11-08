@@ -1,11 +1,8 @@
 const Router = require('express').Router();
-const authMiddleware = require('../../middlewares/auth');
 
 const QueryExerciseSheet = require('../../domains/exerciseSheet/exerciseSheetDomain');
 
-Router.use(authMiddleware);
-
-Router.get('/', async (req, res) => {
+Router.get('/', async (req, res, next) => {
     const USER_ID = req.userId;
 
     try {
@@ -14,11 +11,11 @@ Router.get('/', async (req, res) => {
         res.status(200).json({ data: EXERCISE_SHEETS });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-Router.get('/available/:sheetId', async (req, res) => {
+Router.get('/available/:sheetId', async (req, res, next) => {
     const USER_ID = req.userId;
     let type = req.query.type;
     let sheetId = req.params.sheetId;
@@ -29,11 +26,11 @@ Router.get('/available/:sheetId', async (req, res) => {
         res.status(200).json({ data: EXERCISE_SHEETS });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        next(err);
     } 
 });
 
-Router.post('/add/:sheetId', async (req, res) => {
+Router.post('/add/:sheetId', async (req, res, next) => {
     try {
         const EXERCISE_IDS = req.body.exercisesIds;
         const USER_ID = req.userId;
@@ -47,11 +44,11 @@ Router.post('/add/:sheetId', async (req, res) => {
         });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-Router.put('/:sheetId/update/:exerciseId', async (req, res) => {
+Router.put('/:sheetId/update/:exerciseId', async (req, res, next) => {
     try {
         const USER_EXERCISE_INFO = req.body;
         const USER_EXERCISE_NAME = req.body.name;
@@ -72,11 +69,11 @@ Router.put('/:sheetId/update/:exerciseId', async (req, res) => {
         } });
     }
     catch(err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 
-Router.delete('/:sheetId/delete/:exerciseId', async (req, res) => {
+Router.delete('/:sheetId/delete/:exerciseId', async (req, res, next) => {
     try {
         const SHEET_ID = req.params.sheetId;
         const USER_ID = req.userId;
@@ -92,7 +89,7 @@ Router.delete('/:sheetId/delete/:exerciseId', async (req, res) => {
         res.status(200).send('Exercício de usuário excluído com sucesso.');
     }
     catch(err) {
-        res.status(400).send(err.message);
+        next(err);
     }
 });
 

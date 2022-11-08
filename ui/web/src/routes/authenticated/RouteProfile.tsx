@@ -30,7 +30,7 @@ import {
 /** Constants */
 const DEFAULT_USER_INFO_PAYLOAD = {
   nickname: 'Apelido',
-  totalPoints: 0,
+  score: 0,
   profileIcon: UserProfilePictureEnum.DEFAULT,
 };
 const DEFAULT_USER_WEEKLY_HISTOGRAM_PAYLOAD = [
