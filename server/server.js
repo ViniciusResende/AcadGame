@@ -1,6 +1,6 @@
-const Express = require('express');
-const cors = require('cors');
-const server = Express();
+const EXPRESS = require('express');
+const CORS = require('cors');
+const SERVER = EXPRESS();
 
 const BADGE_ROUTER = require('./adapters/badge/badgeRoute');
 const USER_ROUTER = require('./adapters/user/userRoute');
@@ -11,21 +11,21 @@ const DAY_SCORE_ROUTER = require('./adapters/dayScore/dayScoreRouter');
 const AUTHENTICATION = require('./utils/authMiddleware');
 const ERROR_HANDLING = require('./utils/errorMiddleware');
 
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
+const BODY_PARSER = require("body-parser");
+const COOKIE_PARSER = require("cookie-parser");
 
-server.use(cors());
-server.use(Express.json());
-server.use(bodyParser.urlencoded({extended:true}));
-server.use(bodyParser.json());
-server.use(cookieParser());
+SERVER.use(CORS());
+SERVER.use(EXPRESS.json());
+SERVER.use(BODY_PARSER.urlencoded({extended:true}));
+SERVER.use(BODY_PARSER.json());
+SERVER.use(COOKIE_PARSER());
 
-server.use('/api/badges', AUTHENTICATION, BADGE_ROUTER, ERROR_HANDLING);
-server.use('/api/users', AUTHENTICATION, USER_ROUTER, ERROR_HANDLING);
-server.use('/api/exercisesSheet', AUTHENTICATION, EXERCISE_SHEET_ROUTER, ERROR_HANDLING);
-server.use('/api/dailyScores', AUTHENTICATION, DAY_SCORE_ROUTER, ERROR_HANDLING);
-server.use('/api/auth', AUTH_ROUTER, ERROR_HANDLING);
+SERVER.use('/api/badges', AUTHENTICATION, BADGE_ROUTER, ERROR_HANDLING);
+SERVER.use('/api/users', AUTHENTICATION, USER_ROUTER, ERROR_HANDLING);
+SERVER.use('/api/exercisesSheet', AUTHENTICATION, EXERCISE_SHEET_ROUTER, ERROR_HANDLING);
+SERVER.use('/api/dailyScores', AUTHENTICATION, DAY_SCORE_ROUTER, ERROR_HANDLING);
+SERVER.use('/api/auth', AUTH_ROUTER, ERROR_HANDLING);
 
-server.listen(process.env.EXPRESS_PORT, () => {
+SERVER.listen(process.env.EXPRESS_PORT, () => {
     console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
 });
