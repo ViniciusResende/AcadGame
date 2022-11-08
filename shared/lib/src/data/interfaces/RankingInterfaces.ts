@@ -15,3 +15,10 @@ export interface IRankingUserInfo {
   nickname: string;
   profileIcon: UserProfilePictureEnum;
 }
+
+/**
+ * Ranking Current User Info body interface.
+ */
+export interface IRankingCurrentUserInfo extends IRankingUserInfo {
+  userRank: number;
+}
