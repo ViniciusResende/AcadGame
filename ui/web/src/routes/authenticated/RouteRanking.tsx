@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 /** React components */
 import Ranking from '../../components/Authenticated/Ranking';
 
+/** React Hooks */
+import useSecurity from '../middlewares/useSecurity';
+
 /** Library */
 import Lib, { UserProfilePictureEnum } from 'acad-game-lib';
 
@@ -36,6 +39,8 @@ const DEFAULT_WEEK_RANKING = {
 };
 
 function RouteRanking() {
+  useSecurity();
+
   const [userRanking, setUserRanking] =
     useState<IUserRankingInfo>(DEFAULT_USER_RANKING);
   const [weekRankings, setWeekRankings] =
