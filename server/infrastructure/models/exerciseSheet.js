@@ -1,7 +1,5 @@
 const database = require('../db');
 const Sequelize = require('sequelize');
-const User = require('./user');
-const Exercise = require('./exercise');
 
 const ExerciseSheet = database.define('ExerciseSheets', {
     sheetId: {
@@ -38,9 +36,6 @@ const ExerciseSheet = database.define('ExerciseSheets', {
         defaultValue: true 
     }
 }); 
-
-// User.belongsToMany(Exercise, { through: ExerciseSheet });
-// Exercise.belongsToMany(User, { through: ExerciseSheet });
 
 ExerciseSheet.sync({alter: false, force: false})
     .then(() => {
