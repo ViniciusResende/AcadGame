@@ -17,3 +17,12 @@ ROUTER.get('/pending', async (req, res, next) => {
         next(err);
     }
 });
+
+ROUTER.post('/add', async (req, res, next) => {
+    try {
+        res.status(200).send('Essa rota é responsável por enviar uma solicitação de amizade a outro usuário do aplicativo.');
+    }
+    catch (err) {
+        next(err);
+    }
+});
