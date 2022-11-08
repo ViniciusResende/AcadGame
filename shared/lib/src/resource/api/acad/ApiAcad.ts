@@ -17,6 +17,7 @@ import {
   IApiAcadAuthResponse,
   IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadRankingGetUserRankInfoResponse,
   IApiAcadRankingGetWeeklyRankingResponse,
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
@@ -341,6 +342,28 @@ export class ApiAcad extends ApiClient {
     const response = this.#api.request(`/dailyScores/user/add/`, requestParams);
 
     await response.promise;
+  }
+
+  async rankingGetUserRanking(
+    token: string
+  ): Promise<IApiAcadRankingGetUserRankInfoResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/dailyScores/user/ranking`,
+      requestParams
+    );
+    const responseData = await response.promise;
+
+    const resData = responseData.data as Record<string, unknown>;
+
+    return {
+      firstPlaceRankUser: resData.first,
+      averageScore: resData.averageScore,
+      userRankInfo: resData.user,
+    } as IApiAcadRankingGetUserRankInfoResponse;
   }
 
   async rankingGetWeeklyRanking(
