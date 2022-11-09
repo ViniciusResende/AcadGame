@@ -38,6 +38,30 @@ class GymPalsDatabaseAdapter {
         }
     }
 
+    async getPendingRequests(userId) {
+        try {
+            const PENDING_FRIENDSHIP_REQUESTS = await GYM_PALS.findAll({
+                where: {
+                    receiverId: userId,
+                    accepted: false
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            let pendingFriendshipRequests = [];
+            PENDING_FRIENDSHIP_REQUESTS.forEach(request => {
+                pendingFriendshipRequests.push(request.dataValues);
+            });
+
+            return pendingFriendshipRequests;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     async confirmFriendship(friendshipId) {
         try {
             let friendship = await GYM_PALS.findOne({
