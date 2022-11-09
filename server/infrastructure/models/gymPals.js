@@ -2,7 +2,22 @@ const database = require('../db');
 const Sequelize = require('sequelize');
 
 const GymPals = database.define('GymPals', {
-
+    friendshipId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    senderId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    receiverId: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+    },
+    accepted: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    }
 });
 
 GymPals.sync({
