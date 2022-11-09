@@ -127,6 +127,20 @@ class GymPalsDatabaseAdapter {
             throw err;
         }
     }
+
+    async removeGymPal(friendshipId) {
+        try {
+            await GYM_PALS.destroy({
+                where: {
+                    friendshipId: friendshipId,
+                    accepted: true
+                }
+            });
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new GymPalsDatabaseAdapter;
