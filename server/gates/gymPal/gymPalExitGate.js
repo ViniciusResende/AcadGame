@@ -65,6 +65,31 @@ class QueryGymPals {
             throw err;
         }
     }
+
+    async getUserGymPals(userId) {
+        try {
+            let userGymPals = await GYM_PALS_DB_ADAPTER.getPals(userId);
+
+            for (let index = 0; index < userGymPals.length; index++) {
+                if (userId == userGymPals[index].receiverId) {
+                    const PAL_INFO = await USER_DOMAIN.getSingleUser(userGymPals[index].senderId);
+    
+                    userGymPals[index]['palInfo'] = PAL_INFO;
+                }
+                else {
+                    const PAL_INFO = await USER_DOMAIN.getSingleUser(userGymPals[index].receiverId);
+    
+                    userGymPals[index]['palInfo'] = PAL_INFO;
+
+                }
+            }
+
+            return userGymPals;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryGymPals;

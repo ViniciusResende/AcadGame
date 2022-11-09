@@ -56,6 +56,17 @@ class GymPals {
             throw err;
         }
     }
+
+    async getUserGymPals(userId) {
+        try {
+            const USER_GYM_PALS = await QUERY_GYM_PALS.getUserGymPals(userId);
+
+            return USER_GYM_PALS;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new GymPals;
