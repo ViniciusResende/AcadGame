@@ -28,7 +28,7 @@ class GymPals {
         }
     }
 
-    async getPendingFriendshipRequests (userId) {
+    async getPendingFriendshipRequests(userId) {
         try {
             const PENDING_FRIENDSHIP_REQUESTS = await QUERY_GYM_PALS.getPendingFriendshipRequests(userId);
 
@@ -39,9 +39,18 @@ class GymPals {
         }
     }
 
-    async acceptFriendshipRequest (friendshipId) {
+    async acceptFriendshipRequest(friendshipId) {
         try {
             await QUERY_GYM_PALS.acceptFriendshipRequest(friendshipId);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async rejectFriendshipRequest(friendshipId) {
+        try {
+            await QUERY_GYM_PALS.rejectFriendshipRequest(friendshipId);
         }
         catch (err) {
             throw err;
