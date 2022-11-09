@@ -2,6 +2,8 @@ const GYM_PALS = require('../../infrastructure/models/gymPals');
 
 const { Op } = require('sequelize');
 
+const SERVER_ERROR = require('../../utils/serverErrors');
+
 class GymPalsDatabaseAdapter {
     unnecessaryAttributes = ['createdAt', 'updatedAt'];
 
@@ -30,6 +32,32 @@ class GymPalsDatabaseAdapter {
             });
     
             return newFriendship;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
+    async confirmFriendship(friendshipId) {
+        try {
+            let friendship = await GYM_PALS.findOne({
+                where: {
+                    friendshipId: friendshipId
+                }
+            });
+
+            if(!friendship) {
+                let error = new SERVER_ERROR;
+                error.ServerError(404, 'Pedido de amizade não encontrado.');
+
+                throw error;
+            }
+
+            friendship['accepted'] = true;
+
+            await friendship.save({
+                fields: Object.keys(friendship.dataValues)
+            });
         }
         catch (err) {
             throw err;
