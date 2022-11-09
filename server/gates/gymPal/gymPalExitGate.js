@@ -30,6 +30,15 @@ class QueryGymPals {
             throw err;
         }
     }
+
+    async acceptFriendshipRequest(friendshipId) {
+        try {
+            await GYM_PALS_DB_ADAPTER.confirmFriendship(friendshipId);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryGymPals;
