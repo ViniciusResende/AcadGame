@@ -2,24 +2,6 @@ const ROUTER = require('express').Router();
 
 const GYM_PALS = require('../../domains/gymPal/gymPalDomain');
 
-ROUTER.get('/connections', async (req, res, next) => {
-    try {
-        res.status(200).send('Essa rota é responsável por retornar todos os amigos do usuário que realizou a requisição.');
-    }
-    catch (err) {
-        next(err);
-    }
-});
-
-ROUTER.get('/pending', async (req, res, next) => {
-    try {
-        res.status(200).send('Essa rota retorna todos os pedido de amizade pendentes do usuário que realizou a requisição.');
-    }
-    catch (err) {
-        next(err);
-    }
-});
-
 ROUTER.post('/add', async (req, res, next) => {
     try {
         const SENDER_ID = req.userId;
@@ -34,9 +16,9 @@ ROUTER.post('/add', async (req, res, next) => {
     }
 });
 
-ROUTER.delete('/remove', async (req, res, next) => {
+ROUTER.get('/pending', async (req, res, next) => {
     try {
-        res.status(200).send('O objetivo dessa rota é permitir ao usuário excluir um amigo da rede.');
+        res.status(200).send('Essa rota retorna todos os pedido de amizade pendentes do usuário que realizou a requisição.');
     }
     catch (err) {
         next(err);
@@ -55,6 +37,24 @@ ROUTER.put('/accept', async (req, res, next) => {
 ROUTER.delete('/reject', async (req, res, next) => {
     try {
         res.status(200).send('Essa rota é responsável por rejeitar uma solicitação de amizade recebida pelo usuário.');
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
+ROUTER.get('/connections', async (req, res, next) => {
+    try {
+        res.status(200).send('Essa rota é responsável por retornar todos os amigos do usuário que realizou a requisição.');
+    }
+    catch (err) {
+        next(err);
+    }
+});
+
+ROUTER.delete('/remove', async (req, res, next) => {
+    try {
+        res.status(200).send('O objetivo dessa rota é permitir ao usuário excluir um amigo da rede.');
     }
     catch (err) {
         next(err);
