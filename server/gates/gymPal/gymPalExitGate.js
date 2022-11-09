@@ -90,6 +90,15 @@ class QueryGymPals {
             throw err;
         }
     }
+
+    async removeGymPal(friendshipId) {
+        try {
+            await GYM_PALS_DB_ADAPTER.removeGymPal(friendshipId);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new QueryGymPals;

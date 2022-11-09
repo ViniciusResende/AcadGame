@@ -67,6 +67,15 @@ class GymPals {
             throw err;
         }
     }
+
+    async removeGymPal(friendshipId) {
+        try {
+            await QUERY_GYM_PALS.removeGymPal(friendshipId);
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new GymPals;
