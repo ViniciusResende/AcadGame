@@ -215,3 +215,45 @@ Por fim, seguem duas figuras que representam a **Arquitetura Hexagonal** impleme
 ![Acad Game sprint 2(1)](https://user-images.githubusercontent.com/68781942/200831827-9b38078f-c273-4ac9-bddc-ac834555ae12.png)
 
 ---
+
+### Histórias Implementadas
+
+#### História: Eu, como frequentador de academia, quero criar uma conta no Acad Game para melhorar minha experiência de exercícios físicos.
+- [x] frontend
+- [x] backend
+- **Por onde faço?** host:port/signUp
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de fazer login na minha conta para usufruir dos benefícios do aplicativo.
+- [x] frontend
+- [x] backend
+
+- Por onde faço?  ⮕ host:port/login
+
+#### História: Eu, como usuário de Acad Game, quero receber diferentes conquistas divertidas, o que seria mais uma fonte de motivação para a realização dos meus exercícios diários e minha evolução pessoal na academia.
+- [ ] frontend
+- [ ] backend
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de acessar meu perfil, para verificar minhas conquistas e algumas configurações da minha conta.
+- [x] frontend
+- [x] backend
+- Por onde faço?  ⮕  host:port/profile
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de visualizar minha ficha de exercícios atual, para que possa manter controle da minha rotina na academia.
+- [x] frontend
+- [x] backend
+- Por onde faço?  ⮕  host:port/exercisesSheets
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de editar qualquer um dos exercícios da minha ficha, para que a carga e as repetições sejam compatíveis com minha aptidão física.
+- [x] frontend
+- [x] backend
+- Por onde faço?  ⮕  host:port/exercisesSheets
+
+#### História: Eu, como usuário do Acad Game, quero ser capaz de visualizar o ranking semanal de todos os usuários do aplicativo, para saber como me situo em relação aos outros quanto a dedicação e esforço.
+- [x] frontend
+- [x] backend
+- Por onde faço?  ⮕  host:port/ranking
+
+#### História: Eu, como usuário do Acad Game, quero poder adicionar amigos de academia à minha rede para me manter melhor motivado em meus treinos.
+- [ ] frontend
+- [x] backend
+- Por onde faço? (backend) ⮕  host:expressPort/api/gymPals
