@@ -28,7 +28,7 @@ class AuthenticationEntryGate {
             throw error;
          }
 
-         const MATCHING_PASSWORDS = AUTH_ADAPTER.checkPasswords(password, USER.password);
+         const MATCHING_PASSWORDS = await AUTH_ADAPTER.checkPasswords(password, USER.password);
          if(!MATCHING_PASSWORDS) {
             let error = new SERVER_ERROR;
             error.ServerError(400, 'Senha inválida.')

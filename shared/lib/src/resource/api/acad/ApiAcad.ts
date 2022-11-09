@@ -169,7 +169,7 @@ export class ApiAcad extends ApiClient {
         userInfo: {
           nickname,
           profileIcon: picture,
-        }
+        },
       },
       method: HttpMethodEnum.PUT,
     };
@@ -390,7 +390,7 @@ export class ApiAcad extends ApiClient {
 
     const weeklyRanking = {
       podiumUsers: resData.slice(0, 4), // first four
-      nonPodiumUsers: resData.slice(5), // from fifth position and on
+      nonPodiumUsers: resData.slice(4), // from fifth position and on
     };
 
     return weeklyRanking;
