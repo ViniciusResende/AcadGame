@@ -87,6 +87,19 @@ class GymPalsDatabaseAdapter {
             throw err;
         }
     }
+
+    async rejectFriendship(friendshipId) {
+        try {
+            await GYM_PALS.destroy({
+                where: {
+                    friendshipId: friendshipId
+                }
+            });
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new GymPalsDatabaseAdapter;
