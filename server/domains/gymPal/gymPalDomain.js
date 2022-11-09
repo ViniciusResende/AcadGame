@@ -12,6 +12,13 @@ class GymPals {
                 throw error;
             }
 
+            if (senderUserId == receiverUserId) {
+                const error = new SERVER_ERROR;
+                error.ServerError(400, 'Você não pode enviar uma solicitação de amizade para si mesmo.');
+
+                throw error;
+            }
+
             const NEW_FRIENDSHIP = await QUERY_GYM_PALS.addPal(senderUserId, receiverUserId);
 
             return NEW_FRIENDSHIP;
