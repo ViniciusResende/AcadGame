@@ -1,6 +1,6 @@
 /**
  * @category Access
- * @module UserAccess
+ * @module ExercisesSheetAccess
  */
 
 /** Utilities */

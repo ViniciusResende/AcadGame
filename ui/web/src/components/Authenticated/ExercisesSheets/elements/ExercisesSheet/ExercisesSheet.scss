@@ -47,6 +47,14 @@
     overflow: auto;
     padding: 1.75em 5em;
     width: 100%;
+
+    @include forMedium() {
+      grid-template-columns: 1fr;
+    }
+
+    @include forSmall() {
+      padding: 1.75em 0.5em;
+    }
   }
 
   &__add-card {

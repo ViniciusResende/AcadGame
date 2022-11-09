@@ -17,11 +17,14 @@ import {
   IApiAcadAuthResponse,
   IApiAcadExercisesSheetGetAvailableToAddResponse,
   IApiAcadExercisesSheetGetUserSheetResponse,
+  IApiAcadRankingGetUserRankInfoResponse,
+  IApiAcadRankingGetWeeklyRankingResponse,
   IApiUserGetDataInfoResponse,
   IApiUserGetDataWeeklyHistogramResponse,
 } from './ApiAcadInterfaces';
 import { IApiClientRequestParams } from '../../../utils/classes/api-client/ApiClientInterfaces';
 import { ISheetExerciseInfo } from '../../../data/interfaces/ExercisesSheetInterfaces';
+import { IRankingUserInfo } from '../../../data/interfaces/RankingInterfaces';
 
 /** Classes */
 import { ApiClient } from '../../../utils/classes/api-client/ApiClient';
@@ -58,16 +61,10 @@ export class ApiAcad extends ApiClient {
    */
   get headers(): Headers {
     const headersExtension = {
-      [HttpRequestHeaderEnum.ACCEPT]: [
-        HttpContentTypeEnum.JSON,
-        HttpContentTypeEnum.TEXT,
-        HttpContentTypeEnum.ALL,
-      ].join(', '),
-      [HttpRequestHeaderEnum.CONTENT_TYPE]: [
-        HttpContentTypeEnum.JSON,
-        HttpContentTypeEnum.TEXT,
-        HttpContentTypeEnum.ALL,
-      ].join(', '),
+      [HttpRequestHeaderEnum.ACCEPT]: [HttpContentTypeEnum.JSON].join(', '),
+      [HttpRequestHeaderEnum.CONTENT_TYPE]: [HttpContentTypeEnum.JSON].join(
+        ', '
+      ),
     };
     return new Headers(
       Object.assign(
@@ -91,12 +88,12 @@ export class ApiAcad extends ApiClient {
     const requestParams: IApiClientRequestParams = {
       headers: this.headers,
       body: {
-        username,
+        email: username,
         password,
       },
       method: HttpMethodEnum.POST,
     };
-    const response = this.#api.request('/auth', requestParams);
+    const response = this.#api.request('/auth/authenticate', requestParams);
     const responseData = await response.promise;
     const loginResponse = responseData.data as IApiAcadAuthResponse;
 
@@ -117,6 +114,7 @@ export class ApiAcad extends ApiClient {
     password: string
   ): Promise<IApiAcadAuthResponse> {
     const requestParams: IApiClientRequestParams = {
+      headers: this.headers,
       body: {
         nickname,
         email,
@@ -124,7 +122,7 @@ export class ApiAcad extends ApiClient {
       },
       method: HttpMethodEnum.POST,
     };
-    const response = this.#api.request('/signUp', requestParams);
+    const response = this.#api.request('/auth/register', requestParams);
     const responseData = await response.promise;
     const signUpResponse = responseData.data as IApiAcadAuthResponse;
 
@@ -142,9 +140,12 @@ export class ApiAcad extends ApiClient {
       headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
-    const response = this.#api.request('/user/info', requestParams);
+    const response = this.#api.request('/users/me', requestParams);
     const responseData = await response.promise;
-    const userInfoResponse = responseData.data as IApiUserGetDataInfoResponse;
+    const userInfoResponse = {
+      id: undefined,
+      data: responseData.data,
+    } as IApiUserGetDataInfoResponse;
 
     return userInfoResponse;
   }
@@ -165,15 +166,19 @@ export class ApiAcad extends ApiClient {
     const requestParams: IApiClientRequestParams = {
       headers: this.#getAuthHeader(token),
       body: {
-        nickname,
-        picture,
+        userInfo: {
+          nickname,
+          profileIcon: picture,
+        }
       },
       method: HttpMethodEnum.PUT,
     };
-    const response = this.#api.request('/user/info', requestParams);
+    const response = this.#api.request('/users/me', requestParams);
     const responseData = await response.promise;
-    const userInfoSavedResponse =
-      responseData.data as IApiUserGetDataInfoResponse;
+    const userInfoSavedResponse = {
+      id: undefined,
+      data: responseData.data,
+    } as IApiUserGetDataInfoResponse;
 
     return userInfoSavedResponse;
   }
@@ -191,10 +196,15 @@ export class ApiAcad extends ApiClient {
       headers: this.#getAuthHeader(token),
       method: HttpMethodEnum.GET,
     };
-    const response = this.#api.request('/user/weeklyHistogram', requestParams);
+    const response = this.#api.request(
+      '/dailyScores/user/last7days',
+      requestParams
+    );
     const responseData = await response.promise;
-    const userInfoResponse =
-      responseData.data as IApiUserGetDataWeeklyHistogramResponse;
+    const userInfoResponse = {
+      id: undefined,
+      data: responseData.data,
+    } as IApiUserGetDataWeeklyHistogramResponse;
 
     return userInfoResponse;
   }
@@ -245,6 +255,7 @@ export class ApiAcad extends ApiClient {
   ): Promise<ISheetExerciseInfo> {
     const requestParams: IApiClientRequestParams = {
       headers: this.#getAuthHeader(token),
+      body: updatedExercise,
       method: HttpMethodEnum.PUT,
     };
     const response = this.#api.request(
@@ -338,5 +349,50 @@ export class ApiAcad extends ApiClient {
     const response = this.#api.request(`/dailyScores/user/add/`, requestParams);
 
     await response.promise;
+  }
+
+  async rankingGetUserRanking(
+    token: string
+  ): Promise<IApiAcadRankingGetUserRankInfoResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/dailyScores/user/ranking`,
+      requestParams
+    );
+    const responseData = await response.promise;
+
+    const resData = responseData.data as Record<string, unknown>;
+
+    return {
+      firstPlaceRankUser: resData.first,
+      averageScore: resData.averageScore,
+      userRankInfo: resData.user,
+    } as IApiAcadRankingGetUserRankInfoResponse;
+  }
+
+  async rankingGetWeeklyRanking(
+    token: string
+  ): Promise<IApiAcadRankingGetWeeklyRankingResponse> {
+    const requestParams: IApiClientRequestParams = {
+      headers: this.#getAuthHeader(token),
+      method: HttpMethodEnum.GET,
+    };
+    const response = this.#api.request(
+      `/dailyScores/weekPodium`,
+      requestParams
+    );
+    const responseData = await response.promise;
+
+    const resData = responseData.data as IRankingUserInfo[];
+
+    const weeklyRanking = {
+      podiumUsers: resData.slice(0, 4), // first four
+      nonPodiumUsers: resData.slice(5), // from fifth position and on
+    };
+
+    return weeklyRanking;
   }
 }

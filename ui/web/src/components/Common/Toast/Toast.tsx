@@ -61,6 +61,7 @@ const ToastComponent = ({ onDismiss }: ToastComponentProps) => {
       updateToastConfigAndDispatch
     );
 
+    onResize();
     return () =>
       Lib.utils.unsubscribe(
         ToastEventTypesEnum.NEW_TOAST_DISPATCH,

@@ -12,7 +12,7 @@ import WeeklyUserChart from './elements/WeeklyUserChart';
 import DefaultCardBox from '../../Template/DefaultCardBox';
 
 /** Mappings */
-import { userGetProfilePictureImageMap } from './Mappers/UserProfilePictureMappings';
+import { userGetProfilePictureImageMap } from '../../../Mappers/UserProfilePictureMappings';
 
 /** Styles */
 import './Profile.scss';
@@ -170,7 +170,7 @@ function ProfileComponent({
               </div>
               <div className="profile-page__user-points">
                 <span>Pontos acumulados:</span>
-                <strong>{userInfo.totalPoints}</strong>
+                <strong>{userInfo.score}</strong>
                 <TrophyStarIcon />
               </div>
             </div>
@@ -188,7 +188,7 @@ function ProfileComponent({
       <div className="profile-page__bottom-card">
         <DefaultCardBox title="Métricas da Semana" icon={<MetricsChartIcon />}>
           <div className="profile-page__user-metrics">
-            <div>
+            <div className="profile-page__user-metrics-illustration">
               <CellphoneMetricsIllustration />
             </div>
             <WeeklyUserChart userWeeklyHistogram={userWeeklyHistogram} />

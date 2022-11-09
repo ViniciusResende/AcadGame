@@ -25,7 +25,7 @@ function RouteSignUp() {
     const signUpAuthResponse = await Lib.auth.signUp(nickname, email, password);
 
     if (signUpAuthResponse?.token) {
-      navigator('/profile');
+      navigator('/');
     } else {
       dispatchFeedbackToast({
         type: ToastConfigTypesEnum.FAIL,

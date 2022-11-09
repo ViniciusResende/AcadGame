@@ -27,7 +27,7 @@ export const SliderComponent = ({
   children,
   className,
   autoplay = true,
-  delay = 2500,
+  delay = 10000,
   slidesToShow = 1,
   slideClassName,
   ...rest
@@ -102,6 +102,15 @@ export const SliderComponent = ({
             <div className={cx('slider-component__slide', slideClassName)}>
               {arrayChildren.slice(
                 indexCorrected - slidesToShow,
+                indexCorrected
+              )}
+            </div>
+          );
+        } else if (arrayChildren.length === indexCorrected) {
+          return (
+            <div className={cx('slider-component__slide', slideClassName)}>
+              {arrayChildren.slice(
+                indexCorrected - (indexCorrected % slidesToShow),
                 indexCorrected
               )}
             </div>

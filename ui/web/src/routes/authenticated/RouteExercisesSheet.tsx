@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 /** React components */
 import ExercisesSheets from '../../components/Authenticated/ExercisesSheets';
 
+/** React Hooks */
+import useSecurity from '../middlewares/useSecurity';
+
 /** Library */
 import Lib from 'acad-game-lib';
 
@@ -47,6 +50,7 @@ function updateUserExercisesSheetWithUpdatedExercise(
 }
 
 function RouteExercisesSheet() {
+  useSecurity();
   const [userExercisesSheets, setUserExercisesSheets] = useState<
     IExercisesSheetInfoData[]
   >([]);
@@ -138,14 +142,14 @@ function RouteExercisesSheet() {
   }
 
   useEffect(() => {
-    async function getAvailableExercises() {
+    async function getUserSheets() {
       const getUserExercisesSheetsResponse =
         await Lib.exercisesSheet.getUserExercisesSheets();
 
       return getUserExercisesSheetsResponse;
     }
 
-    getAvailableExercises().then(
+    getUserSheets().then(
       (response) => response && setUserExercisesSheets(response)
     );
   }, []);

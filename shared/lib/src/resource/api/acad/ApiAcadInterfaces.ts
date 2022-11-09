@@ -11,6 +11,10 @@ import {
   IExerciseToAddInfo,
   ISheetExerciseInfo,
 } from '../../../data/interfaces/ExercisesSheetInterfaces';
+import {
+  IRankingCurrentUserInfo,
+  IRankingUserInfo,
+} from '../../../data/interfaces/RankingInterfaces';
 
 /**
  * API data representation for general HTTP responses' structure.
@@ -32,7 +36,7 @@ export interface IApiAcadAuthResponse {
  * API data representation for general User Get Data responses'.
  */
 export interface IApiUserGetDataResponse {
-  id: string;
+  id: string | undefined;
   data: unknown;
 }
 
@@ -42,7 +46,7 @@ export interface IApiUserGetDataResponse {
 export interface IApiUserGetDataInfoResponse extends IApiUserGetDataResponse {
   data: {
     nickname: string;
-    totalPoints: number;
+    score: number;
     profileIcon: UserProfilePictureEnum;
   };
 }
@@ -54,7 +58,7 @@ export interface IApiUserGetDataWeeklyHistogramResponse
   extends IApiUserGetDataResponse {
   data: {
     date: string;
-    dailyPoints: number;
+    score: number;
   }[];
 }
 
@@ -72,6 +76,23 @@ export interface IApiAcadExercisesSheetGetUserSheetResponse {
 export interface IApiAcadExercisesSheetGetAvailableToAddResponse {
   sheetId: string;
   availableExercises: IExerciseToAddInfo[];
+}
+
+/**
+ * API data representation for Get Current User Ranking response.
+ */
+export interface IApiAcadRankingGetUserRankInfoResponse {
+  firstPlaceRankUser: IRankingUserInfo;
+  averageScore: number;
+  userRankInfo: IRankingCurrentUserInfo;
+}
+
+/**
+ * API data representation for Get Weekly Ranking response.
+ */
+export interface IApiAcadRankingGetWeeklyRankingResponse {
+  podiumUsers: IRankingUserInfo[];
+  nonPodiumUsers: IRankingUserInfo[];
 }
 
 /**

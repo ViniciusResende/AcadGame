@@ -71,7 +71,7 @@ function LoginComponent({ loginAuth }: LoginComponentProps) {
 
     const thereIsFormErrors = handleFormValidation(username, password);
 
-    if (!thereIsFormErrors) loginAuth(username.value, password.value);
+    if (!thereIsFormErrors) loginAuth(username, password);
   }
 
   function LoginContent() {

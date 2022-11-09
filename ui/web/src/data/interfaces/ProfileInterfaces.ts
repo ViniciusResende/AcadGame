@@ -11,7 +11,7 @@ import { UserProfilePictureEnum } from 'acad-game-lib';
  */
 export interface IUserInfoData {
   nickname: string;
-  totalPoints: number;
+  score: number;
   profileIcon: UserProfilePictureEnum;
 }
 
@@ -28,5 +28,5 @@ export interface IUserUpdateInfoBody {
  */
 export interface IUserWeeklyHistogramElementData {
   date: string;
-  dailyPoints: number;
+  score: number;
 }

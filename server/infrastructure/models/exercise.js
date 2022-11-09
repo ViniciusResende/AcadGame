@@ -16,17 +16,10 @@ const Exercise = database.define('Exercises', {
         type: Sequelize.STRING,
         allowNull: true
     },
-    isTime: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false
-    },
     isLoad: {
         type: Sequelize.BOOLEAN,
-        allowNull: false
-    },
-    icon: {
-        type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        defaultValue: true 
     }
 });
 

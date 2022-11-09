@@ -1,5 +1,6 @@
 const BADGE = require('../../infrastructure/models/badge');
 
+const SEVER_ERROR = require('../../utils/serverErrors');
 
 const { Op } = require('sequelize');
 
@@ -30,7 +31,10 @@ class BadgeDatabaseAdapter {
             });
 
             if (!QUERIED_BADGE) {
-                throw new Error(`Não encontramos uma insíngnia com id ${id}`);
+                let error = new SEVER_ERROR;
+                error.ServerError(400, `Não encontramos uma insíngnia com id ${id}`);
+
+                throw error;
             }
 
             return QUERIED_BADGE;
