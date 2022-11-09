@@ -4,6 +4,8 @@ const Sequelize = require('sequelize');
 const GymPals = database.define('GymPals', {
     friendshipId: {
         type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true,
         allowNull: false
     },
     senderId: {
