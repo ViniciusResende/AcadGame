@@ -28,6 +28,17 @@ class GymPals {
         }
     }
 
+    async getPendingFriendshipRequests (userId) {
+        try {
+            const PENDING_FRIENDSHIP_REQUESTS = await QUERY_GYM_PALS.getPendingFriendshipRequests(userId);
+
+            return PENDING_FRIENDSHIP_REQUESTS;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     async acceptFriendshipRequest (friendshipId) {
         try {
             await QUERY_GYM_PALS.acceptFriendshipRequest(friendshipId);

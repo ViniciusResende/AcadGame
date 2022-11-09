@@ -31,6 +31,23 @@ class QueryGymPals {
         }
     }
 
+    async getPendingFriendshipRequests(userId) {
+        try {
+            let pendingFriendshipRequests = await GYM_PALS_DB_ADAPTER.getPendingRequests(userId);
+
+            for (let index = 0; index < pendingFriendshipRequests.length; index++) {
+                const SENDER_INFO = await USER_DOMAIN.getSingleUser(pendingFriendshipRequests[index].senderId);
+
+                pendingFriendshipRequests[index]['senderInfo'] = SENDER_INFO;
+            }
+
+            return pendingFriendshipRequests;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
+
     async acceptFriendshipRequest(friendshipId) {
         try {
             await GYM_PALS_DB_ADAPTER.confirmFriendship(friendshipId);
