@@ -174,3 +174,44 @@ Entre as principais features da plataforma estão:
 - Desenvolver frontend da tela de amigos [Alan Augusto]
 - Criar tabela com os amigos de cada usuário [Pedro Guedes]
 - Criar rota de consulta e adição dos amigos do usuário [Carlos Henrique]
+
+---
+
+### Arquitetura Hexagonal
+
+O conceito de **Arquitetura Hexagonal** foi proposto por Alistair Cockburn, por volta dos anos 90. A ideia dessa arquitetura é construir sistemas que favorecem a reusabilidade de código, alta coesão, baixo acoplamento, independência de tecnologia e que são fáceis de serem testados. Nesse sentiddo, uma **Arquitetura Hexagonal** divide as classes de um sistema em dois grupos principais:
+- Classes de domínio, relacionadas diretamente com o negócio ddo sistema
+- Classes relacionadas com infraestrutura, tecnologias e reponsáveis pela integração com sistemas externos.
+
+O sistema do Acad Game adotou a **Arquitetura Hexagonal** porque ela garante uma série de vantagens. Primeiramente, esta permite que os desenvolvedores mantenham o foco no domínio do código, que representa o propósito do sistema e é responsável pela geração de valor. Em segundo lugar, essa arquitetura também melhora a testabilidade do código, já que o domínio do projeto é livre e tecnologia, fica mais fácil e prático de testá-lo. Por fim, essa independência do domínio também facilita a troca de bibliotecas, frameworks e bancos de dados, caso necessário.
+
+A seguir, temos a estrutura das pastas do backend do sistema, que impelementa a **Arquitetura Hexagonal**. Essa estrutura está localizada dentro da pasta **server**, que armazena todos os arquivos e diretórios relativos ao desenvolvimento do backend da aplicação.
+  
+**domains**
+A pasta de **domínio** tem por objetivo armazenar cada uma das entidades do sistema em formato de código puro. Em outras palavras, ela conterá as definições de classes das entidades, bem como os principais métodos relacionados a elas.  
+A ideia é que os elementos aqui presentes não tenham dependências externas, principalmente de tecnologias que possam ser alteradas constantemente.  
+O padrão de nomenclatura adotado para os arquivos contidos nessa pasta é: "\<nomeDaEntidade\>Domain".  
+  
+#### **gates**
+Basicamente, essa pasta contém os "serviços" ou "**portas**" do aplicativo. São arquivos de código com funções limpas de dependências externas, que ainda fazem parte do domínio da aplicação, facilitando a comunicação entre o domínio "puro" (aquele que é referenciado pelas rotas de acesso) e os dados armazenados pelo SGBD escolhido.  
+Durante o desenvolvimento do projeto, foi constatado que somente as portas de saída eram necessárias, enquanto as de entrada se mostraram redundantes. Dessa forma, os arquivos aqui presentes são nomeados como "\<nomeDaEntidade\>ExitGate".  
+Foi atribuído aos arquivos dessa pasta realizarem o tratamento dos dados recuperados do SGBD.  
+  
+#### **adapters**
+Essa pasta armazena os arquivos de código que fazem a comunicação com o mundo exterior, realizando o consumo das entidades presentes na pasta "domains". Esses **adaptadores** se dividem entre as rotas de comunicação com o mundo exterior (requisições HTTP, por exemplo) e arquivos de comunicação com o SGBD selecionado.  
+No geral, espera-se que as rotas escritas nos arquivos dessa pasta sejam curtas, preferencialmente apenas chamando um serviço codificado em "domain" e realizando o tratamento de excessão do mesmo.  
+O padrão de nomenclatura dos arquivos dessa pasta é: "\<nomeDaEntidade\>Router" (para adaptadores de requisições http por exemplo) e "\<nomeDaEntidade\>DBAdapter" (para adaptadores de conexão com o banco de dados).  
+  
+#### **infrastructure**
+Como o próprio nome sugere, cuida da infraestrutura do sistema. Nessa pasta estão arquivos de modelo de entidades no banco de dados escolhido, além de outros arquivos de configuração, como um ".env", por exemplo.  
+
+#### **utils**
+Nesse diretório estão presentes arquivos úteis para o desenvolvimento, como middlewares, classes e funções auxiliares. Não é uma pasta que faz, por padrão, parte da arquitetura hexagonal, mas facilita e modulariza o desenvolvimento da aplicação.
+
+Por fim, seguem duas figuras que representam a **Arquitetura Hexagonal** implementada em forma de diagramas:
+
+![Acad Game sprint 2](https://user-images.githubusercontent.com/68781942/200831512-0477d0f9-26dc-4904-b9fd-c064f30c6c9e.png)
+
+![Acad Game sprint 2(1)](https://user-images.githubusercontent.com/68781942/200831827-9b38078f-c273-4ac9-bddc-ac834555ae12.png)
+
+---
