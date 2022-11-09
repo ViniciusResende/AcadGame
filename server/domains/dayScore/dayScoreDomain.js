@@ -127,7 +127,7 @@ class DayScore {
 
             const userIndex = weekPodium.findIndex(element => element.userId === userId);
             let user = weekPodium[userIndex];
-            const userRank = userIndex;
+            const userRank = userIndex + 1;
             user['userRank'] = userRank;
 
             return {
