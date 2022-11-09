@@ -7,10 +7,9 @@ const QUERY_GYM_PALS = require('../../gates/gymPal/gymPalExitGate');
 class GymPals {
     async requestFriendship(senderUserId, receiverUserId) {
         try {
-            const USER_RECEIVER_EXISTS = await USER_DOMAIN.getSingleUser(receiverUserId);
-            if (!USER_RECEIVER_EXISTS) {
+            if (!senderUserId || !receiverUserId) {
                 const error = new SERVER_ERROR;
-                error.ServerError(400, 'Este usuário não existe.');
+                error.ServerError(400, 'Requisição feita de forma incorreta.');
 
                 throw error;
             }
