@@ -3,9 +3,11 @@ const GYM_PALS = require('../../infrastructure/models/gymPals');
 const { Op } = require('sequelize');
 
 class GymPalsDatabaseAdapter {
+    unnecessaryAttributes = ['createdAt', 'updatedAt'];
+
     async addNewPal(senderUserId, receiverUserId) {
         try {
-            const NEW_FRIENDSHIP = await GYM_PALS.findOrCreate({
+            let newFriendship = await GYM_PALS.findOrCreate({
                 where: {
                     senderId: {
                         [Op.or]: [senderUserId, receiverUserId]
@@ -20,8 +22,14 @@ class GymPalsDatabaseAdapter {
                     accepted: false
                 }
             });
+
+            newFriendship = newFriendship[0].dataValues;
+            Object.keys(newFriendship).forEach(attribute => {
+                if (this.unnecessaryAttributes.includes(attribute)) 
+                    delete newFriendship[attribute];
+            });
     
-            return NEW_FRIENDSHIP;
+            return newFriendship;
         }
         catch (err) {
             throw err;
