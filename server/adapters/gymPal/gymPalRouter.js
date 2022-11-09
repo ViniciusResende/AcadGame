@@ -27,7 +27,11 @@ ROUTER.get('/pending', async (req, res, next) => {
 
 ROUTER.put('/accept', async (req, res, next) => {
     try {
-        res.status(200).send('Essa rota tem por objetivo permitir ao usuário aceitar uma das solicitações enviadas');
+        const FRIENDSHIP_ID = req.body.friendshipId;
+
+        await GYM_PALS.acceptFriendshipRequest(FRIENDSHIP_ID);
+
+        res.status(200).send('Pedido aceito com sucesso.');
     }
     catch (err) {
         next(err);
