@@ -7,10 +7,20 @@ const SERVER_ERROR = require('../../utils/serverErrors');
 class GymPalsDatabaseAdapter {
     async addNewPal(senderUserId, receiverUserId) {
         try {
-            const NEW_FRIENDSHIP = await GYM_PALS.create({
-                senderId: senderUserId,
-                receiverId: receiverUserId,
-                accepted: false
+            const NEW_FRIENDSHIP = await GYM_PALS.findOrCreate({
+                where: {
+                    senderId: {
+                        [Op.or]: [senderUserId, receiverUserId]
+                    },
+                    receiverId: {
+                        [Op.or]: [receiverUserId, senderUserId]
+                    }
+                },
+                defaults: {
+                    senderId: senderUserId,
+                    receiverId: receiverUserId,
+                    accepted: false
+                }
             });
     
             return NEW_FRIENDSHIP;
