@@ -1,7 +1,5 @@
 const SERVER_ERROR = require('../../utils/serverErrors');
 
-const USER_DOMAIN = require('../user/userDomain');
-
 const QUERY_GYM_PALS = require('../../gates/gymPal/gymPalExitGate');
 
 class GymPals {
