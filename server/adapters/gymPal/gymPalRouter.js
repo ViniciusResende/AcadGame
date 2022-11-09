@@ -18,7 +18,11 @@ ROUTER.post('/add', async (req, res, next) => {
 
 ROUTER.get('/pending', async (req, res, next) => {
     try {
-        res.status(200).send('Essa rota retorna todos os pedido de amizade pendentes do usuário que realizou a requisição.');
+        const USER_ID = req.userId;
+
+        const PENDING_FRIENDSHIP_REQUESTS = await GYM_PALS.getPendingFriendshipRequests(USER_ID);
+
+        res.status(200).json(PENDING_FRIENDSHIP_REQUESTS);
     }
     catch (err) {
         next(err);
