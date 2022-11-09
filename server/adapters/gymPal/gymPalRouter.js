@@ -70,7 +70,11 @@ ROUTER.get('/connections', async (req, res, next) => {
 
 ROUTER.delete('/remove', async (req, res, next) => {
     try {
-        res.status(200).send('O objetivo dessa rota é permitir ao usuário excluir um amigo da rede.');
+        const FRIENDSHIP_ID = req.body.friendshipId;
+
+        await GYM_PALS.removeGymPal(FRIENDSHIP_ID);
+
+        res.status(200).send('Usuário removido da sua lista de amigos com sucesso.');
     }
     catch (err) {
         next(err);
