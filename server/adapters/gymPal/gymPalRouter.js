@@ -1,5 +1,7 @@
 const ROUTER = require('express').Router();
 
+const GYM_PALS = require('../../domains/gymPal/gymPalDomain');
+
 ROUTER.get('/connections', async (req, res, next) => {
     try {
         res.status(200).send('Essa rota é responsável por retornar todos os amigos do usuário que realizou a requisição.');
@@ -20,7 +22,12 @@ ROUTER.get('/pending', async (req, res, next) => {
 
 ROUTER.post('/add', async (req, res, next) => {
     try {
-        res.status(200).send('Essa rota é responsável por enviar uma solicitação de amizade a outro usuário do aplicativo.');
+        const SENDER_ID = req.userId;
+        const RECEIVER_ID = req.body.userTargetId;
+
+        const NEW_FRIENDSHIP = await GYM_PALS.requestFriendship(SENDER_ID, RECEIVER_ID);
+
+        res.status(200).json(NEW_FRIENDSHIP);
     }
     catch (err) {
         next(err);
