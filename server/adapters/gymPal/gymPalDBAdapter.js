@@ -100,6 +100,33 @@ class GymPalsDatabaseAdapter {
             throw err;
         }
     }
+
+    async getPals(userId) {
+        try {
+            const USER_GYM_PALS = await GYM_PALS.findAll({
+                where: {
+                    [Op.or]: [
+                        {receiverId: userId},
+                        {senderId: userId}
+                    ],
+                    accepted: true
+                },
+                attributes: {
+                    exclude: this.unnecessaryAttributes
+                }
+            });
+
+            let userGymPals = [];
+            USER_GYM_PALS.forEach(pal => {
+                userGymPals.push(pal.dataValues);
+            });
+
+            return userGymPals;
+        }
+        catch (err) {
+            throw err;
+        }
+    }
 }
 
 module.exports = new GymPalsDatabaseAdapter;
