@@ -57,7 +57,11 @@ ROUTER.delete('/reject', async (req, res, next) => {
 
 ROUTER.get('/connections', async (req, res, next) => {
     try {
-        res.status(200).send('Essa rota é responsável por retornar todos os amigos do usuário que realizou a requisição.');
+        const USER_ID = req.userId;
+
+        const USER_GYM_PALS = await GYM_PALS.getUserGymPals(USER_ID);
+
+        res.status(200).json(USER_GYM_PALS);
     }
     catch (err) {
         next(err);
