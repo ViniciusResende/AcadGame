@@ -1,5 +1,6 @@
 const { addDays } = require('date-fns');
 const QueryDayScore = require('../../gates/dayScore/dayScoreExitGate');
+const userDomain = require('../../domains/user/userDomain'); 
 
 class DayScore {
     async getUserDayScores(userId) {
@@ -34,20 +35,23 @@ class DayScore {
         try {
             const TODAY = new Date();
             let score = 0;
-
-            // TODO: improve the score increase business rule 
+ 
             sentExercisesInfo.forEach(sentExerciseInfo => {
                 let numRepetitions = sentExerciseInfo.numRepetitions;
                 let numSets = sentExerciseInfo.numSets;
-                let time = sentExerciseInfo.time;
 
                 if(sentExerciseInfo.isLoad)
                     score += numRepetitions * numSets;
                 else
-                    score += 30;
+                    score += 40;
             });
 
             await QueryDayScore.postDailyScore(userId, TODAY, score);
+
+            const user = await userDomain.getSingleUser(userId);
+            const totalScore = user.dataValues.score + score;
+
+            await userDomain.updateUserInfo(userId, { score: totalScore });
         }
         catch(err) {
             throw err;

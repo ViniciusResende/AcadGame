@@ -43,7 +43,6 @@ class QueryDayScore {
                     
                 currentDate = addDays(currentDate, 1);
             }
-            console.log(allDayScores);
 
             return allDayScores;
         }

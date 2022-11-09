@@ -17,7 +17,7 @@ ROUTER.get('/me', async (req, res, next) => {
     try {
         const USER_ID = req.userId;
 
-        const SINGLE_USER = await userDomain.getSingleUser(USER_ID);
+        const SINGLE_USER = await USER_DOMAIN.getSingleUser(USER_ID);
 
         res.status(200).json({data: SINGLE_USER});
     }
@@ -69,7 +69,7 @@ ROUTER.put('/me', async (req, res, next) => {
     try {
         const USER_INFO = req.body.userInfo;
         
-        const USER_ID = req.body.userId;
+        const USER_ID = req.userId;
 
         if (!USER_INFO) {
             const UPDATED_USER = await USER_DOMAIN.getSingleUser(USER_ID);
