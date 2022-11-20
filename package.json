@@ -1,11 +1,16 @@
 {
   "private": true,
   "devDependencies": {
+    "@badeball/cypress-cucumber-preprocessor": "^14.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@parcel/packager-ts": "2.6.0",
     "@parcel/transformer-typescript-types": "2.6.0",
     "@types/jest": "28.1.1",
     "chokidar": "3.5.3",
+    "cross-env": "^7.0.3",
     "cspell": "6.1.1",
+    "cypress": "^11.1.0",
     "husky": "8.0.1",
     "typescript": ">=3.0.0"
   },
@@ -15,6 +20,12 @@
     "build": "(yarn); (cd ui/web && yarn build)",
     "verify": "yarn -v",
     "verify_old": "(yarn cspell) && (cd shared/lib && yarn verify) && (cd server/transaction-monitor && yarn) && (yarn sast ./)",
-    "postinstall": "(husky install); (cd shared/lib && yarn); (cd ui/web && yarn); (cd server/transaction-monitor && yarn)"
+    "postinstall": "(husky install); (cd shared/lib && yarn); (cd ui/web && yarn);",
+    "cypress": "cross-env CYPRESS_API_URL=$API_URL CYPRESS_EMAIL=$EMAIL CYPRESS_PASSWORD=$PASSWORD ./node_modules/.bin/cypress",
+    "cypress:open": "yarn cypress open",
+    "cypress:run": "yarn cypress run --headless -b chrome --reporter list -q"
+  },
+  "cypress-cucumber-preprocessor": {
+    "stepDefinitions": "tests/cypress/integration/**/*.{js,ts}"
   }
 }
