@@ -1,5 +1,5 @@
 /** React imports */
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import cx from 'classnames';
 
 /** React Components */
@@ -29,6 +29,10 @@ function ProfilePictureEditionModalComponent({
 }: ProfilePictureEditionModalComponentProps) {
   const [currentSelectedPicture, setCurrentSelectedPicture] =
     useState<UserProfilePictureEnum>(userCurrentPicture);
+
+  useEffect(() => {
+    setCurrentSelectedPicture(userCurrentPicture);
+  }, [userCurrentPicture]);
 
   const profilePicturesArray = useMemo(
     () => Object.values(UserProfilePictureEnum),
@@ -64,6 +68,7 @@ function ProfilePictureEditionModalComponent({
             handleOnClose();
             setCurrentSelectedPicture(userCurrentPicture);
           }}
+          data-cy="edit-picture-cancel"
         >
           Cancelar
         </Button>
@@ -74,6 +79,7 @@ function ProfilePictureEditionModalComponent({
             handleOnClose();
           }}
           disabled={currentSelectedPicture === userCurrentPicture}
+          data-cy="edit-picture-confirm"
         >
           Confirmar
         </Button>
