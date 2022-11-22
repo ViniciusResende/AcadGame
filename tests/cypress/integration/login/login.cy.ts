@@ -80,7 +80,7 @@ When('Fill input with right values', () => {
 
 Then('Click on send Form', () => {
   cy.intercept({
-    url: '**/unified-auth',
+    url: '**/api/auth/authenticate',
     method: 'POST',
   }).as('auth');
 
