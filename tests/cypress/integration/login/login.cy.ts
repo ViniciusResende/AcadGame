@@ -96,6 +96,8 @@ Then('should login with success', () => {
 // Visit page without authetication
 
 When('Visit profile page and is not logged', () => {
+  cy.logout();
+
   cy.on('uncaught:exception', (error) => {
     expect(error.name).to.include('ApiClientHttpError');
     return false;
