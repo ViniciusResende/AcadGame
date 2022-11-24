@@ -4,7 +4,7 @@ Feature: Login page
 
   Scenario: Filling form with wrong info
     Given Visit login page
-    Then Inputs should be empty
+    Then Login inputs should be empty
     When Fill wrongly input email
     Then Email input should have correct value
     When Fill wrongly input password

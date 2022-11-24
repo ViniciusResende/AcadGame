@@ -10,7 +10,7 @@ Given('Visit login page', () => {
   cy.visit('/login', { failOnStatusCode: false });
 });
 
-Then('Inputs should be empty', () => {
+Then('Login inputs should be empty', () => {
   cy.get('.login-page__input').should('be.empty');
 });
 
