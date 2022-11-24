@@ -35,6 +35,17 @@ Then('Header should have Logo rendered', () => {
 });
 
 Then('Header navigators items should be properly rendered', () => {
+  cy.intercept(
+    {
+      url: '**/api/dailyScores/user/last7days',
+      method: 'GET',
+    },
+    {
+      fixture: 'profile/last-7-days.json',
+      statusCode: 200,
+    },
+  ).as('userMetrics');
+
   cy.get('.main-header__nav-bar a').each(($elem, idx) => {
     cy.wrap($elem).should('have.text', headerNavigationItems[idx].name);
     cy.wrap($elem).should('have.attr', 'href', headerNavigationItems[idx].path);
