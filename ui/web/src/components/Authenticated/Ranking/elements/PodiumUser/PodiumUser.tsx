@@ -28,6 +28,7 @@ function PodiumUserComponent({
         className="podium-user__picture"
         src={userGetProfilePictureImageMap.get(podiumUserInfo.profileIcon)}
         alt={`${podiumUserInfo.nickname}-profile-picture`}
+        data-cy={podiumUserInfo.profileIcon}
       />
       <div className="podium-user__content">
         <strong className="podium-user__name">{podiumUserInfo.nickname}</strong>
