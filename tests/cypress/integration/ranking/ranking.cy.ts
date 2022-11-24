@@ -22,9 +22,7 @@ export interface IUserRankingInfo {
 
 let userRankingInfo: IUserRankingInfo;
 
-before(() => {
-  cy.login();
-
+function fetchUserRanking() {
   cy.requestAuthenticated({
     url: '/api/dailyScores/user/ranking',
     method: 'GET',
@@ -46,6 +44,12 @@ before(() => {
     url: '**/api/dailyScores/user/ranking',
     method: 'GET',
   }).as('userRanking');
+}
+
+before(() => {
+  cy.login();
+
+  fetchUserRanking();
 });
 
 beforeEach(() => {
@@ -347,4 +351,10 @@ Then('Last user in the last card should be the worsted positioned user', () => {
 
 When('Navigate to first week ranking slide', () => {
   cy.get('.slider-component__dotsBtn').first().click();
+});
+
+// Helper
+
+Given('Get updated user ranking info', () => {
+  fetchUserRanking();
 });
