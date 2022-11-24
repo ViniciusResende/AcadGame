@@ -6,6 +6,7 @@ jest.mock('../../gates/user/userExitGate', () => {
     return {
         createNewUser: jest.fn(),
         getUserByEmail: jest.fn(),
+        getOneUser: jest.fn(),
         updateUserInfo: jest.fn()
     };
 });
@@ -39,6 +40,52 @@ describe('Create user', () => {
         expect(queryUser.createNewUser).toHaveBeenCalledTimes(1);
         expect(queryUser.createNewUser).toHaveBeenCalledWith(userInfo);
         expect(user).toEqual(mockResponse);
+    });
+});
+
+describe('Find user by ID', () => {
+    it('Should be able to find an existing user by his ID', async () => {
+        const mockResponse = {
+            id: 36,
+            nickname: 'Test Name',
+            profileIcon: 'default',
+            email: 'test@gmail.com',
+            password:
+                '$2b$10$iYKCJ/iFrGtKcoeDcePH4eCcpKyBf/pg/gbaVkNJc3ketsVz/fcUe',
+            score: 0
+        };
+
+        jest.spyOn(queryUser, 'getOneUser').mockImplementationOnce(
+            (_userInfo) => new Promise((resolve) => resolve(mockResponse))
+        );
+
+        const userId = 36;
+
+        const user = await userDomain.getSingleUser(userId);
+
+        expect(queryUser.getOneUser).toHaveBeenCalledTimes(1);
+        expect(queryUser.getOneUser).toHaveBeenCalledWith(userId);
+        expect(user).toEqual(mockResponse);
+
+        jest.clearAllMocks();
+    });
+
+    it('Should be able to receive null if ID is not registered', async () => {
+        const mockResponse = null;
+
+        jest.spyOn(queryUser, 'getOneUser').mockImplementationOnce(
+            (_userInfo) => new Promise((resolve) => resolve(mockResponse))
+        );
+
+        const userId = 36;
+
+        const user = await userDomain.getSingleUser(userId);
+
+        expect(queryUser.getOneUser).toHaveBeenCalledTimes(1);
+        expect(queryUser.getOneUser).toHaveBeenCalledWith(userId);
+        expect(user).toEqual(mockResponse);
+
+        jest.clearAllMocks();
     });
 });
 
