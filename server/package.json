@@ -4,7 +4,7 @@
   "description": "The backend files for the AcadGame project",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "nodemon ./server.js"
   },
   "repository": {
@@ -37,5 +37,8 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "sequelize": "^6.23.2"
+  },
+  "devDependencies": {
+    "jest": "^29.3.1"
   }
 }
