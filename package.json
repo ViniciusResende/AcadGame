@@ -26,6 +26,6 @@
     "cypress:run": "yarn cypress run --headless -b chrome --reporter list -q"
   },
   "cypress-cucumber-preprocessor": {
-    "stepDefinitions": "tests/cypress/integration/**/*.{js,ts}"
+    "stepDefinitions": "tests/cypress/{E2E,integration}/**/*.{js,ts}"
   }
 }
