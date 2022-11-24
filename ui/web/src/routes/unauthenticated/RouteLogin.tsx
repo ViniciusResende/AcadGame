@@ -25,7 +25,7 @@ function RouteLogin() {
     const loginAuthResponse = await Lib.auth.login(username, password);
 
     if (loginAuthResponse?.token) {
-      navigator('/profile');
+      navigator('/');
     } else {
       dispatchFeedbackToast({
         type: ToastConfigTypesEnum.FAIL,

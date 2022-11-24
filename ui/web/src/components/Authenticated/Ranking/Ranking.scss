@@ -1,0 +1,109 @@
+@import '../../../styles';
+
+.ranking-page {
+  &__container {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: flex-start;
+    padding: 1.5em;
+    width: 100%;
+  }
+
+  &__upper-cards {
+    display: grid;
+    grid-gap: 1em;
+    grid-template-areas: 'podium podium podium .';
+    width: 100%;
+
+    .default-card-box__container {
+      width: 100%;
+      &:first-child {
+        grid-area: podium;
+      }
+    }
+  }
+
+  &__podium-card {
+    align-items: flex-start;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-start;
+    padding: 1em;
+    width: 80%;
+  }
+
+  &__podium-chart {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 3.25em;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__podium-line {
+    background-color: $secondaryColor;
+    height: 1px;
+    margin-bottom: 7px;
+    margin-left: 5%;
+    width: 80%;
+  }
+
+  &__podium-users {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 27.5em;
+    justify-content: space-evenly;
+  }
+
+  &__rank-profile-card {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    justify-content: space-between;
+    margin-top: -1.25em;
+    padding: 1em;
+    width: 100%;
+  }
+
+  &__down-cards {
+    width: 100%;
+  }
+
+  &__week-rank-card {
+    .slider-component__container {
+      width: 100%;
+    }
+
+    .slider-component__slide {
+      align-items: flex-start;
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+  }
+
+  @include forSmall() {
+    &__upper-cards {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      justify-content: flex-start;
+    }
+  }
+
+  @include forXSmall() {
+    &__podium-card {
+      padding: 1em 0.25em;
+    }
+
+    &__podium-line {
+      display: none;
+    }
+  }
+}

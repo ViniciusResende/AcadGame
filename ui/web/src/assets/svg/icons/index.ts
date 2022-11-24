@@ -2,6 +2,7 @@ import AddSquareIcon from './add-square.svg';
 import BarsIcon from './bars.svg';
 import BullseyeArrowIcon from './bullseye-arrow.svg';
 import CalendarIcon from './calendar.svg';
+import CalendarStarIcon from './calendar-star.svg';
 import CheckIcon from './check.svg';
 import ChevronIcon from './chevron.svg';
 import ChevronLightIcon from './chevron-light.svg';
@@ -27,6 +28,7 @@ import QuestionPersonIcon from './question-person.svg';
 import StarPersonIcon from './star-person.svg';
 import ToDoListIcon from './todo-list.svg';
 import TrophyStarIcon from './trophy-star.svg';
+import WifiSignalIcon from './wifi-signal.svg';
 import XMarkIcon from './xmark.svg';
 
 export {
@@ -34,6 +36,7 @@ export {
   BarsIcon,
   BullseyeArrowIcon,
   CalendarIcon,
+  CalendarStarIcon,
   CheckIcon,
   ChevronIcon,
   ChevronLightIcon,
@@ -59,5 +62,6 @@ export {
   StarPersonIcon,
   ToDoListIcon,
   TrophyStarIcon,
+  WifiSignalIcon,
   XMarkIcon,
 };
