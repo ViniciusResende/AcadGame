@@ -28,6 +28,6 @@ SERVER.use('/api/dailyScores', AUTHENTICATION, DAY_SCORE_ROUTER, ERROR_HANDLING)
 SERVER.use('/api/auth', AUTH_ROUTER, ERROR_HANDLING);
 SERVER.use('/api/gymPals', AUTHENTICATION, GYM_PALS_ROUTER, ERROR_HANDLING);
 
-SERVER.listen(process.env.EXPRESS_PORT, () => {
-    console.log(`Express initialized at ${process.env.EXPRESS_PORT}`);
+SERVER.listen(process.env.PRODUCTION_EXPRESS_PORT, () => {
+    console.log(`Express initialized at ${process.env.PRODUCTION_EXPRESS_PORT}`);
 });
