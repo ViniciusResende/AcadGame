@@ -47,6 +47,12 @@ describe('User authentication', () => {
         expect(USER.nickname).toBe('testUser1');
     });
 
+    test('Should return all users that matches a given nickname (GET /api/users/nickname)', async () => {
+        const USERS = await USER_DOMAIN.getUserByNickname('testUser');
+
+        expect(USERS.length).toBeGreaterThanOrEqual(3);
+    });
+
     afterAll(async () => {
         await USER.sync({
             force: true
