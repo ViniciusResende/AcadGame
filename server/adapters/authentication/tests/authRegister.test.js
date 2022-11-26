@@ -21,7 +21,7 @@ const TOKEN_VALIDATOR = (TOKEN) => {
 
 describe('User creation tests', () => {
 
-    beforeAll(async () => {
+    afterAll(async () => {
         await USER.sync({
             force: true
         });

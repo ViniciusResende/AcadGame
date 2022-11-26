@@ -28,11 +28,13 @@ describe('User authentication', () => {
     };
 
     beforeAll(async () => {
+        await AUTH_DOMAIN.registerUser(USER_INFO);
+    });
+
+    afterAll( async () => {
         await USER.sync({
             force: true
         });
-
-        await AUTH_DOMAIN.registerUser(USER_INFO);
     });
 
     test('Should authenticate user, returning a valid token (POST /api/auth/authenticate)', async () => {
