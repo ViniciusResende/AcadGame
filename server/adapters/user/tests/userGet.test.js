@@ -1,6 +1,6 @@
 jest.mock('../../../infrastructure/db');
 
-const AUTH_DOMAIN = require('../../../domains/authentication/authDomain');
+const USER_DOMAIN = require('../../../domains/user/userDomain');
 const USER = require('../../../infrastructure/models/user');
 
 describe('User authentication', () => {
@@ -20,12 +20,20 @@ describe('User authentication', () => {
     }];
 
     beforeAll(async () => {
+        for (const USER_INFO of USER_COLLECTION) {
+            await USER_DOMAIN.createUser(USER_INFO);
+        }
+    });
+
+    test('Should return all registered users (GET /api/users/)', async () => {
+        const EVERY_USER = await USER_DOMAIN.getEveryUser();
+
+        expect(EVERY_USER.length).toBeGreaterThanOrEqual(3);
+    });
+
+    afterAll(async () => {
         await USER.sync({
             force: true
         });
-
-        USER_COLLECTION.forEach(async (USER_INFO) => {
-            await AUTH_DOMAIN.registerUser(USER_INFO);
-        });
-    });
+   });
 });
