@@ -53,4 +53,18 @@ describe('User creation tests', () => {
             expect(true).toBeTruthy();
         }
     });
+
+    test('Should fail creating an user, since there are missing information (POST /api/auth/register)', async () => {
+        try {
+            await AUTH_DOMAIN.registerUser({
+                email: "pedro123testee@p.com",
+                password: "123123"
+            });
+            
+            expect(false).toBeTruthy();
+        }
+        catch (err) {
+            expect(true).toBeTruthy();
+        }
+    });
 });
