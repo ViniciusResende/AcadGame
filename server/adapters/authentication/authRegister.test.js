@@ -67,4 +67,20 @@ describe('User creation tests', () => {
             expect(true).toBeTruthy();
         }
     });
+
+    test('Should fail creating an user, since there is an invalid property (POST /api/auth/register)', async () => {
+        try {
+            await AUTH_DOMAIN.registerUser({
+                nickname: "pedro123",
+                email: "pedro123@p.com",
+                password: "123123",
+                isAveragePythonEnjoyer: true
+            });
+            
+            expect(false).toBeTruthy();
+        }
+        catch (err) {
+            expect(true).toBeTruthy();
+        }
+    });
 });
