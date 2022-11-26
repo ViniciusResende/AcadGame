@@ -1,4 +1,4 @@
-jest.mock('../../infrastructure/db');
+jest.mock('../../../infrastructure/db');
 
 const AUTH_DOMAIN = require('../../../domains/authentication/authDomain');
 const USER = require('../../../infrastructure/models/user');
