@@ -42,4 +42,26 @@ describe('User authentication', () => {
 
         expect(SUCCESS).toBeTruthy();
     });
+
+    test('Should fail to authenticate user, since the e-mail does not exists in the database (POST /api/auth/authenticate)', async () => {
+        try {
+            await AUTH_DOMAIN.authenticateUser("i_assure_you_that_this_email_does_not_exists@for_real.com", USER_INFO.password);
+
+            expect(false).toBeTruthy();
+        }
+        catch (err) {
+            expect(true).toBeTruthy();
+        }
+    });
+
+    test('Should fail to authenticate user, since the password does not matches the registered one (POST /api/auth/authenticate)', async () => {
+        try {
+            await AUTH_DOMAIN.authenticateUser(USER_INFO.email, "trustM3ThisIsNotTheRightP@ssw0rd123");
+
+            expect(false).toBeTruthy();
+        }
+        catch (err) {
+            expect(true).toBeTruthy();
+        }
+    });
 });
