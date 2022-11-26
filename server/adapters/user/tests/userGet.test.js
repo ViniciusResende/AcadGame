@@ -31,6 +31,16 @@ describe('User authentication', () => {
         expect(EVERY_USER.length).toBeGreaterThanOrEqual(3);
     });
 
+    test('Should return a single registered user (GET /api/users/me)', async () => {
+        const USER = await USER_DOMAIN.getSingleUser(1);
+
+        expect(USER).toHaveProperty('nickname');
+
+        expect(USER).toHaveProperty('email');
+
+        expect(USER).toHaveProperty('password');
+    });
+
     afterAll(async () => {
         await USER.sync({
             force: true
