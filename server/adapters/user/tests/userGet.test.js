@@ -53,6 +53,20 @@ describe('User authentication', () => {
         expect(USERS.length).toBeGreaterThanOrEqual(3);
     });
 
+    test('Should return the top three users of the app', async () => {
+        for (let id of [1, 2, 3]) {
+            await USER_DOMAIN.updateUserInfo(id, {
+                score: (1000 + 1000*id)
+            });
+        }
+
+        const TOP_RANK = await USER_DOMAIN.getTopRankUsers(3);
+
+        expect(TOP_RANK[0].nickname).toBe(USER_COLLECTION[2].nickname);
+
+        expect(TOP_RANK[0].email).toBe(USER_COLLECTION[2].email);
+    });
+
     afterAll(async () => {
         await USER.sync({
             force: true
