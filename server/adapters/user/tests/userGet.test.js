@@ -53,7 +53,7 @@ describe('User authentication', () => {
         expect(USERS.length).toBeGreaterThanOrEqual(3);
     });
 
-    test('Should return the top three users of the app', async () => {
+    test('Should return the top three users of the app (GET /api/users/top/:rank)', async () => {
         for (let id of [1, 2, 3]) {
             await USER_DOMAIN.updateUserInfo(id, {
                 score: (1000 + 1000*id)
