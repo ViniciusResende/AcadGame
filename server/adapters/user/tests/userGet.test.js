@@ -41,6 +41,12 @@ describe('User authentication', () => {
         expect(USER).toHaveProperty('password');
     });
 
+    test('Should get an user by e-mail (GET /api/users/email)', async () => {
+        const USER = await USER_DOMAIN.getUserByEmail('test@testt.com.test');
+
+        expect(USER.nickname).toBe('testUser1');
+    });
+
     afterAll(async () => {
         await USER.sync({
             force: true
