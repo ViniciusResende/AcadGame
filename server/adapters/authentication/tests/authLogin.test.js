@@ -21,20 +21,22 @@ const TOKEN_VALIDATOR = (TOKEN) => {
 
 describe('User authentication', () => {
 
+    const USER_INFO = {
+        nickname: "testUser",
+        email: "test@test.com.test",
+        password: "test123"
+    };
+
     beforeAll(async () => {
         await USER.sync({
             force: true
         });
 
-        await AUTH_DOMAIN.registerUser({
-            nickname: "testUser",
-            email: "test@test.com.test",
-            password: "test123"
-        });
+        await AUTH_DOMAIN.registerUser(USER_INFO);
     });
 
     test('Should authenticate user, returning a valid token (POST /api/auth/authenticate)', async () => {
-        const TOKEN = await AUTH_DOMAIN.authenticateUser("test@test.com.test", "test123");
+        const TOKEN = await AUTH_DOMAIN.authenticateUser(USER_INFO.email, USER_INFO.password);
 
         const SUCCESS = TOKEN_VALIDATOR(TOKEN);
 
