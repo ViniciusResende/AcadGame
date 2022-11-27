@@ -7,7 +7,8 @@ jest.mock('../../gates/exerciseSheet/exerciseSheetExitGate', () => {
         getUserExerciseSheets: jest.fn(),
         getAvailableExercisesSheet: jest.fn(),
         postUserExercises: jest.fn(),
-        putUserExercise: jest.fn()
+        putUserExercise: jest.fn(),
+        deleteUserExercise: jest.fn()
     };
 });
 
@@ -124,6 +125,26 @@ describe('Find user exercise sheets', () => {
 
         jest.clearAllMocks();
     });
+
+    // throw error treatment
+    // it('Should be able to throw an error', async () => {
+    //     const error = new serverError();
+    //     error.ServerError(
+    //         400,
+    //         `Não encontramos fichas de exercícios para o usuário com id 1`
+    //     );
+
+    //     jest.spyOn(
+    //         queryExerciseSheet,
+    //         'getUserExerciseSheets'
+    //     ).mockImplementationOnce(() => Promise.reject((_rejects) => error));
+
+    //     const userId = 1;
+
+    //     await expect(
+    //         exerciseSheetDomain.queryUserExerciseSheets(userId)
+    //     ).rejects.toThrow(error);
+    // });
 });
 
 describe('Find available exercises to an user', () => {
@@ -372,6 +393,28 @@ describe('Update user exercise info', () => {
             userExerciseInfo
         );
         expect(updateUserExercise).toEqual(mockResponse);
+
+        jest.clearAllMocks();
+    });
+});
+
+describe('Delete user exercises', () => {
+    it('Should be able to delete registered user exercises', async () => {
+        jest.spyOn(
+            queryExerciseSheet,
+            'deleteUserExercise'
+        ).mockImplementationOnce(
+            (_userInfo) => new Promise((resolve) => resolve())
+        );
+
+        const userExercisesIds = [4, 5, 7];
+
+        await exerciseSheetDomain.deleteUserExercise(userExercisesIds);
+
+        expect(queryExerciseSheet.deleteUserExercise).toHaveBeenCalledTimes(1);
+        expect(queryExerciseSheet.deleteUserExercise).toHaveBeenCalledWith(
+            userExercisesIds
+        );
 
         jest.clearAllMocks();
     });
