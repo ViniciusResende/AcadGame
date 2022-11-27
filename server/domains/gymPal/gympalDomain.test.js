@@ -68,3 +68,32 @@ describe("Request friendship", ()=>{
     //     jest.clearAllMocks();
     // });
 });
+
+describe("Get pending friendship requests", ()=>{
+
+    it("Shound be able to get pending requests", async ()=>{
+        
+        const mockResponse = {
+            friendshipId: 889,
+            senderId: 24,
+            receiverId: 12,
+            accepted: true,
+            updatedAt: '2022-11-23T16:53:39.810Z',
+            createdAt: '2022-11-23T16:53:39.810Z'
+        }
+
+        jest.spyOn(queryGymPal, 'getPendingFriendshipRequests').mockImplementationOnce(
+            (_palInfo) => new Promise((resolve) => resolve(mockResponse))
+        );
+
+        const userId = 24;
+
+        const pal = await gymPals.getPendingFriendshipRequests(userId);
+        
+        expect(queryGymPal.getPendingFriendshipRequests).toHaveBeenCalledTimes(1);
+        expect(queryGymPal.getPendingFriendshipRequests).toHaveBeenCalledWith(userId);
+        expect(pal).toEqual(mockResponse);
+
+        jest.clearAllMocks();
+    });
+});

@@ -116,3 +116,51 @@ describe('Search a badge by name', () => {
     //     jest.clearAllMocks();
     // });
 });
+
+describe('Search all badges', () => {
+    it('Should be able to find all badges', async () => {
+
+        const mockResponse = {
+            id: 50,
+            name: 'Lucas Paquetá',
+            icon: 'Ícone do bolão',
+            unlockScore: 45,
+            type: 'Platina'
+        }
+
+        jest.spyOn(queryBadge, 'getAllBadges').mockImplementationOnce(
+            (_badgeInfo) => new Promise((resolve) => resolve(mockResponse))
+        );
+
+        const badge = await badgeDomain.queryAllBadges();
+
+        expect(queryBadge.getAllBadges).toHaveBeenCalledTimes(1);
+        expect(queryBadge.getAllBadges).toHaveBeenCalledWith();
+        expect(badge).toEqual(mockResponse);
+    });
+});
+
+describe('Search badges by type', () => {
+    it('Should be able to find badges by type', async () => {
+
+        const mockResponse = {
+            id: 50,
+            name: 'Lucas Paquetá',
+            icon: 'Ícone do bolão',
+            unlockScore: 45,
+            type: 'Platina'
+        }
+
+        jest.spyOn(queryBadge, 'getBadgesByType').mockImplementationOnce(
+            (_badgeInfo) => new Promise((resolve) => resolve(mockResponse))
+        );
+
+        const type = 'Platina';
+
+        const badge = await badgeDomain.queryBadgesByType(type);
+
+        expect(queryBadge.getBadgesByType).toHaveBeenCalledTimes(1);
+        expect(queryBadge.getBadgesByType).toHaveBeenCalledWith(type);
+        expect(badge).toEqual(mockResponse);
+    });
+});
