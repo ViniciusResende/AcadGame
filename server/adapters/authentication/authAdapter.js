@@ -11,6 +11,7 @@ class authAdapter {
             return TOKEN;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -25,6 +26,7 @@ class authAdapter {
                 return true;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }

@@ -20,6 +20,7 @@ class User {
             return EVERY_USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -31,6 +32,7 @@ class User {
             return USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -42,6 +44,7 @@ class User {
             return USER;
         } 
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -53,6 +56,7 @@ class User {
             return USER;
         } 
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -64,6 +68,7 @@ class User {
             return USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -75,6 +80,7 @@ class User {
             return TOP_RANK_USERS;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
