@@ -3,6 +3,22 @@ jest.mock('../../../infrastructure/db');
 const USER_DOMAIN = require('../../../domains/user/userDomain');
 const USER = require('../../../infrastructure/models/user');
 
+const bcrypt = require('bcrypt');
+
+const PASSWORD_CHECKER = async (inputedPassword, hashedPassword) => {
+    try {
+        const MATCH = await bcrypt.compare(inputedPassword, hashedPassword);
+
+        if(!MATCH)
+            return false;
+        else
+            return true;
+    }
+    catch(err) {
+        throw err;
+    }
+}
+
 describe('User updation', () => {
 
     const USER_COLLECTION = [{
@@ -31,6 +47,18 @@ describe('User updation', () => {
 
         const CURR_USER = await USER_DOMAIN.getSingleUser(1);
         expect(CURR_USER.nickname).toBe('pedrinho_testes_ltda.');
+    });
+
+    test('Should update user\'s password (PUT /api/users/me)', async () => {
+        const PREV_USER = await USER_DOMAIN.getUserByEmailWithPassword('test@test.com.test');
+        expect(PASSWORD_CHECKER('test123', PREV_USER.password)).toBeTruthy();
+        
+        await USER_DOMAIN.updateUserInfo(1, {
+            password: 'big_integration_tests_lover_haha'
+        });
+        
+        const CURR_USER = await USER_DOMAIN.getUserByEmailWithPassword('test@test.com.test');
+        expect(PASSWORD_CHECKER('big_integration_tests_lover_haha', CURR_USER.password)).toBeTruthy();
     });
 
     test('Should update user\'s e-mail (PUT /api/users/me)', async () => {
