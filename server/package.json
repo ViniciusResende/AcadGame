@@ -4,7 +4,7 @@
   "description": "The backend files for the AcadGame project",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest -i",
     "dev": "nodemon ./server.js"
   },
   "repository": {
