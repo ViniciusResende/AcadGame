@@ -71,6 +71,20 @@ describe('User updation', () => {
         }
     });
     
+    test('Should fail to update user, since the given user id does not exists in the database (PUT /api/users/me)', async () =>{
+        try {    
+            await USER_DOMAIN.updateUserInfo(21122002, {
+                email: "i_am_a_mc_lovin_lover@mc_lovers.lovin"
+            });
+    
+            expect(false).toBeTruthy();
+        }
+        catch (err) {
+            expect(err.message).toBe("Usuário inexistente.");
+        }
+
+    });
+    
 
     afterAll(async () => {
         await USER.sync({
