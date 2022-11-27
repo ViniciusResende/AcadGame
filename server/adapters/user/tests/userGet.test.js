@@ -3,7 +3,7 @@ jest.mock('../../../infrastructure/db');
 const USER_DOMAIN = require('../../../domains/user/userDomain');
 const USER = require('../../../infrastructure/models/user');
 
-describe('User authentication', () => {
+describe('User getters', () => {
 
     const USER_COLLECTION = [{
         nickname: "testUser",

@@ -3,7 +3,7 @@ jest.mock('../../../infrastructure/db');
 const USER_DOMAIN = require('../../../domains/user/userDomain');
 const USER = require('../../../infrastructure/models/user');
 
-describe('User authentication', () => {
+describe('User updation', () => {
 
     const USER_COLLECTION = [{
         nickname: "testUser",
@@ -21,7 +21,7 @@ describe('User authentication', () => {
         }
     });
 
-    test('Should update user\'s nickname', async () => {
+    test('Should update user\'s nickname (PUT /api/users/me)', async () => {
         const PREV_USER = await USER_DOMAIN.getSingleUser(1);
         expect(PREV_USER.nickname).toBe(USER_COLLECTION[0].nickname);
 
