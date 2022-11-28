@@ -4,7 +4,7 @@ env:
   PRODUCTION_DB_NAME: acad_db
   PRODUCTION_DB_USER: acad_user
   PRODUCTION_DB_PASSWORD: senhaFalsa123
-  PRODUCTION_DB_HOST: localhost
+  PRODUCTION_DB_HOST: 127.0.0.1
   PRODUCTION_DB_PORT: 33306
   PRODUCTION_DB_DIALECT: mysql
 
@@ -16,7 +16,7 @@ env:
   TEST_DB_NAME: test_db
   TEST_DB_USER: tester
   TEST_DB_PASSWORD: testerFalso123
-  TEST_DB_HOST: localhost
+  TEST_DB_HOST: 127.0.0.1
   TEST_DB_PORT: 33306
   TEST_DB_DIALECT: mysql
 
@@ -64,7 +64,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    # - run: sudo service mysql restart
+    - run: sudo service mysql restart
     - run: npm ci
       working-directory: server
     - run: npm run build --if-present
