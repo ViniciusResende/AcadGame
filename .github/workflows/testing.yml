@@ -37,9 +37,7 @@ jobs:
         mysql user: 'tester' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
         mysql password: 'testerFalso123' # Required if "mysql user" exists. The password for the "mysql user"
 
-    - run: sudo mysql
-    - run: SHOW DATABASES;
-    - run: exit
+    - run: sudo service mysql restart
     - run: npm ci
       working-directory: server
     - run: npm run build --if-present
