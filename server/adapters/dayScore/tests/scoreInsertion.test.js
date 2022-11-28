@@ -6,7 +6,7 @@ const USER_DOMAIN = require('../../../domains/user/userDomain');
 const DAILY_SCORE = require('../../../infrastructure/models/dayScore');
 const USER = require('../../../infrastructure/models/user');
 
-describe('User updation', () => {
+describe('User score setters', () => {
 
     const USER_INFO = {
         nickname: "testUser",
