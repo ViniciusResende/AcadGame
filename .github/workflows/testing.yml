@@ -1,5 +1,30 @@
 name: Testing code on pull requests
 
+env:
+  PRODUCTION_DB_NAME: acad_db
+  PRODUCTION_DB_USER: acad_user
+  PRODUCTION_DB_PASSWORD: senhaFalsa123
+  PRODUCTION_DB_HOST: localhost
+  PRODUCTION_DB_PORT: 9001
+  PRODUCTION_DB_DIALECT: mysql
+
+  PRODUCTION_EXPRESS_PORT: 3001
+
+  PRODUCTION_JWT_SECRET: "greenEyedBlackKittens12345678910"
+  PRODUCTION_COOKIE_DURATION: "1d"
+
+  TEST_DB_NAME: test_db
+  TEST_DB_USER: tester
+  TEST_DB_PASSWORD: testerFalso123
+  TEST_DB_HOST: localhost
+  TEST_DB_PORT: 9009
+  TEST_DB_DIALECT: mysql
+
+  TEST_EXPRESS_PORT: 3001
+
+  TEST_JWT_SECRET: "greenEyedBlackKittens12345678910"
+  TEST_COOKIE_DURATION: "1d"
+
 on:
   pull_request:
     branches: [ "main", "development" ]
@@ -45,29 +70,3 @@ jobs:
       working-directory: server
     - run: npm test
       working-directory: server
-    
-
-      env:
-        PRODUCTION_DB_NAME: acad_db
-        PRODUCTION_DB_USER: acad_user
-        PRODUCTION_DB_PASSWORD: senhaFalsa123
-        PRODUCTION_DB_HOST: localhost
-        PRODUCTION_DB_PORT: 9001
-        PRODUCTION_DB_DIALECT: mysql
-
-        PRODUCTION_EXPRESS_PORT: 3001
-
-        PRODUCTION_JWT_SECRET: "greenEyedBlackKittens12345678910"
-        PRODUCTION_COOKIE_DURATION: "1d"
-
-        TEST_DB_NAME: test_db
-        TEST_DB_USER: tester
-        TEST_DB_PASSWORD: testerFalso123
-        TEST_DB_HOST: localhost
-        TEST_DB_PORT: 9009
-        TEST_DB_DIALECT: mysql
-
-        TEST_EXPRESS_PORT: 3001
-
-        TEST_JWT_SECRET: "greenEyedBlackKittens12345678910"
-        TEST_COOKIE_DURATION: "1d"
