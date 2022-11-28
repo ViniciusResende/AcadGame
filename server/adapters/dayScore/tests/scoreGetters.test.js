@@ -32,7 +32,7 @@ describe('User score getters', () => {
         isLoad: true
     };
 
-    beforeAll(async () => {
+    const POPULATE_DATABASE = async () => {
         let id = 1;
         for (const USER_INFO of USER_COLLECTION) {
             await USER_DOMAIN.createUser(USER_INFO);
@@ -41,15 +41,29 @@ describe('User score getters', () => {
             }
             id += 1;
         }
+    };
+
+    const CLEAR_DATABASE = async () => {
+        await USER.sync({
+            force: true
+        });
+
+        await DAILY_SCORE.sync({
+            force: true
+        });
+    };
+
+    beforeAll(async () => {
+        await POPULATE_DATABASE();
     });
 
-    test('Should get all user\'s exercises of the day (GET /api/dailyScores)', async () => {
+    test('Should get all user\'s exercises score of the day (GET /api/dailyScores)', async () => {
         const CURR_SCORE = await DAILY_SCORE_DOMAIN.getUserDayScores(4);
 
         expect(CURR_SCORE.length).toBeGreaterThanOrEqual(4);
     });
 
-    test('Should get every exercise the user made in the week (GET /api/dailyScores/user/last7Days)', async () =>{
+    test('Should get every exercise score the user made in the week (GET /api/dailyScores/user/last7Days)', async () =>{
         const USER_WEEK_EXERCISES = await DAILY_SCORE_DOMAIN.getLast7DaysScores(3);
 
         // This is wrong and should be changed. We could start by changing the date column data type to DATEONLY, instead of DATE.
@@ -79,12 +93,6 @@ describe('User score getters', () => {
     });
 
     afterAll(async () => {
-        await USER.sync({
-            force: true
-        });
-
-        await DAILY_SCORE.sync({
-            force: true
-        });
+        await CLEAR_DATABASE();
    });
 });
