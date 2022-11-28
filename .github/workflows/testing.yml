@@ -1,8 +1,6 @@
-name: Node.js CI
+name: Testing code on pull requests
 
 on:
-  push:
-    branches: [ "main", "development" ]
   pull_request:
     branches: [ "main", "development" ]
 
@@ -24,4 +22,5 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
+    - run: cd ./server/
     - run: npm test
