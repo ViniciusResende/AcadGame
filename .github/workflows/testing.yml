@@ -38,6 +38,9 @@ jobs:
         mysql password: 'testerFalso123' # Required if "mysql user" exists. The password for the "mysql user"
 
     - run: sudo service mysql restart
+    - run: sudo mysql
+    - run: GRANT ALL PRIVILEGES ON *.* TO 'tester'@'localhost'
+    - run: exit
     - run: npm ci
       working-directory: server
     - run: npm run build --if-present
