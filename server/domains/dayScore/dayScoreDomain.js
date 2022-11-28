@@ -10,6 +10,7 @@ class DayScore {
             return QUERIED_DAY_SCORES;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -27,6 +28,7 @@ class DayScore {
             return LAST_7_DAY_SCORES;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -54,6 +56,7 @@ class DayScore {
             await userDomain.updateUserInfo(userId, { score: totalScore });
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -71,6 +74,7 @@ class DayScore {
             
             let weekPodium = await QueryDayScore.getWeekPodium(currentYear, currentWeekNumber);
 
+            /* istanbul ignore next */
             function compare(a, b) {
                 if (a.score < b.score)
                   return 1;
@@ -86,6 +90,7 @@ class DayScore {
             return weekPodium;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -103,6 +108,7 @@ class DayScore {
 
             let weekPodium = await QueryDayScore.getWeekPodium(currentYear, currentWeekNumber);
 
+            /* istanbul ignore next */
             function compare(a, b) {
                 if (a.score < b.score)
                   return 1;
@@ -137,6 +143,7 @@ class DayScore {
             }
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }

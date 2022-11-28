@@ -41,6 +41,12 @@ describe('User score getters', () => {
             }
             id += 1;
         }
+
+        await DAILY_SCORE_DOMAIN.createDailyScore(1, [{
+            numRepetitions: 10,
+            numSets: 100,
+            isLoad: false
+        }]);
     };
 
     const CLEAR_DATABASE = async () => {
@@ -81,7 +87,7 @@ describe('User score getters', () => {
         expect(WEEK_PODIUM[0].score).toBe(4000);
 
         expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].userId).toBe(1);
-        expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].score).toBe(1000);
+        expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].score).toBe(1040);
     });
 
     test('Should return the user\'s position in the weekly global rank correctly (GET /api/dailyScores/user/ranking)', async () => {
