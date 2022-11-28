@@ -49,7 +49,7 @@ describe('User updation', () => {
         expect(CURR_SCORE.length).toBeGreaterThanOrEqual(4);
     });
 
-    test('Should get every exercise the user made in the week (GET /api/dailyScores)', async () =>{
+    test('Should get every exercise the user made in the week (GET /api/dailyScores/user/last7Days)', async () =>{
         const USER_WEEK_EXERCISES = await DAILY_SCORE_DOMAIN.getLast7DaysScores(3);
 
         // This is wrong and should be changed. We could start by changing the date column data type to DATEONLY, instead of DATE.
@@ -58,6 +58,16 @@ describe('User updation', () => {
             expect(USER_WEEK_EXERCISES[weekDay].score).toBe(0);
         }
         expect(USER_WEEK_EXERCISES[7].score).toBe(3000);
+    });
+
+    test('Should get the users ordered by their weekly score (GET /api/dailyScores/weekPodium)', async () => {
+        const WEEK_PODIUM = await DAILY_SCORE_DOMAIN.getWeekPodium();
+
+        expect(WEEK_PODIUM[0].userId).toBe(4);
+        expect(WEEK_PODIUM[0].score).toBe(4000);
+
+        expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].userId).toBe(1);
+        expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].score).toBe(1000);
     });
 
     afterAll(async () => {
