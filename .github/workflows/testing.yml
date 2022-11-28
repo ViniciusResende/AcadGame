@@ -24,5 +24,5 @@ jobs:
       working-directory: server
     - run: npm run build --if-present
       working-directory: server
-    - run: npm test
+    - run: npm test -- --updateSnapshot
       working-directory: server
