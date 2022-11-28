@@ -65,7 +65,7 @@ jobs:
         cache: 'npm'
 
     - run: sudo service mysql restart
-    - run: sudo mysql
+    - run: sudo -u mysql -p && testerFalso123
     - run: SHOW DATABASES;
     - run: npm ci
       working-directory: server
