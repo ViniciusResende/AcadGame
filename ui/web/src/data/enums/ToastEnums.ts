@@ -25,8 +25,8 @@ export enum ToastConfigDurationEnum {
 export enum ToastConfigMessagesEnum {
   EXERCISES_ADD_FAIL_MESSAGE = 'Os exercícios selecionados não puderam ser adicionados, por favor tente novamente.',
   EXERCISES_ADD_SUCCESS_MESSAGE = 'Os exercícios selecionados foram adicionados à sua ficha de exercícios.',
-  EXERCISES_SHEET_FAIL_ON_SUBMIT = 'O exercícios selecionados não puderam ser submetidos, por favor tente novamente.',
-  EXERCISES_SHEET_SUCCESS_ON_SUBMIT = 'O exercício selecionados foram submetidos com sucesso e seus pontos já serão contabilizados.',
+  EXERCISES_SHEET_FAIL_ON_SUBMIT = 'Os exercícios selecionados não puderam ser submetidos, por favor tente novamente.',
+  EXERCISES_SHEET_SUCCESS_ON_SUBMIT = 'Os exercícios selecionados foram submetidos com sucesso e seus pontos já serão contabilizados.',
   EXERCISES_SHEET_FAIL_ON_UPDATE = 'O exercício não pode ser atualizado, por favor tente novamente.',
   EXERCISES_SHEET_SUCCESS_ON_UPDATE = 'O exercício teve seus valores editados com sucesso.',
   GENERIC_FAIL_MESSAGE = 'Alguma coisa aconteceu, por favor tente novamente mais tarde.',
