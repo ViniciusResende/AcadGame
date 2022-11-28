@@ -64,7 +64,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - run: service mysql restart
+    - run: sudo service mysql restart
     - run: npm ci
       working-directory: server
     - run: npm run build --if-present
