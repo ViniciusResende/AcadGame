@@ -6,7 +6,7 @@ const USER_DOMAIN = require('../../../domains/user/userDomain');
 const DAILY_SCORE = require('../../../infrastructure/models/dayScore');
 const USER = require('../../../infrastructure/models/user');
 
-describe('User updation', () => {
+describe('User score getters', () => {
 
     const USER_COLLECTION = [{
         nickname: "testUser",
@@ -68,6 +68,14 @@ describe('User updation', () => {
 
         expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].userId).toBe(1);
         expect(WEEK_PODIUM[WEEK_PODIUM.length - 1].score).toBe(1000);
+    });
+
+    test('Should return the user\'s position in the weekly global rank correctly (GET /api/dailyScores/user/ranking)', async () => {
+        const BEST_USER_RANK = await DAILY_SCORE_DOMAIN.getUserWeeklyRank(4);
+        expect(BEST_USER_RANK.user.userRank).toBe(1);
+
+        const WORSE_USER_RANK = await DAILY_SCORE_DOMAIN.getUserWeeklyRank(1);
+        expect(WORSE_USER_RANK.user.userRank).toBe(4);
     });
 
     afterAll(async () => {
