@@ -5,7 +5,7 @@ env:
   PRODUCTION_DB_USER: acad_user
   PRODUCTION_DB_PASSWORD: senhaFalsa123
   PRODUCTION_DB_HOST: 127.0.0.1
-  PRODUCTION_DB_PORT: 33306
+  PRODUCTION_DB_PORT: 3306
   PRODUCTION_DB_DIALECT: mysql
 
   PRODUCTION_EXPRESS_PORT: 3001
@@ -17,7 +17,7 @@ env:
   TEST_DB_USER: tester
   TEST_DB_PASSWORD: testerFalso123
   TEST_DB_HOST: 127.0.0.1
-  TEST_DB_PORT: 33306
+  TEST_DB_PORT: 3306
   TEST_DB_DIALECT: mysql
 
   TEST_EXPRESS_PORT: 3001
@@ -42,7 +42,7 @@ jobs:
       mysql-database:
         image: mysql:5.7
         ports:
-          - 33306:3306
+          - 3306:3306
         env:
           MYSQL_DATABASE: ${{ env.TEST_DB_NAME }}
           MYSQL_USER: ${{ env.TEST_DB_USER }}
