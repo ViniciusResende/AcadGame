@@ -46,8 +46,8 @@ jobs:
         env:
           MYSQL_DATABASE: ${{ env.TEST_DB_NAME }}
           MYSQL_USER: ${{ env.TEST_DB_USER }}
-          MYSQL_PASSWORD: ${{ env.TEST_DB_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ env.TEST_DB_PASSWORD }}
+          MYSQL_PASSWORD: testerFalso123
+          MYSQL_ROOT_PASSWORD: testerFalso123
         options: >-
           --name=mysql-database
           --health-cmd="mysqladmin ping"
