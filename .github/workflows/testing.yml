@@ -25,8 +25,8 @@ env:
 
   PRODUCTION_EXPRESS_PORT: 3001
 
-  PRODUCTION_JWT_SECRET: "greenEyedBlackKittens12345678910"
-  PRODUCTION_COOKIE_DURATION: "1d"
+  PRODUCTION_JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  PRODUCTION_COOKIE_DURATION: '1d'
 
   TEST_DB_NAME: test_db
   TEST_DB_USER: root
@@ -37,35 +37,34 @@ env:
 
   TEST_EXPRESS_PORT: 3001
 
-  TEST_JWT_SECRET: "greenEyedBlackKittens12345678910"
-  TEST_COOKIE_DURATION: "1d"
+  TEST_JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  TEST_COOKIE_DURATION: '1d'
 
 on:
   pull_request:
-    branches: [ "main", "development" ]
+    branches: ['main', 'development']
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x, 18.12.1]
+        node-version: 18.12.1
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
 
-    - run: sudo systemctl start mysql.service
-    - run: mysql -e 'CREATE DATABASE ${{ env.TEST_DB_NAME }};' -u${{ env.TEST_DB_USER }} -p${{ env.TEST_DB_PASSWORD }}
-    - run: npm ci
-      working-directory: server
-    - run: npm run build --if-present
-      working-directory: server
-    - run: npm test
-      working-directory: server
+      - run: sudo systemctl start mysql.service
+      - run: mysql -e 'CREATE DATABASE ${{ env.TEST_DB_NAME }};' -u${{ env.TEST_DB_USER }} -p${{ env.TEST_DB_PASSWORD }}
+      - run: npm ci
+        working-directory: server
+      - run: npm run build --if-present
+        working-directory: server
+      - run: npm test
+        working-directory: server
