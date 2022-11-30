@@ -109,6 +109,22 @@ describe('Get pending friendship requests', () => {
 
         jest.clearAllMocks();
     });
+    
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(gymPalExitGate, 'getPendingFriendshipRequests').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await gymPalDomain.getPendingFriendshipRequests(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Accept friendship request', () => {
@@ -131,6 +147,22 @@ describe('Accept friendship request', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(gymPalExitGate, 'acceptFriendshipRequest').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await gymPalDomain.acceptFriendshipRequest(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Reject friendship request', () => {
@@ -152,6 +184,22 @@ describe('Reject friendship request', () => {
         );
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(gymPalExitGate, 'rejectFriendshipRequest').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await gymPalDomain.rejectFriendshipRequest(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -189,6 +237,22 @@ describe('Get user gym pals', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(gymPalExitGate, 'getUserGymPals').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await gymPalDomain.getUserGymPals(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Remove gym pal', () => {
@@ -205,5 +269,21 @@ describe('Remove gym pal', () => {
         expect(gymPalExitGate.removeGymPal).toHaveBeenCalledWith(friendshipId);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(gymPalExitGate, 'removeGymPal').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await gymPalDomain.removeGymPal(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
