@@ -17,3 +17,7 @@ yarn-error.log
 .DS_Store
 .env
 .cache
+
+# Cypress
+tests/cypress/screenshots/*
+tests/cypress/videos/*
