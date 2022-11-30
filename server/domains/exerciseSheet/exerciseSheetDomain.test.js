@@ -126,25 +126,24 @@ describe('Find user exercise sheets', () => {
         jest.clearAllMocks();
     });
 
-    // throw error treatment
-    // it('Should be able to throw an error', async () => {
-    //     const error = new serverError();
-    //     error.ServerError(
-    //         400,
-    //         `Não encontramos fichas de exercícios para o usuário com id 1`
-    //     );
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
 
-    //     jest.spyOn(
-    //         queryExerciseSheet,
-    //         'getUserExerciseSheets'
-    //     ).mockImplementationOnce(() => Promise.reject((_rejects) => error));
+        jest.spyOn(
+            queryExerciseSheet,
+            'getUserExerciseSheets'
+        ).mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
 
-    //     const userId = 1;
-
-    //     await expect(
-    //         exerciseSheetDomain.queryUserExerciseSheets(userId)
-    //     ).rejects.toThrow(error);
-    // });
+            await exerciseSheetDomain.queryUserExerciseSheets(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Find available exercises to an user', () => {
@@ -313,6 +312,25 @@ describe('Find available exercises to an user', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(
+            queryExerciseSheet,
+            'getAvailableExercisesSheet'
+        ).mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await exerciseSheetDomain.queryAvailableExercisesSheet(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Create user exercises', () => {
@@ -342,6 +360,24 @@ describe('Create user exercises', () => {
         );
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(queryExerciseSheet, 'postUserExercises').mockImplementation(
+            () => {
+                throw mockError;
+            }
+        );
+        try {
+            const id = 1;
+
+            await exerciseSheetDomain.createUserExercises(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -396,6 +432,24 @@ describe('Update user exercise info', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(queryExerciseSheet, 'putUserExercise').mockImplementation(
+            () => {
+                throw mockError;
+            }
+        );
+        try {
+            const id = 1;
+
+            await exerciseSheetDomain.updateUserExerciseInfo(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Delete user exercises', () => {
@@ -417,5 +471,23 @@ describe('Delete user exercises', () => {
         );
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(queryExerciseSheet, 'deleteUserExercise').mockImplementation(
+            () => {
+                throw mockError;
+            }
+        );
+        try {
+            const id = 1;
+
+            await exerciseSheetDomain.deleteUserExercise(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
