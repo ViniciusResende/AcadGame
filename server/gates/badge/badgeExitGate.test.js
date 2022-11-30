@@ -1,5 +1,6 @@
 const badgeExitGate = require('./badgeExitGate');
 const badgeDBAdapter = require('../../adapters/badge/badgeDBAdapter');
+const serverError = require('../../utils/serverErrors');
 
 jest.mock('../../adapters/badge/badgeDBAdapter', () => {
     return {
@@ -61,6 +62,22 @@ describe('Get all badges', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(badgeDBAdapter, 'findAllBadges').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await badgeExitGate.getAllBadges(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Get one badges', () => {
@@ -94,6 +111,22 @@ describe('Get one badges', () => {
         expect(returnBadge).toEqual(expectedResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(badgeDBAdapter, 'findOneBadge').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await badgeExitGate.getOneBadge(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -151,6 +184,22 @@ describe('Get badges by type', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(badgeDBAdapter, 'findByType').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await badgeExitGate.getBadgesByType(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Get badges by name', () => {
@@ -206,5 +255,21 @@ describe('Get badges by name', () => {
         expect(returnBadges).toEqual(expectedResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(badgeDBAdapter, 'findByName').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await badgeExitGate.getBadgesByName(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
