@@ -108,14 +108,14 @@ describe('Get the user daily scores in a specific date interval', () => {
         );
 
         const expectedResponse = [
-            { date: '2022-11-21', score: 0 },
             { date: '2022-11-22', score: 0 },
             { date: '2022-11-23', score: 0 },
-            { date: '2022-11-24', score: 295 },
-            { date: '2022-11-25', score: 0 },
+            { date: '2022-11-24', score: 0 },
+            { date: '2022-11-25', score: 295 },
             { date: '2022-11-26', score: 0 },
-            { date: '2022-11-27', score: 698 },
-            { date: '2022-11-28', score: 0 }
+            { date: '2022-11-27', score: 0 },
+            { date: '2022-11-28', score: 698 },
+            { date: '2022-11-29', score: 0 }
         ];
 
         const userId = 1;
