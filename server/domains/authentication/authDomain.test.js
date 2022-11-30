@@ -1,5 +1,6 @@
 const authDomain = require('./authDomain');
 const authExitGate = require('../../gates/authentication/authExitGate');
+const serverError = require('../../utils/serverErrors');
 
 jest.mock('../../gates/authentication/authExitGate', () => {
     return {
@@ -29,6 +30,22 @@ describe('Register an user', () => {
         expect(authExitGate.registerUser).toHaveBeenCalledWith(userInfo);
         expect(token).toEqual(mockResponse);
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(authExitGate, 'registerUser').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await authDomain.registerUser(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Authenticate an user', () => {
@@ -51,5 +68,21 @@ describe('Authenticate an user', () => {
             password
         );
         expect(token).toEqual(mockResponse);
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(authExitGate, 'authenticateUser').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await authDomain.authenticateUser(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
