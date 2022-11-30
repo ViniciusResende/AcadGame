@@ -1,7 +1,7 @@
 name: Testing code on pull requests
 
 env:
-  PRODUCTION_DB_NAME: testdb
+  PRODUCTION_DB_NAME: acad_db
   PRODUCTION_DB_USER: root
   PRODUCTION_DB_PASSWORD: 123456
   PRODUCTION_DB_HOST: localhost
@@ -13,7 +13,7 @@ env:
   PRODUCTION_JWT_SECRET: 'greenEyedBlackKittens12345678910'
   PRODUCTION_COOKIE_DURATION: '1d'
 
-  TEST_DB_NAME: testdb
+  TEST_DB_NAME: test_db
   TEST_DB_USER: root
   TEST_DB_PASSWORD: 123456
   TEST_DB_HOST: localhost # For node versions 16.x "localhost" works just fine. For 18.x versions of node, you have to use 127.0.0.1 to prevent errors.
