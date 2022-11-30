@@ -46,6 +46,22 @@ describe('Create user', () => {
         expect(queryUser.createNewUser).toHaveBeenCalledWith(userInfo);
         expect(user).toEqual(mockResponse);
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'createNewUser').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.createUser(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Get every user', () => {
@@ -84,6 +100,22 @@ describe('Get every user', () => {
         expect(everyUser).toEqual(mockResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'getAllUsers').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.getEveryUser(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -131,6 +163,22 @@ describe('Find user by ID', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'getOneUser').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.getSingleUser(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Find user by email', () => {
@@ -177,9 +225,26 @@ describe('Find user by email', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'getUserByEmail').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.getUserByEmail(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Find user by email with password', () => {
+    
     it('Should be able to find an existing user by his email with password', async () => {
         const mockResponse = {
             id: 36,
@@ -233,6 +298,22 @@ describe('Find user by email with password', () => {
 
         jest.clearAllMocks();
     });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'getUserByEmailWithPassword').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.getUserByEmailWithPassword(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
+    });
 });
 
 describe('Find user by nickname', () => {
@@ -260,6 +341,22 @@ describe('Find user by nickname', () => {
         expect(user).toEqual(mockResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'getUserByNickname').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.getUserByNickname(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -308,6 +405,22 @@ describe('Get top rank users', () => {
         expect(topRankUsers).toEqual(mockResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'getTopRankUsers').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.getTopRankUsers(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -406,5 +519,21 @@ describe('Delete user account', () => {
         expect(queryUser.deleteAccount).toHaveBeenCalledWith(userId);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new serverError();
+        mockError.ServerError(400, 'User not found');
+
+        jest.spyOn(queryUser, 'deleteAccount').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await userDomain.deleteUserAccount(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
