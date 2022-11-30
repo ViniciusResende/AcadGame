@@ -1,3 +1,18 @@
+# ========================= Did you know? ==============================
+# MySQL 8.X is already installed in Ubuntu 20.X (latest version) as a preset of github actions.
+# Since it is already installed, we don't need to reinstall it with another image. If we do, it can cause conflicts and worse the testing performance.
+# All we have to do to enable the already installed MySQL is:
+#   - START THE SERVICE: sudo systemctl start mysql.service
+#   - CREATE THE TESTS DATABASE: mysql -e 'CREATE DATABASE <DATABASE NAME>;' -u<USER NAME> -p<USER PASSWORD>
+# The default credentials to access the database are:
+#   - USER: root
+#   - PASSWORD: root
+# To learn more about this subject, please visit the site below:
+# https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
+#
+# The site that helped me to get to this conclusion is:
+# https://ovirium.com/blog/how-to-make-mysql-work-in-your-github-actions/
+
 name: Testing code on pull requests
 
 env:
@@ -37,24 +52,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x, 18.x]
-    
-    services:
-      mysql-database:
-        image: mysql:5.7
-        ports:
-          - 33306:3306
-        env:
-          MYSQL_DATABASE: ${{ env.TEST_DB_NAME }}
-          MYSQL_USER: ${{ env.TEST_DB_USER }}
-          MYSQL_PASSWORD: ${{ env.TEST_DB_PASSWORD }}
-          MYSQL_ROOT_PASSWORD: ${{ env.TEST_DB_PASSWORD }}
-        options: >-
-          --name=mysql-database
-          --health-cmd="mysqladmin ping"
-          --health-interval=10s
-          --health-timeout=5s
-          --health-retries=3
-
 
     steps:
     - uses: actions/checkout@v3
@@ -65,8 +62,6 @@ jobs:
         cache: 'npm'
 
     - run: sudo service mysql restart
-    - run: mysql -u root -p && testerFalso123
-    - run: SHOW DATABASES;
     - run: npm ci
       working-directory: server
     - run: npm run build --if-present
