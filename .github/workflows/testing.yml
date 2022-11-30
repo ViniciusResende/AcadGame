@@ -31,7 +31,7 @@ env:
   TEST_DB_NAME: test_db
   TEST_DB_USER: root
   TEST_DB_PASSWORD: root
-  TEST_DB_HOST: localhost
+  TEST_DB_HOST: 127.0.0.1
   TEST_DB_PORT: 3036
   TEST_DB_DIALECT: mysql
 
