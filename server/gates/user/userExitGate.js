@@ -51,6 +51,7 @@ class QueryUser {
             return allUsers;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -62,6 +63,7 @@ class QueryUser {
             return QUERIED_USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -73,6 +75,7 @@ class QueryUser {
             return QUERIED_USER;
         } 
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -84,6 +87,7 @@ class QueryUser {
             return QUERIED_USER;
         } 
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -95,6 +99,7 @@ class QueryUser {
             return QUERIED_USER;
         } 
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -115,6 +120,7 @@ class QueryUser {
             return topRankUsers;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }

@@ -9,6 +9,7 @@ import RouteExercisesAdd from './RouteExercisesAdd';
 import RouteExercisesSheet from './RouteExercisesSheet';
 import RouteHome from './RouteHome';
 import RouteProfile from './RouteProfile';
+import RouteRanking from './RouteRanking';
 
 /** Exports */
 export default (
@@ -19,5 +20,6 @@ export default (
       <Route index element={<RouteExercisesSheet />} />
       <Route path=":sheetId/add" element={<RouteExercisesAdd />} />
     </Route>
+    <Route path="/ranking" element={<RouteRanking />} />
   </Route>
 );

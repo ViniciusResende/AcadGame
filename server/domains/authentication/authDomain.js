@@ -19,6 +19,7 @@ class authDomain {
          return TOKEN;
       }
       catch(err) {
+         /* istanbul ignore next */
          throw err;
       }
    }

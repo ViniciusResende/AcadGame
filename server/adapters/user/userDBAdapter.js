@@ -35,6 +35,7 @@ class UserDatabaseAdapter {
             return ALL_USERS;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -50,6 +51,7 @@ class UserDatabaseAdapter {
             return QUERIED_USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -68,6 +70,7 @@ class UserDatabaseAdapter {
             return QUERIED_USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -86,6 +89,7 @@ class UserDatabaseAdapter {
             return QUERIED_USER;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -106,6 +110,7 @@ class UserDatabaseAdapter {
             return QUERIED_USERS;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -125,6 +130,7 @@ class UserDatabaseAdapter {
             return ALL_USERS;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
