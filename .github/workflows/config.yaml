@@ -42,8 +42,11 @@ jobs:
         run: npm install
 
       - name: Run tests
-        run: npm run test
-          working-directory: server
+        run: |
+          echo "Back-end Server Tests"
+          cd server 
+          npm run test
+          cd ..
 
       - name: Stop containers
         if: always()
