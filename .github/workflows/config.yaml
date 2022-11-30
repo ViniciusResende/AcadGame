@@ -43,7 +43,8 @@ jobs:
 
       - name: Run tests
         run: npm run test
+          working-directory: server
 
       - name: Stop containers
         if: always()
-        run: docker-compose -f "docker-compose.yml" down
+        run: docker-compose -f "./.github/workflows/docker-compose.yml" down
