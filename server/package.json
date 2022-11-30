@@ -4,7 +4,7 @@
     "description": "The backend files for the AcadGame project",
     "main": "server.js",
     "scripts": {
-        "test": "jest",
+        "test": "jest -i",
         "dev": "nodemon ./server.js"
     },
     "repository": {
@@ -51,6 +51,8 @@
     },
     "devDependencies": {
         "jest": "^29.3.1",
-        "jest-html-reporter": "^3.7.0"
+        "jest-html-reporter": "^3.7.0",
+        "babel-plugin-istanbul": "^6.1.1",
+        "dotenv": "^16.0.3"
     }
 }

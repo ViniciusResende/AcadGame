@@ -4,13 +4,14 @@ const jwt = require('jsonwebtoken');
 class authAdapter {
     generateToken(params = {}) {
         try {
-            const TOKEN = jwt.sign(params, process.env.JWT_SECRET, {
-                expiresIn: process.env.COOKIE_DURATION,
+            const TOKEN = jwt.sign(params, process.env.PRODUCTION_JWT_SECRET, {
+                expiresIn: process.env.PRODUCTION_COOKIE_DURATION,
             });
             
             return TOKEN;
         }
         catch (err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -25,6 +26,7 @@ class authAdapter {
                 return true;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }

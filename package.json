@@ -19,8 +19,8 @@
     "sast": "semgrep --disable-version-check --error --config \"p/react\"",
     "build": "(yarn); (cd ui/web && yarn build)",
     "verify": "yarn -v",
-    "verify_old": "(yarn cspell) && (cd shared/lib && yarn verify) && (cd server/transaction-monitor && yarn) && (yarn sast ./)",
-    "postinstall": "(husky install); (cd shared/lib && yarn); (cd ui/web && yarn);",
+    "verify_old": "(yarn cspell) && (cd shared/lib && yarn verify) && (cd server && yarn) && (yarn sast ./)",
+    "postinstall": "(husky install); (cd shared/lib && yarn); (cd ui/web && yarn); (cd server && yarn);",
     "cypress": "cross-env CYPRESS_API_URL=$API_URL CYPRESS_EMAIL=$EMAIL CYPRESS_PASSWORD=$PASSWORD ./node_modules/.bin/cypress",
     "cypress:open": "yarn cypress open",
     "cypress:run": "yarn cypress run --headless -b chrome --reporter list -q"

@@ -69,7 +69,7 @@ describe('Get the user daily scores in a specific date interval', () => {
                 dataValues: {
                     id: 155,
                     userId: 1,
-                    date: new Date('2022-11-25T01:57:23.000Z'),
+                    date: new Date('2022-11-25T03:00:00.000Z'),
                     score: 295
                 }
             },
@@ -77,7 +77,7 @@ describe('Get the user daily scores in a specific date interval', () => {
                 dataValues: {
                     id: 1,
                     userId: 1,
-                    date: new Date('2022-11-27T16:41:25.000Z'),
+                    date: new Date('2022-11-27T03:00:00.000Z'),
                     score: 291
                 }
             },
@@ -86,7 +86,7 @@ describe('Get the user daily scores in a specific date interval', () => {
                 dataValues: {
                     id: 150,
                     userId: 1,
-                    date: new Date('2022-11-27T16:34:41.000Z'),
+                    date: new Date('2022-11-27T03:00:00.000Z'),
                     score: 192
                 }
             },
@@ -94,7 +94,7 @@ describe('Get the user daily scores in a specific date interval', () => {
                 dataValues: {
                     id: 149,
                     userId: 1,
-                    date: new Date('2022-11-27T16:32:16.000Z'),
+                    date: new Date('2022-11-27T03:00:00.000Z'),
                     score: 215
                 }
             }
@@ -108,19 +108,19 @@ describe('Get the user daily scores in a specific date interval', () => {
         );
 
         const expectedResponse = [
-            { date: '2022-11-21', score: 0 },
             { date: '2022-11-22', score: 0 },
             { date: '2022-11-23', score: 0 },
-            { date: '2022-11-24', score: 295 },
-            { date: '2022-11-25', score: 0 },
+            { date: '2022-11-24', score: 0 },
+            { date: '2022-11-25', score: 295 },
             { date: '2022-11-26', score: 0 },
             { date: '2022-11-27', score: 698 },
-            { date: '2022-11-28', score: 0 }
+            { date: '2022-11-28', score: 0 },
+            { date: '2022-11-29', score: 0 }
         ];
 
         const userId = 1;
-        const startDate = new Date('2022-11-22T02:59:59.103Z');
-        const endDate = new Date('2022-11-29T02:59:59.103Z');
+        const startDate = new Date('2022-11-22T03:00:00.000Z');
+        const endDate = new Date('2022-11-29T03:00:00.000Z');
 
         const userDailyScores = await dayScoreExitGate.getDaysScoresInInterval(
             userId,

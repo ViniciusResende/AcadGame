@@ -75,6 +75,7 @@ ROUTER.put('/me', async (req, res, next) => {
             const UPDATED_USER = await USER_DOMAIN.getSingleUser(USER_ID);
 
             return res.status(200).json({
+                message: 'Usuário atualizado com sucesso!',
                 data: UPDATED_USER
             });
         }

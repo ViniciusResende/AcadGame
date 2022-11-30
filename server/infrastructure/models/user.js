@@ -39,6 +39,7 @@ User.sync({
 }).then( () => {
     console.log('User table was (re)created');
 }).catch(err => {
+    /* istanbul ignore next */
     console.log(err);
 });
 

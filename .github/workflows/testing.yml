@@ -1,0 +1,70 @@
+# ========================= Did you know? ==============================
+# MySQL 8.X is already installed in Ubuntu 20.X (latest version) as a preset of github actions.
+# Since it is already installed, we don't need to reinstall it with another image. If we do, it can cause conflicts and worse the testing performance.
+# All we have to do to enable the already installed MySQL is:
+#   - START THE SERVICE: sudo systemctl start mysql.service
+#   - CREATE THE TESTS DATABASE: mysql -e 'CREATE DATABASE <DATABASE NAME>;' -u<USER NAME> -p<USER PASSWORD>
+# The default credentials to access the database are:
+#   - USER: root
+#   - PASSWORD: root
+# To learn more about this subject, please visit the site below:
+# https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2204-Readme.md
+#
+# The site that helped me to get to this conclusion is:
+# https://ovirium.com/blog/how-to-make-mysql-work-in-your-github-actions/
+
+name: Testing code on pull requests
+
+env:
+  PRODUCTION_DB_NAME: acad_db
+  PRODUCTION_DB_USER: acad_user
+  PRODUCTION_DB_PASSWORD: senhaFalsa123
+  PRODUCTION_DB_HOST: localhost
+  PRODUCTION_DB_PORT: 3036
+  PRODUCTION_DB_DIALECT: mysql
+
+  PRODUCTION_EXPRESS_PORT: 3001
+
+  PRODUCTION_JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  PRODUCTION_COOKIE_DURATION: '1d'
+
+  TEST_DB_NAME: test_db
+  TEST_DB_USER: root
+  TEST_DB_PASSWORD: root
+  TEST_DB_HOST: 127.0.0.1 # For node versions 16.x "localhost" works just fine. For 18.x versions of node, you have to use 127.0.0.1 to prevent errors.
+  TEST_DB_PORT: 3036
+  TEST_DB_DIALECT: mysql
+
+  TEST_EXPRESS_PORT: 3001
+
+  TEST_JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  TEST_COOKIE_DURATION: '1d'
+
+on:
+  pull_request:
+    branches: ['main', 'development']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: 18.12.1
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: sudo systemctl start mysql.service
+      - run: mysql -e 'CREATE DATABASE ${{ env.TEST_DB_NAME }};' -u${{ env.TEST_DB_USER }} -p${{ env.TEST_DB_PASSWORD }}
+      - run: npm ci
+        working-directory: server
+      - run: npm run build --if-present
+        working-directory: server
+      - run: npm test
+        working-directory: server
