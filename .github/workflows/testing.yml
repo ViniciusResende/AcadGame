@@ -31,7 +31,7 @@ env:
   TEST_DB_NAME: test_db
   TEST_DB_USER: root
   TEST_DB_PASSWORD: root
-  TEST_DB_HOST: 127.0.0.1
+  TEST_DB_HOST: 127.0.0.1 # For node versions 16.x "localhost" works just fine. For 18.x versions of node, you have to use 127.0.0.1 to prevent errors.
   TEST_DB_PORT: 3036
   TEST_DB_DIALECT: mysql
 
@@ -51,7 +51,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [16.x, 18.x]
 
     steps:
     - uses: actions/checkout@v3
