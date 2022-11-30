@@ -28,7 +28,7 @@ describe('ApiClient', () => {
 
   it('should be able to fetch data', async () => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore 
+    //@ts-ignore
     global.mockFetch(200, true, { status: 'ok' });
     const baseMockUrl = apiClient.baseUrl + '/path';
     const abortableResponse = apiClient.fetch(baseMockUrl, {});
@@ -40,7 +40,7 @@ describe('ApiClient', () => {
   it('should allow changing timeout limit on fetch method', async () => {
     const timeout = 1000;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore 
+    //@ts-ignore
     global.mockFetch(200, true, { status: 'ok' });
     const baseMockUrl = apiClient.baseUrl + '/path';
     const abortableResponse = apiClient.fetch(
@@ -59,7 +59,7 @@ describe('ApiClient', () => {
     const timeout = 1;
     apiClient = new ApiClient('https://base.url', timeout);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore 
+    //@ts-ignore
     global.mockFetch(408, false, '', 1000);
     const baseMockUrl = apiClient.baseUrl + '/path';
 
@@ -71,7 +71,7 @@ describe('ApiClient', () => {
   it('should throw ApiHttpError when request does not have ok status', async () => {
     expect.assertions(1);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore 
+    //@ts-ignore
     global.mockFetch(401, false, { error: 'Failed to authenticate' });
     const baseMockUrl = apiClient.baseUrl + '/path';
     const expectedError = new ApiClientHttpError('Failed to authenticate', 401);
@@ -86,7 +86,7 @@ describe('ApiClient', () => {
   it('should be able to abort the response externally', async () => {
     expect.assertions(1);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore 
+    //@ts-ignore
     global.mockFetch(200, true, { status: 'ok' });
     const baseMockUrl = apiClient.baseUrl + '/path';
     const abortableResponse = apiClient.fetch(baseMockUrl, {});

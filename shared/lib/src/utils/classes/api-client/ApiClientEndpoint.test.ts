@@ -10,7 +10,7 @@ interface IApiEndpointResponseData {
   data: string;
 }
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore 
+//@ts-ignore
 if (typeof String.prototype.replaceAll === 'undefined') {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
@@ -81,7 +81,7 @@ describe('ApiClientEndpoint', () => {
       urlParams: { id: '123' },
     });
     expect(fetchSpy).toHaveBeenCalledWith(
-      'https://base.url/path/test/${id}',
+      'https://base.url/path/test/123',
       { signal: expect.any(Object) },
       undefined,
       undefined
