@@ -58,6 +58,7 @@ jobs:
         run: |
           echo "Front-end unit tests LIB"
           cd shared/lib
+          yarn install --immutable
           yarn test
           cd ..
 
