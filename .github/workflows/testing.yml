@@ -54,6 +54,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Front-end unit tests
+        run: |
+          echo "Front-end unit tests LIB"
+          cd shared/lib
+          yarn test
+          cd ..
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
