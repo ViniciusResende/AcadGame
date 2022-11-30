@@ -9,9 +9,10 @@ import {
 interface IApiEndpointResponseData {
   data: string;
 }
-
-//@ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore 
 if (typeof String.prototype.replaceAll === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   //@ts-ignore
   String.prototype.replaceAll = function (match: string, replace: string) {
     return this.replace(new RegExp(match, 'g'), () => replace);

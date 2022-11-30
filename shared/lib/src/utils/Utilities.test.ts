@@ -91,6 +91,7 @@ describe('Utilities', () => {
   it('should call subscribeSecurityFailEvents security method when called', () => {
     jest.spyOn(Security, 'subscribeSecurityFailEvents');
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const nop = () => {};
 
     utilities.subscribeSecurityFailEvents(nop);
@@ -102,6 +103,7 @@ describe('Utilities', () => {
   it('should call unsubscribeSecurityFailEvents security method when called', () => {
     jest.spyOn(Security, 'unsubscribeSecurityFailEvents');
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const nop = () => {};
 
     utilities.unsubscribeSecurityFailEvents(nop);
