@@ -8,6 +8,8 @@ interface IApiTestEndpointResponseData {
 
 class ApiTestEndpoint extends ApiEndpoint<IApiTestEndpointResponseData> {
   responseTransformer(): IAbortableResponse<IApiTestEndpointResponseData> {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore 
     return;
   }
 }
@@ -26,16 +28,27 @@ describe('ApiEndpoint', () => {
   });
 
   it('should return a request object without headers defined', () => {
-    const request = apiEndpoint.requestBuilder();
-    expect(Object.fromEntries(request.headers)).toEqual({});
+    const [requestUrl, requestInit] = apiEndpoint.requestBuilder();
+    expect(requestUrl).toEqual('http://test.tst');
+    expect(requestInit.headers).toEqual({ map: {} });
+    expect(requestInit.body).toEqual(null);
   });
 
   it('should return a request object with headers defined', () => {
-    const request = apiEndpoint.requestBuilder({
+    const [_requestUrl, requestInit] = apiEndpoint.requestBuilder({
       headers: new Headers({ 'Test-Header': '123' }),
     });
-    expect(Object.fromEntries(request.headers)).toEqual({
-      'test-header': '123',
+    expect(requestInit.headers).toEqual(
+      new Headers({
+        'test-header': '123',
+      })
+    );
+  });
+
+  it('should return a request object with body defined', () => {
+    const [_requestUrl, requestInit] = apiEndpoint.requestBuilder({
+      body: { userId: '123', name: 'newName' },
     });
+    expect(requestInit.body).toEqual('{"userId":"123","name":"newName"}');
   });
 });
