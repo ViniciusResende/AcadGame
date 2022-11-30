@@ -10,12 +10,11 @@ env:
 
   PRODUCTION_EXPRESS_PORT: 3001
 
-  PRODUCTION_JWT_SECRET: "greenEyedBlackKittens12345678910"
-  PRODUCTION_COOKIE_DURATION: "1d"
+  PRODUCTION_JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  PRODUCTION_COOKIE_DURATION: '1d'
 
   TEST_DB_NAME: testdb
   TEST_DB_USER: root
-  TEST_DB_PASSWORD: root
   TEST_DB_PASSWORD: 123456
   TEST_DB_HOST: localhost # For node versions 16.x "localhost" works just fine. For 18.x versions of node, you have to use 127.0.0.1 to prevent errors.
   TEST_DB_PORT: 3036
@@ -23,8 +22,8 @@ env:
 
   TEST_EXPRESS_PORT: 3001
 
-  TEST_JWT_SECRET: "greenEyedBlackKittens12345678910"
-  TEST_COOKIE_DURATION: "1d"
+  TEST_JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  TEST_COOKIE_DURATION: '1d'
 
 on:
   push:
