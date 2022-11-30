@@ -1,6 +1,7 @@
 const dayScoreDomain = require('./dayScoreDomain');
 const queryDayScore = require('../../gates/dayScore/dayScoreExitGate');
 const userDomain = require('../../domains/user/userDomain');
+const ServerError = require('../../utils/serverErrors');
 
 jest.mock('../../gates/dayScore/dayScoreExitGate', () => {
     return {
@@ -54,6 +55,22 @@ describe('Get user daily scores', () => {
         expect(userDailyScores).toEqual(mockResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(queryDayScore, 'getUserDayScores').mockImplementation(() => {
+            throw mockError;
+        });
+        try {
+            const id = 1;
+
+            await dayScoreDomain.getUserDayScores(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
@@ -118,6 +135,24 @@ describe('Get the user last seven daily scores', () => {
         expect(last7DailyScores).toEqual(mockResponse);
 
         jest.clearAllMocks();
+    });
+
+    it('Should be able to throw an error', async () => {
+        const mockError = new ServerError();
+        mockError.ServerError(400, 'Badge not found');
+
+        jest.spyOn(queryDayScore, 'getDaysScoresInInterval').mockImplementation(
+            () => {
+                throw mockError;
+            }
+        );
+        try {
+            const id = 1;
+
+            await dayScoreDomain.getLast7DaysScores(id);
+        } catch (err) {
+            expect(err).toBe(mockError);
+        }
     });
 });
 
