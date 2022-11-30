@@ -22,6 +22,7 @@ class DayScoreDatabaseAdapter {
                 ]
             });
 
+            /* istanbul ignore next */
             if(!QUERIED_DAILY_SCORES) {
                 let error = new SERVER_ERROR;
                 error.ServerError(500, `Não encontramos pontuações diárias.`);
@@ -32,6 +33,7 @@ class DayScoreDatabaseAdapter {
             return QUERIED_DAILY_SCORES;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -54,6 +56,7 @@ class DayScoreDatabaseAdapter {
                 ]
             });
 
+            /* istanbul ignore next */
             if(!QUERIED_DAY_SCORES) {
                 let error = new SERVER_ERROR;
                 error.ServerError(400, `Não encontramos pontuações diárias para o usuário com id ${userId}`);
@@ -64,6 +67,7 @@ class DayScoreDatabaseAdapter {
             return QUERIED_DAY_SCORES;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -88,6 +92,7 @@ class DayScoreDatabaseAdapter {
             return QUERIED_DAY_SCORES;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -97,6 +102,7 @@ class DayScoreDatabaseAdapter {
             await DAY_SCORE.create(dailyScore);
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }

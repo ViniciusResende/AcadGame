@@ -20,6 +20,7 @@ function ProfileUserComponent({ profileUserInfo }: ProfileUserComponentProps) {
         className="profile-user__picture"
         src={userGetProfilePictureImageMap.get(profileUserInfo.profileIcon)}
         alt={`${profileUserInfo.nickname}-profile-picture`}
+        data-cy={profileUserInfo.profileIcon}
       />
       <div className="profile-user__content">
         <strong className="profile-user__info">

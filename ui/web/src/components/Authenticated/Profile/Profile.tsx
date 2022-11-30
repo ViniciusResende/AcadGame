@@ -96,7 +96,10 @@ function ProfileComponent({
   function renderUserNicknameInteractionArea() {
     function renderEditButton() {
       return (
-        <button onClick={() => setIsInNicknameEditionMode(true)}>
+        <button
+          onClick={() => setIsInNicknameEditionMode(true)}
+          data-cy="edit-name-button"
+        >
           <PencilIcon />
         </button>
       );
@@ -111,6 +114,7 @@ function ProfileComponent({
               setIsInNicknameEditionMode(false);
               setNicknameInputValue('');
             }}
+            data-cy="edit-name-confirm"
           >
             <CheckIcon />
           </button>
@@ -119,6 +123,7 @@ function ProfileComponent({
               setIsInNicknameEditionMode(false);
               setNicknameInputValue('');
             }}
+            data-cy="edit-name-cancel"
           >
             <XMarkIcon />
           </button>
@@ -154,8 +159,12 @@ function ProfileComponent({
               <img
                 src={userGetProfilePictureImageMap.get(userInfo.profileIcon)}
                 alt="Foto de Perfil do Usuário"
+                data-cy={userInfo.profileIcon}
               />
-              <button onClick={() => setIsProfilePictureEditionModalOpen(true)}>
+              <button
+                onClick={() => setIsProfilePictureEditionModalOpen(true)}
+                data-cy="edit-picture-button"
+              >
                 <PencilIcon />
               </button>
             </div>

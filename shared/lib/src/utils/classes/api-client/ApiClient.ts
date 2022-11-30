@@ -9,9 +9,9 @@ import { IAbortableResponse } from './ApiClientInterfaces';
 /** Errors */
 import {
   ApiClientError,
+  ApiClientHttpError,
   RequestAbortedError,
   RequestTimeoutError,
-  ApiClientHttpError,
 } from './ApiClientErrors';
 
 /**

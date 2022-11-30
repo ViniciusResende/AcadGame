@@ -1,41 +1,58 @@
 {
-  "name": "api",
-  "version": "1.0.0",
-  "description": "The backend files for the AcadGame project",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pe-Guedss/AcadGame.git"
-  },
-  "keywords": [
-    "AcadGame",
-    "Gameficação",
-    "Academia"
-  ],
-  "author": "Pedro de Oliveira Guedes",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Pe-Guedss/AcadGame/issues"
-  },
-  "homepage": "https://github.com/Pe-Guedss/AcadGame#readme",
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.0",
-    "cookie-parser": "^1.4.6",
-    "cookieparser": "^0.1.0",
-    "cors": "^2.8.5",
-    "date-fns": "^2.29.3",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.1",
-    "jsonwebtoken": "^8.5.1",
-    "mysql2": "^2.3.3",
-    "nodemon": "^2.0.20",
-    "passport": "^0.6.0",
-    "passport-local": "^1.0.0",
-    "sequelize": "^6.23.2"
-  }
+    "name": "api",
+    "version": "1.0.0",
+    "description": "The backend files for the AcadGame project",
+    "main": "server.js",
+    "scripts": {
+        "test": "jest -i",
+        "dev": "nodemon ./server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pe-Guedss/AcadGame.git"
+    },
+    "keywords": [
+        "AcadGame",
+        "Gameficação",
+        "Academia"
+    ],
+    "author": "Pedro de Oliveira Guedes",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Pe-Guedss/AcadGame/issues"
+    },
+    "homepage": "https://github.com/Pe-Guedss/AcadGame#readme",
+    "dependencies": {
+        "bcrypt": "^5.1.0",
+        "body-parser": "^1.20.0",
+        "cookie-parser": "^1.4.6",
+        "cookieparser": "^0.1.0",
+        "cors": "^2.8.5",
+        "date-fns": "^2.29.3",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.1",
+        "jsonwebtoken": "^8.5.1",
+        "mysql2": "^2.3.3",
+        "nodemon": "^2.0.20",
+        "passport": "^0.6.0",
+        "passport-local": "^1.0.0",
+        "sequelize": "^6.23.2"
+    },
+    "jest": {
+        "collectCoverage": true,
+        "coverageReporters": [
+            "lcov"
+        ],
+        "coverageDirectory": "./coverage/",
+        "reporters": [
+            "default",
+            "./node_modules/jest-html-reporter"
+        ]
+    },
+    "devDependencies": {
+        "jest": "^29.3.1",
+        "jest-html-reporter": "^3.7.0",
+        "babel-plugin-istanbul": "^6.1.1",
+        "dotenv": "^16.0.3"
+    }
 }

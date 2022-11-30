@@ -16,6 +16,7 @@ class QueryDayScore {
             return returnValues;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -47,6 +48,7 @@ class QueryDayScore {
             return allDayScores;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -62,6 +64,7 @@ class QueryDayScore {
             await DayScoreDBAdapter.newDailyScore(newDailyScore);
         }  
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }
@@ -100,6 +103,7 @@ class QueryDayScore {
             return RETURN_VALUES;
         }
         catch(err) {
+            /* istanbul ignore next */
             throw err;
         }
     }

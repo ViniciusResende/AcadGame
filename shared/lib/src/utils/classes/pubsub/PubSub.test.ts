@@ -9,6 +9,7 @@ describe('PubSub', () => {
   });
 
   it('should not allow subscribing without an event name', () => {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const subscribeWithoutEventName = () => pubSub.subscribe('', () => {});
     const expectedError = new PubSubError('Invalid event name');
     expect(subscribeWithoutEventName).toThrow(expectedError);
@@ -80,6 +81,7 @@ describe('PubSub', () => {
 
   it('should not throw error when unsubscribing to random events', () => {
     const unsubscribeEventName = () => pubSub.unsubscribe('random');
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     const unsubscribeCallback = () => pubSub.unsubscribe('random', () => {});
     expect(unsubscribeEventName).not.toThrow(expect.any(Error));
     expect(unsubscribeCallback).not.toThrow(expect.any(Error));

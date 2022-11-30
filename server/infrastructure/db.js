@@ -2,13 +2,13 @@ require('dotenv').config({path:__dirname+'/.env'})
 const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD || "",
+    process.env.PRODUCTION_DB_NAME,
+    process.env.PRODUCTION_DB_USER,
+    process.env.PRODUCTION_DB_PASSWORD || "",
     {
-        host: process.env.DB_HOST,
-        port: process.env.PORT,
-        dialect: process.env.DB_DIALECT,
+        host: process.env.PRODUCTION_DB_HOST,
+        port: process.env.PRODUCTION_PORT,
+        dialect: process.env.PRODUCTION_DB_DIALECT,
         timezone: '-03:00',
     },
 );
