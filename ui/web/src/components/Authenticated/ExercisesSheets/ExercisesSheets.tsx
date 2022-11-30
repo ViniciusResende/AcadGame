@@ -88,6 +88,7 @@ function ExercisesSheetsComponent({
           modifier="default"
           icon={<FlagIcon />}
           onClick={submitSelectedExercises}
+          data-cy="submit-sheet-button"
         >
           Finalizar Treino
         </Button>

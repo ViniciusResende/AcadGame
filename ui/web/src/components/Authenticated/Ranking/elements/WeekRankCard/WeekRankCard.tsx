@@ -33,6 +33,7 @@ function WeekRankCardComponent({
               className="week-rank-card__user-picture"
               src={userGetProfilePictureImageMap.get(user.profileIcon)}
               alt={`${user.nickname}-profile-picture`}
+              data-cy={user.profileIcon}
             />
             <div className="week-rank-card__user-content">
               <strong className="week-rank-card__name">{user.nickname}</strong>

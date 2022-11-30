@@ -125,7 +125,10 @@ function ExerciseCardComponent({
     >
       <header className="exercise-card__header">
         <h3>{userExercise.name}</h3>
-        <button onClick={(event) => openExerciseEdition(event, userExercise)}>
+        <button
+          onClick={(event) => openExerciseEdition(event, userExercise)}
+          data-cy="exercise-edit-button"
+        >
           <PencilIcon />
         </button>
       </header>

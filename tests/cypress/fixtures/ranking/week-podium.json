@@ -1,0 +1,226 @@
+{
+  "data": [
+    {
+      "userId": 22,
+      "score": 3468,
+      "nickname": "Arnold Schwarzenegger",
+      "profileIcon": "special_assassins_screed"
+    },
+    {
+      "userId": 6,
+      "score": 3264,
+      "nickname": "Paulo Muzy",
+      "profileIcon": "generic_man_three"
+    },
+    {
+      "userId": 20,
+      "score": 3080,
+      "nickname": "The Rock",
+      "profileIcon": "special_god_of_war"
+    },
+    {
+      "userId": 10,
+      "score": 3032,
+      "nickname": "Renato Cariani",
+      "profileIcon": "funny_bodybuilder"
+    },
+    {
+      "userId": 21,
+      "score": 2868,
+      "nickname": "Paulo Giga",
+      "profileIcon": "special_mario"
+    },
+    {
+      "userId": 7,
+      "score": 2601,
+      "nickname": "Leo Stronda",
+      "profileIcon": "special_god_of_war"
+    },
+    {
+      "userId": 11,
+      "score": 2597,
+      "nickname": "Roberta Carbonari",
+      "profileIcon": "generic_woman_one"
+    },
+    {
+      "userId": 18,
+      "score": 2376,
+      "nickname": "Camilão",
+      "profileIcon": "sport_surf"
+    },
+    {
+      "userId": 8,
+      "score": 2340,
+      "nickname": "Toguro",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 26,
+      "score": 2288,
+      "nickname": "Gracyanne Barbosa",
+      "profileIcon": "sport_american_football"
+    },
+    {
+      "userId": 16,
+      "score": 2136,
+      "nickname": "Vanessa Garcia",
+      "profileIcon": "generic_woman_five"
+    },
+    {
+      "userId": 17,
+      "score": 2136,
+      "nickname": "Vivi Winkler",
+      "profileIcon": "generic_woman_two"
+    },
+    {
+      "userId": 25,
+      "score": 2088,
+      "nickname": "CJ",
+      "profileIcon": "special_gta"
+    },
+    {
+      "userId": 1,
+      "score": 2023,
+      "nickname": "Carlos Leão",
+      "profileIcon": "special_spike"
+    },
+    {
+      "userId": 13,
+      "score": 2015,
+      "nickname": "Luana Mendes ",
+      "profileIcon": "sport_fight"
+    },
+    {
+      "userId": 15,
+      "score": 1990,
+      "nickname": "Carol Borba",
+      "profileIcon": "special_the_sims"
+    },
+    {
+      "userId": 19,
+      "score": 1976,
+      "nickname": "Gabriela Bahia",
+      "profileIcon": "special_buzz"
+    },
+    {
+      "userId": 12,
+      "score": 1844,
+      "nickname": "Carol Vaz",
+      "profileIcon": "sport_handball"
+    },
+    {
+      "userId": 4,
+      "score": 1523,
+      "nickname": "Gabriel Bifano",
+      "profileIcon": "funny_i_hate_leg_day"
+    },
+    {
+      "userId": 5,
+      "score": 1412,
+      "nickname": "Alan Augusto",
+      "profileIcon": "sport_football"
+    },
+    {
+      "userId": 3,
+      "score": 1245,
+      "nickname": "Pedro Guedes",
+      "profileIcon": "generic_man_two"
+    },
+    {
+      "userId": 27,
+      "score": 1186,
+      "nickname": "Paulo Plinio",
+      "profileIcon": "special_cs"
+    },
+    {
+      "userId": 2,
+      "score": 624,
+      "nickname": "Vinicius Alves",
+      "profileIcon": "special_goku"
+    },
+    {
+      "userId": 29,
+      "score": 486,
+      "nickname": "Dona Maria",
+      "profileIcon": "sport_bicycle"
+    },
+    {
+      "userId": 9,
+      "score": 446,
+      "nickname": "Karen",
+      "profileIcon": "generic_woman_five"
+    },
+    {
+      "userId": 24,
+      "score": 216,
+      "nickname": "Frango",
+      "profileIcon": "special_zelda"
+    },
+    {
+      "userId": 23,
+      "score": 116,
+      "nickname": "Benjamin",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 35,
+      "score": 112,
+      "nickname": "Clovis",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 36,
+      "score": 97,
+      "nickname": "Pancada",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 37,
+      "score": 97,
+      "nickname": "Mano Tetas",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 38,
+      "score": 87,
+      "nickname": "Ricardão",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 39,
+      "score": 85,
+      "nickname": "Camarão",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 40,
+      "score": 82,
+      "nickname": "Igor Guimarões",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 41,
+      "score": 80,
+      "nickname": "Brasil Hexa",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 42,
+      "score": 74,
+      "nickname": "Shikamaru Nara",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 43,
+      "score": 70,
+      "nickname": "Sasuke",
+      "profileIcon": "default"
+    },
+    {
+      "userId": 44,
+      "score": 70,
+      "nickname": "Denji Motoserra",
+      "profileIcon": "default"
+    }
+  ]
+}
