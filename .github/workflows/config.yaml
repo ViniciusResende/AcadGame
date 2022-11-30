@@ -53,6 +53,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Startup back-end server
+        run: |
+          echo "Back-end Server Startup"
+          cd server 
+          npm run dev
+          cd ..
+
       - name: Run tests
         run: |
           echo "Back-end Server Tests"
