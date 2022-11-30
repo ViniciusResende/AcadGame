@@ -29,9 +29,9 @@ env:
   PRODUCTION_COOKIE_DURATION: "1d"
 
   TEST_DB_NAME: test_db
-  TEST_DB_USER: tester
-  TEST_DB_PASSWORD: testerFalso123
-  TEST_DB_HOST: 127.0.0.1
+  TEST_DB_USER: root
+  TEST_DB_PASSWORD: root
+  TEST_DB_HOST: localhost
   TEST_DB_PORT: 3306
   TEST_DB_DIALECT: mysql
 
@@ -61,7 +61,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - run: sudo service mysql restart
+    - run: sudo systemctl start mysql.service
     - run: npm ci
       working-directory: server
     - run: npm run build --if-present
