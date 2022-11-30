@@ -1,0 +1,49 @@
+name: Testing code on pull requests
+
+env:
+  DB_NAME: testdb
+  DB_USER: root
+  DB_PASSWORD: 123456
+  DB_HOST: localhost # For node versions 16.x "localhost" works just fine. For 18.x versions of node, you have to use 127.0.0.1 to prevent errors.
+  DB_PORT: 3036
+  DB_DIALECT: mysql
+
+  EXPRESS_PORT: 3001
+
+  JWT_SECRET: 'greenEyedBlackKittens12345678910'
+  COOKIE_DURATION: '1d'
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Start containers
+        run: docker-compose -f "docker-compose.yml" up -d --build
+
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Stop containers
+        if: always()
+        run: docker-compose -f "docker-compose.yml" down
