@@ -41,10 +41,6 @@ env:
   TEST_COOKIE_DURATION: '1d'
 
 on:
-  push:
-    branches:
-      - main
-      - development
   pull_request:
     branches: ['main', 'development']
 
